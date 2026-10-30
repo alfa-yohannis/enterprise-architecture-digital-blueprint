@@ -1,0 +1,82 @@
+\chapter{Arsitektur Data dan Informasi Saat Ini}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Mengidentifikasi konsep informasi bisnis utama beserta pemiliknya.
+  \item Memetakan lokasi dan aliran data penting di antara aplikasi dengan matriks CRUD (\textit{Create, Read, Update, Delete}).
+  \item Menganalisis masalah kualitas, duplikasi, dan klasifikasi data yang menghambat strategi.
+\end{itemize}
+
+\section{Pendahuluan}
+
+% TODO
+% Cakupan: data pasien tersebar di banyak sistem dan laporan manajemen disusun manual dengan
+%   spreadsheet, sehingga angka yang sama berbeda di tiap laporan.
+
+\section{Konsep Informasi Bisnis dan Model Data Konseptual}
+
+% TODO
+% Cakupan: beda data, informasi, dan konsep bisnis; entitas dan hubungan antarentitas dalam bahasa
+%   bisnis; peta informasi menurut BIZBOK; business object dan data object di ArchiMate.
+% Kasus Medikara: konsep Pasien, Kunjungan, Rekam Medis, Resep, Tagihan, dan Klaim.
+
+\section{Data Induk, Kepemilikan, dan Stewardship}
+
+% TODO
+% Cakupan: data induk, data referensi, dan data transaksi; pemilik bisnis dan pengelola teknis
+%   data; data stewardship sehari-hari; mengapa identitas pasien adalah data induk paling penting.
+% Kasus Medikara: tiap rumah sakit memberi nomor rekam medis sendiri.
+
+\section{Lokasi dan Aliran Data}
+
+% TODO
+% Cakupan: aliran data tingkat tinggi dari sumber ke laporan; matriks CRUD antara data dan
+%   aplikasi; data yang dibuat di banyak tempat; laporan spreadsheet sebagai aliran data
+%   tersembunyi.
+
+\section{Klasifikasi Data dan Kewajiban Regulasi}
+
+% TODO
+% Cakupan: skema klasifikasi data yang sederhana; data pribadi dan data pribadi yang bersifat
+%   spesifik, termasuk data kesehatan, menurut UU 27/2022 (dibahas rinci di mata kuliah IT40813);
+%   kewajiban rekam medis elektronik menurut Permenkes 24/2022; dampak klasifikasi pada lokasi dan
+%   akses data.
+% Kasus Medikara: insiden kebocoran data pasien lewat vendor pada 2025 dibaca dari sudut pandang
+%   arsitektur data.
+
+\section{Masalah Kualitas Data}
+
+% TODO
+% Cakupan: dimensi kualitas (akurasi, kelengkapan, konsistensi, ketepatan waktu); identitas pasien
+%   ganda; dampak kualitas data pada layanan, laporan, dan klaim; mencatat masalah data sebagai
+%   bahan kondisi target.
+% Pendalaman teknis: model data logis untuk Pasien dan Kunjungan dibandingkan dengan resource
+%   Patient dan Encounter pada HL7 FHIR yang dipakai SATUSEHAT.
+
+\section{Aktivitas: Menelusuri Data Pasien}
+
+% TODO
+% Tujuan aktivitas: mengetahui di mana data penting berada, siapa pemiliknya, dan masalah apa
+%   yang menghambat strategi.
+% Peran dalam tim: analis bisnis menentukan pemilik bisnis dan pemakai tiap konsep; analis
+%   teknologi menelusuri aplikasi yang membuat, membaca, mengubah, dan menghapus data; pemodel
+%   memodelkan business object dan data object; koordinator merangkum daftar masalah data.
+% Langkah: susun 10 sampai 15 konsep informasi utama; tentukan pemiliknya; isi matriks CRUD;
+%   gambar aliran data tingkat tinggi; tandai data pribadi dan data kesehatan; catat masalah
+%   kualitas dan duplikasi.
+% Luaran dan tonggak capstone: peta informasi, matriks CRUD, dan daftar masalah data (C2).
+% Berkas sources yang direncanakan: sources/chapter06/templat-katalog-konsep-informasi.csv,
+%   sources/chapter06/templat-matriks-crud.csv, sources/chapter06/medikara-matriks-crud.csv,
+%   sources/chapter06/templat-daftar-masalah-data.md
+
+\section{Ringkasan}
+
+% TODO
+
+\section{Latihan}
+
+\begin{enumerate}
+  \item Tiga rumah sakit Medikara memberi nomor rekam medis sendiri-sendiri. Jelaskan dampaknya pada layanan pasien, laporan manajemen, dan kepatuhan.
+  \item Bagaimana matriks CRUD membantu menemukan data yang tidak punya pemilik jelas? Berikan satu contoh.
+  \item Tentukan klasifikasi untuk jadwal praktik dokter, hasil laboratorium, dan nomor rekening karyawan. Jelaskan alasannya.
+\end{enumerate}

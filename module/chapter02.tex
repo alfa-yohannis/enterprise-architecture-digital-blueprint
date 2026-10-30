@@ -1,0 +1,92 @@
+\chapter{Kerangka Kerja Arsitektur: TOGAF, Zachman, dan Arsitektur SPBE}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menjelaskan struktur TOGAF Standard edisi ke-10 dan urutan fase ADM (\textit{Architecture Development Method}).
+  \item Membandingkan TOGAF, Zachman Framework, dan Arsitektur SPBE (Sistem Pemerintahan Berbasis Elektronik) dari sisi tujuan, cakupan, dan cara pakai.
+  \item Menyusun peta pemangku kepentingan beserta \textit{concern} dan ruang lingkup kerja arsitektur.
+\end{itemize}
+
+\section{Pendahuluan}
+
+% TODO
+% Cakupan: tiap tim atau konsultan menggambar arsitektur dengan istilah dan struktur sendiri,
+%   sehingga dokumen sulit dibandingkan, sulit diperiksa kelengkapannya, dan sulit dipakai ulang.
+
+\section{Stakeholder, Concern, View, dan Viewpoint}
+
+% TODO
+% Cakupan: konsep inti ISO/IEC/IEEE 42010:2022; beda arsitektur dan deskripsi arsitektur; matriks
+%   kekuasaan dan kepentingan untuk memetakan pemangku kepentingan; concern sebagai titik awal
+%   memilih view.
+% Kasus Medikara: pemangku kepentingan Medikara (direksi, kepala rumah sakit, dokter, perawat,
+%   pasien, BPJS Kesehatan, Kementerian Kesehatan, vendor) dan concern masing-masing.
+
+\section{Struktur TOGAF Standard Edisi Ke-10}
+
+% TODO
+% Cakupan: Fundamental Content dan Series Guides; pembaruan 2025 yang memuat Technical
+%   Corrigendum 1; beda deliverable, artefak (katalog, matriks, diagram), dan building block;
+%   Architecture Repository dan Enterprise Continuum secara singkat.
+
+\section{Siklus ADM}
+
+% TODO
+% Cakupan: fase Preliminary, A sampai H, dan Requirements Management; tujuan dan luaran utama tiap
+%   fase; iterasi dan penyesuaian siklus; peta fase ADM ke pertemuan di mata kuliah ini.
+% Kasus Medikara: posisi tiap tonggak capstone C1 sampai C4 pada siklus ADM.
+
+\section{Zachman Framework sebagai Pembanding}
+
+% TODO
+% Cakupan: matriks enam kolom (what, how, where, who, when, why) dan enam baris perspektif;
+%   Zachman sebagai ontologi, bukan metode; kegunaannya sebagai daftar periksa kelengkapan;
+%   memakai Zachman berdampingan dengan TOGAF.
+% Pendalaman teknis: memetakan sel Zachman ke model rekayasa perangkat lunak (model data, diagram
+%   komponen, diagram deployment) dan menilai sel yang sering kosong.
+
+\section{Arsitektur SPBE}
+
+% TODO
+% Cakupan: Perpres 95/2018 dan Perpres 132/2022 beserta enam domain (proses bisnis, data dan
+%   informasi, infrastruktur, aplikasi, keamanan, layanan); Perpres 82/2023 dan Perpres 83/2025
+%   tentang percepatan transformasi digital pemerintah; perbandingan domain SPBE dengan domain
+%   TOGAF; status regulasi per 30 Oktober 2026 (revisi menuju Perpres Pemerintah Digital masih
+%   disusun, periode Arsitektur SPBE Nasional 2020 sampai 2024 belum diperbarui).
+% Kasus Medikara: keterhubungan Medikara dengan layanan pemerintah (SATUSEHAT, BPJS Kesehatan)
+%   sebagai alasan organisasi swasta tetap perlu memahami arsitektur pemerintah.
+
+\section{Menyesuaikan Kerangka untuk Organisasi}
+
+% TODO
+% Cakupan: tailoring fase dan artefak untuk organisasi menengah; artefak minimum yang benar-benar
+%   dipakai menurut Kotusev; kerangka kerja sebagai alat, bukan tujuan; memilih artefak untuk
+%   cetak biru capstone.
+
+\section{Aktivitas: Peta Pemangku Kepentingan dan Ruang Lingkup Arsitektur}
+
+% TODO
+% Tujuan aktivitas: mengetahui siapa yang berkepentingan atas cetak biru dan menetapkan batas
+%   pekerjaan arsitektur.
+% Peran dalam tim: analis bisnis memimpin identifikasi pemangku kepentingan dan concern bisnis;
+%   analis teknologi menambah concern teknis dan regulasi; pemodel memilih fase ADM dan artefak
+%   minimum; koordinator menulis Statement of Architecture Work.
+% Langkah: daftar pemangku kepentingan; tempatkan di matriks kekuasaan dan kepentingan; tulis
+%   concern tiap kelompok; tetapkan ruang lingkup (unit, horizon waktu, domain, batasan); pilih
+%   artefak; bila organisasinya instansi pemerintah, petakan domain TOGAF ke domain SPBE.
+% Luaran dan tonggak capstone: peta pemangku kepentingan dan Statement of Architecture Work (C1).
+% Berkas sources yang direncanakan: sources/chapter02/templat-peta-pemangku-kepentingan.md,
+%   sources/chapter02/templat-statement-of-architecture-work.md,
+%   sources/chapter02/pemetaan-domain-togaf-spbe.md
+
+\section{Ringkasan}
+
+% TODO
+
+\section{Latihan}
+
+\begin{enumerate}
+  \item Direktur keuangan dan kepala teknologi informasi menilai proyek yang sama. Tuliskan dua \textit{concern} yang mungkin untuk masing-masing, lalu tentukan \textit{view} yang cocok untuk tiap \textit{concern}.
+  \item Jelaskan mengapa Zachman disebut ontologi, sedangkan ADM disebut metode. Apa akibatnya bila keduanya dipakai bersama dalam satu proyek?
+  \item Bandingkan enam domain Arsitektur SPBE dengan empat domain arsitektur TOGAF. Tunjukkan domain yang tidak punya padanan langsung dan jelaskan cara menanganinya.
+\end{enumerate}

@@ -1,0 +1,90 @@
+\chapter{Arsitektur Teknologi Target dan Kesiapan AI}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Merumuskan arah teknologi target tingkat tinggi beserta standar teknologi organisasi.
+  \item Mendokumentasikan keputusan arsitektur penting sebagai ADR (\textit{Architecture Decision Record}) lengkap dengan \textit{trade-off}-nya.
+  \item Menilai kesiapan organisasi memanfaatkan AI (\textit{Artificial Intelligence}) dari sisi kapabilitas, data, dan tata kelola.
+\end{itemize}
+
+\section{Pendahuluan}
+
+% TODO
+% Cakupan: keputusan teknologi diambil per proyek, sehingga organisasi memakai terlalu banyak
+%   platform dan tidak ada yang dapat menjelaskan alasan tiap pilihan.
+
+\section{Arsitektur Teknologi Tingkat Tinggi}
+
+% TODO
+% Cakupan: fase D dalam ADM; layanan teknologi yang dibutuhkan aplikasi target; pilihan lokasi
+%   penerapan (on-premise, private cloud, public cloud, hybrid) pada tingkat keputusan, sedangkan
+%   strategi migrasi dan operasi cloud dibahas rinci di mata kuliah IT40713.
+% Kasus Medikara: arah modernisasi ke cloud dalam strategi 2026 sampai 2030 dan batasannya.
+
+\section{Standar Teknologi dan Technology Reference Model}
+
+% TODO
+% Cakupan: katalog standar teknologi; status standar (dipakai, baru, akan dihentikan); manfaat dan
+%   biaya standardisasi; technology reference model sebagai bahasa bersama.
+
+\section{Keamanan sebagai Concern Lintas Domain}
+
+% TODO
+% Cakupan: identitas terpusat, kontrol akses, dan pemisahan jaringan pada tingkat arsitektur;
+%   keamanan yang dirancang sejak awal; kendali dan standar keamanan dibahas rinci di mata kuliah
+%   IT40813.
+% Kasus Medikara: temuan audit tentang kontrol akses yang lemah dan insiden lewat vendor.
+
+\section{Keputusan Arsitektur dan ADR}
+
+% TODO
+% Cakupan: struktur ADR (konteks, opsi, keputusan, konsekuensi); kriteria dan trade-off yang
+%   eksplisit; ADR sebagai jejak keputusan bagi auditor dan anggota tim baru; kapan sebuah
+%   keputusan layak dicatat.
+% Kasus Medikara: ADR lokasi penyimpanan rekam medis.
+
+\section{AI sebagai Kapabilitas dan Concern Arsitektur}
+
+% TODO
+% Cakupan: memetakan kasus penggunaan AI ke kapabilitas, bukan ke produk; kesiapan data sebagai
+%   syarat; posisi model dan agen AI dalam lanskap aplikasi; tahap kematangan AI organisasi dan
+%   model operasi TI di era AI menurut MIT CISR.
+% Kasus Medikara: prediksi antrean dan ringkasan rekam medis untuk dokter.
+% Pendalaman teknis: memetakan satu kasus AI ke sumber data, pipeline, model, antarmuka, dan
+%   pemantauan, lalu menandai titik kendali.
+
+\section{Peran EA dalam Tata Kelola AI}
+
+% TODO
+% Cakupan: inventaris model dan agen AI sebagai artefak EA; temuan SAP LeanIX Agentic AI Survey
+%   2026 tentang rendahnya visibilitas agen AI; pembagian peran antara arsitek dan fungsi tata
+%   kelola; standar tata kelola AI dibahas rinci di mata kuliah IT40813.
+
+\section{Aktivitas: Menulis ADR dan Menilai Kesiapan AI}
+
+% TODO
+% Tujuan aktivitas: menetapkan arah teknologi target dengan keputusan yang terdokumentasi dan
+%   menilai peluang AI secara realistis.
+% Peran dalam tim: analis teknologi menyusun arah teknologi dan daftar standar; seluruh tim menulis
+%   ADR; analis bisnis memimpin identifikasi peluang AI; kedua analis menilai kesiapan data dan
+%   risiko; pemodel memperbarui technology view target.
+% Langkah: rumuskan arah teknologi target; susun katalog standar; tulis minimal tiga ADR; pilih dua
+%   sampai tiga peluang AI yang terkait dengan kapabilitas target; nilai kesiapan kapabilitas,
+%   data, dan tata kelola; modelkan kondisi target.
+% Luaran dan tonggak capstone: arsitektur teknologi target, kumpulan ADR, dan penilaian kesiapan
+%   AI (C3).
+% Berkas sources yang direncanakan: sources/chapter10/templat-adr.md,
+%   sources/chapter10/templat-katalog-standar-teknologi.csv,
+%   sources/chapter10/lembar-kesiapan-ai.md
+
+\section{Ringkasan}
+
+% TODO
+
+\section{Latihan}
+
+\begin{enumerate}
+  \item Tulis satu ADR singkat untuk keputusan menyimpan rekam medis di pusat data sendiri atau di \textit{cloud}. Sertakan minimal dua opsi beserta konsekuensinya.
+  \item Mengapa peluang AI sebaiknya dipetakan dulu ke kapabilitas, bukan langsung ke produk atau vendor? Berikan satu contoh kegagalan bila urutannya dibalik.
+  \item Survei industri 2026 menunjukkan banyak organisasi belum tahu agen AI apa saja yang berjalan di dalamnya. Artefak EA (\textit{Enterprise Architecture}) apa yang dapat menutup celah itu, dan siapa yang memeliharanya?
+\end{enumerate}

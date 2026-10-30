@@ -1,0 +1,84 @@
+\chapter{Pemodelan Arsitektur dengan ArchiMate dan Archi}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menjelaskan kerangka inti ArchiMate: lapisan, aspek, elemen, dan relasi.
+  \item Membangun model berlapis di Archi yang menghubungkan layanan bisnis, proses, aplikasi, dan teknologi.
+  \item Memilih \textit{viewpoint} yang sesuai dengan \textit{concern} pemangku kepentingan tertentu.
+\end{itemize}
+
+\section{Pendahuluan}
+
+% TODO
+% Cakupan: diagram kotak dan panah yang dibaca berbeda oleh tiap orang; gambar yang sama
+%   digambar ulang di banyak dokumen dan saling bertentangan.
+
+\section{Model, Diagram, dan Repositori}
+
+% TODO
+% Cakupan: beda model dan gambar; satu elemen dipakai di banyak view; repositori sebagai sumber
+%   tunggal; akibat bila tim hanya menggambar tanpa memodelkan.
+
+\section{Kerangka Inti ArchiMate}
+
+% TODO
+% Cakupan: lapisan bisnis, aplikasi, dan teknologi; aspek struktur aktif, perilaku, dan struktur
+%   pasif; elemen strategi, motivasi, serta implementasi dan migrasi; elemen yang paling sering
+%   dipakai dalam cetak biru.
+% Kasus Medikara: layanan janji temu rawat jalan dipetakan ke elemen tiap lapisan.
+
+\section{Relasi dan Aturan Pemakaiannya}
+
+% TODO
+% Cakupan: relasi struktural, dependensi, dan dinamis; arti tiap relasi dalam bahasa sehari-hari;
+%   kesalahan pemakaian yang umum; penurunan relasi secara singkat.
+
+\section{Viewpoint untuk Pemangku Kepentingan Berbeda}
+
+% TODO
+% Cakupan: layered view, motivation view, application cooperation view, dan capability map;
+%   memilih viewpoint berdasarkan concern; menyembunyikan detail yang tidak dibutuhkan pembaca.
+% Kasus Medikara: view untuk direksi berbeda dengan view untuk tim TI pada layanan yang sama.
+
+\section{Bekerja dengan Archi}
+
+% TODO
+% Cakupan: pemasangan Archi 5.10.0 yang mendukung ArchiMate 3.2; struktur folder, konvensi
+%   penamaan, dan properti elemen; ekspor gambar dan laporan HTML; kerja bersama dalam tim.
+% Pendalaman teknis: skrip jArchi untuk memeriksa konsistensi model; ekspor dan impor format
+%   pertukaran model ArchiMate (Open Exchange Format).
+
+\section{ArchiMate 4 dan Dampaknya bagi Pemodel}
+
+% TODO
+% Cakupan: ArchiMate 4 (C260) terbit 27 April 2026; perubahan utama (lapisan menjadi domain,
+%   elemen perilaku lintas lapisan digabung, peran generik, multiplisitas relasi, beberapa elemen
+%   dihapus); alasan mata kuliah tetap memakai ArchiMate 3.2; cara menyiapkan model agar mudah
+%   dipindahkan ke versi 4.
+
+\section{Aktivitas: Memodelkan Satu Layanan dari Pasien sampai Server}
+
+% TODO
+% Tujuan aktivitas: menghasilkan model berlapis pertama yang menjadi fondasi repositori tim.
+% Peran dalam tim: analis bisnis memodelkan lapisan bisnis; analis teknologi memodelkan lapisan
+%   aplikasi dan teknologi; keduanya menyepakati titik sambung; pemodel menyiapkan struktur folder,
+%   konvensi penamaan, dan berkas bersama; koordinator memastikan rantai motivasi C1 ikut dimodelkan.
+% Langkah: pasang Archi; pilih satu layanan inti; modelkan pelaku, layanan, proses, aplikasi, dan
+%   node; hubungkan dengan relasi yang tepat; buat layered view; pindahkan rantai motivasi C1 ke
+%   motivation view; periksa silang istilah dengan glosarium.
+% Luaran dan tonggak capstone: model ArchiMate awal berisi layered view dan motivation view,
+%   sebagai fondasi C2.
+% Berkas sources yang direncanakan: sources/chapter04/panduan-instalasi-archi.md,
+%   sources/chapter04/konvensi-penamaan-model.md, sources/chapter04/medikara-janji-temu.archimate
+
+\section{Ringkasan}
+
+% TODO
+
+\section{Latihan}
+
+\begin{enumerate}
+  \item Uraikan rantai elemen dan relasi dari ``Pasien'' sampai ``\textit{server} basis data SIMRS (Sistem Informasi Manajemen Rumah Sakit)'' untuk layanan pendaftaran. Sebutkan jenis relasi pada tiap langkah.
+  \item Seorang direktur hanya ingin tahu aplikasi mana yang mendukung tiap layanan pasien. \textit{Viewpoint} apa yang cocok, dan elemen apa yang sengaja tidak ditampilkan?
+  \item ArchiMate 4 menggabungkan elemen perilaku lintas lapisan. Jelaskan satu keuntungan dan satu kerugian perubahan itu bagi organisasi yang sudah punya model ArchiMate 3.2.
+\end{enumerate}

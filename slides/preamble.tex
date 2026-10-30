@@ -1,0 +1,86 @@
+% Preamble bersama seluruh slide mata kuliah ini.
+% Dipanggil dari slides/sessionXX/sessionXX.tex tepat sesudah baris
+% \documentclass[aspectratio=169, table, 12pt]{beamer}
+% Paket tambahan yang hanya dibutuhkan satu sesi ditulis di berkas sesi itu.
+
+\usepackage{colortbl}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{tikz}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{arrows.meta, positioning, calc, fit, shapes.geometric,
+	shapes.multipart, backgrounds, matrix, chains, trees}
+
+\makeatletter
+\def\input@path{{../theme/}}
+\makeatother
+\graphicspath{{../theme/}{../../figures/}}
+\usetheme{Pradita}
+
+\definecolor{praditagreen}{RGB}{37, 113, 71}
+
+% Tema membuat garis tabel berwarna putih. Dikembalikan agar tabel terbaca.
+\arrayrulecolor{black}
+\setlength{\arrayrulewidth}{0.5pt}
+
+\lstdefinelanguage{yaml}{
+	basicstyle=\ttfamily\scriptsize,
+	keywordstyle=\color{blue}\bfseries,
+	commentstyle=\color{gray}\itshape,
+	stringstyle=\color{red},
+	showstringspaces=false,
+	breaklines=true,
+	frame=lines,
+	numbers=none,
+	backgroundcolor=\color{lightgray!10},
+	tabsize=2,
+	morecomment=[l]{\#}
+}
+
+\lstdefinelanguage{json}{
+	basicstyle=\ttfamily\scriptsize,
+	stringstyle=\color{red},
+	commentstyle=\color{gray},
+	breaklines=true,
+	showstringspaces=false,
+	tabsize=2,
+	numbers=none,
+	frame=lines,
+	backgroundcolor=\color{lightgray!10},
+	string=[s]{"}{"}
+}
+
+\lstdefinelanguage{bash}{
+	keywords={},
+	basicstyle=\ttfamily\scriptsize,
+	ndkeywords={docker, kubectl, helm, curl, git, terraform},
+	ndkeywordstyle=\color{purple}\bfseries,
+	sensitive=true,
+	commentstyle=\color{gray},
+	numbers=none,
+	breaklines=true,
+	frame=lines,
+	backgroundcolor=\color{lightgray!10},
+	tabsize=2,
+	comment=[l]{\#},
+	showstringspaces=false
+}
+
+\lstdefinelanguage{http}{
+	keywords={GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS, HTTP},
+	basicstyle=\ttfamily\scriptsize,
+	keywordstyle=\color{blue}\bfseries,
+	sensitive=true,
+	numbers=none,
+	breaklines=true,
+	frame=lines,
+	backgroundcolor=\color{lightgray!10},
+	tabsize=2,
+	showstringspaces=false
+}
+
+\subtitle{IT40513 · Enterprise Architecture \& Digital Blueprint}
+\author{\textbf{Alfa Yohannis}}

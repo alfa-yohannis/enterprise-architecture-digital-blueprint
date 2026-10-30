@@ -1,0 +1,83 @@
+\chapter{Arsitektur Data dan Aplikasi Target}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Merancang arsitektur data target yang menjamin satu identitas dan satu rekam medis untuk tiap pasien.
+  \item Menyusun lanskap aplikasi target beserta keputusan rasionalisasi untuk tiap aplikasi.
+  \item Mengevaluasi pilihan membangun sendiri, membeli, atau berlangganan SaaS (\textit{Software as a Service}) dengan kriteria yang eksplisit.
+\end{itemize}
+
+\section{Pendahuluan}
+
+% TODO
+% Cakupan: satu pasien tercatat dengan banyak nomor rekam medis, sehingga riwayat klinis terpecah
+%   dan laporan direksi tidak dapat dipercaya.
+
+\section{Identitas Pasien Tunggal dan Data Induk}
+
+% TODO
+% Cakupan: MPI (Master Patient Index); pola manajemen data induk pada tingkat konsep (registri,
+%   konsolidasi, terpusat); aturan kepemilikan dan pembaruan data induk; prinsip satu sumber
+%   kebenaran dari C1.
+% Kasus Medikara: penyatuan identitas pasien dari lima rumah sakit dan 18 klinik.
+% Pendalaman teknis: aturan pencocokan identitas deterministik dan probabilistik beserta risiko
+%   salah gabung dan salah pisah.
+
+\section{Arsitektur Data untuk Analitik dan Pelaporan}
+
+% TODO
+% Cakupan: beda data operasional dan data analitik; gudang data dan platform data pada tingkat
+%   konsep; mengganti laporan spreadsheet dengan sumber yang terkelola; kualitas data sebagai
+%   syarat laporan terpadu.
+
+\section{Lanskap Aplikasi Target dan Rasionalisasi}
+
+% TODO
+% Cakupan: keputusan per aplikasi (pertahankan, ganti, gabungkan, hentikan); aplikasi bersama dan
+%   aplikasi lokal; pemeriksaan sebelum menghentikan aplikasi.
+% Kasus Medikara: konsolidasi lima SIMRS dan posisi Medikara+ serta ERP.
+
+\section{Integrasi Target pada Tingkat Konsep}
+
+% TODO
+% Cakupan: dari point-to-point ke hub, platform integrasi, dan API pada tingkat konsep; integrasi
+%   eksternal dengan SATUSEHAT dan BPJS Kesehatan; batas tanggung jawab dengan mata kuliah IT40613
+%   yang membahas rinci desain dan tata kelola API.
+% Pendalaman teknis: memetakan sumber data Medikara ke resource HL7 FHIR.
+
+\section{Keputusan Membangun, Membeli, atau Berlangganan}
+
+% TODO
+% Cakupan: kriteria berbobot (kesesuaian kapabilitas, biaya total, waktu, ketergantungan vendor,
+%   kepatuhan); risiko pihak ketiga dari sisi arsitektur (dibahas rinci di mata kuliah IT40813);
+%   mendokumentasikan alasan keputusan.
+% Kasus Medikara: pelajaran dari insiden kebocoran data lewat vendor pada 2025.
+
+\section{Aktivitas: Merancang Data dan Aplikasi Target}
+
+% TODO
+% Tujuan aktivitas: menghasilkan rancangan data dan aplikasi target yang dapat ditelusuri ke
+%   kapabilitas dan prinsip.
+% Peran dalam tim: analis teknologi memimpin rancangan data dan aplikasi target; analis bisnis
+%   memeriksa keterkaitan tiap keputusan dengan kapabilitas dan prinsip; pemodel menggambar
+%   application cooperation view target dan information structure view; koordinator menyelaraskan
+%   rancangan integrasi dengan tim IT40613.
+% Langkah: rancang identitas pasien tunggal dan data induk; rancang alur data untuk laporan;
+%   susun tabel rasionalisasi aplikasi; bandingkan minimal dua opsi untuk satu keputusan besar
+%   dengan kriteria berbobot; modelkan kondisi target.
+% Luaran dan tonggak capstone: arsitektur data dan aplikasi target (C3).
+% Berkas sources yang direncanakan: sources/chapter09/templat-tabel-rasionalisasi-aplikasi.csv,
+%   sources/chapter09/templat-matriks-bangun-beli-langganan.csv,
+%   sources/chapter09/contoh-aturan-identitas-pasien.md
+
+\section{Ringkasan}
+
+% TODO
+
+\section{Latihan}
+
+\begin{enumerate}
+  \item Jelaskan tanpa istilah teknis mengapa MPI (\textit{Master Patient Index}) dibutuhkan sebelum laporan manajemen terpadu dapat dipercaya.
+  \item Susun lima kriteria untuk memilih antara membangun sendiri dan membeli SIMRS (Sistem Informasi Manajemen Rumah Sakit) baru. Beri bobot dan jelaskan alasannya.
+  \item Sebuah aplikasi dinilai \textit{Eliminate}, tetapi masih dipakai satu unit kecil untuk laporan ke regulator. Apa yang perlu diperiksa sebelum aplikasi itu dihentikan?
+\end{enumerate}

@@ -1,0 +1,85 @@
+\chapter{Arsitektur Aplikasi dan Teknologi Saat Ini}
+
+\section*{Tujuan Pembelajaran}
+\begin{itemize}
+  \item Menyusun katalog aplikasi dan menilainya dengan model TIME (\textit{Tolerate, Invest, Migrate, Eliminate}).
+  \item Memetakan integrasi antaraplikasi dan menunjukkan titik rawan pola \textit{point-to-point}.
+  \item Merangkum lanskap teknologi tingkat tinggi beserta utang teknis dan risikonya.
+\end{itemize}
+
+\section{Pendahuluan}
+
+% TODO
+% Cakupan: aplikasi bertambah dari akuisisi dan proyek terpisah, sampai tidak ada yang tahu jumlah
+%   pasti aplikasi, pemiliknya, dan biaya tahunannya.
+
+\section{Katalog Aplikasi}
+
+% TODO
+% Cakupan: atribut minimum (fungsi, pemilik, pengguna, vendor, umur, biaya); sumber data inventaris
+%   (kontrak, tagihan, wawancara); aplikasi tidak resmi dan spreadsheet yang berperan sebagai
+%   aplikasi.
+% Kasus Medikara: lima SIMRS berbeda versi, ERP keuangan terpusat, dan aplikasi pasien Medikara+.
+
+\section{Pemetaan Aplikasi ke Kapabilitas}
+
+% TODO
+% Cakupan: matriks aplikasi dan kapabilitas; aplikasi dengan fungsi tumpang tindih; kapabilitas
+%   tanpa dukungan sistem; kaitan dengan heatmap Bab 5.
+
+\section{Penilaian Portofolio dengan Model TIME}
+
+% TODO
+% Cakupan: dua sumbu nilai bisnis dan kualitas teknis; arti empat kuadran; penilaian bersama
+%   pengguna agar tidak bias teknis; panduan portofolio aplikasi dalam BIZBOK versi 15.
+
+\section{Integrasi dan Antarmuka}
+
+% TODO
+% Cakupan: katalog antarmuka; pola point-to-point dan akibatnya pada biaya dan risiko; integrasi
+%   dengan BPJS Kesehatan dan SATUSEHAT dari sisi arsitektur (desain API dibahas rinci di mata
+%   kuliah IT40613).
+% Kasus Medikara: diagram integrasi saat ini dan biaya integrasi yang tinggi.
+% Pendalaman teknis: menghitung jumlah koneksi dengan rumus n(n-1)/2 dan memperkirakan biaya
+%   pemeliharaannya dari data insiden dan permintaan perubahan.
+
+\section{Lanskap Teknologi Tingkat Tinggi}
+
+% TODO
+% Cakupan: lokasi dan hosting; jaringan antarfasilitas; platform dan perangkat lunak dasar; utang
+%   teknis dan dukungan vendor yang berakhir (operasi cloud dibahas rinci di mata kuliah IT40713).
+% Kasus Medikara: SIMRS on-premise di tiap rumah sakit dan ketergantungan pada vendor.
+
+\section{Merangkai Dokumen Kondisi Saat Ini}
+
+% TODO
+% Cakupan: struktur dokumen C2; ringkasan lima masalah terbesar; pemeriksaan konsistensi nama
+%   antarartefak; persiapan tinjauan menjelang UTS.
+
+\section{Aktivitas: Menilai Portofolio Aplikasi dan Merangkai C2}
+
+% TODO
+% Tujuan aktivitas: melengkapi potret kondisi saat ini dan merangkainya menjadi satu dokumen.
+% Peran dalam tim: analis teknologi memimpin katalog aplikasi dan katalog antarmuka; analis bisnis
+%   menilai nilai bisnis bersama pengguna; pemodel menggambar application cooperation view dan
+%   technology view; koordinator merangkai dokumen C2.
+% Langkah: susun katalog aplikasi; nilai kualitas teknis dan nilai bisnis; tempatkan di kuadran
+%   TIME; susun katalog antarmuka dan diagram integrasi; rangkum lanskap teknologi; rangkai
+%   artefak Pertemuan 4 sampai 7 menjadi dokumen C2.
+% Luaran dan tonggak capstone: katalog aplikasi, diagram integrasi, ringkasan teknologi, dan
+%   dokumen kondisi saat ini (C2) untuk ditinjau menjelang UTS.
+% Berkas sources yang direncanakan: sources/chapter07/templat-katalog-aplikasi.csv,
+%   sources/chapter07/templat-katalog-antarmuka.csv, sources/chapter07/lembar-penilaian-time.md,
+%   sources/chapter07/templat-dokumen-c2.md
+
+\section{Ringkasan}
+
+% TODO
+
+\section{Latihan}
+
+\begin{enumerate}
+  \item Aplikasi bernilai bisnis tinggi tetapi berkualitas teknis rendah masuk kuadran TIME yang mana? Langkah apa yang wajar untuknya?
+  \item Medikara punya lima SIMRS (Sistem Informasi Manajemen Rumah Sakit) berbeda versi, satu ERP (\textit{Enterprise Resource Planning}), satu aplikasi pasien, dan dua sistem eksternal. Berapa koneksi maksimum bila semuanya saling terhubung \textit{point-to-point}? Mengapa angka ini penting bagi direksi?
+  \item Sebutkan tiga pertanyaan untuk vendor guna menilai risiko sebuah aplikasi lama, dan jelaskan alasan tiap pertanyaan.
+\end{enumerate}
