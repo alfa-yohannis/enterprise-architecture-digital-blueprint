@@ -1,0 +1,45 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  pelanggan/.style={draw, rounded corners, minimum height=0.8cm, text width=2.9cm,
+                    align=center, fill=praditagreen!15, inner sep=2pt},
+  data/.style={draw, rounded corners, minimum height=0.8cm, text width=2.15cm,
+               align=center, fill=orange!12, inner sep=2pt},
+  penghubung/.style={draw, minimum height=0.55cm, minimum width=11.4cm,
+                     align=center, fill=blue!8, font=\scriptsize\bfseries},
+  fasilitas/.style={draw, minimum height=0.95cm, text width=2.45cm,
+                    align=center, fill=gray!35, inner sep=2pt},
+  sambung/.style={thick, gray}
+]
+  \node[pelanggan] (pasien) at (0.8,4.6) {\textbf{Pasien}\\{\tiny\mdseries sekitar 1,2 juta kunjungan per tahun}};
+  \node[pelanggan] (penjamin) at (4.5,4.6) {\textbf{Penjamin}\\{\tiny\mdseries BPJS Kesehatan dan asuransi}};
+  \node[pelanggan] (mitra) at (8.2,4.6) {\textbf{Mitra}\\{\tiny\mdseries klinik mitra, apotek daring, perusahaan}};
+
+  \node[penghubung] (kanal) at (4.5,3.45) {Aplikasi Medikara+ dan portal mitra};
+
+  \node[data] (identitas) at (0.45,2.15) {Identitas pasien};
+  \node[data] (ringkasan) at (3.15,2.15) {Ringkasan rekam medis};
+  \node[data] (jadwal) at (5.85,2.15) {Jadwal dokter dan kapasitas};
+  \node[data] (tarif) at (8.55,2.15) {Penjamin, tarif, dan klaim};
+  \begin{scope}[on background layer]
+    \node[draw, dashed, rounded corners, fill=orange!4, inner sep=6pt,
+          fit=(identitas) (tarif), label={[font=\tiny\bfseries, anchor=south west]north west:Data bersama}] (bersama) {};
+  \end{scope}
+
+  \node[penghubung] (integrasi) at (4.5,0.75) {Platform integrasi, termasuk ke SATUSEHAT dan BPJS Kesehatan};
+
+  \node[fasilitas] (rs) at (0.15,-0.6) {\textbf{5 rumah sakit}\\{\tiny\mdseries SIMRS dan alur masing-masing}};
+  \node[fasilitas] (klinik) at (3.1,-0.6) {\textbf{18 klinik pratama}\\{\tiny\mdseries alur lokal}};
+  \node[fasilitas] (lab) at (5.95,-0.6) {\textbf{1 laboratorium}\\{\tiny\mdseries rujukan}};
+  \node[fasilitas] (apotek) at (8.85,-0.6) {\textbf{12 apotek}\\{\tiny\mdseries alur lokal}};
+
+  \foreach \simpul in {pasien, penjamin, mitra} {
+    \draw[sambung] (\simpul.south) -- (\simpul.south |- kanal.north);
+  }
+  \draw[sambung] (kanal.south) -- (bersama.north);
+  \draw[sambung] (bersama.south) -- (integrasi.north);
+  \foreach \simpul in {rs, klinik, lab, apotek} {
+    \draw[sambung] (\simpul.north) -- (\simpul.north |- integrasi.south);
+  }
+  \node[font=\tiny, gray, anchor=north] at (4.5,-1.2)
+    {proses di tiap fasilitas tidak diseragamkan; yang wajib sama hanya data bersama dan antarmukanya};
+\end{tikzpicture}

@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  aktor/.style={draw, rounded corners, fill=blue!8, minimum height=0.8cm,
+                text width=1.8cm, align=center, font=\scriptsize},
+  kotak/.style={draw, rounded corners, minimum height=1.2cm, text width=2.0cm,
+                align=center, font=\scriptsize\bfseries},
+  zona/.style={draw, rounded corners, minimum height=0.8cm, text width=2.7cm,
+               align=center, font=\scriptsize},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Kiri: siapa yang meminta akses.
+  \node[aktor] (pasien) at (0,2.4) {Pasien};
+  \node[aktor] (staf) at (0,1.2) {Karyawan\\dan dokter};
+  \node[aktor] (vendor) at (0,0) {Vendor\\dan mitra};
+
+  % Tengah: satu pintu identitas, lalu satu pengatur hak.
+  \node[kotak, fill=praditagreen!15] (idp) at (3.0,1.2)
+    {Identitas terpusat\\{\tiny\mdseries satu akun per orang,\\autentikasi multifaktor}};
+  \node[kotak, fill=orange!12] (hak) at (5.9,1.2)
+    {Kontrol akses\\{\tiny\mdseries hak minimum\\sesuai peran}};
+
+  % Kanan: zona yang dipisahkan.
+  \node[zona, fill=blue!8] (publik) at (9.4,2.4) {Zona publik\\{\tiny Medikara+, portal mitra}};
+  \node[zona, fill=blue!8] (apl) at (9.4,1.2) {Zona aplikasi\\{\tiny SIMRS, ERP, integrasi}};
+  \node[zona, fill=orange!12] (klinis) at (9.4,0) {Zona data klinis\\{\tiny rekam medis, MPI}};
+
+  % Bawah: bukti dan kondisi lama sebagai pembanding.
+  \node[zona, fill=green!10] (log) at (5.9,-1.65) {Catatan akses terpusat\\{\tiny siapa, kapan, data apa}};
+  \node[zona, fill=red!22] (lama) at (0.4,-1.65) {Kondisi 2025\\{\tiny akun vendor bersama,\\jaringan datar}};
+
+  \draw[panah] (pasien.east) -- (idp.west);
+  \draw[panah] (staf.east) -- (idp.west);
+  \draw[panah] (vendor.east) -- (idp.west);
+  \draw[panah] (idp) -- (hak);
+  \draw[panah] (hak.east) -- (publik.west);
+  \draw[panah] (hak.east) -- (apl.west);
+  \draw[panah] (hak.east) -- (klinis.west);
+  \draw[panah, dashed, gray] (klinis.south) |- (log.east);
+  \draw[panah, dashed, gray] (idp.south) |- (log.west);
+
+  \node[font=\tiny, gray, anchor=north west, text width=2.6cm, align=left]
+    at (-0.95,-0.45) {target: akun vendor pribadi\\dan berbatas waktu};
+\end{tikzpicture}

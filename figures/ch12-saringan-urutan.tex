@@ -1,0 +1,35 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=1.0cm, text width=1.45cm,
+                align=center, font=\scriptsize\bfseries},
+  tanya/.style={text width=1.6cm, align=center, font=\tiny},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=praditagreen!15] (daftar) at (0,0)
+    {Paket kerja\\{\tiny\mdseries dari Bab 11}};
+  \node[kotak, fill=blue!8] (dep) at (2.05,0)
+    {Dependensi\\{\tiny\mdseries syarat mutlak}};
+  \node[kotak, fill=blue!8] (nilai) at (4.1,0)
+    {Nilai dan risiko\\{\tiny\mdseries skor}};
+  \node[kotak, fill=orange!12] (kap) at (6.15,0)
+    {Kapasitas\\{\tiny\mdseries batas per tahun}};
+  \node[kotak, fill=blue!8] (angg) at (8.2,0)
+    {Anggaran\\{\tiny\mdseries titik keputusan}};
+  \node[kotak, fill=green!10] (peta) at (10.25,0)
+    {Peta jalan\\{\tiny\mdseries 2026 sampai 2030}};
+
+  \draw[panah] (daftar) -- (dep);
+  \draw[panah] (dep) -- (nilai);
+  \draw[panah] (nilai) -- (kap);
+  \draw[panah] (kap) -- (angg);
+  \draw[panah] (angg) -- (peta);
+
+  \node[tanya, anchor=north] at (0,-0.7) {6 sampai 10 paket beserta matriks dependensi};
+  \node[tanya, anchor=north] at (2.05,-0.7) {Apa yang harus selesai lebih dahulu?};
+  \node[tanya, anchor=north] at (4.1,-0.7)
+    {Mana yang paling bermanfaat dan paling menurunkan risiko?};
+  \node[tanya, anchor=north] at (6.15,-0.7)
+    {Berapa proyek besar yang sanggup berjalan dalam setahun?};
+  \node[tanya, anchor=north] at (8.2,-0.7) {Kapan dana tahun berikutnya diputuskan?};
+  \node[tanya, anchor=north] at (10.25,-0.7) {Urutan, transisi, dan titik keputusan};
+\end{tikzpicture}

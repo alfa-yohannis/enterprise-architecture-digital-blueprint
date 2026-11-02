@@ -1,0 +1,37 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kuadran/.style={draw, minimum width=4.4cm, minimum height=2.4cm, align=center,
+                  font=\scriptsize\bfseries, anchor=south west},
+  penanda/.style={circle, draw, thick, fill=white, inner sep=1.5pt,
+                  font=\tiny\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kuadran, fill=gray!35] (div) at (0,0)
+    {Diversifikasi\\[1pt]{\tiny\mdseries proses beragam, data terpisah}};
+  \node[kuadran, fill=blue!8] (rep) at (4.4,0)
+    {Replikasi\\[1pt]{\tiny\mdseries proses seragam, data terpisah}};
+  \node[kuadran, fill=orange!12] (koor) at (0,2.4)
+    {Koordinasi\\[1pt]{\tiny\mdseries proses beragam, data bersama}};
+  \node[kuadran, fill=blue!8] (unif) at (4.4,2.4)
+    {Unifikasi\\[1pt]{\tiny\mdseries proses seragam, data bersama}};
+
+  \node[penanda] (saatini) at (0.7,1.85) {S};
+  \node[penanda] (target) at (3.75,3.0) {T};
+  \draw[panah, praditagreen!80!black] (saatini) -- (target);
+
+  \draw[panah] (-0.25,0) -- (-0.25,5.0);
+  \node[rotate=90, font=\scriptsize\bfseries] at (-0.55,2.4) {Integrasi proses bisnis};
+  \node[rotate=90, font=\tiny, anchor=east] at (-0.55,0.75) {rendah};
+  \node[rotate=90, font=\tiny, anchor=west] at (-0.55,4.05) {tinggi};
+  \draw[panah] (0,-0.25) -- (9.0,-0.25);
+  \node[font=\scriptsize\bfseries] at (4.4,-0.55) {Standardisasi proses bisnis};
+  \node[font=\tiny] at (0.45,-0.55) {rendah};
+  \node[font=\tiny] at (8.35,-0.55) {tinggi};
+
+  \node[penanda] at (0.2,-1.1) {S};
+  \node[font=\tiny, anchor=west] at (0.45,-1.1)
+    {kondisi saat ini: lima rumah sakit hasil akuisisi, data dan proses sendiri-sendiri};
+  \node[penanda] at (0.2,-1.55) {T};
+  \node[font=\tiny, anchor=west] at (0.45,-1.55)
+    {target 2030: data pasien dipakai bersama, inti layanan distandarkan, sisanya lokal};
+\end{tikzpicture}

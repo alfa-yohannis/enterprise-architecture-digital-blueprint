@@ -1,4 +1,7 @@
+% !TeX root = enterprise-architecture-digital-blueprint.tex
+% !TeX encoding = UTF-8
 \chapter{Orientasi Mata Kuliah dan Dasar Arsitektur Enterprise}
+\label{ch:ch01-orientasi}
 
 \section*{Tujuan Pembelajaran}
 \begin{itemize}
@@ -9,82 +12,1120 @@
 
 \section{Pendahuluan}
 
-% TODO
-% Cakupan: organisasi yang tumbuh lewat akuisisi dan proyek terpisah akhirnya punya sistem ganda,
-%   data tersebar, dan keputusan TI tanpa gambaran utuh; pertanyaan pembuka: siapa yang memegang
-%   peta besar organisasi ini?
+Banyak organisasi tidak dirancang sekaligus. Organisasi tumbuh sedikit demi
+sedikit: membuka cabang baru, membeli perusahaan lain, dan menjalankan proyek
+yang didanai unit masing-masing. Setiap langkah masuk akal pada saatnya.
+Sepuluh tahun kemudian, hasilnya sering berupa beberapa sistem yang
+mengerjakan hal yang sama, data pelanggan yang tersimpan di banyak tempat
+dengan isi berbeda, dan keputusan teknologi yang diambil tanpa gambaran utuh.
+Gejala ini tidak muncul karena orang-orangnya ceroboh, melainkan karena tidak
+ada yang bertugas menjaga gambaran utuhnya.
+
+Pertanyaan pembuka bab ini sederhana: siapa yang memegang peta besar
+organisasi? Direktur utama memahami strategi, tetapi tidak tahu aplikasi mana
+yang menyimpan data pelanggan. Kepala Teknologi Informasi (TI) di tiap cabang
+memahami servernya sendiri, tetapi tidak tahu rencana bisnis lima tahun ke
+depan. Vendor memahami produknya, tetapi tidak bertanggung jawab atas
+keseluruhan. Arsitektur \textit{enterprise}, atau EA, adalah praktik yang
+mengisi kekosongan ini. Hubungan strategi, bisnis, data, aplikasi, dan teknologi membuat
+konsekuensi perubahan dapat dibaca sebagai satu rancangan organisasi.
+
+Gambar \ref{fig:ch01-tumbuh} merangkum hubungan komponen dan konsep utama bab ini.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{../figures/ch01-diagram-konsep.png}
+  \caption{Lima sudut pandang untuk satu perubahan organisasi}
+  \label{fig:ch01-tumbuh}
+\end{figure}
+
+Bab ini membahas pengertian EA dan bedanya dengan arsitektur solusi dan
+arsitektur perangkat lunak, lima sudut pandang atas organisasi, penyetaraan
+istilah untuk tim berlatar campuran, bukti empiris tentang nilai EA, peran
+arsitek \textit{enterprise}, serta proyek \textit{capstone} dan kasus Medikara
+Health. Rujukan utamanya adalah TOGAF (\textit{The Open Group Architecture
+Framework}) Standard \cite{togaf10}, standar internasional tentang deskripsi
+arsitektur \cite{iso42010}, model nilai EA dari Tamm dkk. \cite{tamm2011},
+faktor keberhasilan pengelolaan EA dari Lange dkk. \cite{lange2016}, serta
+kajian artefak EA dari Kotusev \cite{kotusev2019,kotusev2021}.
 
 \section{Enterprise, Arsitektur, dan Arsitektur Enterprise}
 
-% TODO
-% Cakupan: enterprise sebagai organisasi atau gabungan organisasi dengan tujuan bersama; arsitektur
-%   sebagai struktur, hubungan, dan prinsip yang mengarahkan perubahan (ISO/IEC/IEEE 42010:2022 dan
-%   TOGAF); EA sebagai praktik berkelanjutan, bukan sekadar dokumen; beda EA, arsitektur solusi, dan
-%   arsitektur perangkat lunak.
-% Kasus Medikara: lima rumah sakit hasil akuisisi dengan SIMRS berbeda versi sebagai gejala
-%   organisasi yang tumbuh tanpa EA.
+Organisasi yang tumbuh tanpa arsitektur biasanya memperlihatkan empat gejala
+yang sama:
+
+\begin{enumerate}
+  \item \textbf{Sistem ganda}: dua aplikasi atau lebih mengerjakan fungsi yang
+        sama di unit yang berbeda.
+  \item \textbf{Data tersebar}: satu pelanggan tercatat di beberapa sistem
+        dengan isi yang tidak sama.
+  \item \textbf{Integrasi yang menumpuk}: setiap sistem baru disambungkan
+        sendiri-sendiri, sehingga jumlah sambungan terus bertambah.
+  \item \textbf{Keputusan tanpa gambaran utuh}: proyek disetujui satu per satu
+        tanpa ada yang memeriksa dampaknya pada keseluruhan.
+\end{enumerate}
+
+Pertanyaan kemudian muncul: apa yang hilang dari organisasi semacam itu?
+Jawabannya ada pada tiga istilah yang membentuk nama praktik ini.
+
+TOGAF memakai kata \textit{enterprise} untuk tingkat tertinggi deskripsi
+sebuah organisasi, yang mencakup seluruh misi dan fungsinya dan sering
+melintasi lebih dari satu organisasi \cite{togaf10}. Batasnya tidak harus sama
+dengan batas badan hukum. Satu \textit{enterprise} dapat berupa satu
+perusahaan, satu grup usaha, satu kementerian beserta unit di bawahnya, atau
+gabungan rumah sakit, klinik mitra, dan perusahaan asuransi yang bekerja untuk
+tujuan bersama. Yang menentukan batasnya adalah tujuan bersama dan keputusan
+yang ingin diambil, bukan akta pendirian.
+
+ISO/IEC/IEEE 42010:2022 adalah standar bersama International Organization
+for Standardization (ISO), International Electrotechnical Commission (IEC),
+dan Institute of Electrical and Electronics Engineers (IEEE). Standar ini
+mendefinisikan arsitektur sebagai konsep atau sifat mendasar suatu entitas di
+dalam lingkungannya, beserta prinsip yang mengatur perwujudan dan
+perubahannya \cite{iso42010}. TOGAF memberi rumusan yang lebih mudah
+dibayangkan: struktur komponen, hubungan antarkomponen, serta prinsip dan
+pedoman yang mengatur rancangan dan evolusinya \cite{togaf10}. Keduanya
+memuat tiga unsur, yaitu bagian, hubungan, dan prinsip. Unsur ketiga paling
+sering terlupa, padahal prinsip itulah yang mengarahkan perubahan berikutnya.
+
+Standar yang sama memisahkan arsitektur, yaitu sifat entitasnya, dari
+deskripsi arsitektur, yaitu dokumen yang menjelaskannya \cite{iso42010}.
+Akibatnya, setiap organisasi sudah punya arsitektur, entah pernah digambar
+atau tidak. Bedanya hanya satu: arsitektur itu dirancang, atau terbentuk
+secara kebetulan.
+
+EA adalah praktik berkelanjutan untuk memahami \textit{enterprise} secara
+utuh, dari strategi sampai teknologi, lalu memakai pemahaman itu untuk
+mengarahkan perubahan. Kata kuncinya praktik, bukan dokumen. Dokumen, model,
+dan diagram adalah alat kerjanya, sedangkan hasil yang dicari adalah
+keputusan yang lebih baik: proyek mana yang didahulukan, sistem mana yang
+dipertahankan, dan data mana yang harus punya satu sumber. Kotusev memandang
+artefak EA sebagai alat untuk menjembatani komunikasi antara pemangku
+kepentingan bisnis dan pemangku kepentingan TI \cite{kotusev2019}. Artefak
+yang tidak pernah dipakai dalam percakapan semacam itu tidak menjalankan
+fungsinya, serapi apa pun gambarnya.
+
+Analoginya seperti rencana tata ruang kota. Rencana tata ruang tidak
+menggambar setiap rumah. Isinya zona permukiman, zona niaga, jalan utama,
+jaringan air, dan aturan bangunan. Pemilik rumah tetap bebas merancang
+rumahnya, asalkan mengikuti aturan zona dan tersambung ke jalan yang sudah
+direncanakan. Kota tanpa rencana tata ruang tetap punya bentuk, tetapi
+bentuknya ditentukan oleh siapa yang membangun lebih dahulu.
+
+Dua contoh rekaan memperlihatkan akibatnya bila praktik ini tidak ada:
+
+\begin{enumerate}
+  \item Misalkan sebuah perusahaan distribusi dengan 9 gudang cabang
+        membiarkan tiap gudang memilih aplikasi stoknya sendiri. Lima tahun
+        kemudian ada empat aplikasi stok, dan laporan stok nasional dirakit
+        dua staf selama empat hari kerja tiap akhir bulan.
+  \item Misalkan sebuah bank daerah membeli aplikasi pinjaman digital yang
+        membutuhkan data nasabah seketika, padahal sistem intinya hanya
+        mengirim data sekali sehari. Proyek senilai Rp3,5 miliar tertunda
+        sembilan bulan untuk membangun penghubung yang tidak dianggarkan.
+\end{enumerate}
+
+\subsection*{Tiga arsitektur yang sering tertukar}
+
+Tiga istilah sering tertukar: EA, arsitektur solusi, dan arsitektur perangkat
+lunak. Pembagiannya begini. TOGAF memakai arsitektur solusi untuk deskripsi
+satu kegiatan bisnis tertentu beserta cara sistem informasi mendukungnya
+\cite{togaf10}. Arsitektur perangkat lunak menurut Bass dkk. adalah kumpulan
+struktur yang dibutuhkan untuk menalar sebuah sistem, yang terdiri atas elemen
+perangkat lunak, hubungan antarelemen, dan sifat keduanya \cite{c01-bass2021}.
+Tabel \ref{tab:ch01-tiga-arsitektur} merinci perbedaannya, lengkap dengan
+padanannya dalam tata kota.
+
+\begin{table}[!htb]
+  \centering
+  \caption{EA, arsitektur solusi, dan arsitektur perangkat lunak}
+  \label{tab:ch01-tiga-arsitektur}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.9cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X
+      >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Aspek} & \textbf{EA} & \textbf{Arsitektur solusi} & \textbf{Arsitektur perangkat lunak} \\
+    \hline
+    Cakupan & Seluruh \textit{enterprise} & Satu inisiatif atau satu layanan & Satu sistem perangkat lunak \\
+    \hline
+    Pertanyaan utama & Apa yang diubah lebih dahulu, dan mengapa? & Bagaimana inisiatif ini dibangun dari sistem yang ada? & Bagaimana sistem ini disusun di dalamnya? \\
+    \hline
+    Horizon & Beberapa tahun, misalnya 2026 sampai 2030 & Selama proyek berjalan & Selama umur sistem \\
+    \hline
+    Pembaca utama & Direksi, pimpinan unit, arsitek lain & Sponsor, manajer proyek, vendor & Tim pengembang dan tim operasi \\
+    \hline
+    Contoh luaran & Prinsip, \textit{capability map}, peta jalan & Rancangan solusi satu proyek & Diagram komponen, keputusan desain \\
+    \hline
+    Padanan tata kota & Rencana tata ruang kota & Rancangan satu kawasan perumahan & Gambar kerja satu rumah \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Ketiganya saling membutuhkan, dan kesalahan yang paling sering adalah salah
+tingkat: diagram komponen satu aplikasi dibawa ke rapat direksi, atau peta
+jalan lima tahun dibawa ke rapat desain tim pengembang.
+
+Kotak berikut menerapkan keempat gejala tadi pada kasus berjalan mata kuliah
+ini, yaitu jaringan rumah sakit yang menjalankan lima SIMRS (Sistem Informasi
+Manajemen Rumah Sakit). Lanskap sistemnya tampak pada Gambar
+\ref{fig:ch01-lanskap}.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch01-lanskap-medikara.tex}
+  \caption{Lanskap sistem Medikara saat ini: lima SIMRS berbeda versi, masing-masing
+           dengan sambungan \textit{point-to-point} sendiri}
+  \label{fig:ch01-lanskap}
+\end{figure}
+
+\begin{kasus}[title={Kasus Medikara Health: Lima Rumah Sakit, Lima SIMRS}]
+  Medikara Health tumbuh lewat akuisisi. Kelima rumah sakitnya di Jakarta,
+  Bekasi, Depok, Bogor, dan Bandung masing-masing membawa SIMRS
+  \textit{on-premise} dengan versi berbeda. Keuangan memakai ERP
+  (\textit{Enterprise Resource Planning}) terpusat, dan aplikasi pasien
+  Medikara+ dibuat oleh vendor. Keempat gejala muncul sekaligus:
+
+  \begin{itemize}
+    \item \textbf{Sistem ganda}: lima SIMRS mengerjakan fungsi yang sama.
+    \item \textbf{Data tersebar}: misalkan seorang pasien pernah dirawat di
+          Bekasi lalu berobat di Depok. Ia punya dua nomor rekam medis, dan
+          dokter di Depok tidak melihat riwayat alergi yang tercatat di Bekasi.
+    \item \textbf{Integrasi yang menumpuk}: tiap SIMRS punya sambungan sendiri
+          ke BPJS (Badan Penyelenggara Jaminan Sosial) Kesehatan, SATUSEHAT,
+          ERP, dan Medikara+, sehingga ada 5 $\times$ 4 = 20 sambungan yang
+          dipelihara terpisah. Perubahan aturan klaim BPJS Kesehatan dikerjakan
+          lima kali.
+    \item \textbf{Keputusan tanpa gambaran utuh}: sambungan Medikara+ ke kelima
+          SIMRS dibuat satu per satu, dan laporan manajemen dirakit dengan
+          menyalin data ke \textit{spreadsheet}.
+  \end{itemize}
+
+  Siapa yang memegang peta besarnya? Belum ada. Kepala TI tiap rumah sakit
+  memahami SIMRS-nya sendiri, tim ERP memahami keuangan, dan vendor memahami
+  Medikara+. Sepanjang semester, tim \textit{capstone} berlatih mengisi posisi
+  yang kosong itu.
+\end{kasus}
 
 \section{Lima Sudut Pandang atas Organisasi}
 
-% TODO
-% Cakupan: strategi, bisnis, data, aplikasi, dan teknologi dengan contoh sehari-hari; bagaimana
-%   perubahan di satu sudut pandang merambat ke sudut pandang lain; gambaran satu halaman sebagai
-%   alat komunikasi dengan direksi.
-% Kasus Medikara: satu kunjungan pasien rawat jalan dilihat dari kelima sudut pandang.
+Misalkan direksi sebuah rumah sakit bertanya mengapa antrean pendaftaran
+rawat jalan mencapai 50 menit. Kepala layanan menjawab petugas loket kurang.
+Kepala TI menjawab server pendaftaran lambat setiap pagi. Bagian keuangan
+menjawab verifikasi kepesertaan BPJS Kesehatan memakan waktu. Ketiganya mungkin
+benar, tetapi masing-masing hanya melihat sebagian. Tanpa cara bersama untuk
+melihat organisasi, rapat seperti ini berakhir dengan tiga proyek terpisah
+yang masing-masing menambal satu sisi.
+
+EA memakai beberapa sudut pandang yang disepakati untuk mendeskripsikan
+organisasi yang sama. Mata kuliah ini memakai lima: strategi, bisnis, data,
+aplikasi, dan teknologi. Empat yang terakhir adalah domain arsitektur dalam
+TOGAF \cite{togaf10}. Sudut pandang strategi ditambahkan karena keempat domain
+itu baru bermakna bila dikaitkan dengan arah organisasi, dan ArchiMate, bahasa
+pemodelan yang dipakai mulai Bab 4, menyediakan elemen strategi dan motivasi
+tersendiri untuk keperluan ini \cite{archimate32}. Gambar \ref{fig:ch01-lima}
+menyusun kelimanya bertumpuk, lengkap dengan pertanyaan yang dijawab tiap
+sudut pandang dan contoh dari satu kunjungan rawat jalan.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch01-lima-sudut-pandang.tex}
+  \caption{Lima sudut pandang atas organisasi yang sama, dengan contoh dari satu
+           kunjungan rawat jalan}
+  \label{fig:ch01-lima}
+\end{figure}
+
+Analoginya seperti gambar kerja sebuah gedung rumah sakit. Satu gedung punya
+denah ruang, gambar instalasi listrik, gambar pipa air, dan gambar jalur gas
+medis. Tiap gambar dibaca orang yang berbeda, tetapi semuanya menggambarkan
+gedung yang sama. Bila ruang operasi dipindah ke lantai lain pada denah,
+gambar listrik dan jalur gas medisnya wajib ikut berubah. Gambar yang tidak
+ikut berubah akan menyesatkan teknisi berikutnya.
+
+Susunan bertumpuk itu sengaja dipilih, karena perubahan di satu sudut pandang
+merambat ke sudut pandang lain. Arahnya dua, seperti pada dua contoh rekaan
+berikut:
+
+\begin{enumerate}
+  \item \textbf{Turun dari strategi.} Misalkan sebuah jaringan klinik
+        memutuskan bekerja sama dengan 6 klinik mitra. Proses rujukan perlu
+        dirancang (bisnis), identitas pasien harus dapat dicocokkan lintas
+        organisasi (data), klinik mitra butuh akses ke sistem rujukan
+        (aplikasi), dan jaringan harus aman dibuka untuk pihak luar
+        (teknologi). Satu keputusan strategi menghasilkan empat pekerjaan.
+  \item \textbf{Naik dari teknologi.} Misalkan server sebuah SIMRS tidak lagi
+        didukung pabrikannya mulai tahun depan. Aplikasinya harus dipindah,
+        datanya dikonversi, pendaftaran mungkin berhenti dua hari saat
+        peralihan, dan target antrean tahun itu terancam. Batasan teknis yang
+        tampak kecil naik sampai ke target direksi.
+\end{enumerate}
+
+Bagi direksi, kelima sudut pandang ini diringkas menjadi satu halaman.
+Gambaran satu halaman tidak memuat semua detail. Fungsinya sebagai alat
+bicara: direksi dapat menunjuk satu kotak dan bertanya apa akibatnya bila
+kotak itu diubah. Ross, Weill, dan Robertson memakai gambaran semacam ini,
+yang mereka sebut \textit{core diagram}, untuk menyepakati proses dan data
+inti yang perlu distandarkan \cite{ross2006}. Bab 3 membahasnya lebih rinci.
+
+\begin{kasus}[title={Kasus Medikara Health: Satu Kunjungan, Lima Sudut Pandang}]
+  Misalkan seorang peserta BPJS Kesehatan membuat janji temu di Medikara+ untuk
+  poli penyakit dalam rumah sakit Medikara Depok. Ia datang, mendaftar,
+  diperiksa dokter, menerima resep, mengambil obat, lalu pulang. Bagi pasien,
+  ini satu kunjungan. Bagi organisasi, kunjungan itu menyentuh kelima sudut
+  pandang sekaligus, seperti pada Tabel \ref{tab:ch01-kunjungan}.
+
+  Kolom terakhir tabel itu memperlihatkan bahwa antrean panjang berakar di
+  beberapa sudut pandang. Pasien yang sudah membuat janji temu tetap antre di
+  loket karena Medikara+ tidak menulis langsung ke SIMRS. Menambah petugas
+  loket hanya menyentuh baris bisnis, dan antrean akan kembali panjang begitu
+  jumlah pasien naik.
+\end{kasus}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Satu kunjungan rawat jalan di Medikara Depok dilihat dari lima sudut pandang}
+  \label{tab:ch01-kunjungan}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.6cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Sudut pandang} & \textbf{Yang terlihat pada kunjungan ini} & \textbf{Masalah yang muncul} \\
+    \hline
+    Strategi & Bagian dari sasaran ``Satu Pasien, Satu Rekam Medis'' dan sasaran antrean yang lebih pendek & Belum ada ukuran waktu tunggu yang sama di kelima rumah sakit \\
+    \hline
+    Bisnis & Janji temu, pendaftaran di loket, verifikasi BPJS, pemeriksaan, resep, pengambilan obat & Pasien yang sudah janji temu tetap mendaftar ulang di loket \\
+    \hline
+    Data & Identitas pasien, data kunjungan, catatan dokter, resep, data klaim & Identitas di Medikara+ dan di SIMRS Depok dicocokkan manual \\
+    \hline
+    Aplikasi & Medikara+, SIMRS Depok, sambungan BPJS Kesehatan dan SATUSEHAT & Data janji temu diketik ulang ke SIMRS \\
+    \hline
+    Teknologi & Server SIMRS di rumah sakit Depok, jaringan ke server vendor Medikara+ & Server melambat pada jam sibuk pagi \\
+    \hline
+  \end{tabularx}
+\end{table}
 
 \section{Penyetaraan Istilah untuk Dua Kelompok Latar Belakang}
 
-% TODO
-% Cakupan: istilah teknis dasar (aplikasi, basis data, integrasi, API, cloud) dijelaskan dengan
-%   analogi tanpa pemrograman; istilah bisnis dasar (strategi, model bisnis, model operasi, biaya,
-%   nilai, pemangku kepentingan) untuk latar teknis; glosarium bersama tim sebagai alat kerja.
-% Pendalaman teknis: hubungan dokumentasi arsitektur perangkat lunak dengan artefak EA menurut
-%   Kotusev (2019).
+Misalkan sebuah rapat proyek menyepakati bahwa sistem pendaftaran baru
+``harus terintegrasi dengan SIMRS''. Kepala layanan pulang dengan bayangan
+bahwa data pasien akan muncul seketika di semua rumah sakit. Tim TI pulang
+dengan rencana mengirim berkas data sekali tiap malam. Tiga bulan kemudian
+kedua pihak merasa dikecewakan, padahal keduanya memakai kata yang sama.
+
+Mahasiswa mata kuliah ini datang dari dua kelompok. Kelompok berlatar bisnis,
+manajemen, akuntansi, hukum, atau kesehatan perlu memahami istilah teknis
+dasar tanpa harus memprogram. Kelompok berlatar ilmu komputer, rekayasa
+perangkat lunak, atau TI perlu memahami istilah bisnis dasar tanpa harus
+menjadi akuntan. Tabel \ref{tab:ch01-istilah-teknis} memasangkan istilah
+teknis dengan analogi sehari-hari. Untuk \textit{cloud}, definisi bakunya
+adalah model akses jaringan sesuai kebutuhan ke kumpulan sumber daya
+komputasi bersama yang dapat disediakan dan dilepas dengan cepat
+\cite{nist800-145}. Desain API (\textit{Application Programming
+Interface}) dibahas rinci di IT40613, dan \textit{cloud} di IT40713.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Istilah teknis dasar beserta analogi sehari-hari}
+  \label{tab:ch01-istilah-teknis}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.8cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Istilah} & \textbf{Arti singkat} & \textbf{Analogi} \\
+    \hline
+    Aplikasi & Program yang membantu satu pekerjaan, misalnya pendaftaran pasien & Formulir dan buku catatan petugas dalam bentuk digital \\
+    \hline
+    Basis data & Tempat aplikasi menyimpan data secara tertata agar mudah dicari dan diperbarui & Lemari arsip dengan map berlabel \\
+    \hline
+    Server & Komputer yang menjalankan aplikasi untuk banyak pengguna sekaligus & Dapur warung yang melayani semua meja \\
+    \hline
+    Integrasi & Cara dua aplikasi bertukar data, seketika atau berkala & Kurir antarkantor: ada yang tiap jam, ada yang tiap malam \\
+    \hline
+    API & Pintu resmi aplikasi untuk menerima permintaan dari aplikasi lain dengan format yang disepakati & Loket dengan formulir baku: permintaan lewat loket, tidak masuk ke gudang \\
+    \hline
+    \textit{On-premise} & Server dimiliki dan dirawat sendiri di gedung organisasi & Memiliki dan merawat genset sendiri \\
+    \hline
+    \textit{Cloud} & Daya komputasi disewa dari penyedia lewat jaringan, sesuai pemakaian & Berlangganan listrik tanpa merawat pembangkitnya \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Bagi mahasiswa berlatar teknis, istilah bisnis sering terdengar kabur karena
+tidak punya definisi formal. Cara termudah memahaminya adalah lewat
+pertanyaan yang dijawab tiap istilah, seperti pada Tabel
+\ref{tab:ch01-istilah-bisnis}.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Istilah bisnis dasar beserta pertanyaan yang dijawabnya}
+  \label{tab:ch01-istilah-bisnis}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.8cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Istilah} & \textbf{Arti singkat} & \textbf{Pertanyaan yang dijawab} \\
+    \hline
+    Strategi & Pilihan arah jangka menengah: di mana bersaing dan bagaimana menang & Apa yang dikerjakan, dan apa yang sengaja tidak dikerjakan? \\
+    \hline
+    Model bisnis & Cara organisasi menciptakan, menyerahkan, dan menangkap nilai \cite{c01-osterwalder2010} & Dari mana pendapatan datang, dan untuk nilai apa? \\
+    \hline
+    Model operasi & Tingkat integrasi dan standardisasi proses bisnis untuk melayani pelanggan \cite{ross2006} & Proses dan data mana yang harus sama di semua unit? \\
+    \hline
+    Biaya modal dan operasional & Belanja sekali di awal lawan belanja berulang tiap periode & Berapa dibayar sekarang, berapa tiap tahun? \\
+    \hline
+    Nilai & Manfaat yang dirasakan dibandingkan pengorbanannya & Apa yang menjadi lebih baik, dan bagi siapa? \\
+    \hline
+    \textit{Stakeholder} & Pihak yang punya kepentingan atas sebuah sistem atau perubahan \cite{iso42010} & Siapa diuntungkan atau dirugikan, dan apa kekhawatirannya? \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Kedua tabel itu hanya titik awal. Alat kerja yang sesungguhnya adalah
+glosarium bersama, yaitu daftar istilah yang disepakati tim beserta artinya di
+organisasi \textit{capstone}. Setiap entri memuat istilah, arti yang
+disepakati, contoh pemakaian, istilah lain yang sering dikira sama, dan
+pemilik istilah, yaitu orang yang berhak mengubah artinya. Glosarium bukan
+kamus umum, karena ``pasien aktif'' di satu rumah sakit dapat berbeda artinya
+dengan di rumah sakit lain.
+
+Analoginya seperti daftar singkatan resmi di rumah sakit. Banyak rumah sakit
+menetapkan singkatan yang boleh dan tidak boleh dipakai dalam resep, karena
+satu singkatan yang dibaca berbeda oleh dokter dan apoteker dapat berujung
+pada salah obat. Glosarium tim bekerja dengan cara yang sama: mencegah salah
+paham yang mahal.
+
+Dua contoh rekaan memperlihatkan harga istilah yang tidak disepakati:
+
+\begin{enumerate}
+  \item \textbf{``Selesai''.} Misalkan vendor menyatakan proyek SIMRS baru
+        selesai ketika aplikasinya terpasang, sedangkan bagi unit layanan
+        selesai berarti petugas sudah terlatih dan data lama sudah
+        dipindahkan. Selisihnya berupa tiga bulan kerja tambahan senilai
+        Rp600 juta yang tidak ada di kontrak.
+  \item \textbf{``Biaya aplikasi''.} Misalkan tim TI melaporkan biaya Rp200
+        juta, yaitu lisensi tahun pertama, sedangkan bagian keuangan
+        menghitung total biaya lima tahun termasuk pemeliharaan, pelatihan,
+        dan server sebesar Rp1,4 miliar. Direksi menyetujui proyek dengan
+        angka pertama, lalu terkejut pada tahun kedua.
+\end{enumerate}
+
+\begin{pendalaman}[title={Pendalaman Teknis (opsional): Dokumentasi Arsitektur Perangkat Lunak dan Artefak EA}]
+  Mahasiswa berlatar rekayasa perangkat lunak biasanya sudah mengenal
+  dokumentasi arsitektur. Clements dkk. menyusunnya sebagai kumpulan
+  \textit{view}, yaitu tampilan sistem dari sudut tertentu, ditambah informasi
+  yang berlaku lintas \textit{view} \cite{c01-clements2010}. Di mana dokumen
+  semacam itu berada dalam praktik EA?
+
+  Kotusev menganalisis artefak EA yang dipakai di 27 organisasi dan menemukan
+  24 artefak umum yang terbukti berguna \cite{kotusev2019}. Ia mengelompokkan
+  artefak EA menjadi enam jenis menurut dua sumbu, yaitu apa yang dijelaskan
+  (aturan, struktur, atau perubahan) dan fokusnya (bisnis atau TI)
+  \cite{kotusev2021}. Model ini dikenal sebagai CSVLOD (\textit{Considerations,
+  Standards, Visions, Landscapes, Outlines, Designs}). Tabel
+  \ref{tab:ch01-csvlod} memetakan keenam jenis itu ke dokumentasi tim
+  pengembang.
+
+  \begin{center}
+    \captionof{table}{Enam jenis artefak EA menurut Kotusev dan padanannya
+                      dalam dokumentasi tim pengembang}
+    \label{tab:ch01-csvlod}
+    \footnotesize
+    \begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{1.7cm}
+        >{\raggedright\arraybackslash}p{1.8cm} >{\raggedright\arraybackslash}X
+        >{\raggedright\arraybackslash}X}
+      \hline
+      \textbf{Jenis} & \textbf{Menjelaskan} & \textbf{Contoh artefak EA} & \textbf{Padanan di tim pengembang} \\
+      \hline
+      \textit{Con\-sid\-er\-a\-tions} & Aturan, bisnis & Prinsip arsitektur & Jarang ada, kadang muncul sebagai alasan keputusan \\
+      \hline
+      \textit{Standards} & Aturan, TI & Model referensi teknologi, pedoman & Standar teknologi tim, panduan kode \\
+      \hline
+      \textit{Visions} & Struktur, bisnis & Model kapabilitas, peta jalan & Hampir tidak ada \\
+      \hline
+      \textit{Landscapes} & Struktur, TI & Diagram lanskap aplikasi & Diagram konteks, diagram \textit{deployment} \\
+      \hline
+      \textit{Outlines} & Perubahan, bisnis & Ringkasan solusi untuk keputusan investasi & Usulan proyek dan perkiraan biaya \\
+      \hline
+      \textit{Designs} & Perubahan, TI & Rancangan solusi rinci & Dokumen arsitektur perangkat lunak \\
+      \hline
+    \end{tabularx}
+  \end{center}
+
+  Dokumentasi arsitektur perangkat lunak umumnya berada di jenis
+  \textit{Designs}, dengan sebagian di \textit{Landscapes} dan
+  \textit{Standards}. Artefak jenis \textit{Considerations}, \textit{Visions},
+  dan \textit{Outlines} dibuat bersama pemangku kepentingan bisnis, dan di
+  sanalah sebagian besar pekerjaan EA berada. Karena itu kemampuan memodelkan
+  sistem saja belum cukup untuk menjadi arsitek \textit{enterprise}.
+\end{pendalaman}
 
 \section{Nilai Arsitektur Enterprise dan Bukti Empirisnya}
 
-% TODO
-% Cakupan: mekanisme nilai EA menurut Tamm dkk. (2011); faktor keberhasilan pengelolaan EA menurut
-%   Lange dkk. (2016); persepsi EA sebagai fungsi administratif TI menurut SAP LeanIX EA Insights
-%   2025; penyebab umum kegagalan praktik EA.
+Misalkan direktur keuangan sebuah grup rumah sakit menerima usulan membentuk
+tim arsitektur tiga orang dengan biaya Rp1,8 miliar per tahun. Pertanyaannya
+wajar: apa yang didapat dari biaya itu? Jawaban ``gambaran utuh organisasi''
+tidak cukup, karena gambaran tidak tercatat di laporan laba rugi. Penelitian
+tentang EA berusaha menjawab pertanyaan yang sama.
+
+Tamm dkk. merumuskan model manfaat EA dengan gagasan inti yang sederhana: EA
+tidak menghasilkan manfaat secara langsung \cite{tamm2011}. Manfaat mengalir
+lewat empat pemungkin (\textit{benefit enablers}), seperti pada Gambar
+\ref{fig:ch01-nilai}. Keselarasan organisasi (\textit{organisational
+alignment}) membuat proyek di berbagai unit bergerak searah dengan strategi.
+Ketersediaan informasi (\textit{information availability}) membuat informasi
+yang tepat sampai ke pengambil keputusan. Optimalisasi portofolio sumber daya
+(\textit{resource portfolio optimisation}) membuat aplikasi dan investasi yang
+ganda tidak dibiayai dua kali. Komplementaritas sumber daya (\textit{resource
+complementarity}) membuat proses, data, dan aplikasi saling melengkapi.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch01-mekanisme-nilai.tex}
+  \caption{Manfaat EA mengalir lewat empat pemungkin, diadaptasi dari model
+           manfaat EA Tamm dkk. \cite{tamm2011}}
+  \label{fig:ch01-nilai}
+\end{figure}
+
+Analoginya seperti resep dokter. Resep tidak menyembuhkan. Pasien sembuh bila
+resepnya ditebus, obatnya diminum sesuai aturan, dan kondisinya dipantau.
+Artefak EA bekerja dengan cara yang sama: nilainya baru muncul ketika dipakai
+dalam keputusan nyata.
+
+Dua contoh rekaan berangka memperlihatkan jalur pemungkin itu:
+
+\begin{enumerate}
+  \item \textbf{Optimalisasi portofolio.} Misalkan katalog aplikasi
+        memperlihatkan tiga aplikasi penjadwalan dokter di tiga rumah sakit,
+        masing-masing berbiaya Rp150 juta per tahun. Menyatukannya menghemat
+        2 $\times$ Rp150 juta = Rp300 juta per tahun, belum dikurangi biaya
+        peralihan. Penghematan itu muncul karena katalognya dipakai dalam
+        keputusan anggaran, bukan karena katalognya ada.
+  \item \textbf{Ketersediaan informasi.} Misalkan laporan kunjungan bulanan
+        disusun dua staf selama 6 hari kerja dengan menyalin data dari lima
+        SIMRS ke \textit{spreadsheet}. Bila peta informasi menunjukkan sumber
+        data yang dapat ditarik langsung, penyusunannya turun menjadi 1 hari
+        kerja. Penghematannya 5 hari $\times$ 2 staf = 10 hari kerja per bulan,
+        atau 120 hari kerja per tahun.
+\end{enumerate}
+
+Pertanyaan berikutnya muncul: bila mekanismenya jelas, mengapa banyak praktik
+EA tetap gagal memberi manfaat? Lange dkk. menguji model keberhasilan
+pengelolaan EA lewat survei terhadap 133 praktisi \cite{lange2016}. Mereka
+menemukan empat faktor yang berpengaruh, seperti pada Tabel
+\ref{tab:ch01-faktor}. Faktor penambatan EA di dalam organisasi
+(\textit{organizational anchoring}) menjadi pusat model, karena pengaruh mutu
+infrastruktur dan mutu layanan terhadap manfaat EA berjalan lewat penambatan
+itu. Temuan lain juga patut dicatat: kepuasan pengguna terhadap EA tidak
+terbukti berguna untuk menentukan maupun mengukur keberhasilannya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Empat faktor keberhasilan pengelolaan EA menurut Lange dkk.
+           \cite{lange2016}, dengan pertanyaan pemeriksaan rekaan}
+  \label{tab:ch01-faktor}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.1cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Faktor} & \textbf{Artinya} & \textbf{Pertanyaan pemeriksaan} \\
+    \hline
+    Mutu produk & Artefak EA benar, mutakhir, dan sesuai kebutuhan pembacanya & Apakah artefak terakhir dipakai dalam satu keputusan selama tiga bulan terakhir? \\
+    \hline
+    Mutu infrastruktur & Alat, repositori, dan cara kerja yang membuat artefak mudah dibuat dan dicari & Dapatkah manajer proyek menemukan katalog aplikasi tanpa bertanya ke arsitek? \\
+    \hline
+    Mutu layanan & Dukungan arsitek kepada proyek dan unit bisnis, tepat waktu dan berguna & Berapa hari yang dibutuhkan untuk meninjau satu usulan proyek? \\
+    \hline
+    Penambatan organisasi & EA melekat pada anggaran, persetujuan proyek, dan tata kelola & Apakah persetujuan proyek mensyaratkan tinjauan arsitektur? \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Laporan industri memberi gambaran dari sisi praktisi. Survei SAP LeanIX EA
+Insights 2025 terhadap 360 arsitek \textit{enterprise} mencatat bahwa 92
+persen responden menyatakan EA dipandang, seluruhnya atau sebagian, sebagai
+fungsi administratif TI \cite{leanix2025}. Siaran pers survei yang sama
+mencatat bahwa 51 persen organisasi membutuhkan sebulan atau lebih untuk satu
+keputusan arsitektur, hanya 15 persen yang menyertakan wakil dari seluruh lini
+bisnis dalam dewan peninjau arsitekturnya, dan hanya 14 persen responden
+menyatakan EA dipandang sebagai mitra dekat bisnis \cite{c01-leanix2025rilis}.
+Angka ini perlu dibaca kritis. Respondennya adalah arsitek di organisasi
+pelanggan SAP LeanIX, perusahaan yang menjual alat EA, sehingga sampelnya
+tidak mewakili seluruh organisasi. Meski begitu, arahnya sejalan dengan Lange
+dkk.: EA yang tidak tertambat pada keputusan bisnis dipandang sebagai
+pekerjaan administrasi.
+
+Dari penelitian dan laporan tersebut, penyebab umum kegagalan praktik EA
+dapat dikelompokkan menjadi lima, seperti pada Tabel \ref{tab:ch01-gagal}.
+Löhe dan Legner menemukan bahwa masalah muncul ketika pengelolaan EA
+dijalankan sebagai inisiatif tersendiri yang terpisah dari pengelolaan TI:
+dokumentasinya jarang dipakai, dan arsitek tidak punya kewenangan untuk
+menegakkan standar dan prinsipnya \cite{c01-lohe2014}. Kotusev mempertanyakan
+anggapan lama bahwa EA harus berupa model lengkap kondisi saat ini, kondisi
+target, dan peta transisi \cite{kotusev2019}.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lima penyebab umum kegagalan praktik EA, gejala, dan penawarnya}
+  \label{tab:ch01-gagal}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.9cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Penyebab} & \textbf{Gejala} & \textbf{Penawar} \\
+    \hline
+    EA terpisah dari pengelolaan TI \cite{c01-lohe2014} & Tim arsitektur dan proyek berjalan sendiri-sendiri & Tinjauan arsitektur ditambatkan pada persetujuan anggaran dan proyek \\
+    \hline
+    Dokumentasi jarang dipakai \cite{c01-lohe2014} & Model besar tidak pernah dibuka lagi & Artefak dibuat atas permintaan pembaca untuk keputusan tertentu \\
+    \hline
+    Arsitek tanpa kewenangan \cite{c01-lohe2014} & Prinsip dilanggar tanpa akibat & Mandat tertulis dari direksi dan alur dispensasi (Bab 14) \\
+    \hline
+    Mengejar model lengkap lebih dahulu \cite{kotusev2019} & Berbulan-bulan memotret kondisi saat ini tanpa manfaat & Mulai dari keputusan yang mendesak, model diperluas secukupnya \\
+    \hline
+    EA dipandang urusan TI \cite{leanix2025} & Tidak ada wakil bisnis dalam peninjauan & Pimpinan unit bisnis menjadi pemilik artefak bisnis \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Baris keempat perlu dikaitkan dengan susunan mata kuliah ini. Urutan kondisi
+saat ini, kondisi target, dan peta jalan tetap dipakai sebagai kerangka
+belajar, tetapi setiap artefak dibatasi pada yang dibutuhkan untuk keputusan.
+\textit{Capability map} tidak perlu memuat 300 kapabilitas bila keputusan yang
+dihadapi hanya menyangkut 20 di antaranya.
 
 \section{Peran Arsitek Enterprise}
 
-% TODO
-% Cakupan: tugas dan kompetensi arsitek enterprise; hubungan dengan direksi, manajer proyek, unit
-%   bisnis, dan vendor; arsitek sebagai penerjemah antara bahasa bisnis dan bahasa teknologi.
+Misalkan sebuah grup rumah sakit akan membeli sistem antrean daring. Direksi
+menyetujui anggaran, manajer proyek menyusun jadwal, vendor menawarkan
+produknya, dan unit layanan menulis kebutuhan. Tidak satu pun bertugas
+memeriksa apakah sistem itu menambah satu salinan data pasien lagi, atau
+apakah sistem itu sejalan dengan rencana mengganti SIMRS tiga tahun lagi.
+Pemeriksaan itulah tugas arsitek \textit{enterprise}.
+
+Arsitek \textit{enterprise} memelihara gambaran utuh organisasi dan memakainya
+untuk mengarahkan perubahan. Kotusev menggambarkan praktik EA sebagai tiga
+proses yang berjalan bersamaan: perencanaan strategis, pelaksanaan inisiatif,
+dan optimalisasi teknologi \cite{kotusev2021}. Di dalam ketiga proses itu,
+arsitek memelihara gambaran kondisi saat ini secukupnya, merumuskan prinsip
+dan standar bersama pimpinan bisnis dan TI, menyusun kondisi target dan peta
+jalan, meninjau usulan proyek, dan memfasilitasi keputusan lintas unit
+beserta \textit{tradeoff}-nya. Kompetensinya mengikuti tugas itu: memahami
+bisnis cukup dalam untuk membaca strategi dan laporan keuangan, memahami
+teknologi cukup luas untuk menilai usulan teknis, dan mampu menulis untuk
+pembaca yang berbeda. Kemampuan menggambar model hanya bagian kecil.
+
+Analoginya seperti juru bahasa dalam perundingan dua negara. Juru bahasa tidak
+memutuskan isi perjanjian, tetapi memastikan kedua pihak memahami hal yang
+sama, dan tahu kapan satu kata tidak punya padanan sehingga perlu dijelaskan
+panjang. Arsitek \textit{enterprise} menerjemahkan antara bahasa bisnis,
+misalnya ``antrean harus turun separuh'', dan bahasa teknologi, misalnya
+``janji temu daring harus menulis langsung ke SIMRS''. Penerjemahan itu
+berlangsung dua arah dengan banyak pihak, seperti pada Tabel
+\ref{tab:ch01-hubungan}.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Hubungan arsitek \textit{enterprise} dengan pihak di sekitarnya}
+  \label{tab:ch01-hubungan}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.4cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Pihak} & \textbf{Yang diberikan arsitek} & \textbf{Yang dibutuhkan arsitek} \\
+    \hline
+    Direksi & Pilihan investasi beserta akibat dan \textit{tradeoff}-nya, dalam satu halaman & Arah strategi, prioritas, dan mandat \\
+    \hline
+    Pimpinan unit bisnis & Kepastian bahwa kebutuhan unitnya masuk peta jalan & Penjelasan proses, masalah, dan ukuran keberhasilan \\
+    \hline
+    Manajer proyek & Batasan arsitektur yang jelas sejak awal proyek & Rancangan solusi untuk ditinjau dan jadwal keputusan \\
+    \hline
+    Tim TI dan vendor & Standar, prinsip, dan antarmuka yang disepakati & Informasi teknis tentang produk, batasan, dan biaya \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Dua peran sering tertukar dengan peran arsitek. Pembagiannya begini. Manajer
+proyek bertanggung jawab atas lingkup, jadwal, dan biaya satu proyek,
+sedangkan arsitek bertanggung jawab atas kecocokan proyek itu dengan
+keseluruhan. Direksi memutuskan investasi, sedangkan arsitek menyiapkan
+pilihan beserta akibatnya. Dua contoh rekaan memperlihatkan pembagian itu:
+
+\begin{enumerate}
+  \item Misalkan arsitek meninjau usulan sistem antrean daring senilai Rp900
+        juta yang menyimpan identitas pasien sendiri. Rekomendasinya: sistem
+        boleh dibeli asalkan memakai identitas pasien dari SIMRS. Syarat ini
+        menambah biaya integrasi Rp120 juta, tetapi mencegah satu salinan data
+        pasien lagi.
+  \item Misalkan tiga rumah sakit mengajukan pembaruan server senilai total
+        Rp2,4 miliar pada tahun yang sama. Arsitek menunjukkan bahwa peta jalan
+        memindahkan SIMRS ke \textit{cloud} dua tahun lagi. Direksi memilih
+        memperpanjang kontrak pemeliharaan server lama sebesar Rp450 juta.
+        Keputusan tetap di tangan direksi; arsitek menyediakan gambarannya.
+\end{enumerate}
 
 \section{Proyek Capstone dan Kasus Medikara Health}
 
-% TODO
-% Cakupan: empat mata kuliah dalam satu proyek dan pembagian materinya; tonggak C1 sampai C4 beserta
-%   jadwalnya; aturan izin, kerahasiaan, dan anonimisasi data bila memakai organisasi nyata; empat
-%   peran tim yang bergilir (koordinator, analis bisnis, analis teknologi, pemodel).
-% Kasus Medikara: profil, kondisi saat ini, strategi 2026 sampai 2030, dan pemicu perubahan;
-%   ditegaskan sebagai organisasi fiktif.
+Mata kuliah ini tidak berdiri sendiri. Empat mata kuliah peminatan Digital
+Enterprise Architecture dijalankan sebagai satu proyek \textit{capstone}
+dengan satu luaran, yaitu Cetak Biru Transformasi Digital. Setiap mata kuliah
+menyumbang bagian yang berbeda, seperti pada Tabel \ref{tab:ch01-empat-mk}.
+Topik milik mata kuliah lain hanya disinggung di modul ini. Mata kuliah ini
+memegang gambaran utuhnya: bagaimana semua bagian saling terkait, dan
+perubahan mana yang dikerjakan lebih dahulu.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Empat mata kuliah dalam satu proyek \textit{capstone}}
+  \label{tab:ch01-empat-mk}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.3cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Mata kuliah} & \textbf{Fokus} & \textbf{Contoh sumbangan ke cetak biru} \\
+    \hline
+    IT40513 Enterprise Architecture \& Digital Blueprint & Gambaran utuh dan urutan perubahan & Visi arsitektur, kondisi saat ini dan target, peta jalan, tata kelola arsitektur \\
+    \hline
+    IT40613 Digital Platform \& API Economy & Model bisnis platform dan API & Produk API, mitra ekosistem, integrasi SATUSEHAT dari sisi desain \\
+    \hline
+    IT40713 Cloud-Native \& Microservices Architecture & Cara sistem dibangun dan dijalankan di \textit{cloud} & Strategi migrasi, \textit{microservices}, operasi \textit{cloud} \\
+    \hline
+    IT40813 IT Governance, Risk \& Compliance & Tata kelola, risiko, dan kepatuhan & Struktur tata kelola TI, daftar risiko, kendali, pelindungan data pribadi \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Pekerjaan \textit{capstone} dibagi menjadi empat tonggak yang sejajar dengan
+urutan pertemuan, seperti pada Gambar \ref{fig:ch01-tonggak}: C1 Konteks dan
+Strategi (Pertemuan 1 sampai 3), C2 Kondisi Saat Ini (4 sampai 7, ditinjau
+menjelang UTS atau Ujian Tengah Semester), C3 Kondisi Target (8 sampai 11),
+dan C4 Peta Jalan dan Tata Kelola (12 sampai 14, dipresentasikan menjelang UAS
+atau Ujian Akhir Semester). Tatap muka hanya hari Sabtu dan dipakai untuk
+membahas artefak, bukan mengulang materi. Konsekuensinya dua. Pertama, modul
+dan slide dipelajari sebelum hari Sabtu. Kedua, setiap tim datang membawa
+artefak pertemuan sebelumnya sebagai bahan diskusi.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch01-tonggak-capstone.tex}
+  \caption{Empat tonggak \textit{capstone} sepanjang 14 pertemuan, beserta luaran
+           utama mata kuliah ini}
+  \label{fig:ch01-tonggak}
+\end{figure}
+
+Tim dianjurkan memakai organisasi nyata, sebaiknya tempat kerja salah satu
+anggota, karena kasus nyata memberi pelajaran yang tidak dapat diberikan kasus
+rekaan: data yang tidak lengkap, pemangku kepentingan yang sibuk, dan tarik
+ulur antarunit. Kasus nyata membawa empat kewajiban:
+
+\begin{enumerate}
+  \item \textbf{Izin tertulis} dari pejabat berwenang, yang menyebut lingkup
+        informasi yang boleh dipakai dan untuk keperluan apa.
+  \item \textbf{Anonimisasi}: nama organisasi, nama orang, nama vendor, dan
+        angka yang dapat menunjuk organisasi diganti atau dibulatkan.
+  \item \textbf{Tanpa data pribadi}: data pribadi pasien, pelanggan, atau
+        karyawan tidak dipakai sama sekali. Kewajiban hukumnya diatur UU PDP
+        (Undang-Undang Pelindungan Data Pribadi) \cite{uu27-2022-pdp}, yang
+        dibahas rinci di IT40813.
+  \item \textbf{Kerahasiaan dokumen}: dokumen internal tidak diunggah ke
+        layanan publik, termasuk layanan kecerdasan buatan.
+\end{enumerate}
+
+Tim yang tidak memperoleh izin memakai kasus Medikara Health. Tim
+beranggotakan 4 sampai 5 orang, minimal satu berlatar bisnis atau non-teknis
+dan minimal satu berlatar teknis. Empat peran pada Tabel \ref{tab:ch01-peran}
+digilir pada tiap tonggak. Dengan empat tonggak dan empat peran, setiap
+anggota tim empat orang memegang setiap peran tepat satu kali, termasuk peran
+yang jauh dari latarnya. Pada tim lima orang, satu peran dipegang berdua.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Empat peran tim \textit{capstone} dan tugasnya pada Pertemuan 1}
+  \label{tab:ch01-peran}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.2cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{3.4cm}}
+    \hline
+    \textbf{Peran} & \textbf{Tugas sepanjang semester} & \textbf{Tugas pada Pertemuan 1} \\
+    \hline
+    Koordinator & Menjaga jadwal, membagi kerja, menyelaraskan luaran dengan tiga mata kuliah lain & Menulis piagam tim \\
+    \hline
+    Analis bisnis & Memimpin pemahaman strategi, proses, dan kapabilitas & Menyusun profil organisasi \\
+    \hline
+    Analis teknologi & Memimpin pemahaman aplikasi, data, dan teknologi & Mendaftar sistem yang dipakai sehari-hari \\
+    \hline
+    Pemodel & Menjaga model, konvensi penamaan, dan konsistensi istilah & Menyusun glosarium bersama \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{kasus}[title={Kasus Medikara Health: Profil Organisasi Fiktif}]
+  Medikara Health adalah organisasi fiktif yang disusun untuk keperluan
+  belajar. Fakta dasarnya sama di keempat mata kuliah dan tidak boleh diubah.
+
+  \textbf{Profil.} PT Medikara Nusa Sehat adalah jaringan layanan kesehatan
+  swasta dengan 5 rumah sakit (Jakarta, Bekasi, Depok, Bogor, dan Bandung), 18
+  klinik pratama, 1 laboratorium rujukan, dan 12 apotek. Karyawannya sekitar
+  4.800 orang, dengan sekitar 1,2 juta kunjungan pasien per tahun, atau
+  rata-rata sekitar 3.300 kunjungan per hari.
+
+  \textbf{Kondisi saat ini.} SIMRS monolitik \textit{on-premise} berbeda versi
+  di tiap rumah sakit, ERP keuangan terpusat, dan aplikasi pasien Medikara+
+  buatan vendor. Integrasi ke BPJS Kesehatan dan SATUSEHAT, yang berbasis HL7
+  FHIR (\textit{Health Level Seven Fast Healthcare Interoperability
+  Resources}), dibangun \textit{point-to-point}. Data pasien tersebar, dan
+  banyak laporan manajemen masih disusun dengan \textit{spreadsheet}.
+
+  \textbf{Strategi 2026 sampai 2030.} ``Satu Pasien, Satu Rekam Medis'':
+  layanan terintegrasi lintas fasilitas; ekosistem mitra bagi klinik mitra,
+  asuransi, laboratorium, apotek daring, dan layanan kesehatan karyawan
+  perusahaan; modernisasi ke \textit{cloud}; serta kepatuhan pada UU PDP dan
+  aturan rekam medis elektronik \cite{permenkes24-2022}.
+
+  \textbf{Pemicu.} Insiden kebocoran data pasien skala kecil lewat vendor pada
+  2025, temuan audit internal tentang kontrol akses yang lemah, antrean layanan
+  yang panjang, dan biaya integrasi yang tinggi.
+
+  Tim yang memakai Medikara boleh menambah detail asalkan tidak bertentangan
+  dengan fakta dasar ini, dan setiap detail tambahan ditandai sebagai asumsi.
+\end{kasus}
 
 \section{Aktivitas: Membentuk Tim dan Memotret Organisasi}
 
-% TODO
-% Tujuan aktivitas: membentuk tim campuran dan menghasilkan gambaran awal organisasi capstone.
-% Peran dalam tim: koordinator menulis piagam tim; analis bisnis menyusun profil organisasi; analis
-%   teknologi mendaftar sistem yang dipakai sehari-hari; pemodel menyusun glosarium bersama.
-% Langkah: bentuk tim 4 sampai 5 orang berlatar campuran; pilih organisasi dan minta izin tertulis
-%   atau pakai Medikara; tetapkan aturan anonimisasi; susun profil satu halaman; daftar sistem awal;
-%   tulis piagam tim; sepakati 20 sampai 30 istilah dalam glosarium.
-% Luaran dan tonggak capstone: piagam tim, profil organisasi, dan glosarium bersama (C1).
-% Berkas sources yang direncanakan: sources/chapter01/templat-piagam-tim.md,
-%   sources/chapter01/templat-profil-organisasi.md, sources/chapter01/panduan-izin-dan-anonimisasi.md,
-%   sources/chapter01/glosarium-awal.md
+\subsection*{Tujuan dan peran}
+
+Aktivitas ini membentuk tim campuran latar belakang dan menghasilkan gambaran
+awal organisasi \textit{capstone}: siapa anggotanya dan bagaimana mereka
+bekerja, organisasi apa yang dipotret, dan istilah apa yang dipakai dengan
+arti yang sama. Pembagian perannya mengikuti kolom terakhir Tabel
+\ref{tab:ch01-peran}: koordinator menulis piagam tim, analis bisnis menyusun
+profil organisasi, analis teknologi mendaftar sistem, dan pemodel memimpin
+penyusunan glosarium.
+
+\subsection*{Langkah kerja}
+
+\begin{enumerate}
+  \item Bentuk tim 4 sampai 5 orang berlatar campuran. Catat latar dan
+        pengalaman kerja tiap anggota, lalu tetapkan giliran peran untuk
+        keempat tonggak.
+  \item Pilih organisasi. Bila memakai organisasi nyata, ajukan izin tertulis
+        memakai contoh surat di
+        \berkas{sources/chapter01/panduan-izin-dan-anonimisasi.md}. Selama izin
+        belum keluar, atau bila tidak ada akses, tim bekerja dengan Medikara.
+  \item Tetapkan aturan anonimisasi: nama samaran organisasi, cara membulatkan
+        angka, dan daftar informasi yang tidak boleh ditulis.
+  \item Analis bisnis menyusun profil satu halaman dengan
+        \berkas{sources/chapter01/templat-profil-organisasi.md}: layanan,
+        pelanggan, struktur, angka utama, dan tiga masalah utama.
+  \item Analis teknologi mendaftar 10 sampai 20 sistem di
+        \berkas{sources/chapter01/daftar-sistem-awal.csv}: nama, fungsi,
+        pengguna, pemilik, dan cara bertukar data.
+  \item Koordinator menulis piagam tim dengan
+        \berkas{sources/chapter01/templat-piagam-tim.md}: tujuan, peran dan
+        gilirannya, aturan kerja, cara mengambil keputusan, dan jadwal
+        sinkronisasi dengan tiga mata kuliah lain.
+  \item Pemodel memimpin penyusunan glosarium dengan
+        \berkas{sources/chapter01/glosarium-awal.md}: 20 sampai 30 istilah,
+        termasuk minimal 5 istilah yang semula diartikan berbeda oleh anggota.
+  \item Seluruh tim membaca ulang keempat luaran dan memeriksa bahwa nama
+        organisasi, nama sistem, dan istilah ditulis sama di semua dokumen.
+\end{enumerate}
+
+\subsection*{Luaran, tonggak, dan penilaian}
+
+Luarannya adalah piagam tim, profil organisasi, daftar sistem awal, dan
+glosarium bersama untuk tonggak C1. Keempatnya dipakai lagi: profil menjadi
+bahan peta pemangku kepentingan di Bab 2, daftar sistem menjadi cikal bakal
+katalog aplikasi di Bab 7, dan glosarium dipakai di seluruh dokumen keempat
+mata kuliah. Tabel \ref{tab:ch01-kriteria} memuat kriteria penilaiannya.
+Bobot terbesar diberikan pada profil organisasi, karena profil itulah dasar
+seluruh tonggak berikutnya. Seluruh berkas pendukung beserta kegunaannya
+didaftar di \berkas{sources/chapter01/README.md}.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Kriteria penilaian Aktivitas Pertemuan 1}
+  \label{tab:ch01-kriteria}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm}
+      >{\raggedright\arraybackslash}X r}
+    \hline
+    \textbf{Luaran} & \textbf{Kriteria} & \textbf{Bobot} \\
+    \hline
+    Piagam tim & Peran dan gilirannya jelas, aturan keputusan tertulis, jadwal sinkronisasi lintas mata kuliah tercantum & 25\% \\
+    \hline
+    Profil organisasi & Muat satu halaman, angka utama bersumber, tiga masalah dirumuskan sebagai masalah organisasi, bukan solusi & 30\% \\
+    \hline
+    Daftar sistem awal & Minimal 10 sistem, masing-masing dengan fungsi dan pemilik & 15\% \\
+    \hline
+    Glosarium bersama & 20 sampai 30 istilah yang disepakati, minimal 5 istilah yang semula diartikan berbeda & 20\% \\
+    \hline
+    Izin dan anonimisasi & Bukti izin atau pernyataan memakai Medikara, aturan anonimisasi tertulis & 10\% \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{pendalaman}
+  Mahasiswa berlatar ilmu komputer, rekayasa perangkat lunak, atau TI dapat
+  membaca Kotusev (2019) tentang artefak EA yang dipakai di 27 organisasi
+  \cite{kotusev2019}. Sesudahnya, pilih satu dokumen arsitektur perangkat
+  lunak dari proyek yang pernah diikuti, lalu kelompokkan isinya ke enam jenis
+  artefak pada Tabel \ref{tab:ch01-csvlod}. Catat jenis mana yang kosong dan
+  siapa di organisasi itu yang seharusnya membuatnya. Hasilnya cukup satu
+  halaman, dilampirkan pada glosarium sebagai catatan tim.
+\end{pendalaman}
 
 \section{Ringkasan}
 
-% TODO
+Organisasi yang tumbuh lewat akuisisi dan proyek terpisah hampir selalu
+memperlihatkan empat gejala: sistem ganda, data tersebar, integrasi yang
+menumpuk, dan keputusan tanpa gambaran utuh. Medikara Health memperlihatkan
+keempatnya sekaligus: lima SIMRS berbeda versi, dua nomor rekam medis untuk
+pasien yang sama, dan 20 sambungan \textit{point-to-point} yang dipelihara
+terpisah.
+
+Setiap organisasi sudah punya arsitektur, entah dirancang atau terbentuk
+kebetulan, dan arsitektur itu berbeda dari dokumen yang menjelaskannya. EA
+adalah praktik berkelanjutan untuk memahami organisasi secara utuh dan
+memakai pemahaman itu dalam keputusan. EA berbeda tingkat dengan arsitektur
+solusi dan arsitektur perangkat lunak, seperti rencana tata ruang kota berbeda
+tingkat dengan rancangan kawasan dan gambar kerja satu rumah.
+
+Lima sudut pandang, yaitu strategi, bisnis, data, aplikasi, dan teknologi,
+memberi bahasa bersama untuk melihat organisasi yang sama. Keputusan strategi
+merambat turun dan batasan teknologi merambat naik. Satu kunjungan rawat jalan
+di Medikara memperlihatkan bahwa antrean panjang berakar di beberapa sudut
+pandang sekaligus. Glosarium bersama menjaga agar kata seperti
+``terintegrasi'' atau ``selesai'' berarti sama bagi semua anggota tim.
+
+EA tidak menghasilkan manfaat secara langsung. Manfaatnya mengalir lewat empat
+pemungkin, dan survei terhadap 133 praktisi menempatkan penambatan EA pada
+keputusan organisasi sebagai faktor pusat keberhasilannya. Survei industri
+terhadap 360 arsitek menunjukkan 92 persen masih melihat EA dipandang sebagai
+fungsi administratif TI. Arsitek \textit{enterprise} mengisi celah itu sebagai
+penerjemah antara bahasa bisnis dan bahasa teknologi, tanpa mengambil alih
+keputusan direksi.
+
+Proyek \textit{capstone} menyatukan keempat mata kuliah dalam satu Cetak Biru
+Transformasi Digital, dengan empat tonggak dan empat peran yang bergilir.
+Pertemuan ini menghasilkan piagam tim, profil organisasi, daftar sistem awal,
+dan glosarium bersama. Pesan utama bab ini: gambaran utuh organisasi baru
+bernilai ketika dipakai untuk memutuskan, dan keputusan yang baik dimulai dari
+istilah yang dipahami sama oleh semua pihak.
 
 \section{Latihan}
 
+Ketiga latihan dikerjakan perorangan dan dapat memakai organisasi sendiri atau
+Medikara Health. Angka pada tabel contoh berasal dari skenario rekaan Medikara
+atau dari sumber yang dirujuk bab ini. Hasil tiap mahasiswa boleh berbeda;
+yang dinilai adalah penalaran dan perbandingannya.
+
+\subsection*{Latihan 1: Kerugian Tiga Aplikasi Pendaftaran}
+
+Latihan ini membuktikan bahwa sistem ganda menimbulkan kerugian bisnis yang
+dapat dihitung, dan bahwa mekanisme EA yang mencegahnya dapat ditunjuk dengan
+tepat. Soalnya: sebuah rumah sakit memakai tiga aplikasi pendaftaran pasien
+yang berbeda. Jelaskan dua kerugian bisnis dari kondisi itu dan cara EA
+membantu mencegahnya.
+
 \begin{enumerate}
-  \item Sebuah rumah sakit memakai tiga aplikasi pendaftaran pasien yang berbeda. Jelaskan dua kerugian bisnis dari kondisi itu dan cara EA membantu mencegahnya.
-  \item Seorang manajer berkata, ``EA hanya menghasilkan diagram yang tidak dibaca orang.'' Tanggapi pernyataan itu dengan merujuk minimal satu temuan penelitian.
-  \item Ambil satu contoh keputusan di sebuah organisasi yang gagal karena bagian bisnis dan bagian teknologi informasi memakai istilah dengan arti berbeda. Uraikan istilah yang disalahpahami dan dampaknya.
+  \item Tetapkan skenario. Pakai rumah sakit yang dikenal, atau skenario
+        berikut: misalkan rumah sakit Medikara Bogor melayani 180.000 kunjungan
+        per tahun lewat tiga jalur pendaftaran, yaitu modul SIMRS, Medikara+,
+        dan aplikasi loket khusus peserta BPJS Kesehatan.
+  \item Tuliskan dua kerugian bisnis, masing-masing dengan pihak yang merugi:
+        pasien, petugas, manajemen, atau pembayar.
+  \item Beri angka perkiraan untuk tiap kerugian, lengkap dengan asumsi dan
+        sumber angkanya.
+  \item Pasangkan tiap kerugian dengan satu pemungkin pada Gambar
+        \ref{fig:ch01-nilai} dan satu artefak atau keputusan EA yang
+        mencegahnya.
+  \item Isi Tabel \ref{tab:ch01-lat1-hasil}. Tabel \ref{tab:ch01-lat1-contoh}
+        memperlihatkan contoh yang sudah terisi.
+  \item Jawab dua pertanyaan. Pertama, kerugian mana yang lebih besar dalam
+        rupiah, dan mana yang lebih berbahaya bagi keselamatan pasien? Mengapa
+        urutan keduanya dapat berbeda? Kedua, asumsi mana yang paling
+        memengaruhi hasil perhitungan, dan data apa yang dibutuhkan untuk
+        memeriksanya di organisasi nyata?
 \end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 1 yang sudah terisi, skenario rekaan Medikara Bogor}
+  \label{tab:ch01-lat1-contoh}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.4cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.1cm}
+      >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Kerugian} & \textbf{Perhitungan} & \textbf{Pemungkin EA} & \textbf{Pencegahan} \\
+    \hline
+    Rekam medis ganda: pasien lama terdaftar sebagai pasien baru & Misalkan 6\% pendaftaran membuat nomor baru: 6\% $\times$ 180.000 = 10.800 rekam medis ganda per tahun & Ketersediaan informasi & Prinsip satu identitas pasien; satu jalur pendaftaran yang menulis ke SIMRS \\
+    \hline
+    Biaya ganda: tiga lisensi dan tiga kontrak pemeliharaan & Misalkan Rp150 juta per aplikasi per tahun: 3 $\times$ Rp150 juta = Rp450 juta per tahun & Optimalisasi portofolio sumber daya & Katalog aplikasi dan keputusan rasionalisasi \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 1}
+  \label{tab:ch01-lat1-hasil}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.4cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.1cm}
+      >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Kerugian} & \textbf{Perhitungan} & \textbf{Pemungkin EA} & \textbf{Pencegahan} \\
+    \hline
+    Kerugian 1: \dots & \dots & \dots & \dots \\
+    \hline
+    Kerugian 2: \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Latihan 2: Menanggapi Anggapan ``EA Hanya Menghasilkan Diagram''}
+
+Latihan ini membuktikan bahwa tanggapan atas keraguan terhadap EA harus
+bertumpu pada bukti, dan bahwa sebagian bukti justru membenarkan keraguan itu.
+Soalnya: seorang manajer berkata, ``EA hanya menghasilkan diagram yang tidak
+dibaca orang.'' Tanggapi pernyataan itu dengan merujuk minimal satu temuan
+penelitian.
+
+\begin{enumerate}
+  \item Uraikan pernyataan manajer menjadi klaim yang dapat diperiksa satu per
+        satu, misalnya ``luaran EA hanya diagram'', ``diagram itu tidak
+        dibaca'', dan ``karena itu EA tidak bernilai''.
+  \item Untuk tiap klaim, cari minimal satu temuan penelitian atau laporan
+        industri yang dirujuk bab ini, lalu baca bagian sumber yang relevan.
+  \item Tentukan sikap untuk tiap klaim: dibantah, dibenarkan sebagian, atau
+        dibenarkan.
+  \item Isi Tabel \ref{tab:ch01-lat2-hasil}. Tabel \ref{tab:ch01-lat2-contoh}
+        memperlihatkan contoh yang sudah terisi.
+  \item Tulis tanggapan satu paragraf, paling banyak 150 kata, yang dapat
+        disampaikan langsung kepada manajer itu.
+  \item Jawab tiga pertanyaan. Pertama, klaim mana yang paling sulit dibantah
+        dengan bukti yang ada, dan mengapa? Kedua, survei Lange dkk. dan survei
+        SAP LeanIX memakai responden yang berbeda; apa akibatnya pada cara
+        membaca angkanya? Ketiga, bila manajer itu benar tentang organisasinya
+        sendiri, faktor mana pada Tabel \ref{tab:ch01-faktor} yang kemungkinan
+        besar lemah?
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 2 yang sudah terisi}
+  \label{tab:ch01-lat2-contoh}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.3cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm}
+      >{\raggedright\arraybackslash}p{1.9cm}}
+    \hline
+    \textbf{Klaim} & \textbf{Temuan} & \textbf{Sumber} & \textbf{Sikap} \\
+    \hline
+    Luaran EA hanya diagram & Di 27 organisasi ditemukan 24 artefak umum yang berguna, termasuk prinsip, model kapabilitas, dan peta jalan & Kotusev \cite{kotusev2019,kotusev2021} & Dibantah \\
+    \hline
+    Diagram itu tidak dibaca & Dokumentasi EA jarang dipakai bila EA terpisah dari pengelolaan TI & Löhe dan Legner \cite{c01-lohe2014} & Dibenarkan sebagian \\
+    \hline
+    EA tidak bernilai & Manfaat mengalir lewat empat pemungkin; survei 133 praktisi menempatkan penambatan organisasi sebagai faktor pusat & Tamm dkk. \cite{tamm2011}, Lange dkk. \cite{lange2016} & Dibantah dengan syarat \\
+    \hline
+    EA dipandang administratif & 92\% dari 360 arsitek menyatakan EA dipandang sebagai fungsi administratif TI & SAP LeanIX \cite{leanix2025} & Dibenarkan sebagai persepsi \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 2}
+  \label{tab:ch01-lat2-hasil}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.3cm}
+      >{\raggedright\arraybackslash}X >{\raggedright\arraybackslash}p{2.3cm}
+      >{\raggedright\arraybackslash}p{1.9cm}}
+    \hline
+    \textbf{Klaim} & \textbf{Temuan} & \textbf{Sumber} & \textbf{Sikap} \\
+    \hline
+    Klaim 1: \dots & \dots & \dots & \dots \\
+    \hline
+    Klaim 2: \dots & \dots & \dots & \dots \\
+    \hline
+    Klaim 3: \dots & \dots & \dots & \dots \\
+    \hline
+    Tanggapan & \multicolumn{3}{l}{\dots} \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Latihan 3: Istilah yang Diartikan Berbeda}
+
+Latihan ini membuktikan bahwa salah paham istilah antara bagian bisnis dan
+bagian TI menimbulkan kerugian yang dapat ditelusuri, dan bahwa glosarium
+bersama adalah kendali yang murah. Soalnya: ambil satu contoh keputusan di
+sebuah organisasi yang gagal karena bagian bisnis dan bagian TI memakai
+istilah dengan arti berbeda. Uraikan istilah yang disalahpahami dan dampaknya.
+
+\begin{enumerate}
+  \item Pilih satu keputusan yang gagal atau tertunda, dari pengalaman kerja,
+        pemberitaan, atau skenario Medikara. Anonimkan bila berasal dari
+        organisasi nyata.
+  \item Tentukan istilah yang disalahpahami, lalu tuliskan arti menurut bagian
+        bisnis dan arti menurut bagian TI dalam satu kalimat masing-masing.
+  \item Telusuri dampaknya pada waktu, biaya, mutu layanan, atau kepatuhan.
+        Beri angka bila tersedia, dan tandai angka yang berupa perkiraan.
+  \item Rumuskan entri glosarium yang seharusnya mencegah salah paham itu,
+        lengkap dengan pemilik istilahnya.
+  \item Isi Tabel \ref{tab:ch01-lat3-hasil}. Tabel \ref{tab:ch01-lat3-contoh}
+        memperlihatkan contoh yang sudah terisi.
+  \item Jawab dua pertanyaan. Pertama, berapa bagian dari dampak yang tercatat
+        dapat dicegah oleh satu rapat penyetaraan istilah di awal proyek?
+        Kedua, siapa yang seharusnya menjadi pemilik istilah itu, dan mengapa
+        bukan tim TI?
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 3 yang sudah terisi, skenario rekaan Medikara}
+  \label{tab:ch01-lat3-contoh}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.8cm}
+      >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Aspek} & \textbf{Isian} \\
+    \hline
+    Keputusan yang gagal & Negosiasi lisensi aplikasi pengingat jadwal kontrol yang dihargai per ``pasien aktif'' \\
+    \hline
+    Istilah & ``Pasien aktif'' \\
+    \hline
+    Arti menurut bisnis & Pasien yang berkunjung minimal sekali dalam 12 bulan terakhir: misalkan 410.000 orang \\
+    \hline
+    Arti menurut TI & Seluruh rekord pasien yang belum dihapus di lima SIMRS, termasuk rekord ganda: misalkan 2,3 juta rekord \\
+    \hline
+    Dampak & Vendor menawar dengan angka 2,3 juta, sekitar 5,6 kali angka bagian layanan; negosiasi tertunda dua bulan \\
+    \hline
+    Entri glosarium & Pasien aktif: individu unik dengan minimal satu kunjungan dalam 12 bulan terakhir di fasilitas mana pun. Pemilik istilah: direktur pelayanan \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 3}
+  \label{tab:ch01-lat3-hasil}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.8cm}
+      >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Aspek} & \textbf{Isian} \\
+    \hline
+    Keputusan yang gagal & \dots \\
+    \hline
+    Istilah & \dots \\
+    \hline
+    Arti menurut bisnis & \dots \\
+    \hline
+    Arti menurut TI & \dots \\
+    \hline
+    Dampak & \dots \\
+    \hline
+    Entri glosarium & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}

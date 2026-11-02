@@ -1,0 +1,38 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.85cm, minimum width=2.9cm,
+                align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Panel kiri: setiap dokumen menggambar ulang sistem yang sama.
+  \node[font=\footnotesize\bfseries] at (2.4,2.45) {Hanya menggambar};
+  \node[kotak, fill=red!22] (g1) at (2.4,1.4)
+    {Proposal vendor\\{\tiny\mdseries ``SIMRS Bekasi v4''}};
+  \node[kotak, fill=red!22] (g2) at (2.4,0.2)
+    {Laporan audit\\{\tiny\mdseries ``Sistem RS Bekasi''}};
+  \node[kotak, fill=red!22] (g3) at (2.4,-1.0)
+    {Presentasi direksi\\{\tiny\mdseries ``HIS Bekasi''}};
+  \node[font=\tiny, gray, align=center] at (2.4,-1.95)
+    {tiga gambar, tiga nama,\\tidak saling tahu bila sistemnya berubah};
+
+  \draw[gray, dashed] (4.75,2.7) -- (4.75,-2.3);
+
+  % Panel kanan: satu elemen di repositori dipakai oleh banyak view.
+  \node[font=\footnotesize\bfseries] at (8.3,2.45) {Memodelkan};
+  \node[kotak, fill=praditagreen!15, minimum height=2.9cm, minimum width=2.6cm] (repo)
+    at (6.55,0.2)
+    {Repositori model\\[3pt]{\tiny\mdseries satu elemen:}\\SIMRS RS Bekasi\\
+     {\tiny\mdseries komponen aplikasi}};
+  \node[kotak, fill=blue!8] (v1) at (10.3,1.4)
+    {Layered view\\{\tiny\mdseries untuk tim TI}};
+  \node[kotak, fill=blue!8] (v2) at (10.3,0.2)
+    {Application cooperation\\{\tiny\mdseries untuk tim integrasi}};
+  \node[kotak, fill=green!10] (v3) at (10.3,-1.0)
+    {View layanan pasien\\{\tiny\mdseries untuk direksi}};
+
+  \draw[panah] ($(repo.east)+(0,0.6)$) -- (v1.west);
+  \draw[panah] (repo.east) -- (v2.west);
+  \draw[panah] ($(repo.east)+(0,-0.6)$) -- (v3.west);
+  \node[font=\tiny, gray, align=center] at (8.3,-1.95)
+    {ubah sekali di repositori,\\semua view ikut berubah};
+\end{tikzpicture}

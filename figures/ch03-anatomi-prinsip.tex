@@ -1,0 +1,46 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kartu/.style={draw, text width=3.6cm, align=left, inner sep=3pt,
+                minimum height=0.65cm},
+  kotak/.style={draw, rounded corners, text width=2.6cm, align=left,
+                inner sep=3pt},
+  keterangan/.style={font=\tiny, gray, align=center},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kartu, fill=praditagreen!15, align=center, font=\scriptsize\bfseries]
+    (nama) at (0,0) {PA1 Satu sumber kebenaran untuk data pasien};
+  \node[kartu, fill=blue!8, below=0pt of nama] (pernyataan)
+    {\textbf{Pernyataan}\\{\tiny\mdseries Tiap atribut data pasien punya
+     satu sistem acuan dan satu jalur resmi untuk mengubahnya}};
+  \node[kartu, fill=blue!8, below=0pt of pernyataan] (alasan)
+    {\textbf{Alasan}\\{\tiny\mdseries Keputusan klinis tidak boleh memakai
+     data yang usang atau ganda}};
+  \node[kartu, fill=orange!12, below=0pt of alasan] (implikasi)
+    {\textbf{Implikasi}\\{\tiny\mdseries Pemilik data ditunjuk; sistem lain
+     membaca dari acuan; salinan diberi tanda waktu}};
+  \node[fit=(nama) (implikasi), inner sep=0pt] (kartu) {};
+
+  \node[kotak, fill=blue!8, right=1.1cm of kartu] (kriteria)
+    {\textbf{Kriteria tinjauan}\\{\tiny\mdseries K1 Rancangan menyebut
+     sistem acuan tiap atribut.\\K2 Tidak ada penulisan di dua tempat
+     tanpa sinkronisasi.}};
+  \draw[panah] (kartu.east) -- (kriteria.west)
+    node[midway, above, keterangan, text width=1cm] {diturunkan menjadi};
+  \node[keterangan, above=2pt of kriteria] {lalu diuji pada dua opsi};
+
+  \node[kotak, text width=3cm, fill=green!10, anchor=west] (opsia)
+    at ([xshift=1.1cm, yshift=1.2cm]kriteria.east)
+    {\textbf{Opsi A: lolos}\\{\tiny\mdseries Medikara+ membaca jadwal dari
+     SIMRS lewat antarmuka}};
+  \node[kotak, text width=3cm, fill=red!22, anchor=west] (opsib)
+    at ([xshift=1.1cm, yshift=-0.15cm]kriteria.east)
+    {\textbf{Opsi B: ditolak}\\{\tiny\mdseries Medikara+ menyimpan salinan
+     jadwal yang diunggah manual}};
+  \node[kotak, text width=3cm, fill=gray!35, below=0.3cm of opsib] (dispensasi)
+    {\textbf{Dispensasi}\\{\tiny\mdseries bila mendesak: pemilik, alasan,
+     masa berlaku, rencana kembali}};
+
+  \draw[panah] (kriteria.east) -- (opsia.west);
+  \draw[panah] (kriteria.east) -- (opsib.west);
+  \draw[panah, dashed] (opsib.south) -- (dispensasi.north);
+\end{tikzpicture}

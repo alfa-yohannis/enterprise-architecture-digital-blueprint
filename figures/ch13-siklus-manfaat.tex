@@ -1,0 +1,34 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  tahap/.style={draw, rounded corners, minimum height=1.25cm, text width=1.85cm,
+                align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[tahap, fill=blue!8] (t1) at (0,0)
+    {{\tiny\mdseries Tahap 1}\\Identifikasi dan susun manfaat};
+  \node[tahap, fill=blue!8] (t2) at (2.45,0)
+    {{\tiny\mdseries Tahap 2}\\Rencanakan realisasi manfaat};
+  \node[tahap, fill=blue!8] (t3) at (4.9,0)
+    {{\tiny\mdseries Tahap 3}\\Jalankan rencana manfaat};
+  \node[tahap, fill=orange!12] (t4) at (7.35,0)
+    {{\tiny\mdseries Tahap 4}\\Tinjau dan evaluasi hasil};
+  \node[tahap, fill=green!10] (t5) at (9.8,0)
+    {{\tiny\mdseries Tahap 5}\\Temukan manfaat lanjutan};
+
+  \draw[panah] (t1) -- (t2);
+  \draw[panah] (t2) -- (t3);
+  \draw[panah] (t3) -- (t4);
+  \draw[panah] (t4) -- (t5);
+  \draw[panah] (t5.south) -- ++(0,-0.6) -| (t1.south);
+  \node[font=\tiny, gray, fill=white, inner sep=1pt] at (4.9,-1.23)
+    {investasi berikutnya memakai pelajaran dari siklus ini};
+
+  \draw[gray, thick] ([yshift=0.15cm]t1.north west) -- ++(0,0.15)
+    -- ([yshift=0.3cm]t2.north east) -- ++(0,-0.15);
+  \node[font=\tiny, anchor=south] at ($(t1.north)!0.5!(t2.north)+(0,0.32)$)
+    {\textit{business case} disusun di sini};
+  \node[font=\tiny, anchor=south] at ([yshift=0.15cm]t3.north)
+    {proyek berjalan};
+  \node[font=\tiny, anchor=south] at ([yshift=0.15cm]t4.north)
+    {pemilik manfaat melapor};
+\end{tikzpicture}

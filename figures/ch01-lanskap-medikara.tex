@@ -1,0 +1,41 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.85cm, minimum width=2.0cm,
+                align=center, font=\scriptsize\bfseries},
+  luar/.style={kotak, dashed, fill=praditagreen!15},
+  sambung/.style={draw=gray!70, thin},
+  salin/.style={draw=red!60!black, densely dashed, thin},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Sistem eksternal dan aplikasi pasien di baris atas.
+  \node[luar] (bpjs) at (1.25,2.5) {BPJS Kesehatan\\{\tiny\mdseries eksternal}};
+  \node[kotak, fill=orange!12] (plus) at (5,2.5) {Medikara+\\{\tiny\mdseries buatan vendor}};
+  \node[luar] (satu) at (8.75,2.5) {SATUSEHAT\\{\tiny\mdseries eksternal, HL7 FHIR}};
+
+  % Lima SIMRS hasil akuisisi, masing-masing versi berbeda.
+  \node[kotak, fill=blue!8] (jkt) at (0,0) {SIMRS Jakarta\\{\tiny\mdseries versi A}};
+  \node[kotak, fill=blue!8] (bks) at (2.5,0) {SIMRS Bekasi\\{\tiny\mdseries versi B}};
+  \node[kotak, fill=blue!8] (dpk) at (5,0) {SIMRS Depok\\{\tiny\mdseries versi C}};
+  \node[kotak, fill=blue!8] (bgr) at (7.5,0) {SIMRS Bogor\\{\tiny\mdseries versi D}};
+  \node[kotak, fill=blue!8] (bdg) at (10,0) {SIMRS Bandung\\{\tiny\mdseries versi E}};
+
+  % Sistem pusat dan laporan manual di baris bawah.
+  \node[kotak, fill=blue!8] (erp) at (2.5,-2.5) {ERP keuangan\\{\tiny\mdseries terpusat}};
+  \node[kotak, fill=red!22] (lapor) at (7.5,-2.5) {Laporan manajemen\\{\tiny\mdseries disusun di spreadsheet}};
+
+  % Integrasi point-to-point: tiap SIMRS punya sambungan sendiri.
+  \foreach \rs in {jkt, bks, dpk, bgr, bdg} {
+    \draw[sambung] (\rs.north) -- (bpjs.south);
+    \draw[sambung] (\rs.north) -- (plus.south);
+    \draw[sambung] (\rs.north) -- (satu.south);
+    \draw[sambung] (\rs.south) -- (erp.north);
+    \draw[salin] (\rs.south) -- (lapor.north);
+  }
+  \draw[salin] (erp.east) -- (lapor.west);
+
+  % Keterangan.
+  \node[font=\tiny, gray!40!black, align=left, anchor=north west] at (-1.0,-3.25)
+    {garis abu-abu: sambungan \textit{point-to-point}, 5 SIMRS $\times$ 4 sistem = 20 sambungan};
+  \node[font=\tiny, red!60!black, align=left, anchor=north west] at (-1.0,-3.6)
+    {garis putus merah: data disalin manual ke \textit{spreadsheet}};
+\end{tikzpicture}

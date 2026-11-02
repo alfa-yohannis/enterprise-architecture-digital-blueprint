@@ -1,0 +1,61 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  tahap/.style={fill=praditagreen!15, draw},
+  isi/.style={text width=1.25cm, align=center, font=\tiny\bfseries},
+  ukur/.style={text width=1.6cm, align=center, font=\tiny, anchor=north},
+  kap/.style={draw, text width=1.5cm, minimum height=0.75cm, align=center,
+              font=\tiny, inner sep=2pt},
+  label/.style={font=\tiny\bfseries, anchor=west}
+]
+  \node[font=\tiny, gray, anchor=west] at (1.1,1.2)
+    {Pemicu: pasien membutuhkan layanan rawat jalan};
+  \node[font=\tiny, gray, anchor=east] at (11.65,1.2)
+    {Nilai: pasien tertangani tuntas dan terpantau};
+
+  \node[label] at (0,0.45) {Tahap};
+  \node[label] at (0,-0.5) {Ukuran};
+  \node[label] at (0,-1.55) {Kapabilitas};
+
+  \draw[tahap] (1.10,0) -- ++(1.58,0) -- ++(0.22,0.45) -- ++(-0.22,0.45)
+    -- ++(-1.58,0) -- ++(0.22,-0.45) -- cycle;
+  \draw[tahap] (2.85,0) -- ++(1.58,0) -- ++(0.22,0.45) -- ++(-0.22,0.45)
+    -- ++(-1.58,0) -- ++(0.22,-0.45) -- cycle;
+  \draw[tahap] (4.60,0) -- ++(1.58,0) -- ++(0.22,0.45) -- ++(-0.22,0.45)
+    -- ++(-1.58,0) -- ++(0.22,-0.45) -- cycle;
+  \draw[tahap] (6.35,0) -- ++(1.58,0) -- ++(0.22,0.45) -- ++(-0.22,0.45)
+    -- ++(-1.58,0) -- ++(0.22,-0.45) -- cycle;
+  \draw[tahap] (8.10,0) -- ++(1.58,0) -- ++(0.22,0.45) -- ++(-0.22,0.45)
+    -- ++(-1.58,0) -- ++(0.22,-0.45) -- cycle;
+  \draw[tahap] (9.85,0) -- ++(1.58,0) -- ++(0.22,0.45) -- ++(-0.22,0.45)
+    -- ++(-1.58,0) -- ++(0.22,-0.45) -- cycle;
+
+  \node[isi] at (2.05,0.45) {1. Memesan layanan};
+  \node[isi] at (3.80,0.45) {2. Hadir dan terverifikasi};
+  \node[isi] at (5.55,0.45) {3. Diperiksa dan didiagnosis};
+  \node[isi] at (7.30,0.45) {4. Menerima obat};
+  \node[isi] at (9.05,0.45) {5. Menyelesaikan pembayaran};
+  \node[isi] at (10.80,0.45) {6. Ditindak\-lanjuti};
+
+  \node[ukur] at (2.00,-0.15) {janji temu daring\\28\% ke 50\%};
+  \node[ukur] at (3.75,-0.15) {datang sampai terverifikasi\\25 ke 5 menit};
+  \node[ukur] at (5.50,-0.15) {riwayat lintas fasilitas terbuka\\10\% ke 95\%};
+  \node[ukur] at (7.25,-0.15) {tunggu obat nonracikan\\45 ke 20 menit};
+  \node[ukur] at (9.00,-0.15) {klaim dikembalikan\\9\% ke 3\%};
+  \node[ukur] at (10.75,-0.15) {pengingat kontrol terkirim\\20\% ke 90\%};
+
+  \node[kap, fill=blue!8] at (2.00,-1.55) {Penjadwalan Layanan};
+  \node[kap, fill=orange!12, very thick] at (3.75,-1.55)
+    {Pengelolaan Identitas Pasien Terpadu};
+  \node[kap, fill=blue!8] at (5.50,-1.55) {Pengelolaan Rekam Medis};
+  \node[kap, fill=white] at (7.25,-1.55) {Layanan Farmasi dan Laboratorium};
+  \node[kap, fill=blue!8] at (9.00,-1.55) {Klaim dan Penjaminan};
+  \node[kap, fill=blue!8] at (10.75,-1.55) {Telekonsultasi};
+
+  \draw[fill=orange!12, very thick] (1.1,-2.3) rectangle (1.4,-2.5);
+  \node[font=\tiny, anchor=west] at (1.45,-2.4) {kapabilitas baru};
+  \draw[fill=blue!8] (3.6,-2.3) rectangle (3.9,-2.5);
+  \node[font=\tiny, anchor=west] at (3.95,-2.4) {diperkuat};
+  \draw[fill=white] (5.6,-2.3) rectangle (5.9,-2.5);
+  \node[font=\tiny, anchor=west] at (5.95,-2.4) {dipertahankan};
+  \node[font=\tiny, gray, anchor=east] at (11.65,-2.4) {angka: saat ini ke target 2030};
+\end{tikzpicture}

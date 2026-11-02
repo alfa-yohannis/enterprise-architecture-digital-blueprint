@@ -1,0 +1,2238 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="950.4pt" height="640.8pt" viewBox="0 0 950.4 640.8" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-11-02T04:57:56.349251</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 640.8 
+L 950.4 640.8 
+L 950.4 0 
+L 0 0 
+z
+" style="fill: #ffffff"/>
+  </g>
+  <g id="axes_1">
+   <g id="line2d_1">
+    <path d="M 243.144231 186.633 
+L 366.193976 186.633 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_2">
+    <path d="M 475.2 222.313909 
+L 475.2 288.578455 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_3">
+    <path d="M 366.193976 324.259364 
+L 354.82525 324.259364 
+L 354.82525 416.010273 
+L 134.138207 416.010273 
+L 134.138207 426.204818 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_4">
+    <path d="M 475.2 359.940273 
+L 475.2 426.204818 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: square"/>
+   </g>
+   <g id="line2d_5">
+    <path d="M 584.206024 324.259364 
+L 595.57475 324.259364 
+L 595.57475 416.010273 
+L 816.261793 416.010273 
+L 816.261793 426.204818 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: square"/>
+   </g>
+   <g id="patch_2">
+    <path d="M 243.144231 186.633 
+Q 304.669104 186.633 364.740532 186.633 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 359.540532 184.033 
+L 364.740532 186.633 
+L 359.540532 189.233 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #5c7084; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="patch_3">
+    <path d="M 475.2 222.313909 
+Q 475.2 255.446182 475.2 287.12501 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 477.8 281.92501 
+L 475.2 287.12501 
+L 472.6 281.92501 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #5c7084; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="patch_4">
+    <path d="M 134.138207 416.010273 
+Q 134.138207 421.107545 134.138207 424.751374 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 136.738207 419.551374 
+L 134.138207 424.751374 
+L 131.538207 419.551374 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #5c7084; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="patch_5">
+    <path d="M 475.2 359.940273 
+Q 475.2 393.072545 475.2 424.751374 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 477.8 419.551374 
+L 475.2 424.751374 
+L 472.6 419.551374 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #5c7084; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="patch_6">
+    <path d="M 816.261793 416.010273 
+Q 816.261793 421.107545 816.261793 424.751374 
+" clip-path="url(#p5b237e82ef)" style="fill: none; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+    <path d="M 818.861793 419.551374 
+L 816.261793 424.751374 
+L 813.661793 419.551374 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #5c7084; stroke: #5c7084; stroke-width: 1.3; stroke-linecap: round"/>
+   </g>
+   <g id="patch_7">
+    <path d="M 30.147798 223.588227 
+L 238.128617 223.588227 
+Q 244.816103 223.588227 244.816103 218.490955 
+L 244.816103 154.775045 
+Q 244.816103 149.677773 238.128617 149.677773 
+L 30.147798 149.677773 
+Q 23.460312 149.677773 23.460312 154.775045 
+L 23.460312 218.490955 
+Q 23.460312 223.588227 30.147798 223.588227 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #f1edf8; stroke: #786394; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_8">
+    <path d="M 371.209591 223.588227 
+L 579.190409 223.588227 
+Q 585.877895 223.588227 585.877895 218.490955 
+L 585.877895 154.775045 
+Q 585.877895 149.677773 579.190409 149.677773 
+L 371.209591 149.677773 
+Q 364.522105 149.677773 364.522105 154.775045 
+L 364.522105 218.490955 
+Q 364.522105 223.588227 371.209591 223.588227 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #e9f3ec; stroke: #316b4b; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_9">
+    <path d="M 371.209591 361.214591 
+L 579.190409 361.214591 
+Q 585.877895 361.214591 585.877895 356.117318 
+L 585.877895 292.401409 
+Q 585.877895 287.304136 579.190409 287.304136 
+L 371.209591 287.304136 
+Q 364.522105 287.304136 364.522105 292.401409 
+L 364.522105 356.117318 
+Q 364.522105 361.214591 371.209591 361.214591 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #f1edf8; stroke: #786394; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_10">
+    <path d="M 30.147798 498.840955 
+L 238.128617 498.840955 
+Q 244.816103 498.840955 244.816103 493.743682 
+L 244.816103 430.027773 
+Q 244.816103 424.9305 238.128617 424.9305 
+L 30.147798 424.9305 
+Q 23.460312 424.9305 23.460312 430.027773 
+L 23.460312 493.743682 
+Q 23.460312 498.840955 30.147798 498.840955 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #e4f2ec; stroke: #236c57; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_11">
+    <path d="M 371.209591 498.840955 
+L 579.190409 498.840955 
+Q 585.877895 498.840955 585.877895 493.743682 
+L 585.877895 430.027773 
+Q 585.877895 424.9305 579.190409 424.9305 
+L 371.209591 424.9305 
+Q 364.522105 424.9305 364.522105 430.027773 
+L 364.522105 493.743682 
+Q 364.522105 498.840955 371.209591 498.840955 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #e4f2ec; stroke: #236c57; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="patch_12">
+    <path d="M 712.271383 498.840955 
+L 920.252202 498.840955 
+Q 926.939688 498.840955 926.939688 493.743682 
+L 926.939688 430.027773 
+Q 926.939688 424.9305 920.252202 424.9305 
+L 712.271383 424.9305 
+Q 705.583897 424.9305 705.583897 430.027773 
+L 705.583897 493.743682 
+Q 705.583897 498.840955 712.271383 498.840955 
+z
+" clip-path="url(#p5b237e82ef)" style="fill: #e4f2ec; stroke: #236c57; stroke-width: 1.15; stroke-linejoin: miter"/>
+   </g>
+   <g id="text_1">
+    <!-- Repositori model -->
+    <g style="fill: #20394f" transform="translate(71.45602 181.622909) scale(0.17 -0.17)">
+     <defs>
+      <path id="TitilliumWeb-Bold-35" d="M 1357 1459 
+L 1357 0 
+L 474 0 
+L 474 4352 
+L 2163 4352 
+Q 3699 4352 3699 2918 
+Q 3699 2067 3059 1664 
+L 3680 0 
+L 2714 0 
+L 2208 1459 
+L 1357 1459 
+z
+M 2176 2214 
+Q 2490 2214 2643 2406 
+Q 2797 2598 2797 2912 
+Q 2797 3226 2633 3411 
+Q 2470 3597 2163 3597 
+L 1357 3597 
+L 1357 2214 
+L 2176 2214 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-48" d="M 1101 1235 
+Q 1107 941 1257 809 
+Q 1408 678 1690 678 
+Q 2285 678 2752 717 
+L 2931 736 
+L 2944 102 
+Q 2208 -77 1613 -77 
+Q 890 -77 563 307 
+Q 237 691 237 1555 
+Q 237 3277 1651 3277 
+Q 3046 3277 3046 1830 
+L 2982 1235 
+L 1101 1235 
+z
+M 2202 1888 
+Q 2202 2272 2080 2422 
+Q 1958 2573 1654 2573 
+Q 1350 2573 1225 2416 
+Q 1101 2259 1094 1888 
+L 2202 1888 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-53" d="M 397 -1344 
+L 397 3200 
+L 1248 3200 
+L 1248 3027 
+Q 1664 3277 1978 3277 
+Q 2624 3277 2931 2889 
+Q 3238 2502 3238 1574 
+Q 3238 646 2899 284 
+Q 2560 -77 1786 -77 
+Q 1574 -77 1331 -38 
+L 1254 -26 
+L 1254 -1344 
+L 397 -1344 
+z
+M 1811 2509 
+Q 1574 2509 1331 2413 
+L 1254 2381 
+L 1254 704 
+Q 1542 666 1722 666 
+Q 2093 666 2230 883 
+Q 2368 1101 2368 1626 
+Q 2368 2509 1811 2509 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-52" d="M 569 2838 
+Q 909 3277 1702 3277 
+Q 2496 3277 2835 2838 
+Q 3174 2400 3174 1606 
+Q 3174 -77 1702 -77 
+Q 230 -77 230 1606 
+Q 230 2400 569 2838 
+z
+M 1232 883 
+Q 1363 653 1702 653 
+Q 2042 653 2173 883 
+Q 2304 1114 2304 1606 
+Q 2304 2099 2173 2323 
+Q 2042 2547 1702 2547 
+Q 1363 2547 1232 2323 
+Q 1101 2099 1101 1606 
+Q 1101 1114 1232 883 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-56" d="M 2694 2400 
+Q 1901 2502 1584 2502 
+Q 1267 2502 1174 2444 
+Q 1082 2387 1082 2262 
+Q 1082 2138 1206 2090 
+Q 1331 2042 1846 1949 
+Q 2362 1856 2579 1645 
+Q 2797 1434 2797 960 
+Q 2797 -77 1510 -77 
+Q 1088 -77 486 38 
+L 282 77 
+L 307 794 
+Q 1101 691 1411 691 
+Q 1722 691 1834 752 
+Q 1946 813 1946 934 
+Q 1946 1056 1827 1113 
+Q 1709 1171 1213 1254 
+Q 717 1338 473 1536 
+Q 230 1734 230 2243 
+Q 230 2752 576 3011 
+Q 922 3270 1466 3270 
+Q 1843 3270 2496 3149 
+L 2707 3110 
+L 2694 2400 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-4c" d="M 397 0 
+L 397 3200 
+L 1254 3200 
+L 1254 0 
+L 397 0 
+z
+M 397 3610 
+L 397 4480 
+L 1254 4480 
+L 1254 3610 
+L 397 3610 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-57" d="M 2170 2470 
+L 1382 2470 
+L 1382 1158 
+Q 1382 966 1392 886 
+Q 1402 806 1462 748 
+Q 1523 691 1651 691 
+L 2138 704 
+L 2176 19 
+Q 1747 -77 1523 -77 
+Q 947 -77 736 182 
+Q 525 442 525 1139 
+L 525 2470 
+L 147 2470 
+L 147 3200 
+L 525 3200 
+L 525 4090 
+L 1382 4090 
+L 1382 3200 
+L 2170 3200 
+L 2170 2470 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-55" d="M 397 0 
+L 397 3200 
+L 1248 3200 
+L 1248 2861 
+Q 1786 3181 2272 3277 
+L 2272 2413 
+Q 1754 2304 1382 2189 
+L 1254 2144 
+L 1254 0 
+L 397 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-3" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-50" d="M 1254 0 
+L 397 0 
+L 397 3200 
+L 1248 3200 
+L 1248 3021 
+Q 1690 3277 2003 3277 
+Q 2522 3277 2803 2976 
+Q 3392 3277 3878 3277 
+Q 4512 3277 4758 2909 
+Q 5005 2541 5005 1734 
+L 5005 0 
+L 4147 0 
+L 4147 1709 
+Q 4147 2118 4057 2313 
+Q 3968 2509 3699 2509 
+Q 3494 2509 3200 2419 
+L 3104 2387 
+Q 3130 1907 3130 1658 
+L 3130 0 
+L 2272 0 
+L 2272 1645 
+Q 2272 2118 2189 2313 
+Q 2106 2509 1824 2509 
+Q 1574 2509 1331 2419 
+L 1254 2394 
+L 1254 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-47" d="M 3117 4480 
+L 3117 0 
+L 2266 0 
+L 2266 134 
+Q 1818 -77 1491 -77 
+Q 794 -77 518 326 
+Q 243 730 243 1603 
+Q 243 2477 572 2877 
+Q 902 3277 1568 3277 
+Q 1773 3277 2138 3213 
+L 2259 3187 
+L 2259 4480 
+L 3117 4480 
+z
+M 2170 768 
+L 2259 787 
+L 2259 2470 
+Q 1907 2534 1632 2534 
+Q 1114 2534 1114 1613 
+Q 1114 1114 1229 902 
+Q 1344 691 1609 691 
+Q 1875 691 2170 768 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-4f" d="M 435 0 
+L 435 4480 
+L 1293 4480 
+L 1293 0 
+L 435 0 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Bold-35"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(61.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-53" transform="translate(112.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-52" transform="translate(166.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-56" transform="translate(219.8125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(267.015625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-57" transform="translate(292.8125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-52" transform="translate(329.21875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-55" transform="translate(382.421875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(419.625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(445.421875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-50" transform="translate(467.421875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-52" transform="translate(551.328125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-47" transform="translate(604.53125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(659.4375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4f" transform="translate(710.4375 0)"/>
+    </g>
+   </g>
+   <g id="text_2">
+    <!-- objek beridentitas tetap -->
+    <g style="fill: #455264" transform="translate(61.78434 204.494114) scale(0.145 -0.145)">
+     <defs>
+      <path id="TitilliumWeb-Regular-52" d="M 320 1606 
+Q 320 2483 633 2873 
+Q 947 3264 1692 3264 
+Q 2438 3264 2748 2873 
+Q 3059 2483 3059 1606 
+Q 3059 730 2764 333 
+Q 2470 -64 1689 -64 
+Q 909 -64 614 333 
+Q 320 730 320 1606 
+z
+M 813 1616 
+Q 813 915 982 633 
+Q 1152 352 1693 352 
+Q 2234 352 2400 630 
+Q 2566 909 2566 1613 
+Q 2566 2317 2380 2582 
+Q 2195 2848 1692 2848 
+Q 1190 2848 1001 2582 
+Q 813 2317 813 1616 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-45" d="M 1875 3264 
+Q 2522 3264 2781 2896 
+Q 3040 2528 3040 1606 
+Q 3040 685 2717 310 
+Q 2394 -64 1530 -64 
+Q 1261 -64 640 -13 
+L 461 6 
+L 461 4595 
+L 934 4595 
+L 934 3040 
+Q 1421 3264 1875 3264 
+z
+M 1523 365 
+Q 2150 365 2352 649 
+Q 2554 934 2554 1612 
+Q 2554 2291 2394 2563 
+Q 2234 2835 1824 2835 
+Q 1453 2835 1062 2694 
+L 934 2650 
+L 934 397 
+Q 1350 365 1523 365 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-4d" d="M 467 83 
+L 467 3200 
+L 941 3200 
+L 941 77 
+Q 941 -512 729 -806 
+Q 518 -1101 -122 -1427 
+L -314 -1056 
+Q 186 -768 326 -566 
+Q 467 -365 467 83 
+z
+M 467 3923 
+L 467 4480 
+L 941 4480 
+L 941 3923 
+L 467 3923 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-48" d="M 2637 397 
+L 2822 416 
+L 2835 38 
+Q 2106 -64 1587 -64 
+Q 896 -64 608 336 
+Q 320 736 320 1581 
+Q 320 3264 1658 3264 
+Q 2304 3264 2624 2902 
+Q 2944 2541 2944 1766 
+L 2918 1402 
+L 806 1402 
+Q 806 870 998 614 
+Q 1190 358 1667 358 
+Q 2144 358 2637 397 
+z
+M 2464 1786 
+Q 2464 2374 2275 2617 
+Q 2086 2861 1660 2861 
+Q 1235 2861 1020 2605 
+Q 806 2349 800 1786 
+L 2464 1786 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-4e" d="M 941 0 
+L 461 0 
+L 461 4595 
+L 941 4595 
+L 941 1882 
+L 1440 1907 
+L 2355 3200 
+L 2899 3200 
+L 1856 1728 
+L 2944 0 
+L 2400 0 
+L 1446 1485 
+L 941 1466 
+L 941 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-3" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-55" d="M 461 0 
+L 461 3200 
+L 934 3200 
+L 934 2765 
+Q 1491 3149 2106 3270 
+L 2106 2784 
+Q 1837 2733 1545 2624 
+Q 1254 2515 1101 2432 
+L 941 2349 
+L 941 0 
+L 461 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-4c" d="M 461 0 
+L 461 3200 
+L 941 3200 
+L 941 0 
+L 461 0 
+z
+M 461 3923 
+L 461 4480 
+L 941 4480 
+L 941 3923 
+L 461 3923 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-47" d="M 2918 4595 
+L 2918 0 
+L 2445 0 
+L 2445 218 
+Q 1952 -64 1472 -64 
+Q 1216 -64 1024 0 
+Q 832 64 666 230 
+Q 320 576 320 1507 
+Q 320 2438 630 2851 
+Q 941 3264 1658 3264 
+Q 2029 3264 2445 3181 
+L 2445 4595 
+L 2918 4595 
+z
+M 1037 576 
+Q 1139 454 1254 409 
+Q 1370 365 1552 365 
+Q 1734 365 1961 425 
+Q 2189 486 2317 544 
+L 2445 602 
+L 2445 2771 
+Q 2035 2848 1683 2848 
+Q 1197 2848 1005 2537 
+Q 813 2227 813 1574 
+Q 813 832 1037 576 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-51" d="M 941 0 
+L 461 0 
+L 461 3200 
+L 934 3200 
+L 934 2976 
+Q 1453 3264 1926 3264 
+Q 2566 3264 2787 2918 
+Q 3008 2573 3008 1690 
+L 3008 0 
+L 2534 0 
+L 2534 1677 
+Q 2534 2342 2403 2588 
+Q 2272 2835 1843 2835 
+Q 1638 2835 1411 2774 
+Q 1184 2714 1062 2656 
+L 941 2598 
+L 941 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-57" d="M 2118 2784 
+L 1101 2784 
+L 1101 1254 
+Q 1101 704 1181 531 
+Q 1261 358 1562 358 
+L 2131 397 
+L 2163 0 
+Q 1734 -70 1510 -70 
+Q 1011 -70 819 173 
+Q 627 416 627 1101 
+L 627 2784 
+L 173 2784 
+L 173 3200 
+L 627 3200 
+L 627 4179 
+L 1101 4179 
+L 1101 3200 
+L 2118 3200 
+L 2118 2784 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-44" d="M 2720 2234 
+L 2720 595 
+Q 2739 358 3091 314 
+L 3072 -64 
+Q 2566 -64 2310 192 
+Q 1734 -64 1158 -64 
+Q 717 -64 486 185 
+Q 256 435 256 902 
+Q 256 1370 493 1590 
+Q 730 1811 1235 1862 
+L 2240 1958 
+L 2240 2234 
+Q 2240 2560 2099 2701 
+Q 1958 2842 1715 2842 
+Q 1203 2842 653 2778 
+L 454 2758 
+L 435 3123 
+Q 1139 3264 1683 3264 
+Q 2227 3264 2473 3014 
+Q 2720 2765 2720 2234 
+z
+M 749 928 
+Q 749 339 1235 339 
+Q 1670 339 2093 486 
+L 2240 538 
+L 2240 1594 
+L 1293 1504 
+Q 1005 1478 877 1337 
+Q 749 1197 749 928 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-56" d="M 1466 2835 
+Q 768 2835 768 2349 
+Q 768 2125 928 2032 
+Q 1088 1939 1657 1840 
+Q 2227 1741 2464 1561 
+Q 2701 1382 2701 889 
+Q 2701 397 2384 166 
+Q 2067 -64 1459 -64 
+Q 1062 -64 525 26 
+L 333 58 
+L 358 474 
+Q 1088 365 1459 365 
+Q 1830 365 2025 483 
+Q 2221 602 2221 880 
+Q 2221 1158 2054 1257 
+Q 1888 1357 1325 1446 
+Q 762 1536 525 1709 
+Q 288 1882 288 2349 
+Q 288 2816 617 3040 
+Q 947 3264 1440 3264 
+Q 1830 3264 2419 3174 
+L 2598 3142 
+L 2586 2733 
+Q 1875 2835 1466 2835 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-53" d="M 461 -1421 
+L 461 3200 
+L 934 3200 
+L 934 2970 
+Q 1421 3264 1894 3264 
+Q 2502 3264 2777 2877 
+Q 3053 2490 3053 1600 
+Q 3053 710 2729 323 
+Q 2406 -64 1658 -64 
+Q 1267 -64 941 6 
+L 941 -1421 
+L 461 -1421 
+z
+M 1824 2835 
+Q 1632 2835 1411 2771 
+Q 1190 2707 1062 2643 
+L 941 2579 
+L 941 422 
+Q 1395 352 1632 352 
+Q 2150 352 2358 646 
+Q 2566 941 2566 1606 
+Q 2566 2272 2377 2553 
+Q 2189 2835 1824 2835 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Regular-52"/>
+     <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(52.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4d" transform="translate(105.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(127.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(177.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(225.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(247.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(300.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(350.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(385.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(407.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(460.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(510.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(564.109375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(599.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(621.109375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(656.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(706.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(752.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(774.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(809.890625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(860.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(895.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-53" transform="translate(945.28125 0)"/>
+    </g>
+   </g>
+   <g id="text_3">
+    <!-- Relasi bertipe -->
+    <g style="fill: #20394f" transform="translate(424.581172 181.622909) scale(0.17 -0.17)">
+     <defs>
+      <path id="TitilliumWeb-Bold-44" d="M 2848 2202 
+L 2848 870 
+Q 2861 717 2899 656 
+Q 2938 595 3059 570 
+L 3034 -77 
+Q 2707 -77 2512 -32 
+Q 2317 13 2118 147 
+Q 1658 -77 1178 -77 
+Q 186 -77 186 973 
+Q 186 1485 461 1699 
+Q 736 1914 1306 1952 
+L 1990 2003 
+L 1990 2202 
+Q 1990 2400 1900 2473 
+Q 1811 2547 1613 2547 
+L 410 2496 
+L 384 3091 
+Q 1069 3277 1686 3277 
+Q 2304 3277 2576 3021 
+Q 2848 2765 2848 2202 
+z
+M 1408 1357 
+Q 1050 1325 1050 973 
+Q 1050 621 1363 621 
+Q 1606 621 1894 698 
+L 1990 723 
+L 1990 1408 
+L 1408 1357 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-45" d="M 1946 3277 
+Q 2618 3277 2928 2909 
+Q 3238 2541 3238 1593 
+Q 3238 646 2880 284 
+Q 2522 -77 1645 -77 
+Q 1370 -77 640 -13 
+L 397 13 
+L 397 4480 
+L 1254 4480 
+L 1254 3104 
+Q 1664 3277 1946 3277 
+z
+M 1645 691 
+Q 2074 691 2221 899 
+Q 2368 1107 2368 1645 
+Q 2368 2509 1830 2509 
+Q 1574 2509 1344 2445 
+L 1254 2426 
+L 1254 717 
+Q 1549 691 1645 691 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Bold-35"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(61.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4f" transform="translate(112.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(139.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-56" transform="translate(190.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(237.5 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(263.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-45" transform="translate(285.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(339.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-55" transform="translate(390.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-57" transform="translate(427.90625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(464.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-53" transform="translate(490.109375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(544.515625 0)"/>
+    </g>
+   </g>
+   <g id="text_4">
+    <!-- makna hubungan jelas -->
+    <g style="fill: #455264" transform="translate(406.841563 204.406887) scale(0.145 -0.145)">
+     <defs>
+      <path id="TitilliumWeb-Regular-50" d="M 941 0 
+L 461 0 
+L 461 3200 
+L 934 3200 
+L 934 2976 
+Q 1414 3264 1869 3264 
+Q 2464 3264 2701 2938 
+Q 2912 3066 3248 3165 
+Q 3584 3264 3840 3264 
+Q 4480 3264 4701 2921 
+Q 4922 2579 4922 1690 
+L 4922 0 
+L 4442 0 
+L 4442 1677 
+Q 4442 2342 4314 2588 
+Q 4186 2835 3770 2835 
+Q 3558 2835 3334 2774 
+Q 3110 2714 2989 2656 
+L 2867 2598 
+Q 2950 2387 2950 1664 
+L 2950 0 
+L 2470 0 
+L 2470 1651 
+Q 2470 2342 2345 2588 
+Q 2221 2835 1798 2835 
+Q 1594 2835 1379 2774 
+Q 1165 2714 1050 2656 
+L 941 2598 
+L 941 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-4b" d="M 941 0 
+L 461 0 
+L 461 4595 
+L 941 4595 
+L 941 3021 
+Q 1453 3264 1926 3264 
+Q 2566 3264 2787 2918 
+Q 3008 2573 3008 1690 
+L 3008 0 
+L 2528 0 
+L 2528 1677 
+Q 2528 2342 2397 2588 
+Q 2266 2835 1843 2835 
+Q 1440 2835 1062 2688 
+L 941 2643 
+L 941 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-58" d="M 2458 3200 
+L 2938 3200 
+L 2938 0 
+L 2458 0 
+L 2458 224 
+Q 1978 -64 1510 -64 
+Q 858 -64 643 275 
+Q 429 614 429 1530 
+L 429 3200 
+L 909 3200 
+L 909 1536 
+Q 909 838 1030 601 
+Q 1152 365 1581 365 
+Q 1792 365 2009 425 
+Q 2227 486 2342 544 
+L 2458 602 
+L 2458 3200 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-4a" d="M 1696 -1504 
+Q 928 -1504 624 -1296 
+Q 320 -1088 320 -538 
+Q 320 -275 435 -112 
+Q 550 51 826 256 
+Q 646 378 646 698 
+Q 646 806 806 1101 
+L 864 1203 
+Q 358 1434 358 2170 
+Q 358 3264 1555 3264 
+Q 1862 3264 2125 3200 
+L 2221 3181 
+L 3168 3206 
+L 3168 2797 
+L 2560 2810 
+Q 2771 2598 2771 2170 
+Q 2771 1568 2473 1328 
+Q 2176 1088 1536 1088 
+Q 1363 1088 1222 1114 
+Q 1107 832 1107 749 
+Q 1107 550 1228 502 
+Q 1350 454 1964 454 
+Q 2579 454 2848 262 
+Q 3117 70 3117 -486 
+Q 3117 -1504 1696 -1504 
+z
+M 794 -499 
+Q 794 -838 982 -969 
+Q 1171 -1101 1680 -1101 
+Q 2189 -1101 2409 -960 
+Q 2630 -819 2630 -489 
+Q 2630 -160 2470 -64 
+Q 2310 32 1843 32 
+L 1152 64 
+Q 941 -90 867 -205 
+Q 794 -320 794 -499 
+z
+M 838 2169 
+Q 838 1792 1008 1632 
+Q 1178 1472 1568 1472 
+Q 1958 1472 2124 1632 
+Q 2291 1792 2291 2173 
+Q 2291 2554 2124 2714 
+Q 1958 2874 1568 2874 
+Q 1178 2874 1008 2710 
+Q 838 2547 838 2169 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Regular-4f" d="M 499 0 
+L 499 4595 
+L 979 4595 
+L 979 0 
+L 499 0 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Regular-50"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(83.59375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(133.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(181.59375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(235.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(285.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4b" transform="translate(307.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(361.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(414.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(466.78125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(519.875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4a" transform="translate(573.578125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(624.984375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(675.078125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(728.78125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4d" transform="translate(750.78125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(772.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(823.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(846.28125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(896.375 0)"/>
+    </g>
+   </g>
+   <g id="text_5">
+    <!-- Model terhubung -->
+    <g style="fill: #20394f" transform="translate(411.711641 319.079273) scale(0.17 -0.17)">
+     <defs>
+      <path id="TitilliumWeb-Bold-30" d="M 474 0 
+L 474 4352 
+L 1978 4352 
+L 2746 1178 
+L 3514 4352 
+L 5018 4352 
+L 5018 0 
+L 4134 0 
+L 4134 3366 
+L 4038 3366 
+L 3187 192 
+L 2304 192 
+L 1453 3366 
+L 1357 3366 
+L 1357 0 
+L 474 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-4b" d="M 1254 0 
+L 397 0 
+L 397 4480 
+L 1254 4480 
+L 1254 3046 
+Q 1696 3277 2048 3277 
+Q 2688 3277 2931 2899 
+Q 3174 2522 3174 1734 
+L 3174 0 
+L 2317 0 
+L 2317 1715 
+Q 2317 2118 2221 2313 
+Q 2125 2509 1837 2509 
+Q 1587 2509 1338 2432 
+L 1254 2406 
+L 1254 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-58" d="M 2285 3200 
+L 3142 3200 
+L 3142 0 
+L 2291 0 
+L 2291 179 
+Q 1830 -77 1491 -77 
+Q 826 -77 595 291 
+Q 365 659 365 1523 
+L 365 3200 
+L 1222 3200 
+L 1222 1510 
+Q 1222 1037 1299 864 
+Q 1376 691 1670 691 
+Q 1952 691 2202 781 
+L 2285 806 
+L 2285 3200 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-51" d="M 1254 0 
+L 397 0 
+L 397 3200 
+L 1248 3200 
+L 1248 3021 
+Q 1683 3277 2048 3277 
+Q 2688 3277 2931 2899 
+Q 3174 2522 3174 1734 
+L 3174 0 
+L 2317 0 
+L 2317 1709 
+Q 2317 2118 2221 2313 
+Q 2125 2509 1837 2509 
+Q 1574 2509 1331 2419 
+L 1254 2394 
+L 1254 0 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-4a" d="M 3296 -400 
+Q 3296 -947 2873 -1209 
+Q 2451 -1472 1731 -1472 
+Q 1011 -1472 624 -1280 
+Q 237 -1088 237 -582 
+Q 237 -179 698 179 
+Q 461 339 461 666 
+Q 461 794 653 1088 
+L 710 1178 
+Q 275 1491 275 2102 
+Q 275 2714 643 2989 
+Q 1011 3264 1619 3264 
+Q 1894 3264 2163 3200 
+L 2266 3181 
+L 3296 3213 
+L 3296 2528 
+L 2816 2566 
+Q 2957 2349 2957 2131 
+Q 2957 1491 2630 1248 
+Q 2304 1005 1606 1005 
+Q 1459 1005 1344 1030 
+Q 1280 864 1280 758 
+Q 1280 653 1389 614 
+Q 1498 576 1901 570 
+Q 2707 563 3001 355 
+Q 3296 147 3296 -400 
+z
+M 1082 -493 
+Q 1082 -768 1757 -768 
+Q 2432 -768 2432 -448 
+Q 2432 -275 2317 -227 
+Q 2202 -179 1830 -173 
+L 1254 -128 
+Q 1082 -301 1082 -493 
+z
+M 1133 2128 
+Q 1133 1658 1622 1658 
+Q 2112 1658 2112 2128 
+Q 2112 2598 1622 2598 
+Q 1133 2598 1133 2128 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Bold-30"/>
+     <use xlink:href="#TitilliumWeb-Bold-52" transform="translate(85.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-47" transform="translate(138.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(193.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4f" transform="translate(244.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(271.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-57" transform="translate(293.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(329.71875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-55" transform="translate(380.71875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4b" transform="translate(417.921875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-58" transform="translate(473.21875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-45" transform="translate(528.515625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-58" transform="translate(582.921875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-51" transform="translate(638.21875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4a" transform="translate(693.515625 0)"/>
+    </g>
+   </g>
+   <g id="text_6">
+    <!-- bisnis, aplikasi, teknologi -->
+    <g style="fill: #455264" transform="translate(400.176094 342.033251) scale(0.145 -0.145)">
+     <defs>
+      <path id="TitilliumWeb-Regular-f" d="M 218 -787 
+L 512 685 
+L 1043 685 
+L 614 -787 
+L 218 -787 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Regular-45"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(52.59375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(74.5 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(121 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(174.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(196.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-f" transform="translate(243.109375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(265.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(287.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-53" transform="translate(337.5 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(390.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(413.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(435.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(482.8125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(532.90625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(579.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-f" transform="translate(601.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(623.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(645.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(680.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(731.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(779.109375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(832.8125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(885.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(908.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4a" transform="translate(961.5 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(1012.90625 0)"/>
+    </g>
+   </g>
+   <g id="text_7">
+    <!-- View direksi -->
+    <g style="fill: #20394f" transform="translate(89.113442 458.558371) scale(0.17 -0.17)">
+     <defs>
+      <path id="TitilliumWeb-Bold-39" d="M 2829 4352 
+L 3757 4352 
+L 2746 0 
+L 1114 0 
+L 102 4352 
+L 1030 4352 
+L 1786 768 
+L 2074 768 
+L 2829 4352 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-5a" d="M 154 3200 
+L 998 3200 
+L 1389 730 
+L 1542 730 
+L 2029 3136 
+L 2912 3136 
+L 3398 730 
+L 3552 730 
+L 3942 3200 
+L 4787 3200 
+L 4179 0 
+L 2835 0 
+L 2470 1958 
+L 2106 0 
+L 762 0 
+L 154 3200 
+z
+" transform="scale(0.015625)"/>
+      <path id="TitilliumWeb-Bold-4e" d="M 1254 0 
+L 397 0 
+L 397 4480 
+L 1254 4480 
+L 1254 1933 
+L 1581 1990 
+L 2214 3200 
+L 3174 3200 
+L 2342 1683 
+L 3219 0 
+L 2253 0 
+L 1606 1248 
+L 1254 1190 
+L 1254 0 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Bold-39"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(60.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(86.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-5a" transform="translate(137.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(214.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-47" transform="translate(236.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(291.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-55" transform="translate(317 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(354.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4e" transform="translate(405.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-56" transform="translate(456.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(503.90625 0)"/>
+    </g>
+   </g>
+   <g id="text_8">
+    <!-- tujuan dan kapabilitas -->
+    <g style="fill: #455264" transform="translate(67.48352 479.746841) scale(0.145 -0.145)">
+     <use xlink:href="#TitilliumWeb-Regular-57"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(35.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4d" transform="translate(88.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(110.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(163.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(213.28125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(266.984375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(288.984375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(341.890625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(391.984375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(445.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(467.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(515.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-53" transform="translate(565.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(618.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(668.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(720.78125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(742.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(765.78125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(787.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(822.78125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(872.875 0)"/>
+    </g>
+   </g>
+   <g id="text_9">
+    <!-- View pemilik layanan -->
+    <g style="fill: #20394f" transform="translate(397.248359 456.875636) scale(0.17 -0.17)">
+     <defs>
+      <path id="TitilliumWeb-Bold-5c" d="M 102 3200 
+L 947 3200 
+L 1530 730 
+L 1677 730 
+L 2259 3200 
+L 3104 3200 
+L 1978 -1344 
+L 1139 -1344 
+L 1491 0 
+L 890 0 
+L 102 3200 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Bold-39"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(60.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(86.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-5a" transform="translate(137.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(214.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-53" transform="translate(236.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(290.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-50" transform="translate(341.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(425.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4f" transform="translate(451.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(478.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4e" transform="translate(504.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(555.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4f" transform="translate(577.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(604.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-5c" transform="translate(655.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(704.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-51" transform="translate(755.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(810.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-51" transform="translate(861.78125 0)"/>
+    </g>
+   </g>
+   <g id="text_10">
+    <!-- aplikasi dan informasi -->
+    <g style="fill: #455264" transform="translate(409.08793 479.826138) scale(0.145 -0.145)">
+     <defs>
+      <path id="TitilliumWeb-Regular-49" d="M 1075 2784 
+L 1075 0 
+L 595 0 
+L 595 2784 
+L 192 2784 
+L 192 3200 
+L 595 3200 
+L 595 3488 
+Q 595 4166 787 4412 
+Q 979 4659 1459 4659 
+L 2106 4614 
+L 2099 4218 
+Q 1741 4230 1507 4230 
+Q 1274 4230 1174 4076 
+Q 1075 3923 1075 3482 
+L 1075 3200 
+L 2003 3200 
+L 2003 2784 
+L 1075 2784 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Regular-44"/>
+     <use xlink:href="#TitilliumWeb-Regular-53" transform="translate(50.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(102.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(125.890625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(147.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(195.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(245.5 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(292 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(313.90625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(335.90625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(388.8125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(438.90625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(492.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(514.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(536.515625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-49" transform="translate(590.21875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(622.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(675.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-50" transform="translate(709.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(793.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(843.484375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(889.984375 0)"/>
+    </g>
+   </g>
+   <g id="text_11">
+    <!-- View tim teknis -->
+    <g style="fill: #20394f" transform="translate(759.174996 458.558371) scale(0.17 -0.17)">
+     <use xlink:href="#TitilliumWeb-Bold-39"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(60.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(86.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-5a" transform="translate(137.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(214.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-57" transform="translate(236.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(272.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-50" transform="translate(298.5 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(382.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-57" transform="translate(404.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(440.8125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4e" transform="translate(491.8125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-51" transform="translate(543.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(598.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Bold-56" transform="translate(624.40625 0)"/>
+    </g>
+   </g>
+   <g id="text_12">
+    <!-- layanan dan teknologi -->
+    <g style="fill: #455264" transform="translate(749.737379 479.659614) scale(0.145 -0.145)">
+     <defs>
+      <path id="TitilliumWeb-Regular-5c" d="M 160 3200 
+L 640 3200 
+L 1440 416 
+L 1651 416 
+L 2458 3200 
+L 2938 3200 
+L 1606 -1421 
+L 1126 -1421 
+L 1542 0 
+L 1069 0 
+L 160 3200 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Regular-4f"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(23.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-5c" transform="translate(72.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(120.078125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(170.171875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(223.875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(273.96875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(327.671875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(349.671875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(402.578125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(452.671875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(506.375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(528.375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(563.46875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(613.96875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(661.875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(715.578125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(768.375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(791.46875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4a" transform="translate(844.265625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(895.671875 0)"/>
+    </g>
+   </g>
+   <g id="text_13">
+    <g id="patch_13">
+     <path d="M 257.102799 208.135602 
+L 352.235408 208.135602 
+L 352.235408 165.130398 
+L 257.102799 165.130398 
+z
+" style="fill: #ffffff; opacity: 0.97"/>
+    </g>
+    <!-- menghubungkan -->
+    <g style="fill: #35485c" transform="translate(258.281799 179.634644) scale(0.131 -0.131)">
+     <use xlink:href="#TitilliumWeb-Regular-50"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(83.59375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(134.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4a" transform="translate(187.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4b" transform="translate(239.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(292.90625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(346 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(398.59375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(451.6875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4a" transform="translate(505.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(556.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(604.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(654.5 0)"/>
+    </g>
+    <!-- objek -->
+    <g style="fill: #35485c" transform="translate(289.885549 200.037051) scale(0.131 -0.131)">
+     <use xlink:href="#TitilliumWeb-Regular-52"/>
+     <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(52.796875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4d" transform="translate(105.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(127.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(177.796875 0)"/>
+    </g>
+   </g>
+   <g id="text_14">
+    <g id="patch_14">
+     <path d="M 421.368211 266.786983 
+L 529.031789 266.786983 
+L 529.031789 244.105381 
+L 421.368211 244.105381 
+z
+" style="fill: #ffffff; opacity: 0.97"/>
+    </g>
+    <!-- menyusun struktur -->
+    <g style="fill: #35485c" transform="translate(422.547211 258.694572) scale(0.131 -0.131)">
+     <use xlink:href="#TitilliumWeb-Regular-50"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(83.59375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(134.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-5c" transform="translate(187.203125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(235.5 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(288.59375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(335.09375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(388.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(441.890625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(463.890625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(510.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(545.484375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(580.078125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(633.171875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(681.078125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(716.171875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(769.265625 0)"/>
+    </g>
+   </g>
+   <g id="text_15">
+    <g id="patch_15">
+     <path d="M 303.454828 395.238256 
+L 406.195672 395.238256 
+L 406.195672 372.556654 
+L 303.454828 372.556654 
+z
+" style="fill: #ffffff; opacity: 0.97"/>
+    </g>
+    <!-- pilih unsur relevan -->
+    <g style="fill: #35485c" transform="translate(304.633828 387.145845) scale(0.131 -0.131)">
+     <defs>
+      <path id="TitilliumWeb-Regular-59" d="M 160 3200 
+L 672 3200 
+L 1421 416 
+L 1658 416 
+L 2432 3200 
+L 2925 3200 
+L 2022 0 
+L 1062 0 
+L 160 3200 
+z
+" transform="scale(0.015625)"/>
+     </defs>
+     <use xlink:href="#TitilliumWeb-Regular-53"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(52.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(74.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(97.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4b" transform="translate(119.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(173.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(195.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(248.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(302.109375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(348.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(401.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(436.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(458.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(491.890625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(542.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(565.484375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-59" transform="translate(615.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(662.484375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(712.578125 0)"/>
+    </g>
+   </g>
+   <g id="text_16">
+    <g id="patch_16">
+     <path d="M 423.829578 404.413346 
+L 526.570422 404.413346 
+L 526.570422 381.731744 
+L 423.829578 381.731744 
+z
+" style="fill: #ffffff; opacity: 0.97"/>
+    </g>
+    <!-- pilih unsur relevan -->
+    <g style="fill: #35485c" transform="translate(425.008578 396.320936) scale(0.131 -0.131)">
+     <use xlink:href="#TitilliumWeb-Regular-53"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(52.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(74.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(97.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4b" transform="translate(119.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(173.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(195.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(248.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(302.109375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(348.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(401.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(436.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(458.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(491.890625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(542.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(565.484375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-59" transform="translate(615.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(662.484375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(712.578125 0)"/>
+    </g>
+   </g>
+   <g id="text_17">
+    <g id="patch_17">
+     <path d="M 544.204328 395.238256 
+L 646.945172 395.238256 
+L 646.945172 372.556654 
+L 544.204328 372.556654 
+z
+" style="fill: #ffffff; opacity: 0.97"/>
+    </g>
+    <!-- pilih unsur relevan -->
+    <g style="fill: #35485c" transform="translate(545.383328 387.145845) scale(0.131 -0.131)">
+     <use xlink:href="#TitilliumWeb-Regular-53"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(52.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(74.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(97.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4b" transform="translate(119.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(173.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(195.3125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(248.40625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(302.109375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(348.609375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(401.703125 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(436.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(458.296875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(491.890625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(542.390625 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(565.484375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-59" transform="translate(615.1875 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(662.484375 0)"/>
+     <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(712.578125 0)"/>
+    </g>
+   </g>
+  </g>
+  <g id="text_18">
+   <!-- IT40513  /  BAB 04  /  DIAGRAM KONSEP -->
+   <g style="fill: #316b4b" transform="translate(42.768 44.9952) scale(0.12 -0.12)">
+    <defs>
+     <path id="TitilliumWeb-Bold-2c" d="M 474 0 
+L 474 4352 
+L 1357 4352 
+L 1357 0 
+L 474 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-37" d="M 83 3571 
+L 83 4352 
+L 3283 4352 
+L 3283 3571 
+L 2131 3571 
+L 2131 0 
+L 1248 0 
+L 1248 3571 
+L 83 3571 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-17" d="M 2048 0 
+L 2048 698 
+L 256 698 
+L 256 1370 
+L 1299 4224 
+L 2272 4224 
+L 1139 1466 
+L 2048 1466 
+L 2048 2650 
+L 2931 2650 
+L 2931 1466 
+L 3334 1466 
+L 3334 698 
+L 2931 698 
+L 2931 0 
+L 2048 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-13" d="M 566 3776 
+Q 979 4301 1792 4301 
+Q 2605 4301 3017 3776 
+Q 3430 3251 3430 2089 
+Q 3430 928 3020 425 
+Q 2611 -77 1792 -77 
+Q 973 -77 563 425 
+Q 154 928 154 2089 
+Q 154 3251 566 3776 
+z
+M 2522 2108 
+Q 2522 2899 2355 3216 
+Q 2189 3533 1795 3533 
+Q 1402 3533 1232 3213 
+Q 1062 2893 1062 2105 
+Q 1062 1318 1235 1004 
+Q 1408 691 1798 691 
+Q 2189 691 2355 1004 
+Q 2522 1318 2522 2108 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-18" d="M 3136 4224 
+L 3136 3456 
+L 1248 3456 
+L 1139 2541 
+Q 1536 2694 1894 2694 
+Q 3264 2694 3264 1421 
+Q 3264 704 2886 313 
+Q 2509 -77 1818 -77 
+Q 1523 -77 1148 -19 
+Q 774 38 550 102 
+L 320 160 
+L 416 813 
+Q 1190 691 1709 691 
+Q 2022 691 2188 857 
+Q 2355 1024 2355 1334 
+Q 2355 1645 2214 1785 
+Q 2074 1926 1818 1926 
+Q 1389 1926 1062 1843 
+L 966 1818 
+L 442 1939 
+L 557 4224 
+L 3136 4224 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-14" d="M 2675 4224 
+L 2675 0 
+L 1792 0 
+L 1792 3226 
+L 877 2637 
+L 474 3296 
+L 1869 4224 
+L 2675 4224 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-16" d="M 397 4070 
+Q 986 4301 1712 4301 
+Q 2438 4301 2771 4022 
+Q 3104 3744 3104 3129 
+Q 3104 2515 2611 2189 
+Q 2918 2022 3049 1843 
+Q 3181 1664 3181 1274 
+Q 3181 589 2838 256 
+Q 2496 -77 1741 -77 
+Q 1184 -77 570 90 
+L 365 141 
+L 410 813 
+Q 1126 691 1613 691 
+Q 2272 691 2272 1254 
+Q 2272 1491 2102 1632 
+Q 1933 1773 1658 1773 
+L 806 1773 
+L 806 2502 
+L 1658 2502 
+Q 1869 2502 2032 2681 
+Q 2195 2861 2195 3078 
+Q 2195 3533 1562 3533 
+Q 1120 3533 621 3443 
+L 454 3418 
+L 397 4070 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-12" d="M 198 51 
+L 2042 4595 
+L 2797 4326 
+L 954 -218 
+L 198 51 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-25" d="M 474 4352 
+L 2182 4352 
+Q 2861 4352 3200 4080 
+Q 3539 3808 3539 3200 
+Q 3539 2835 3430 2620 
+Q 3322 2406 3059 2240 
+Q 3347 2118 3484 1888 
+Q 3622 1658 3622 1248 
+Q 3622 614 3251 307 
+Q 2880 0 2208 0 
+L 474 0 
+L 474 4352 
+z
+M 2163 1818 
+L 1357 1818 
+L 1357 755 
+L 2163 755 
+Q 2451 755 2588 870 
+Q 2726 986 2726 1293 
+Q 2726 1818 2163 1818 
+z
+M 2138 3597 
+L 1357 3597 
+L 1357 2560 
+L 2144 2560 
+Q 2643 2560 2643 3078 
+Q 2643 3597 2138 3597 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-24" d="M 109 0 
+L 1088 4352 
+L 2765 4352 
+L 3744 0 
+L 2861 0 
+L 2688 787 
+L 1165 787 
+L 992 0 
+L 109 0 
+z
+M 1773 3622 
+L 1331 1555 
+L 2522 1555 
+L 2080 3622 
+L 1773 3622 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-27" d="M 1939 0 
+L 474 0 
+L 474 4352 
+L 1939 4352 
+Q 2502 4352 2867 4233 
+Q 3232 4115 3433 3843 
+Q 3635 3571 3712 3203 
+Q 3789 2835 3789 2246 
+Q 3789 1658 3718 1270 
+Q 3648 883 3453 579 
+Q 3258 275 2886 137 
+Q 2515 0 1939 0 
+z
+M 2867 1728 
+Q 2880 1933 2880 2294 
+Q 2880 2656 2854 2873 
+Q 2829 3091 2733 3270 
+Q 2637 3450 2448 3517 
+Q 2259 3584 1939 3584 
+L 1357 3584 
+L 1357 768 
+L 1939 768 
+Q 2419 768 2637 1011 
+Q 2822 1210 2867 1728 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-2a" d="M 2285 1562 
+L 2285 2330 
+L 3552 2330 
+L 3552 70 
+Q 2637 -77 2067 -77 
+Q 1050 -77 669 467 
+Q 288 1011 288 2195 
+Q 288 3379 685 3904 
+Q 1082 4429 2035 4429 
+Q 2630 4429 3322 4294 
+L 3552 4250 
+L 3526 3565 
+Q 2758 3648 2268 3648 
+Q 1779 3648 1580 3533 
+Q 1382 3418 1289 3107 
+Q 1197 2797 1197 2045 
+Q 1197 1293 1382 992 
+Q 1568 691 2150 691 
+L 2682 717 
+L 2682 1562 
+L 2285 1562 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-2e" d="M 1357 0 
+L 474 0 
+L 474 4352 
+L 1357 4352 
+L 1357 2438 
+L 1946 2502 
+L 2662 4352 
+L 3667 4352 
+L 2720 2170 
+L 3693 0 
+L 2675 0 
+L 1946 1734 
+L 1357 1670 
+L 1357 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-32" d="M 1379 1027 
+Q 1568 691 2086 691 
+Q 2605 691 2793 1027 
+Q 2982 1363 2982 2153 
+Q 2982 2944 2790 3302 
+Q 2598 3661 2086 3661 
+Q 1574 3661 1382 3302 
+Q 1190 2944 1190 2153 
+Q 1190 1363 1379 1027 
+z
+M 3484 464 
+Q 3078 -77 2086 -77 
+Q 1094 -77 688 464 
+Q 282 1005 282 2157 
+Q 282 3309 688 3869 
+Q 1094 4429 2086 4429 
+Q 3078 4429 3484 3869 
+Q 3891 3309 3891 2157 
+Q 3891 1005 3484 464 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-31" d="M 474 0 
+L 474 4352 
+L 1965 4352 
+L 3014 768 
+L 3078 768 
+L 3078 4352 
+L 3962 4352 
+L 3962 0 
+L 2509 0 
+L 1421 3584 
+L 1357 3584 
+L 1357 0 
+L 474 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-36" d="M 1811 3661 
+Q 1114 3661 1114 3200 
+Q 1114 2995 1286 2886 
+Q 1459 2778 2096 2573 
+Q 2733 2368 2989 2109 
+Q 3245 1850 3245 1312 
+Q 3245 627 2829 275 
+Q 2413 -77 1741 -77 
+Q 1242 -77 518 77 
+L 288 122 
+L 378 806 
+Q 1235 691 1690 691 
+Q 2368 691 2368 1254 
+Q 2368 1459 2211 1574 
+Q 2054 1690 1587 1824 
+Q 845 2035 541 2326 
+Q 237 2618 237 3136 
+Q 237 3789 633 4109 
+Q 1030 4429 1722 4429 
+Q 2195 4429 2925 4301 
+L 3155 4256 
+L 3085 3558 
+Q 2182 3661 1811 3661 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-28" d="M 474 0 
+L 474 4352 
+L 3290 4352 
+L 3290 3584 
+L 1357 3584 
+L 1357 2566 
+L 2906 2566 
+L 2906 1811 
+L 1357 1811 
+L 1357 768 
+L 3290 768 
+L 3290 0 
+L 474 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Bold-33" d="M 2074 1267 
+L 1357 1267 
+L 1357 0 
+L 474 0 
+L 474 4352 
+L 2074 4352 
+Q 3622 4352 3622 2842 
+Q 3622 2080 3228 1673 
+Q 2835 1267 2074 1267 
+z
+M 1357 2022 
+L 2067 2022 
+Q 2726 2022 2726 2842 
+Q 2726 3245 2566 3421 
+Q 2406 3597 2067 3597 
+L 1357 3597 
+L 1357 2022 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#TitilliumWeb-Bold-2c"/>
+    <use xlink:href="#TitilliumWeb-Bold-37" transform="translate(28.59375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-17" transform="translate(81.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-13" transform="translate(137.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-18" transform="translate(193.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-14" transform="translate(249.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-16" transform="translate(305.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(361.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(383.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-12" transform="translate(405.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(451.78125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(473.78125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-25" transform="translate(495.78125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-24" transform="translate(555.890625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-25" transform="translate(616.09375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(677 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-13" transform="translate(699 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-17" transform="translate(755 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(811 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(833 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-12" transform="translate(855 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(901.59375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(923.59375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-27" transform="translate(945.59375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-2c" transform="translate(1009.390625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-24" transform="translate(1037.984375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-2a" transform="translate(1097.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-35" transform="translate(1158.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-24" transform="translate(1219.484375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-30" transform="translate(1279.6875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(1365.484375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-2e" transform="translate(1387.484375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-32" transform="translate(1446.078125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-31" transform="translate(1511.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-36" transform="translate(1580.578125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-28" transform="translate(1634.984375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-33" transform="translate(1690.390625 0)"/>
+   </g>
+  </g>
+  <g id="text_19">
+   <!-- Satu model bersama menghasilkan beberapa view -->
+   <g style="fill: #20394f" transform="translate(42.768 82.7466) scale(0.21 -0.21)">
+    <defs>
+     <path id="TitilliumWeb-Bold-59" d="M 96 3200 
+L 992 3200 
+L 1504 730 
+L 1683 730 
+L 2221 3200 
+L 3091 3200 
+L 2323 0 
+L 864 0 
+L 96 3200 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#TitilliumWeb-Bold-36"/>
+    <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(54.40625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-57" transform="translate(105.5 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-58" transform="translate(141.90625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(197.203125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-50" transform="translate(219.203125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-52" transform="translate(303.109375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-47" transform="translate(356.3125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(411.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-4f" transform="translate(462.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(489.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-45" transform="translate(511.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(565.625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-55" transform="translate(616.625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-56" transform="translate(653.828125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(701.03125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-50" transform="translate(752.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(836.03125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(887.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-50" transform="translate(909.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(993.03125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-51" transform="translate(1044.03125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-4a" transform="translate(1099.328125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-4b" transform="translate(1152.734375 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(1208.03125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-56" transform="translate(1259.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(1306.328125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-4f" transform="translate(1332.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-4e" transform="translate(1359.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(1410.625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-51" transform="translate(1461.71875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(1517.015625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-45" transform="translate(1539.015625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(1593.421875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-45" transform="translate(1644.421875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(1698.828125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-55" transform="translate(1749.828125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(1787.03125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-53" transform="translate(1838.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-44" transform="translate(1892.53125 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-3" transform="translate(1943.625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-59" transform="translate(1965.625 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-4c" transform="translate(2015.421875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-48" transform="translate(2041.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Bold-5a" transform="translate(2092.21875 0)"/>
+   </g>
+  </g>
+  <g id="text_20">
+   <!-- View tidak menjadi salinan model yang berdiri sendiri. Gambar ini memakai kotak generik, bukan notasi formal ArchiMate. -->
+   <g style="fill: #455264" transform="translate(42.768 598.042916) scale(0.134 -0.134)">
+    <defs>
+     <path id="TitilliumWeb-Regular-39" d="M 3059 4429 
+L 3571 4429 
+L 2413 0 
+L 1312 0 
+L 154 4429 
+L 666 4429 
+L 1683 435 
+L 2042 435 
+L 3059 4429 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Regular-5a" d="M 198 3200 
+L 678 3200 
+L 1325 416 
+L 1427 416 
+L 2189 3136 
+L 2688 3136 
+L 3450 416 
+L 3558 416 
+L 4198 3200 
+L 4678 3200 
+L 3917 0 
+L 3117 0 
+L 2438 2502 
+L 1760 0 
+L 960 0 
+L 198 3200 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Regular-11" d="M 429 0 
+L 429 730 
+L 954 730 
+L 954 0 
+L 429 0 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Regular-2a" d="M 2298 1824 
+L 2298 2266 
+L 3520 2266 
+L 3520 90 
+Q 2714 -64 2080 -64 
+Q 1114 -64 739 493 
+Q 365 1050 365 2211 
+Q 365 3373 739 3933 
+Q 1114 4493 2067 4493 
+Q 2662 4493 3302 4365 
+L 3520 4326 
+L 3501 3917 
+Q 2707 4051 2125 4051 
+Q 1389 4051 1133 3625 
+Q 877 3200 877 2211 
+Q 877 1222 1133 796 
+Q 1389 371 2118 371 
+Q 2566 371 3034 461 
+L 3034 1824 
+L 2298 1824 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Regular-24" d="M 154 0 
+L 1370 4429 
+L 2445 4429 
+L 3661 0 
+L 3174 0 
+L 2854 1139 
+L 960 1139 
+L 640 0 
+L 154 0 
+z
+M 1741 4006 
+L 1069 1581 
+L 2746 1581 
+L 2074 4006 
+L 1741 4006 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Regular-46" d="M 1658 3264 
+Q 1869 3264 2374 3187 
+L 2528 3168 
+L 2509 2778 
+Q 1997 2835 1754 2835 
+Q 1210 2835 1014 2576 
+Q 819 2317 819 1616 
+Q 819 915 1001 640 
+Q 1184 365 1760 365 
+L 2515 422 
+L 2534 26 
+Q 1939 -64 1645 -64 
+Q 896 -64 611 320 
+Q 326 704 326 1616 
+Q 326 2528 633 2896 
+Q 941 3264 1658 3264 
+z
+" transform="scale(0.015625)"/>
+     <path id="TitilliumWeb-Regular-30" d="M 544 0 
+L 544 4429 
+L 1434 4429 
+L 2688 685 
+L 3942 4429 
+L 4832 4429 
+L 4832 0 
+L 4339 0 
+L 4339 3904 
+L 4250 3904 
+L 2963 160 
+L 2413 160 
+L 1126 3904 
+L 1037 3904 
+L 1037 0 
+L 544 0 
+z
+" transform="scale(0.015625)"/>
+    </defs>
+    <use xlink:href="#TitilliumWeb-Regular-39"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(58.203125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(80.109375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-5a" transform="translate(130.109375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(206.3125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(228.3125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(263.40625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(285.3125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(338.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(388.3125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(436.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-50" transform="translate(458.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(541.8125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(592.3125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4d" transform="translate(646.015625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(667.921875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(718.015625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(770.921875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(792.828125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(814.828125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(861.328125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(911.421875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(934.515625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(956.421875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(1010.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(1060.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(1113.921875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-50" transform="translate(1135.921875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(1219.515625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(1272.3125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(1325.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(1375.71875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(1398.8125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-5c" transform="translate(1420.8125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(1468.203125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(1518.296875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4a" transform="translate(1572 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(1623.40625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(1645.40625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(1698 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(1748.5 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(1781.796875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(1834.703125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(1856.609375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(1891.203125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(1913.109375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(1935.109375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(1981.609375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(2032.109375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-47" transform="translate(2085.8125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(2138.71875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(2160.625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(2195.21875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-11" transform="translate(2217.125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(2238.71875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-2a" transform="translate(2260.71875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(2322.3125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-50" transform="translate(2372.40625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(2456 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(2508.59375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(2558.6875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(2593.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(2615.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(2637.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(2690.890625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(2712.796875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-50" transform="translate(2734.796875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(2818.390625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-50" transform="translate(2868.890625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(2952.484375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(3002.578125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(3050.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(3100.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(3122.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(3144.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(3190.796875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(3243.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(3278.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(3328.375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(3376.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4a" transform="translate(3398.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(3449.6875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(3500.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(3553.890625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(3604.390625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(3638.984375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(3660.890625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-f" transform="translate(3708.796875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(3731.09375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-45" transform="translate(3753.09375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-58" transform="translate(3805.6875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4e" transform="translate(3858.78125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(3906.390625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(3956.484375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(4010.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-51" transform="translate(4032.1875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(4085.890625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(4138.28125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(4173.375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-56" transform="translate(4223.46875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(4269.96875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(4291.875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-49" transform="translate(4313.875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-52" transform="translate(4346.0625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(4398.859375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-50" transform="translate(4433.453125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(4517.046875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4f" transform="translate(4567.140625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-3" transform="translate(4590.234375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-24" transform="translate(4612.234375 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-55" transform="translate(4671.828125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-46" transform="translate(4705.421875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4b" transform="translate(4749.015625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-4c" transform="translate(4802.71875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-30" transform="translate(4824.625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-44" transform="translate(4908.625 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-57" transform="translate(4958.71875 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-48" transform="translate(4993.8125 0)"/>
+    <use xlink:href="#TitilliumWeb-Regular-11" transform="translate(5044.3125 0)"/>
+   </g>
+  </g>
+ </g>
+ <defs>
+  <clipPath id="p5b237e82ef">
+   <rect x="17.1072" y="102.528" width="916.1856" height="448.56"/>
+  </clipPath>
+ </defs>
+</svg>

@@ -1,0 +1,30 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  judul/.style={font=\scriptsize\bfseries, anchor=north west},
+  isi/.style={font=\scriptsize, anchor=north west, align=left, text width=4.6cm},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Empat kuadran: sumbu x kepentingan, sumbu y kekuasaan.
+  \draw[fill=blue!8] (0,3.1) rectangle (5.2,6.2);
+  \draw[fill=orange!12] (5.2,3.1) rectangle (10.4,6.2);
+  \draw[fill=white] (0,0) rectangle (5.2,3.1);
+  \draw[fill=blue!8] (5.2,0) rectangle (10.4,3.1);
+
+  \node[judul] at (0.15,6.05) {Jaga kepuasannya {\tiny\mdseries(\textit{keep satisfied})}};
+  \node[isi] at (0.15,5.55) {Dewan Komisaris\\Kementerian Kesehatan\\BPJS Kesehatan};
+
+  \node[judul] at (5.35,6.05) {Pemain kunci {\tiny\mdseries(\textit{key players})}};
+  \node[isi] at (5.35,5.55) {Direksi dan Direktur Keuangan\\Kepala TI\\Kepala lima rumah sakit\\Komite medik};
+
+  \node[judul] at (0.15,2.95) {Pantau seperlunya {\tiny\mdseries(\textit{minimal effort})}};
+  \node[isi] at (0.15,2.45) {Calon mitra ekosistem\\Perusahaan klien layanan\\kesehatan karyawan};
+
+  \node[judul] at (5.35,2.95) {Beri informasi rutin {\tiny\mdseries(\textit{keep informed})}};
+  \node[isi] at (5.35,2.45) {Dokter dan perawat\\Petugas pendaftaran\\Pasien pengguna Medikara+\\Vendor SIMRS dan Medikara+};
+
+  % Sumbu.
+  \draw[panah] (0,-0.25) -- (10.4,-0.25);
+  \node[font=\tiny, anchor=north] at (5.2,-0.3) {kepentingan atas cetak biru: rendah ke tinggi};
+  \draw[panah] (-0.25,0) -- (-0.25,6.2);
+  \node[font=\tiny, anchor=south, rotate=90] at (-0.3,3.1) {kekuasaan atas keputusan: rendah ke tinggi};
+\end{tikzpicture}

@@ -1,0 +1,11 @@
+# Ekspor sintetis model target Medikara dari Bab 8 sampai Bab 10. Pakai bersama bandingkan-model.py; hapus baris ini saat impor spreadsheet.
+id,nama,jenis
+CAP-L01,Pendaftaran Pasien Lintas Fasilitas,kapabilitas
+CAP-T01,Pengelolaan Identitas Pasien Terpadu,kapabilitas
+APP-07,ERP keuangan,aplikasi
+APP-08,Medikara+,aplikasi
+APP-T01,SIMRS terpadu,aplikasi
+APP-T02,MPI,aplikasi
+APP-T03,Platform integrasi,aplikasi
+APP-T04,Platform data,aplikasi
+APP-T05,Akses terpusat,aplikasi

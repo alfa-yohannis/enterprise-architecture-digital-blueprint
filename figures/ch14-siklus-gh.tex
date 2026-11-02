@@ -1,0 +1,41 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.95cm, text width=2.8cm,
+                align=center, font=\scriptsize\bfseries},
+  kecil/.style={draw, rounded corners, minimum height=0.7cm, text width=2.8cm,
+                align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=blue!8] (ef) at (0,0)
+    {Fase E dan F\\{\tiny\mdseries peta jalan dan rencana migrasi}};
+  \node[kotak, fill=orange!12] (g) at (4.3,0)
+    {Fase G\\{\tiny\mdseries tata kelola implementasi: kontrak arsitektur dan tinjauan
+    kepatuhan}};
+  \node[kotak, fill=green!10] (hasil) at (8.6,0)
+    {Solusi berjalan\\{\tiny\mdseries sesuai arsitektur target}};
+  \node[kotak, fill=orange!12] (h) at (4.3,-3.0)
+    {Fase H\\{\tiny\mdseries manajemen perubahan arsitektur}};
+  \node[kotak, fill=praditagreen!15] (req) at (0,-3.0)
+    {Requirements Management\\{\tiny\mdseries kebutuhan dicatat dan ditelusuri
+    sepanjang siklus}};
+  \node[kecil, fill=blue!8] (sederhana) at (8.6,-1.7)
+    {Penyederhanaan\\{\tiny\mdseries manajemen perubahan biasa}};
+  \node[kecil, fill=blue!8] (inkremental) at (8.6,-3.0)
+    {Inkremental\\{\tiny\mdseries arsitektur diperbarui sebagian}};
+  \node[kecil, fill=red!22] (ulang) at (8.6,-4.3)
+    {Arsitektur ulang\\{\tiny\mdseries siklus ADM baru dari Fase A}};
+
+  \draw[panah] (ef) -- (g);
+  \draw[panah] (g) -- (hasil);
+  \draw[panah] (g) -- (h);
+  \draw[panah] (h.east) -- ++(0.55,0) |- (sederhana.west);
+  \draw[panah] (h.east) -- (inkremental.west);
+  \draw[panah] (h.east) -- ++(0.55,0) |- (ulang.west);
+  \draw[dashed, thick, gray] (req) -- (h);
+  \draw[dashed, thick, gray] (req) -- (ef);
+  \draw[dashed, thick, gray] (req.north east) -- (g.south west);
+
+  \node[font=\tiny, gray, anchor=west] at (4.4,-1.5) {permintaan perubahan};
+  \node[font=\tiny, gray, align=center, anchor=north] at (4.3,-3.7)
+    {pemicu: proyek, strategi bisnis,\\teknologi baru, dan regulasi};
+\end{tikzpicture}

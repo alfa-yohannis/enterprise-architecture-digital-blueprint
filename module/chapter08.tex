@@ -1,80 +1,1109 @@
+% !TeX root = enterprise-architecture-digital-blueprint.tex
+% !TeX encoding = UTF-8
 \chapter{Arsitektur Bisnis Target untuk Transformasi Digital}
+\label{ch:ch08-arsitektur-bisnis-target}
 
 \section*{Tujuan Pembelajaran}
 \begin{itemize}
   \item Menganalisis pilihan transformasi digital memakai kerangka \textit{Designed for Digital}.
-  \item Merumuskan model operasi target dan kapabilitas yang perlu dibangun, diperkuat, atau dihentikan.
+  \item Merumuskan model operasi target dan kapabilitas yang perlu dibangun, diperkuat, atau
+        dihentikan.
   \item Merancang \textit{value stream} target beserta ukuran keberhasilannya.
 \end{itemize}
 
 \section{Pendahuluan}
 
-% TODO
-% Cakupan: transformasi digital yang dimulai dari membeli teknologi tanpa mengubah cara kerja,
-%   sehingga sistem baru hanya memindahkan masalah lama ke layar baru.
+Banyak program transformasi digital dimulai dari daftar belanja: aplikasi seluler, sistem
+baru, dan langganan \textit{cloud}. Teknologinya terpasang, tetapi cara kerja organisasi
+tidak berubah. Formulir kertas berpindah ke layar, antrean di loket berpindah ke antrean di
+aplikasi, dan data yang dulu tersebar di lemari arsip kini tersebar di beberapa basis data.
+Masalah lamanya ikut pindah. Yang baru hanya tampilannya.
+
+Medikara Health mengalami hal itu. Aplikasi Medikara+ dibeli dari vendor agar pasien dapat
+membuat janji temu dan berkonsultasi jarak jauh. Pasien memang dapat memesan dari rumah.
+Namun ketika tiba di rumah sakit Medikara yang belum pernah dikunjunginya, pasien tetap
+mengisi formulir identitas di loket. Tiap rumah sakit memberi nomor rekam medis sendiri,
+dan Sistem Informasi Manajemen Rumah Sakit (SIMRS) di kelima rumah sakit tidak saling
+mengenal pasiennya. Aplikasi baru mempercepat satu tahap, lalu menabrak tembok yang sama di
+tahap berikutnya. Tembok itu bukan masalah aplikasi, melainkan masalah arsitektur bisnis:
+siapa memiliki identitas pasien, proses mana yang harus seragam, dan kapabilitas apa yang
+belum dimiliki organisasi.
+
+Bab ini membuka Bagian III, yaitu merancang kondisi target. Bab 5 sudah memotret arsitektur
+bisnis saat ini lewat \textit{capability map}, \textit{value stream}, dan \textit{heatmap}.
+Bab ini menjawab pertanyaan berikutnya: arsitektur bisnis seperti apa yang dituju, dan
+mengapa yang itu. Pembahasan dimulai dari pembedaan digitisasi, digitalisasi, dan
+transformasi digital \cite{c08-verhoef2021}, lalu lima blok bangunan dari \textit{Designed
+for Digital} \cite{ross2019}. Sesudahnya bab ini membahas model operasi target
+\cite{ross2006}, penyusunan opsi kondisi target dengan teknik \textit{business scenario}
+dalam fase B \textit{Architecture Development Method} (ADM) milik The Open Group
+Architecture Framework (TOGAF) \cite{togaf10,c08-togaf-g176}, peta perubahan kapabilitas
+\cite{c08-togaf-g211,bizbok15}, dan \textit{value stream} target \cite{c08-togaf-g178}.
+
+\IfFileExists{../figures/ch08-diagram-konsep.png}{%
+
+Gambar \ref{fig:ch08-ilustrasi-bab} merangkum hubungan komponen dan konsep utama bab ini.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{../figures/ch08-diagram-konsep.png}
+  \caption{Target bisnis menyatukan backbone dan platform digital}
+  \label{fig:ch08-ilustrasi-bab}
+\end{figure}
+}{}
 
 \section{Transformasi Digital dari Sudut Pandang Arsitektur}
 
-% TODO
-% Cakupan: beda digitisasi, digitalisasi, dan transformasi digital; lima blok bangunan Designed for
-%   Digital (shared customer insights, operational backbone, digital platform, accountability
-%   framework, external developer platform); beda operational backbone dan digital platform.
-% Kasus Medikara: Medikara+ sebagai calon platform digital dan kebutuhan backbone yang rapi lebih
-%   dahulu.
+Istilah transformasi digital dipakai untuk hampir semua proyek yang menyentuh teknologi:
+pemindaian berkas, aplikasi pendaftaran, sampai perubahan model bisnis. Akibatnya direksi
+menyetujui anggaran untuk satu hal, tetapi membayangkan hasil dari hal lain. Arsitek perlu
+membereskan istilah ini sebelum merancang apa pun.
+
+\subsection*{Digitisasi, digitalisasi, dan transformasi digital}
+
+Verhoef dan rekan-rekannya membedakan tiga fase perubahan digital \cite{c08-verhoef2021}.
+Digitisasi adalah mengubah informasi analog menjadi format digital agar dapat disimpan,
+diolah, dan dikirim oleh komputer, misalnya formulir kertas yang dipindahkan ke formulir
+digital. Digitisasi tidak mengubah cara organisasi menciptakan nilai. Digitalisasi adalah
+memakai teknologi informasi untuk mengubah proses bisnis yang sudah ada, misalnya membuka
+saluran daring baru bagi pelanggan. Hasilnya bukan hanya penghematan biaya, tetapi juga
+pengalaman pelanggan yang lebih baik. Transformasi digital adalah perubahan menyeluruh di
+tingkat perusahaan yang melahirkan model bisnis baru, yaitu cara baru menciptakan dan
+menangkap nilai. Kajian yang sama mencatat bahwa sebagian besar literatur menganggap dua
+fase pertama perlu dilalui sebelum fase ketiga tercapai.
+
+Analoginya seperti warung kelontong. Pemilik yang memotret buku utang pelanggan lalu
+menyimpannya di ponsel sedang melakukan digitisasi: catatannya sama, hanya medianya yang
+berubah. Pemilik yang menerima pesanan lewat pesan singkat dan pembayaran kode QR sedang
+melakukan digitalisasi: proses jual belinya berubah, tetapi warungnya tetap menjual barang
+dan mengambil selisih harga. Pemilik yang menjadikan warungnya titik ambil pesanan bagi
+beberapa aplikasi belanja, lalu memperoleh komisi dari tiap paket, sedang melakukan
+transformasi digital: sumber pendapatannya berubah.
+
+Dua contoh dari Medikara:
+
+\begin{enumerate}
+  \item Misalkan rumah sakit Medikara di Bogor memindai sekitar 300.000 berkas rekam medis
+        kertas lama dalam delapan bulan. Berkas kini dapat dibuka di layar, tetapi isinya
+        berupa gambar halaman. Dokter tetap membaca halaman demi halaman, dan rumah sakit
+        lain tidak dapat memakai isinya. Ini digitisasi: informasinya berpindah media, cara
+        kerjanya tetap.
+  \item Medikara+ memindahkan pemesanan janji temu ke aplikasi. Misalkan 28 persen
+        kunjungan kini dipesan daring. Prosesnya berubah, tetapi cara Medikara
+        menciptakan nilai tetap sama: pasien datang, diperiksa, lalu membayar per kunjungan.
+        Ini digitalisasi. Transformasi digital baru terjadi bila Medikara, misalnya, menjual
+        paket layanan kesehatan karyawan kepada perusahaan dengan pembayaran bulanan, dilayani
+        bersama klinik mitra, laboratorium, dan apotek daring, dengan satu rekam medis untuk
+        tiap karyawan.
+\end{enumerate}
+
+Tabel \ref{tab:ch08-tiga-istilah} merangkum ketiga fase itu beserta domain arsitektur yang
+paling terdampak.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Tiga fase perubahan digital dan domain arsitektur yang paling terdampak}
+  \label{tab:ch08-tiga-istilah}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.0cm}>{\raggedright\arraybackslash}p{2.5cm}>{\raggedright\arraybackslash}p{2.7cm}>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Fase} & \textbf{Yang berubah} & \textbf{Domain terdampak} &
+      \textbf{Contoh Medikara} \\
+    \hline
+    Digitisasi & Media informasi & Data & Pemindaian berkas rekam medis lama \\
+    \hline
+    Digitalisasi & Proses yang sudah ada & Proses bisnis dan aplikasi & Pemesanan janji
+      temu lewat Medikara+ \\
+    \hline
+    Trans\-for\-masi digital & Model bisnis & Seluruh domain, dimulai dari strategi & Paket
+      kesehatan karyawan bersama mitra, dibayar bulanan \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Pembedaan ini punya dua konsekuensi bagi arsitek. Pertama, program yang disebut
+transformasi digital tetapi isinya digitisasi tidak membutuhkan arsitektur bisnis target
+yang baru. Program itu cukup dikelola sebagai proyek data yang baik. Kedua, program
+transformasi digital yang dianggarkan sebagai proyek aplikasi akan kehilangan bagian
+terpentingnya, yaitu perubahan model operasi, kapabilitas, dan tanggung jawab. Bagian
+berikutnya memberi kerangka untuk membicarakan perubahan itu secara utuh.
+
+\subsection*{Lima blok bangunan Designed for Digital}
+
+Ross, Beath, dan Mocker meneliti perusahaan besar yang sudah mapan dan berusaha bersaing di
+era digital \cite{ross2019}. Kesimpulan mereka: perusahaan seperti itu harus dirancang
+ulang, bukan sekadar membeli teknologi. Rancangannya tersusun dari lima blok bangunan:
+
+\begin{itemize}
+  \item \textit{Shared customer insights}, yaitu pengetahuan bersama di dalam organisasi
+        tentang apa yang benar-benar dibutuhkan pelanggan, apa yang bersedia mereka bayar,
+        dan bagaimana teknologi digital dapat memenuhinya. Pengetahuan ini diperoleh lewat
+        percobaan yang diukur, bukan lewat dugaan.
+  \item \textit{Operational backbone}, yaitu sistem, data, dan proses yang terpadu dan
+        mendukung operasi inti. Blok ini memberi keandalan dan efisiensi.
+  \item \textit{Digital platform}, yaitu kumpulan komponen bisnis, data, dan infrastruktur
+        yang dapat dipakai ulang untuk merakit tawaran digital dengan cepat.
+  \item \textit{Accountability framework}, yaitu pembagian tanggung jawab atas tawaran
+        digital dan komponennya. Pembagian ini menyeimbangkan keleluasaan tim dengan
+        keselarasan organisasi.
+  \item \textit{External developer platform}, yaitu kumpulan komponen digital yang dibuka
+        bagi pihak luar, sehingga mitra dapat membangun tawaran di atasnya.
+\end{itemize}
+
+Gambar \ref{fig:ch08-lima-blok} memperlihatkan hubungan kelima blok tersebut.
+\textit{Accountability framework} digambar membentang di samping karena berlaku untuk semua
+blok lain.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch08-lima-blok.tex}
+  \caption{Lima blok bangunan \textit{Designed for Digital}. \textit{Digital platform}
+           memakai data dan proses dari \textit{operational backbone}, dan sebagian
+           komponennya dibuka bagi mitra}
+  \label{fig:ch08-lima-blok}
+\end{figure}
+
+Analoginya seperti rumah makan dengan banyak cabang. Dapur pusat dengan resep baku dan stok
+bahan yang tercatat rapi adalah \textit{operational backbone}. Bumbu dasar dan bahan
+setengah jadi yang dapat dipakai ulang untuk menu baru adalah \textit{digital platform}.
+Catatan tentang menu yang laku dan permintaan tamu adalah \textit{shared customer insights}.
+Daftar siapa yang bertanggung jawab atas tiap menu dan tiap bumbu dasar adalah
+\textit{accountability framework}. Bumbu dasar yang dijual kepada usaha katering mitra
+adalah \textit{external developer platform}. Menu baru dapat diluncurkan dalam seminggu
+hanya bila dapur pusat dan bumbu dasarnya sudah tertata.
+
+Dua contoh dari Medikara:
+
+\begin{enumerate}
+  \item Misalkan Medikara menambah fitur pemesanan pemeriksaan laboratorium di Medikara+.
+        Bila komponen jadwal, identitas pasien, dan pembayaran sudah tersedia di
+        \textit{digital platform}, fitur itu dirakit dalam enam minggu. Bila belum, vendor
+        harus membangun sambungan baru ke laboratorium dan kelima SIMRS selama enam bulan.
+  \item Misalkan 40 klinik mitra ingin membaca hasil laboratorium pasien rujukannya. Tanpa
+        \textit{external developer platform}, Medikara memelihara 40 sambungan khusus.
+        Dengan komponen yang dibuka secara baku, seluruh klinik memakai pintu yang sama.
+\end{enumerate}
+
+\subsection*{Operational backbone dan digital platform sering tertukar}
+
+Dua hal pada kerangka ini sering tertukar, yaitu \textit{operational backbone} dan
+\textit{digital platform}. Keduanya berisi sistem dan data, dan keduanya dibangun tim
+teknologi, sehingga mudah dianggap satu hal. Pembagiannya begini. \textit{Operational
+backbone} menjawab pertanyaan apakah operasi inti berjalan andal dan efisien.
+\textit{Digital platform} menjawab pertanyaan seberapa cepat tawaran digital baru dapat
+dirakit. Tabel \ref{tab:ch08-backbone-platform} merinci perbedaannya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Perbedaan \textit{operational backbone} dan \textit{digital platform}}
+  \label{tab:ch08-backbone-platform}
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Aspek} & \textbf{Operational backbone} & \textbf{Digital platform} \\
+    \hline
+    Pertanyaan & Apakah operasi inti berjalan andal dan efisien? &
+      Seberapa cepat tawaran digital baru dapat dirakit? \\
+    \hline
+    Isi & Sistem transaksi, data induk, dan proses inti & Komponen yang dipakai ulang,
+      misalnya jadwal, notifikasi, dan telekonsultasi \\
+    \hline
+    Ukuran & Ketepatan data, keandalan, biaya per transaksi & Waktu dari gagasan sampai
+      peluncuran, tingkat pemakaian ulang komponen \\
+    \hline
+    Laju perubahan & Lambat dan terencana & Cepat dan sering, lewat percobaan \\
+    \hline
+    Contoh Medikara & SIMRS, \textit{Enterprise Resource Planning} (ERP) keuangan,
+      identitas pasien tunggal, integrasi klaim Badan Penyelenggara Jaminan Sosial (BPJS)
+      Kesehatan & Komponen di balik Medikara+ yang dapat dipakai fitur lain dan mitra \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Pemisahan kedua blok ini punya dua konsekuensi.
+Pertama, urutannya tidak dapat dibalik. \textit{Digital platform} mengambil data dari
+\textit{operational backbone}, sehingga platform yang dibangun di atas data pasien yang
+kacau hanya menyebarkan kekacauan itu ke lebih banyak layar. Kedua, cara mengelola keduanya
+berbeda. \textit{Operational backbone} cocok dibangun sebagai program bertahun-tahun dengan
+standar yang ketat. \textit{Digital platform} cocok dikelola tim produk yang mencoba,
+mengukur, dan memperbaiki dalam hitungan minggu.
+
+\begin{kasus}[title={Kasus Medikara Health: Medikara+ sebagai Calon Platform Digital},
+              parbox=false]
+  Medikara+ adalah tawaran digital, bukan platform. Platformnya adalah komponen di balik
+  aplikasi itu: jadwal dokter, identitas pasien, telekonsultasi, dan notifikasi. Saat ini
+  komponen tersebut milik vendor dan hanya dapat dipakai Medikara+. Data identitas pasien
+  di Medikara+ bahkan menjadi salinan keenam, di samping lima salinan di kelima SIMRS.
+
+  Misalkan direksi meminta Medikara+ segera dibuka bagi klinik mitra dan perusahaan
+  pelanggan. Bila permintaan itu dituruti sekarang, mitra akan menerima enam versi
+  identitas pasien yang tidak selalu cocok. Karena itu arsitektur bisnis target menetapkan
+  urutan berikut. Pertama, \textit{operational backbone} dirapikan: identitas pasien
+  tunggal lewat \textit{Master Patient Index} (MPI), proses pendaftaran yang baku, dan
+  kontrol akses yang menjawab temuan audit internal. Kedua, komponen di balik Medikara+
+  dipisahkan menjadi \textit{digital platform} yang dapat dipakai fitur lain. Ketiga,
+  sebagian komponen dibuka bagi mitra sebagai \textit{external developer platform}.
+  Rancangan produk API (\textit{Application Programming Interface}) untuk tahap ketiga
+  dibahas rinci di IT40613.
+
+  Dua blok lain juga belum ada. Tidak ada pemilik tunggal Medikara+: bagian pemasaran
+  membelinya, bagian teknologi informasi (TI) memeliharanya, dan vendor mengubahnya. Data
+  pemakaian aplikasi dan keluhan pasien juga belum pernah dianalisis bersama. Kedua
+  kekosongan ini muncul kembali sebagai kapabilitas baru pada peta kapabilitas target.
+\end{kasus}
 
 \section{Model Operasi Target}
 
-% TODO
-% Cakupan: pergeseran model operasi dari kondisi saat ini; standardisasi versus keleluasaan lokal;
-%   dampak pada struktur organisasi, data bersama, dan aplikasi bersama.
+Pertanyaan kemudian muncul: sebelum memilih sistem apa pun, seberapa seragam proses di
+kelima rumah sakit harus dibuat, dan data apa yang harus dipakai bersama? Jawabannya adalah
+model operasi target.
+
+Bab 3 sudah memperkenalkan model operasi menurut Ross, Weill, dan Robertson
+\cite{ross2006}. Model operasi ditentukan dua hal. Integrasi proses bisnis menyatakan
+seberapa banyak data dipakai bersama antarunit. Standardisasi proses bisnis menyatakan
+seberapa seragam proses dijalankan antarunit. Kombinasi keduanya menghasilkan empat model:
+diversifikasi, koordinasi, replikasi, dan unifikasi. Model operasi target adalah posisi
+yang dituju, dan jarak dari posisi saat ini menentukan besarnya perubahan. Gambar
+\ref{fig:ch08-model-operasi} memperlihatkan pergeseran yang dituju Medikara.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch08-model-operasi.tex}
+  \caption{Pergeseran model operasi Medikara dari kondisi saat ini (S) ke target 2030 (T),
+           digambar pada dua sumbu model operasi Ross, Weill, dan Robertson}
+  \label{fig:ch08-model-operasi}
+\end{figure}
+
+Analoginya seperti empat cabang toko roti milik satu keluarga. Pada diversifikasi, tiap
+cabang punya resep, kasir, dan daftar pelanggan sendiri. Pada koordinasi, kartu anggota
+berlaku di semua cabang dan riwayat belanja dibagi, tetapi tiap cabang boleh membuat roti
+khasnya. Pada replikasi, resep dan cara kerja seragam, tetapi data pelanggan tidak dibagi.
+Pada unifikasi, ada satu dapur pusat, satu resep, dan satu daftar pelanggan. Tidak ada
+model yang selalu benar. Yang benar adalah model yang cocok dengan strategi keluarga itu.
+
+Medikara saat ini berada di kuadran diversifikasi, bukan karena dipilih, tetapi karena
+kelima rumah sakitnya berasal dari akuisisi. Strategi ``Satu Pasien, Satu Rekam Medis''
+menuntut integrasi tinggi, sehingga posisi target paling tidak berada di kuadran
+koordinasi. Pertanyaan yang tersisa adalah seberapa jauh standardisasi perlu didorong.
+Pertanyaan itu menjadi inti opsi kondisi target pada seksi berikutnya.
+
+\subsection*{Standardisasi versus keleluasaan lokal}
+
+Model operasi target jarang berlaku seragam untuk seluruh organisasi. Bagian yang
+menyangkut identitas, keselamatan, dan kepatuhan cenderung distandarkan, sedangkan bagian
+yang menyangkut kebutuhan pasar setempat cenderung dibiarkan lokal. Tabel
+\ref{tab:ch08-standar-lokal} memperlihatkan pembagian yang diusulkan untuk Medikara.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Pembagian bidang yang distandarkan dan yang diberi keleluasaan lokal pada model
+           operasi target Medikara}
+  \label{tab:ch08-standar-lokal}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.9cm}>{\raggedright\arraybackslash}p{2.3cm}>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Bidang} & \textbf{Arah target} & \textbf{Alasan} \\
+    \hline
+    Identitas pasien dan pendaftaran & Distandarkan & Pasien dikenali sama di 5 rumah
+      sakit, 18 klinik, laboratorium, dan 12 apotek \\
+    \hline
+    Isi minimum rekam medis & Distandarkan & Wajib terhubung ke platform interoperabilitas
+      Kementerian Kesehatan \\
+    \hline
+    Kontrol akses data pasien & Distandarkan & Temuan audit internal dan insiden vendor 2025 \\
+    \hline
+    Klaim BPJS Kesehatan dan asuransi & Distandarkan & Aturan penjamin sama untuk semua
+      fasilitas \\
+    \hline
+    Jadwal praktik dan layanan unggulan & Lokal & Kebutuhan pasien dan dokter tiap kota
+      berbeda \\
+    \hline
+    Kemitraan setempat & Lokal, kontrak baku & Pasar berbeda, syarat berbagi data sama \\
+    \hline
+    Alur kerja perawatan di bangsal & Lokal, pedoman bersama & Budaya kerja dan susunan
+      ruang tiap rumah sakit berbeda \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Baris kedua tabel tersebut berakar pada Peraturan Menteri Kesehatan Nomor 24 Tahun 2022.
+Pasal 21 mewajibkan rekam medis elektronik terhubung dengan platform layanan
+interoperabilitas dan integrasi data kesehatan, dan Pasal 24 ayat (2) mengatur pengiriman
+isi rekam medis untuk rujukan lewat platform yang sama \cite{permenkes24-2022}. Isi minimum
+yang berbeda-beda di tiap rumah sakit membuat kewajiban itu dipenuhi lima kali dengan lima
+cara.
+
+Pilihan pada Tabel \ref{tab:ch08-standar-lokal} punya tiga konsekuensi. Pertama, struktur
+organisasi berubah. Bidang yang distandarkan butuh pemilik lintas fasilitas, misalnya
+Kepala Layanan Pasien Terpadu di kantor pusat, sedangkan direktur rumah sakit tetap
+berwenang atas bidang lokal. Rincian hak keputusan semacam ini dibahas di IT40813. Kedua,
+data bersama bertambah. Identitas pasien, isi rekam medis inti, dan data penjamin menjadi
+data perusahaan, bukan lagi data rumah sakit, sehingga pemilik dan pengelola datanya harus
+ditetapkan seperti pada Bab 6. Ketiga, aplikasi bersama dibutuhkan untuk bidang yang
+distandarkan, misalnya satu layanan identitas pasien dan satu proses pendaftaran. Bidang
+lokal boleh tetap memakai alat setempat. Pembagian inilah yang menjadi masukan rasionalisasi
+aplikasi pada Bab 9.
 
 \section{Opsi Kondisi Target dan Business Scenario}
 
-% TODO
-% Cakupan: menyusun dua sampai tiga opsi; kriteria evaluasi yang diturunkan dari prinsip C1;
-%   business scenario dalam fase B; mendokumentasikan alasan memilih dan hal yang dikorbankan.
-% Kasus Medikara: opsi sentralisasi penuh layanan pasien versus inti yang distandarkan dengan
-%   keleluasaan lokal.
+Kondisi target tidak lahir dari satu gagasan yang langsung disetujui. Tim menyusun dua
+sampai tiga opsi yang benar-benar berbeda, menilainya dengan kriteria yang diturunkan dari
+prinsip arsitektur pada tonggak C1, lalu memilih satu dan menuliskan alasannya. Dalam ADM,
+pekerjaan ini berlangsung di fase B, yaitu arsitektur bisnis \cite{togaf10}. Gambar
+\ref{fig:ch08-alur-opsi} memperlihatkan alurnya.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch08-alur-opsi.tex}
+  \caption{Alur dari prinsip arsitektur sampai keputusan kondisi target. \textit{Business
+           scenario} menjadi bahan menyusun opsi, dan dokumen kondisi saat ini menjadi bahan
+           menilai kelayakannya}
+  \label{fig:ch08-alur-opsi}
+\end{figure}
+
+Analoginya seperti keluarga yang mencari rumah. Pilihannya apartemen dekat kantor, rumah di
+pinggir kota, atau merenovasi rumah lama. Keluarga yang bijak menyepakati kriterianya lebih
+dahulu, misalnya jarak ke sekolah, besar cicilan, dan jumlah kamar, baru kemudian melihat
+rumah. Keluarga yang jatuh hati pada satu rumah lebih dahulu cenderung menyusun kriteria
+yang cocok dengan rumah itu. Urutan yang sama berlaku untuk kondisi target.
+
+\subsection*{Menyusun opsi yang sungguh berbeda}
+
+Opsi yang baik memenuhi tiga syarat. Pertama, tiap opsi utuh: model operasinya jelas,
+bidang yang distandarkan jelas, dan bidang yang dibiarkan lokal juga jelas. Kedua,
+opsi-opsinya berbeda pada pilihan mendasar, bukan pada rincian. Dua opsi yang hanya berbeda
+nama vendor bukan dua opsi arsitektur bisnis. Ketiga, tidak ada opsi boneka, yaitu opsi
+yang sengaja dibuat lemah agar opsi favorit terlihat unggul. Direksi yang jeli akan
+mengenalinya, dan kepercayaan pada seluruh analisis ikut turun.
+
+Untuk Medikara, tiga opsi berikut memenuhi syarat itu:
+
+\begin{enumerate}
+  \item \textbf{Opsi A, sentralisasi penuh layanan pasien.} Pendaftaran, pusat kontak, dan
+        penjadwalan kelima rumah sakit dipusatkan di kantor pusat Jakarta. Kelima SIMRS
+        diganti satu SIMRS dalam 24 bulan. Posisinya unifikasi.
+  \item \textbf{Opsi B, inti yang distandarkan dengan keleluasaan lokal.} Identitas pasien,
+        isi rekam medis inti, kontrol akses, dan klaim distandarkan. Jadwal praktik, layanan
+        unggulan, dan kemitraan setempat tetap diputuskan tiap rumah sakit. Konsolidasi
+        SIMRS berjalan bertahap sampai 2030. Posisinya koordinasi dengan inti yang seragam.
+  \item \textbf{Opsi C, federasi terintegrasi.} Kelima SIMRS dan prosesnya dipertahankan.
+        Yang dibangun hanya lapisan integrasi dan MPI di atasnya. Posisinya koordinasi
+        dengan standardisasi paling rendah.
+\end{enumerate}
+
+\subsection*{Kriteria berbobot dan penilaiannya}
+
+Kriteria diturunkan dari prinsip arsitektur, lalu dilengkapi dua kriteria kelayakan agar
+penilaian tetap membumi. Misalkan visi arsitektur Medikara memuat prinsip ``satu sumber
+kebenaran untuk data pasien'', ``layanan berpusat pada pasien'', serta ``keamanan dan
+privasi sejak rancangan''. Ketiganya menjadi kriteria pertama sampai ketiga. Kriteria
+keempat dan kelima, yaitu kelayakan dari kondisi saat ini serta biaya dan risiko perubahan,
+diambil dari dokumen C2. Bobot disepakati sebelum opsi dinilai. Tiap opsi diberi nilai 1
+sampai 5 pada tiap kriteria, lalu nilainya dikalikan bobot. Tabel
+\ref{tab:ch08-matriks-opsi} memuat hasilnya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Matriks kriteria berbobot untuk tiga opsi kondisi target Medikara. Nilai 1
+           sampai 5, angka dalam kurung adalah nilai dikali bobot}
+  \label{tab:ch08-matriks-opsi}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}Xrrrr}
+    \hline
+    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Opsi A} & \textbf{Opsi B} & \textbf{Opsi C} \\
+    \hline
+    Satu identitas dan satu rekam medis lintas fasilitas & 30\% & 5 (1,50) & 4 (1,20) &
+      2 (0,60) \\
+    \hline
+    Pengalaman pasien: pendaftaran sekali, tunggu singkat & 20\% & 4 (0,80) & 4 (0,80) &
+      2 (0,40) \\
+    \hline
+    Kepatuhan dan kontrol akses & 15\% & 5 (0,75) & 4 (0,60) & 3 (0,45) \\
+    \hline
+    Kelayakan dari kondisi saat ini & 20\% & 2 (0,40) & 4 (0,80) & 5 (1,00) \\
+    \hline
+    Biaya dan risiko perubahan & 15\% & 1 (0,15) & 3 (0,45) & 4 (0,60) \\
+    \hline
+    \textbf{Jumlah} & \textbf{100\%} & \textbf{3,60} & \textbf{3,85} & \textbf{3,05} \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Opsi B unggul dengan 3,85, disusul opsi A dengan 3,60. Selisih 0,25 itu tidak besar,
+sehingga satu pertanyaan wajib diajukan: apakah urutannya bertahan bila bobotnya sedikit
+berubah? Uji kepekaan menjawabnya. Tabel \ref{tab:ch08-kepekaan} memuat dua susunan bobot
+lain.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Uji kepekaan matriks opsi. Urutan bobot mengikuti urutan kriteria pada Tabel
+           \ref{tab:ch08-matriks-opsi}}
+  \label{tab:ch08-kepekaan}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}Xrrrl}
+    \hline
+    \textbf{Susunan bobot} & \textbf{Opsi A} & \textbf{Opsi B} & \textbf{Opsi C} &
+      \textbf{Unggul} \\
+    \hline
+    Dasar: 30, 20, 15, 20, 15 & 3,60 & 3,85 & 3,05 & B \\
+    \hline
+    Integrasi dinaikkan, kelayakan diturunkan: 40, 20, 15, 10, 15 & 3,90 & 3,85 & 2,75 & A \\
+    \hline
+    Biaya dinaikkan, pengalaman diturunkan: 30, 10, 15, 20, 25 & 3,30 & 3,75 & 3,25 & B \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Opsi A hanya unggul bila bobot kelayakan dipangkas menjadi 10 persen. Artinya, opsi A
+menang hanya bila direksi bersedia mengabaikan kenyataan bahwa lima SIMRS berbeda versi
+tidak dapat diganti sekaligus tanpa risiko besar. Kesimpulan ini lebih berguna daripada
+angka 3,85 itu sendiri. Direksi kini tahu pertanyaan apa yang sedang diputuskan:
+seberapa besar risiko pelaksanaan yang sanggup ditanggung organisasi.
+
+\subsection*{Business scenario dalam fase B}
+
+Opsi yang baik membutuhkan pemahaman masalah yang baik. TOGAF menyediakan teknik
+\textit{business scenario} untuk itu \cite{c08-togaf-g176}. \textit{Business scenario}
+menggambarkan satu masalah bisnis beserta lingkungan, aktor, dan hasil yang diharapkan,
+sehingga kebutuhan arsitektur dapat diturunkan dan dikaitkan dengan tujuan organisasi.
+Pengembangannya berjalan dalam tujuh langkah. Tim mengenali dan memeringkat masalah,
+mengenali lingkungan bisnis dan teknisnya, lalu menetapkan tujuan yang ingin dicapai. Tim
+kemudian mengenali aktor manusia dan aktor komputer, yaitu sistem yang terlibat, lalu
+mendokumentasikan peran, ukuran keberhasilan, dan alur kerja tiap aktor. Langkah terakhir
+memeriksa apakah skenarionya layak dipakai pada tahap berikutnya. Ketujuh langkah itu
+diulang dalam tiga fase, yaitu mengumpulkan, menganalisis, dan meninjau. Tujuannya ditulis
+SMART: \textit{Specific, Measurable, Actionable, Realistic, Time-bound}. Tabel
+\ref{tab:ch08-business-scenario} memperlihatkan penerapannya pada masalah identitas pasien
+Medikara.
+
+\begin{table}[!htb]
+  \centering
+  \caption{\textit{Business scenario} ``Pasien berpindah fasilitas'' untuk Medikara}
+  \label{tab:ch08-business-scenario}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.8cm}>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Unsur} & \textbf{Isi} \\
+    \hline
+    Masalah & Pasien yang berpindah fasilitas mendaftar ulang dan riwayatnya tidak terbaca
+      dokter di fasilitas baru \\
+    \hline
+    Lingkungan & 5 rumah sakit dengan SIMRS berbeda versi, Medikara+ buatan vendor,
+      integrasi \textit{point-to-point} ke BPJS Kesehatan dan SATUSEHAT \\
+    \hline
+    Tujuan SMART & Pada akhir 2028, 95 persen kunjungan rawat jalan di 5 rumah sakit
+      dilayani dengan satu nomor pasien Medikara, dan riwayat lintas fasilitas terbuka bagi
+      dokter yang merawat \\
+    \hline
+    Aktor & Manusia: pasien, petugas pendaftaran, dokter, apoteker, petugas klaim, klinik
+      mitra. Komputer: Medikara+, lima SIMRS, MPI baru, sistem klaim, SATUSEHAT \\
+    \hline
+    Ukuran per aktor & Petugas memverifikasi pasien dalam 5 menit; dokter membuka riwayat
+      lintas fasilitas tanpa meminta fotokopi \\
+    \hline
+    Alur kerja & Pasien klinik Depok dirujuk ke poli jantung di Jakarta, lalu kembali
+      kontrol di Depok \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Mendokumentasikan alasan dan yang dikorbankan}
+
+Keputusan kondisi target ditulis dalam catatan keputusan singkat. Isinya lima hal: opsi
+yang dipilih, alasan beserta angkanya, hal yang dikorbankan, syarat peninjauan ulang, dan
+pihak yang menyetujui. Bagian ``yang dikorbankan'' paling sering dilewati, padahal bagian
+itulah yang membuat keputusan dapat dipertanggungjawabkan. Setiap opsi mengorbankan sesuatu.
+Keputusan yang tampak tanpa korban biasanya menyembunyikan korbannya. Bentuk catatan yang
+sama dipakai untuk keputusan teknologi dalam bentuk \textit{Architecture Decision Record}
+(ADR) pada Bab 10.
+
+\begin{kasus}[title={Kasus Medikara Health: Sentralisasi Penuh atau Inti yang Distandarkan},
+              parbox=false]
+  Rapat penentuan kondisi target mempertemukan dua pandangan. Direktur keuangan mendukung
+  opsi A. Satu pusat kontak dan satu SIMRS menghapus biaya memelihara lima versi dan lima
+  tim pendaftaran telepon. Direktur rumah sakit Bandung menolak. Misalkan sebagian besar
+  dokter spesialis di Bandung adalah dokter tamu dari rumah sakit pendidikan setempat yang
+  jadwalnya berubah tiap minggu. Bila jadwal diatur dari Jakarta, perubahan yang kini
+  selesai pada hari yang sama dapat butuh dua hari, dan pasien yang datang menemukan poli
+  yang tutup.
+
+  Matriks menempatkan opsi B di depan, dan opsi A hanya unggul bila bobot kelayakan
+  dipangkas. Tim memilih opsi B dengan catatan keputusan berikut.
+
+  \begin{itemize}
+    \item \textbf{Alasan.} Opsi B memenuhi strategi ``Satu Pasien, Satu Rekam Medis'' lewat
+          inti yang seragam, tanpa mengganti lima SIMRS sekaligus.
+    \item \textbf{Yang dikorbankan.} Penghematan pusat kontak tunggal tidak diperoleh
+          penuh. Lima SIMRS masih hidup berdampingan sampai 2030, sehingga biaya
+          pemeliharaan ganda berlanjut selama masa transisi. Standar inti juga berisiko
+          dilanggar rumah sakit yang terbiasa bekerja sendiri.
+    \item \textbf{Syarat tinjau ulang.} Bila pada Juni 2028, tiga bulan sesudah paket
+          identitas pasien selesai, kurang dari 80 persen pendaftaran memakai identitas
+          terpadu, opsi A dibuka kembali.
+    \item \textbf{Disetujui.} Direksi, dengan masukan direktur kelima rumah sakit.
+  \end{itemize}
+\end{kasus}
 
 \section{Kapabilitas Target dan Peta Perubahan Kapabilitas}
 
-% TODO
-% Cakupan: kapabilitas baru, diperkuat, dan dihentikan; heatmap target; kapabilitas pengelolaan
-%   ekosistem mitra (model bisnis platform dibahas rinci di mata kuliah IT40613).
-% Pendalaman teknis: memilih kapabilitas yang layak menjadi layanan bersama dan menuliskan antarmuka
-%   bisnisnya sebagai bahan desain API.
+Opsi yang terpilih belum menjelaskan apa yang harus dibangun. Penjelasannya ada pada peta
+kapabilitas target. Peta ini adalah \textit{capability map} dari Bab 5 yang diberi tanda
+perubahan. Kapabilitas sendiri relatif stabil, karena menyatakan apa yang dilakukan
+organisasi, bukan bagaimana atau oleh siapa \cite{c08-togaf-g211,bizbok15}. Yang berubah
+adalah kapabilitas mana yang ditambah, mana yang dinaikkan tingkatnya, dan mana yang tidak
+lagi dibutuhkan.
+
+Ada empat jenis tanda. Kapabilitas \emph{baru} belum dimiliki organisasi. Kapabilitas
+\emph{diperkuat} sudah ada, tetapi tingkatnya harus naik. Kapabilitas \emph{dipertahankan}
+sudah memadai. Kapabilitas \emph{dihentikan} tidak lagi dibutuhkan, biasanya karena
+digantikan kapabilitas lain. \textit{Heatmap} target lalu mencatat tingkat yang dituju untuk
+tiap kapabilitas, dengan skala 1 sampai 3 yang sama seperti Bab 5. Selisih antara
+\textit{heatmap} saat ini dan \textit{heatmap} target menjadi bahan \textit{gap analysis} pada
+Bab 11.
+
+Analoginya seperti denah renovasi rumah. Denah lama digambar ulang dengan tanda warna:
+ruang kerja yang dibangun baru, dapur yang diperbesar, kamar yang dibiarkan, dan gudang yang
+dibongkar karena isinya pindah ke loteng. Kontraktor menghitung biaya dari tanda itu, bukan
+dari foto rumah impian. Peta kapabilitas target berfungsi sama bagi perencana investasi.
+
+Gambar \ref{fig:ch08-peta-kapabilitas} memperlihatkan peta kapabilitas target Medikara
+untuk opsi B.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch08-peta-kapabilitas.tex}
+  \caption{Peta kapabilitas target Medikara untuk opsi B, dengan empat jenis tanda
+           perubahan}
+  \label{fig:ch08-peta-kapabilitas}
+\end{figure}
+
+Gambar tersebut memuat 18 kapabilitas tingkat 2, yaitu 15 kapabilitas Bab 5 ditambah 3
+kapabilitas baru. Rinciannya 3 baru, 8 diperkuat, 5 dipertahankan, dan 2 dihentikan.
+Tabel \ref{tab:ch08-perubahan-kapabilitas} merinci 13 kapabilitas yang berubah beserta
+pemicunya. Tingkat saat ini pada tabel itu sama dengan \textit{heatmap} Bab 5.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Perubahan kapabilitas Medikara. Tingkat ditulis dari saat ini ke target, dengan
+           skala 1 (lemah) sampai 3 (memadai); tanda -- berarti belum ada atau dihentikan}
+  \label{tab:ch08-perubahan-kapabilitas}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{4.6cm}lc>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Kapabilitas} & \textbf{Jenis} & \textbf{Tingkat} & \textbf{Pemicu} \\
+    \hline
+    Pengelolaan Identitas Pasien Terpadu & baru & -- ke 3 & Strategi satu rekam medis \\
+    \hline
+    Pengelolaan Kemitraan Ekosistem & baru & -- ke 2 & Strategi ekosistem mitra \\
+    \hline
+    Wawasan Pasien dan Analitik & baru & -- ke 2 & Data Medikara+ belum dianalisis \\
+    \hline
+    Pengelolaan Kepatuhan & diperkuat & 2 ke 3 & Data pribadi, rekam medis \\
+    \hline
+    Pendaftaran Pasien & diperkuat & 2 ke 3 & Pendaftaran masih per fasilitas \\
+    \hline
+    Penjadwalan Layanan & diperkuat & 2 ke 3 & Antrean yang panjang \\
+    \hline
+    Pengelolaan Rekam Medis & diperkuat & 1 ke 3 & Data pasien tersebar \\
+    \hline
+    Telekonsultasi & diperkuat & 2 ke 3 & Komponen terkunci di vendor \\
+    \hline
+    Klaim dan Penjaminan & diperkuat & 2 ke 3 & Biaya integrasi tinggi \\
+    \hline
+    Pengelolaan Akses Pengguna & diperkuat & 1 ke 3 & Temuan audit kontrol akses \\
+    \hline
+    Pelaporan Manajemen & diperkuat & 1 ke 3 & Laporan dari \textit{spreadsheet} \\
+    \hline
+    Penerbitan Nomor Rekam Medis Lokal & dihentikan & 2 ke -- & Diganti identitas terpadu \\
+    \hline
+    Rekonsiliasi Data Manual Antarfasilitas & dihentikan & 1 ke -- & Data dipakai bersama \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Pemicu Pengelolaan Kepatuhan adalah Undang-Undang Nomor 27 Tahun 2022 tentang Pelindungan
+Data Pribadi (UU PDP) \cite{uu27-2022-pdp} dan kewajiban rekam medis elektronik. Dua
+kapabilitas yang dihentikan perlu perhatian khusus.
+Menghentikan kapabilitas berarti menghentikan pekerjaan yang kini dilakukan orang, sehingga
+butuh rencana pengalihan tugas. Kapabilitas yang dihentikan juga sering punya ketergantungan
+tersembunyi. Nomor rekam medis lokal, misalnya, tercetak di label sampel laboratorium,
+gelang pasien, dan arsip kertas lama. Tabel padanan antara nomor lama dan nomor pasien
+Medikara harus tetap dipelihara bertahun-tahun sesudah penerbitannya dihentikan.
+
+\subsection*{Ekosistem mitra sebagai kapabilitas}
+
+Pengelolaan Kemitraan Ekosistem muncul di kondisi target karena strategi 2026 sampai 2030
+menuntut ekosistem yang terbuka bagi klinik mitra, asuransi, laboratorium, apotek daring,
+dan layanan kesehatan karyawan perusahaan. Saat ini kemitraan ditangani per kontrak oleh
+tiap rumah sakit, dengan bagian hukum dan pemasaran yang bekerja sendiri-sendiri. Tidak ada
+satu pihak yang mengelola daur hidup mitra secara utuh: memilih mitra, meng-\textit{onboard},
+menyepakati syarat berbagi data, memantau kinerja, sampai mengakhiri kemitraan.
+
+Kapabilitas ini bergantung pada kapabilitas lain. Mitra harus merujuk pasien yang sama,
+sehingga Pengelolaan Identitas Pasien Terpadu harus berjalan lebih dahulu. Data kesehatan
+termasuk data pribadi yang bersifat spesifik menurut Pasal 4 ayat (2) UU PDP
+\cite{uu27-2022-pdp}, sehingga syarat berbagi data dengan mitra harus disepakati sebelum
+sambungan dibuka. Model bisnis platform, rancangan produk API, dan alur
+meng-\textit{onboard} mitra dibahas rinci di IT40613. Penilaian dampak pelindungan data
+untuk berbagi data dengan mitra dibahas di IT40813.
+
+Angka sederhana memperlihatkan mengapa kapabilitas ini perlu dikelola, bukan diserahkan
+kepada tiap kontrak. Misalkan Medikara menargetkan 40 klinik mitra pada 2028, dan satu
+klinik butuh tiga bulan untuk di-\textit{onboard} karena dinegosiasikan dari nol. Satu tim
+yang mengerjakannya berurutan butuh sepuluh tahun. Kontrak baku, sambungan baku, dan satu
+unit pengelola memangkas waktu itu menjadi beberapa minggu per klinik.
+
+\begin{pendalaman}[title={Pendalaman Teknis (opsional): Dari Kapabilitas ke Layanan Bersama},
+                   parbox=false]
+  Kapabilitas yang distandarkan sering layak diwujudkan sebagai layanan bersama
+  (\textit{shared service}), yaitu satu layanan yang dipakai banyak unit dan banyak aplikasi.
+  Empat syarat dipakai untuk memilih calonnya. Pertama, kapabilitas itu dipakai paling
+  sedikit tiga unit atau tiga tahap \textit{value stream}. Kedua, aturan bisnisnya sama bagi
+  semua pemakai, dan ini merupakan hasil keputusan standardisasi. Ketiga, datanya adalah
+  data perusahaan, bukan data satu unit. Keempat, ada satu pemilik yang jelas. Pengelolaan
+  Identitas Pasien Terpadu memenuhi keempatnya. Pelayanan Klinis tidak memenuhi syarat
+  kedua, karena alur kerjanya sengaja dibiarkan lokal.
+
+  Calon yang lolos lalu ditulis antarmuka bisnisnya, yaitu uraian dalam bahasa bisnis
+  tentang apa yang dapat diminta pemakai dan apa yang dijanjikan layanan. Contohnya untuk
+  Layanan Identitas Pasien, ditulis dengan
+  \berkas{sources/chapter08/templat-antarmuka-layanan-bersama.md}:
+
+  \begin{itemize}
+    \item \textbf{Pemilik:} Kepala Layanan Pasien Terpadu.
+    \item \textbf{Pemakai:} Medikara+, lima SIMRS, klinik, apotek, laboratorium, dan mitra.
+    \item \textbf{Operasi bisnis:} mencari pasien, mendaftarkan pasien baru, menggabungkan
+          identitas ganda, dan memisahkan identitas yang salah gabung.
+    \item \textbf{Masukan dan keluaran:} nama, tanggal lahir, nomor induk kependudukan atau
+          paspor, dan nomor telepon; keluarannya nomor pasien Medikara dan status kecocokan.
+    \item \textbf{Aturan bisnis:} penggabungan otomatis hanya pada kecocokan tinggi;
+          selebihnya ditinjau petugas. Setiap akses dicatat karena datanya data pribadi
+          spesifik.
+    \item \textbf{Janji layanan:} pencarian dijawab dalam 2 detik pada 95 persen permintaan,
+          tersedia 24 jam.
+  \end{itemize}
+
+  Antarmuka ini sengaja belum berbentuk kontrak API. Di IT40613, tiap operasi bisnis
+  diturunkan menjadi kandidat API, misalnya dipetakan ke \textit{resource} Patient pada
+  standar Health Level Seven (HL7) Fast Healthcare Interoperability Resources (FHIR) yang
+  dipakai SATUSEHAT. Aturan pencocokan identitas yang lebih rinci dibahas pada Bab 9.
+\end{pendalaman}
 
 \section{Value Stream Target}
 
-% TODO
-% Cakupan: merancang ulang tahapan dari sudut pandang pasien; ukuran keberhasilan per tahap;
-%   keterkaitan tahap dengan kapabilitas target.
-% Kasus Medikara: value stream rawat jalan dengan satu identitas dan satu rekam medis lintas
-%   fasilitas.
+Peta kapabilitas menjawab apa yang harus dimiliki organisasi. \textit{Value stream} target
+menjawab bagaimana pasien merasakan hasilnya. \textit{Value stream} adalah rangkaian tahap
+yang menghasilkan nilai bagi satu pemangku kepentingan, dilihat dari sudut pandang pemangku
+kepentingan itu, bukan dari susunan bagian di dalam organisasi \cite{c08-togaf-g178}.
+\textit{Value stream} target dirancang ulang dengan empat langkah. Pertama, nilai yang
+diterima pasien ditetapkan di ujung. Kedua, tahap yang hanya ada karena masalah internal
+dihapus atau diperkecil, misalnya pendaftaran ulang. Ketiga, tiap tahap diberi satu ukuran
+keberhasilan utama lengkap dengan angka saat ini dan target. Keempat, tiap tahap dipetakan
+ke kapabilitas pendukung, sehingga terlihat kapabilitas baru atau diperkuat mana yang
+menggerakkan perbaikannya.
+
+Analoginya seperti perjalanan kereta antarkota. Penumpang hanya peduli pada empat hal:
+memesan tiket, masuk peron, menempuh perjalanan, dan tiba. Dulu penumpang mencetak tiket di
+stasiun, lalu menunjukkan tiket dan kartu identitas kepada petugas. Kini identitasnya
+diperiksa sekali di gerbang, karena data pemesanannya dikenali di seluruh jaringan. Tahap
+mencetak tiket hilang, bukan karena petugasnya bekerja lebih cepat, tetapi karena
+identitas penumpang sudah menjadi data bersama.
+
+Gambar \ref{fig:ch08-value-stream-target} memperlihatkan \textit{value stream} target
+``Pasien menerima layanan rawat jalan'' untuk Medikara.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch08-value-stream-target.tex}
+  \caption{\textit{Value stream} target ``Pasien menerima layanan rawat jalan'', dengan satu
+           ukuran utama dan satu kapabilitas pendukung utama untuk tiap tahap}
+  \label{fig:ch08-value-stream-target}
+\end{figure}
+
+Tabel \ref{tab:ch08-ukuran-tahap} merinci ukuran tiap tahap. Misalkan angka saat ini
+berasal dari pengukuran awal di kelima rumah sakit pada 2026.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Ukuran keberhasilan tiap tahap \textit{value stream} rawat jalan Medikara}
+  \label{tab:ch08-ukuran-tahap}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.1cm}>{\raggedright\arraybackslash}Xrr>{\raggedright\arraybackslash}p{2.9cm}}
+    \hline
+    \textbf{Tahap} & \textbf{Ukuran} & \textbf{Kini} & \textbf{2030} &
+      \textbf{Kapabilitas} \\
+    \hline
+    1. Memesan layanan & Janji temu dipesan daring & 28\% & 50\% & Penjadwalan Layanan \\
+    \hline
+    2. Hadir dan terverifikasi & Median menit dari datang sampai terverifikasi & 25 & 5 &
+      Pengelolaan Identitas Pasien Terpadu \\
+    \hline
+    3. Diperiksa dan didiagnosis & Riwayat lintas fasilitas terbuka & 10\% & 95\% &
+      Pengelolaan Rekam Medis \\
+    \hline
+    4. Menerima obat & Median menit menunggu obat nonracikan & 45 & 20 & Layanan Farmasi
+      dan Laboratorium \\
+    \hline
+    5. Menyelesaikan pembayaran & Klaim BPJS dikembalikan & 9\% & 3\% & Klaim dan
+      Penjaminan \\
+    \hline
+    6. Ditindaklanjuti & Pasien kontrol menerima pengingat & 20\% & 90\% & Telekonsultasi \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Tiga hal terbaca dari tabel tersebut. Pertama, tiga waktu tunggu terbesar, yaitu
+verifikasi, tunggu dokter, dan tunggu obat, kini berjumlah 25 + 70 + 45 = 140 menit. Misalkan
+tunggu dokter ditargetkan turun dari 70 menjadi 30 menit. Jumlahnya pada target menjadi 5 +
+30 + 20 = 55 menit. Ukuran ujung ke ujung seperti ini perlu dicatat di samping ukuran per
+tahap, karena pasien merasakan jumlahnya, bukan tiap tahapnya. Kedua, tahap 4 membaik
+walaupun kapabilitas farmasinya hanya dipertahankan. Penyebabnya ada di tahap 3: resep
+elektronik dari rekam medis terpadu sudah tiba di apotek sebelum pasien berjalan ke sana.
+Ketergantungan lintas tahap semacam ini harus dicatat, karena bila Pengelolaan Rekam Medis
+tertunda, target tahap 4 ikut gagal. Ketiga, setiap ukuran harus dapat diambil dari data
+yang ada. Ukuran ``riwayat lintas fasilitas terbuka'' membutuhkan catatan akses di sistem
+rekam medis, sehingga kebutuhan itu ikut masuk ke arsitektur data target pada Bab 9.
+
+\begin{kasus}[title={Kasus Medikara Health: Satu Identitas Lintas Fasilitas}, parbox=false]
+  Misalkan seorang pasien diabetes berobat rutin di klinik pratama Medikara di Depok, lalu
+  dirujuk ke poli jantung rumah sakit Medikara di Jakarta.
+
+  \textbf{Kondisi saat ini.} Di Jakarta, pasien mendaftar ulang dan menerima nomor rekam
+  medis baru. Ia membawa fotokopi hasil laboratorium dari Depok. Dokter jantung tidak
+  melihat daftar obat yang diresepkan klinik, sehingga harus bertanya langsung kepada
+  pasien yang tidak selalu ingat nama obatnya. Sesudah kunjungan, klinik Depok tidak
+  menerima ringkasan pemeriksaan dari Jakarta.
+
+  \textbf{Kondisi target.} Pasien memesan lewat Medikara+ dan dikenali dengan nomor pasien
+  Medikara yang sama. Dokter jantung membuka riwayat dari klinik Depok dan hasil dari
+  laboratorium rujukan. Resep elektronik dikirim ke apotek Medikara yang paling dekat dengan
+  rumah pasien. Isi rekam medis untuk rujukan dikirim lewat platform interoperabilitas data
+  kesehatan, sesuai Pasal 24 ayat (2) Peraturan Menteri Kesehatan Nomor 24 Tahun 2022
+  \cite{permenkes24-2022}. Pengingat kontrol berikutnya di Depok dikirim lewat Medikara+.
+
+  Perubahan ini tidak membutuhkan dokter yang bekerja lebih cepat. Yang dibutuhkan adalah
+  tiga kapabilitas pada peta target: Pengelolaan Identitas Pasien Terpadu, Pengelolaan
+  Rekam Medis, dan Penjadwalan Layanan. Seluruh perubahan di tahap 2, 3, dan 4 bersandar
+  pada satu hal yang sama, yaitu identitas pasien yang dikenali di seluruh jaringan.
+\end{kasus}
 
 \section{Aktivitas: Memilih Opsi Kondisi Target Bisnis}
 
-% TODO
-% Tujuan aktivitas: memilih arah arsitektur bisnis target dengan alasan yang dapat dipertanggungjawabkan.
-% Peran dalam tim: analis bisnis memimpin perumusan opsi dan kriteria; analis teknologi menilai
-%   kelayakan tiap opsi dari kondisi saat ini; pemodel memperbarui capability map; koordinator
-%   menuliskan keputusan dan alasannya.
-% Langkah: susun dua sampai tiga opsi; tetapkan kriteria berbobot; nilai tiap opsi; pilih satu dan
-%   tulis trade-off-nya; tandai perubahan kapabilitas; rancang value stream target.
-% Luaran dan tonggak capstone: model operasi target, capability map target, dan value stream
-%   target (C3).
-% Berkas sources yang direncanakan: sources/chapter08/templat-opsi-kondisi-target.md,
-%   sources/chapter08/templat-matriks-kriteria-opsi.csv,
-%   sources/chapter08/medikara-capability-map-target.csv
+Aktivitas ini membuka tonggak C3, Kondisi Target. Tujuannya memilih arah arsitektur bisnis
+target dengan alasan yang dapat dipertanggungjawabkan di hadapan direksi. Tim memakai
+organisasi yang dipilih pada Pertemuan 1, atau kasus Medikara Health. Tim yang memakai
+organisasi nyata wajib memegang izin tertulis dan memakai data yang dianonimkan. Data
+pribadi pasien, pelanggan, atau karyawan tidak boleh dipakai. Peran digilir seperti
+disepakati di piagam tim, dan Tabel \ref{tab:ch08-peran} memuat pembagiannya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Pembagian peran pada aktivitas memilih opsi kondisi target}
+  \label{tab:ch08-peran}
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.4cm}}
+    \hline
+    \textbf{Peran} & \textbf{Tugas utama} & \textbf{Yang diserahkan} \\
+    \hline
+    Analis bisnis & Memimpin perumusan opsi dan kriteria, memastikan kriteria diturunkan
+      dari prinsip C1 & Uraian opsi dan bobot kriteria \\
+    \hline
+    Analis teknologi & Menilai kelayakan tiap opsi dari kondisi saat ini (C2), terutama
+      aplikasi dan integrasi & Nilai kelayakan beserta alasannya \\
+    \hline
+    Pemodel & Menandai perubahan kapabilitas pada \textit{capability map} dan memperbarui
+      model di Archi & Peta kapabilitas target \\
+    \hline
+    Koordinator & Memandu penilaian, menulis catatan keputusan, dan menyelaraskan dengan
+      tiga mata kuliah lain & Catatan keputusan \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Langkah kerja}
+
+\begin{enumerate}
+  \item Baca ulang visi arsitektur dan prinsip dari C1, serta lima masalah terbesar dari
+        dokumen C2.
+  \item Susun dua sampai tiga opsi dengan
+        \berkas{sources/chapter08/templat-opsi-kondisi-target.md}. Tiap opsi menyebut
+        posisi model operasinya, bidang yang distandarkan, dan bidang yang dibiarkan lokal.
+  \item Tetapkan empat sampai enam kriteria beserta bobotnya, lalu sepakati bobot itu
+        sebelum opsi dinilai.
+  \item Beri nilai 1 sampai 5 untuk tiap opsi pada tiap kriteria, lengkap dengan alasan
+        satu kalimat. Isian ditulis di
+        \berkas{sources/chapter08/templat-matriks-kriteria-opsi.csv}.
+  \item Lakukan uji kepekaan: ubah bobot dua kriteria terbesar sebesar 10 poin, lalu
+        catat apakah urutan opsi berubah.
+  \item Pilih satu opsi dan tulis catatan keputusannya: alasan, yang dikorbankan, syarat
+        tinjau ulang, dan pihak yang menyetujui.
+  \item Tandai kapabilitas yang baru, diperkuat, dipertahankan, dan dihentikan. Contoh
+        Medikara tersedia di
+        \berkas{sources/chapter08/medikara-capability-map-target.csv}.
+  \item Rancang satu \textit{value stream} target dengan satu ukuran per tahap. Contohnya
+        tersedia di \berkas{sources/chapter08/medikara-value-stream-target.csv}.
+\end{enumerate}
+
+\subsection*{Luaran dan kaitan dengan capstone}
+
+Luaran aktivitas ini adalah arsitektur bisnis target untuk tonggak C3, yang terdiri atas
+empat bagian: model operasi target satu halaman, matriks opsi beserta catatan keputusan,
+\textit{capability map} target, dan \textit{value stream} target. Bab 9 memakai keempatnya
+untuk merancang arsitektur data dan aplikasi target. Di IT40613, peta kapabilitas dan
+\textit{value stream} target menjadi bahan portofolio API. Di IT40813, pembagian bidang yang
+distandarkan menjadi bahan rancangan tata kelola target. Karena itu nama kapabilitas harus
+sama persis di keempat mata kuliah.
+
+\subsection*{Kriteria penilaian}
+
+Tabel \ref{tab:ch08-kriteria-nilai} memuat kriteria yang dipakai saat tatap muka hari Sabtu.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Kriteria penilaian aktivitas memilih opsi kondisi target}
+  \label{tab:ch08-kriteria-nilai}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}Xr}
+    \hline
+    \textbf{Kriteria} & \textbf{Bobot} \\
+    \hline
+    Opsi berbeda pada pilihan mendasar, tanpa opsi boneka & 20\% \\
+    \hline
+    Kriteria diturunkan dari prinsip C1, dan bobot disepakati sebelum penilaian & 20\% \\
+    \hline
+    Alasan, hal yang dikorbankan, dan hasil uji kepekaan tertulis jelas & 25\% \\
+    \hline
+    Peta kapabilitas dan \textit{value stream} konsisten dengan opsi terpilih & 20\% \\
+    \hline
+    Ukuran keberhasilan terukur, dengan angka saat ini dan target & 15\% \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\textit{Pendalaman teknis (opsional):} anggota berlatar ilmu komputer, rekayasa perangkat
+lunak, atau TI memilih satu kapabilitas yang layak menjadi layanan bersama dengan empat
+syarat pada kotak pendalaman seksi kapabilitas, lalu menulis antarmuka bisnisnya dengan
+\berkas{sources/chapter08/templat-antarmuka-layanan-bersama.md}. Hasilnya diserahkan kepada
+tim IT40613 sebagai bahan desain API.
 
 \section{Ringkasan}
 
-% TODO
+Transformasi digital tidak dimulai dari membeli teknologi. Digitisasi memindahkan informasi
+ke media digital, digitalisasi mengubah proses yang sudah ada, dan transformasi digital
+mengubah cara organisasi menciptakan dan menangkap nilai. Hanya fase ketiga yang menuntut
+arsitektur bisnis target yang baru, dan fase itu biasanya baru tercapai sesudah dua fase
+pertama berjalan.
+
+Kerangka \textit{Designed for Digital} memecah rancangan organisasi digital menjadi lima
+blok bangunan. \textit{Operational backbone} menjaga operasi inti tetap andal, sedangkan
+\textit{digital platform} mempercepat perakitan tawaran baru. Urutannya tidak dapat dibalik.
+Medikara+ belum dapat menjadi platform yang dibuka bagi mitra selama identitas pasiennya
+masih tersimpan dalam enam salinan yang tidak selalu cocok.
+
+Model operasi target menetapkan bidang mana yang distandarkan dan data mana yang dipakai
+bersama. Medikara bergeser dari diversifikasi, yang terjadi karena akuisisi, menuju
+koordinasi dengan inti yang seragam: identitas pasien, isi rekam medis inti, kontrol akses,
+dan klaim distandarkan, sedangkan jadwal praktik dan kemitraan setempat tetap lokal.
+Pergeseran itu ikut mengubah struktur organisasi, data bersama, dan aplikasi bersama.
+
+Pilihan itu tidak diambil dari satu gagasan. Tiga opsi dinilai dengan kriteria berbobot
+yang disepakati lebih dahulu. Opsi inti yang distandarkan unggul dengan 3,85, dan uji
+kepekaan menunjukkan sentralisasi penuh hanya menang bila bobot kelayakan dipangkas menjadi
+10 persen. Catatan keputusan menuliskan apa yang dikorbankan dan kapan keputusan itu
+ditinjau ulang. Peta kapabilitas target lalu menandai 3 kapabilitas baru, 8 diperkuat, 5
+dipertahankan, dan 2 dihentikan.
+
+\textit{Value stream} target menerjemahkan semua itu ke pengalaman pasien. Tiga waktu tunggu
+terbesar pada rawat jalan ditargetkan turun dari 140 menjadi 55 menit, dan hampir seluruh
+perbaikannya bersandar pada satu kapabilitas baru, yaitu identitas pasien yang dikenali di
+seluruh jaringan. Pesan utama bab ini: arsitektur bisnis target bukan daftar sistem yang
+akan dibeli, melainkan keputusan tentang apa yang diseragamkan, apa yang dikorbankan, dan
+bagaimana keberhasilannya diukur.
 
 \section{Latihan}
 
+Seluruh berkas pendukung latihan tersedia di \berkas{sources/chapter08/}. Latihan dikerjakan
+untuk Medikara atau untuk organisasi tim. Angka pada tabel contoh berasal dari kasus
+Medikara di bab ini. Hasil tiap mahasiswa boleh berbeda; yang dinilai adalah penalaran dan
+perbandingannya.
+
+\subsection*{Latihan 1: Membedakan Operational Backbone dan Digital Platform}
+
+Latihan ini membuktikan bahwa \textit{operational backbone} dan \textit{digital platform}
+dapat dibedakan dari pertanyaan yang dijawab tiap komponen, bukan dari jenis teknologinya.
+
 \begin{enumerate}
-  \item Jelaskan perbedaan \textit{operational backbone} dan \textit{digital platform} dengan contoh dari Medikara.
-  \item Sentralisasi layanan pasien memberi efisiensi tetapi mengurangi keleluasaan rumah sakit di daerah. Tuliskan \textit{trade-off} ini dalam tiga kalimat yang dapat dibaca direksi.
-  \item Mengapa kapabilitas pengelolaan kemitraan muncul di kondisi target tetapi tidak di kondisi saat ini? Apa syarat agar kapabilitas itu berjalan?
+  \item Daftar enam sampai delapan komponen Medikara atau organisasi tim, misalnya sistem,
+        basis data, atau layanan.
+  \item Untuk tiap komponen, tentukan pertanyaan yang dijawabnya: keandalan operasi inti,
+        atau kecepatan merakit tawaran baru.
+  \item Golongkan komponen itu ke \textit{operational backbone}, \textit{digital
+        platform}, atau tawaran digital yang berdiri di atas platform.
+  \item Isi Tabel \ref{tab:ch08-lat1-hasil}. Tabel \ref{tab:ch08-lat1-contoh} memperlihatkan
+        contoh yang sudah terisi.
+  \item Jawab pertanyaan analisis berikut. Pertama, komponen mana yang paling sulit
+        digolongkan, dan mengapa? Kedua, bila hanya satu komponen \textit{operational
+        backbone} yang dapat diperbaiki tahun ini, komponen mana yang paling banyak
+        membuka jalan bagi \textit{digital platform}? Ketiga, apa akibatnya bila Medikara+
+        dibuka bagi mitra sebelum komponen itu diperbaiki?
 \end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 1 yang sudah terisi}
+  \label{tab:ch08-lat1-contoh}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.4cm}l>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Komponen} & \textbf{Golongan} & \textbf{Alasan} \\
+    \hline
+    MPI & \textit{Backbone} & Data inti yang harus benar untuk semua layanan \\
+    \hline
+    ERP keuangan & \textit{Backbone} & Transaksi inti yang harus stabil \\
+    \hline
+    Integrasi klaim BPJS Kesehatan & \textit{Backbone} & Transaksi wajib yang harus andal \\
+    \hline
+    Layanan jadwal dokter & \textit{Platform} & Dipakai ulang Medikara+, pusat kontak, dan
+      klinik mitra \\
+    \hline
+    Aplikasi Medikara+ & Tawaran & Dirakit dari komponen platform, bukan platform itu
+      sendiri \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 1}
+  \label{tab:ch08-lat1-hasil}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.4cm}l>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Komponen} & \textbf{Golongan} & \textbf{Alasan} \\
+    \hline
+    \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Latihan 2: Menulis Tradeoff Sentralisasi untuk Direksi}
+
+Latihan ini membuktikan bahwa \textit{tradeoff} antara efisiensi sentralisasi dan
+keleluasaan rumah sakit di daerah dapat ditulis ringkas, berangka, dan dapat dibaca direksi.
+
+\begin{enumerate}
+  \item Pilih tiga sampai empat aspek yang terdampak sentralisasi layanan pasien, misalnya
+        biaya, waktu keputusan, pengalaman pasien, dan kemitraan setempat.
+  \item Untuk tiap aspek, tulis apa yang diperoleh, apa yang dikorbankan, dan angka atau
+        bukti yang mendukungnya.
+  \item Isi Tabel \ref{tab:ch08-lat2-hasil}. Tabel \ref{tab:ch08-lat2-contoh} memperlihatkan
+        contoh yang sudah terisi.
+  \item Ringkas tabel itu menjadi tepat tiga kalimat: yang diperoleh, yang dikorbankan, dan
+        usulan keputusan beserta syarat tinjau ulangnya.
+  \item Jawab pertanyaan analisis berikut. Pertama, aspek mana yang paling menentukan
+        keputusan, dan apakah angkanya cukup kuat? Kedua, bagaimana kalimat itu berubah bila
+        bobot kelayakan dipangkas seperti pada uji kepekaan di Tabel
+        \ref{tab:ch08-kepekaan}?
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 2 yang sudah terisi, untuk opsi A Medikara}
+  \label{tab:ch08-lat2-contoh}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.5cm}}
+    \hline
+    \textbf{Aspek} & \textbf{Diperoleh} & \textbf{Dikorbankan} & \textbf{Bukti} \\
+    \hline
+    Biaya & Satu pusat kontak, satu SIMRS & Ganti lima SIMRS sekaligus & Nilai biaya 1 \\
+    \hline
+    Waktu keputusan & Aturan seragam & Jadwal dokter tamu Bandung melambat & Hari yang
+      sama ke 2 hari \\
+    \hline
+    Pengalaman pasien & Pendaftaran sekali & Poli tutup tanpa kabar lokal & Nilai
+      pengalaman 4 \\
+    \hline
+    Risiko & Standar tidak dilanggar & Satu proyek gagal, lima rumah sakit lumpuh & Nilai
+      kelayakan 2 \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Tiga kalimat dari contoh tersebut berbunyi begini. Sentralisasi penuh memberi satu
+pendaftaran untuk seluruh jaringan dan menghapus biaya memelihara lima SIMRS. Harganya
+adalah penggantian lima SIMRS sekaligus dan perubahan jadwal di rumah sakit daerah yang
+melambat dari hari yang sama menjadi dua hari. Karena itu diusulkan inti yang distandarkan
+lebih dahulu, dengan sentralisasi ditinjau ulang bila pada Juni 2028 kurang dari 80 persen
+pendaftaran memakai identitas terpadu.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 2}
+  \label{tab:ch08-lat2-hasil}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.2cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.5cm}}
+    \hline
+    \textbf{Aspek} & \textbf{Diperoleh} & \textbf{Dikorbankan} & \textbf{Bukti} \\
+    \hline
+    \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Latihan 3: Syarat Kapabilitas Pengelolaan Kemitraan}
+
+Latihan ini membuktikan bahwa kapabilitas pengelolaan kemitraan muncul di kondisi target
+karena strategi berubah, dan bahwa kapabilitas itu hanya berjalan bila kapabilitas lain
+sudah tersedia.
+
+\begin{enumerate}
+  \item Baca ulang strategi organisasi dan tandai bagian yang menyebut mitra atau
+        ekosistem.
+  \item Jelaskan mengapa kapabilitas ini tidak tampak pada \textit{capability map} saat ini,
+        misalnya karena kemitraan ditangani per kontrak oleh tiap unit.
+  \item Daftar tiga sampai lima syarat agar kapabilitas itu berjalan, lalu tulis kondisi
+        saat ini dan bukti yang perlu dicari untuk tiap syarat.
+  \item Isi Tabel \ref{tab:ch08-lat3-hasil}. Tabel \ref{tab:ch08-lat3-contoh} memperlihatkan
+        contoh yang sudah terisi.
+  \item Jawab pertanyaan analisis berikut. Pertama, syarat mana yang paling lama dipenuhi,
+        dan apa akibatnya bagi urutan peta jalan pada Bab 12? Kedua, syarat mana yang
+        menjadi tanggung jawab mata kuliah lain, dan bagaimana tim memastikan hasilnya
+        tersambung?
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 3 yang sudah terisi}
+  \label{tab:ch08-lat3-contoh}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.4cm}}
+    \hline
+    \textbf{Syarat} & \textbf{Mengapa dibutuhkan} & \textbf{Kondisi saat ini} &
+      \textbf{Bukti dicari} \\
+    \hline
+    Identitas tunggal & Mitra merujuk pasien yang sama & Lima nomor per pasien & Jumlah
+      identitas ganda \\
+    \hline
+    Syarat berbagi data & Data kesehatan termasuk data spesifik & Kontrak per vendor &
+      Daftar perjanjian \\
+    \hline
+    Sambungan baku & Tanpa integrasi khusus per mitra & \textit{Point-to-point} & Jumlah
+      sambungan khusus \\
+    \hline
+    Pemilik kapabilitas & Daur hidup mitra dikelola utuh & Tersebar di tiap rumah sakit &
+      Struktur organisasi \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 3}
+  \label{tab:ch08-lat3-hasil}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{2.4cm}}
+    \hline
+    \textbf{Syarat} & \textbf{Mengapa dibutuhkan} & \textbf{Kondisi saat ini} &
+      \textbf{Bukti dicari} \\
+    \hline
+    \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}

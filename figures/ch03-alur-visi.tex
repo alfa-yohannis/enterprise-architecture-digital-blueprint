@@ -1,0 +1,29 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  tahap/.style={draw, rounded corners, minimum height=1.05cm, text width=1.95cm,
+                align=center, font=\scriptsize\bfseries, inner sep=2pt},
+  rincian/.style={font=\tiny, align=left, text width=2.1cm, anchor=north},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[tahap, fill=blue!8] (preliminary) at (0,0) {Fase Preliminary};
+  \node[tahap, fill=blue!8] (permintaan) at (2.45,0) {Request for Architecture Work};
+  \node[tahap, fill=orange!12] (visi) at (4.9,0) {Fase A: Architecture Vision};
+  \node[tahap, fill=praditagreen!15] (setuju) at (7.35,0) {Persetujuan sponsor dan direksi};
+  \node[tahap, fill=green!10] (lanjut) at (9.8,0) {Fase B, C, dan D};
+
+  \draw[panah] (preliminary) -- (permintaan);
+  \draw[panah] (permintaan) -- (visi);
+  \draw[panah] (visi) -- (setuju);
+  \draw[panah] (setuju) -- (lanjut);
+  \draw[panah] (setuju.north) -- ++(0,0.45) -| (visi.north);
+  \node[font=\tiny, gray, fill=white, inner sep=1pt] at (6.12,0.88) {ditolak: ruang lingkup direvisi};
+
+  \node[rincian] at (0,-0.7) {organisasi arsitektur, kerangka yang disesuaikan, prinsip awal};
+  \node[rincian] at (2.45,-0.7) {sponsor, tujuan bisnis, batas waktu, anggaran, kendala};
+  \node[rincian] at (4.9,-0.7) {rantai motivasi, model operasi, prinsip, ruang lingkup, risiko};
+  \node[rincian] at (7.35,-0.7) {visi arsitektur dan \textit{Statement of Architecture Work} yang disetujui};
+  \node[rincian] at (9.8,-0.7) {arsitektur bisnis, data, aplikasi, dan teknologi};
+
+  \draw[thick, praditagreen, |-|] (-1.05,-2.05) -- (6.0,-2.05);
+  \node[font=\tiny\bfseries, praditagreen] at (2.45,-2.3) {cakupan Bab 3};
+\end{tikzpicture}

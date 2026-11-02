@@ -1,0 +1,27 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  blok/.style={draw, rounded corners, align=center, font=\scriptsize\bfseries,
+               minimum height=1.15cm, inner sep=3pt},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[blok, fill=orange!12, minimum width=9.6cm] (wawasan) at (6.6,3.1)
+    {Shared customer insights\\[1pt]{\tiny\mdseries apa yang dibutuhkan pasien dan
+     mitra, serta apa yang bersedia mereka bayar}};
+  \node[blok, fill=blue!8, minimum width=5.3cm] (platform) at (4.45,1.55)
+    {Digital platform\\[1pt]{\tiny\mdseries komponen bisnis, data, dan teknologi
+     yang dipakai ulang}};
+  \node[blok, fill=blue!8, minimum width=3.6cm] (eksternal) at (9.6,1.55)
+    {External developer\\platform\\[1pt]{\tiny\mdseries komponen yang dibuka bagi mitra}};
+  \node[blok, fill=praditagreen!15, minimum width=9.6cm] (backbone) at (6.6,0)
+    {Operational backbone\\[1pt]{\tiny\mdseries sistem, data, dan proses inti yang
+     andal dan terpadu}};
+  \node[blok, fill=blue!8, minimum width=4.25cm, minimum height=1.0cm, rotate=90]
+    (akun) at (0.95,1.55)
+    {Accountability framework\\[1pt]{\tiny\mdseries siapa memiliki apa}};
+
+  \draw[panah] (wawasan.south -| platform.north) -- (platform.north);
+  \node[font=\tiny, gray, anchor=west] at (4.55,2.33) {mengarahkan apa yang dibangun};
+  \draw[panah] (platform.south) -- (backbone.north -| platform.south);
+  \node[font=\tiny, gray, anchor=west] at (4.55,0.78) {memakai data dan proses inti};
+  \draw[panah] (platform.east) -- (eksternal.west);
+\end{tikzpicture}

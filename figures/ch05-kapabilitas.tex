@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  induk/.style={draw, rounded corners, fill=praditagreen!15, align=center,
+                text width=4.2cm, minimum height=1.1cm, font=\scriptsize\bfseries},
+  kotak/.style={draw, rounded corners, fill=blue!8, align=center, text width=2.4cm,
+                minimum height=1.35cm, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[induk] (kap) at (5.8,0)
+    {Penjadwalan Layanan (CAP-L03)\\{\tiny\mdseries kapabilitas: apa yang dilakukan}};
+  \node[font=\tiny, gray, anchor=west, align=left] at (8.15,0)
+    {relatif stabil\\selama bertahun-tahun};
+
+  \node[kotak] (orang) at (1.45,-2.6)
+    {Orang dan unit\\{\tiny\mdseries petugas loket lima rumah sakit,
+     petugas telepon, tim Medikara+}};
+  \node[kotak] (proses) at (4.35,-2.6)
+    {Proses\\{\tiny\mdseries lima SOP janji temu yang berbeda}};
+  \node[kotak] (info) at (7.25,-2.6)
+    {Informasi\\{\tiny\mdseries identitas pasien dan jadwal praktik dokter}};
+  \node[kotak] (sumber) at (10.15,-2.6)
+    {Sumber daya\\{\tiny\mdseries lima versi SIMRS, aplikasi Medikara+, telepon}};
+
+  \draw[panah] (orang.north) -- ($(kap.south)+(-1.5,0)$);
+  \draw[panah] (proses.north) -- ($(kap.south)+(-0.5,0)$);
+  \draw[panah] (info.north) -- ($(kap.south)+(0.5,0)$);
+  \draw[panah] (sumber.north) -- ($(kap.south)+(1.5,0)$);
+  \node[font=\tiny, fill=white, inner sep=1pt] at (5.8,-1.15) {diwujudkan oleh};
+
+  \begin{scope}[on background layer]
+    \node[draw=gray, dashed, rounded corners, fit=(orang)(sumber), inner sep=5pt] (bawah) {};
+  \end{scope}
+  \node[font=\tiny, gray, anchor=north] at (bawah.south)
+    {bagaimana, oleh siapa, dan dengan apa: berubah saat reorganisasi, revisi SOP,
+     atau penggantian aplikasi};
+\end{tikzpicture}

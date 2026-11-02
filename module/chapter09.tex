@@ -1,3 +1,5 @@
+% !TeX root = enterprise-architecture-digital-blueprint.tex
+% !TeX encoding = UTF-8
 \chapter{Arsitektur Data dan Aplikasi Target}
 
 \section*{Tujuan Pembelajaran}
@@ -9,75 +11,1296 @@
 
 \section{Pendahuluan}
 
-% TODO
-% Cakupan: satu pasien tercatat dengan banyak nomor rekam medis, sehingga riwayat klinis terpecah
-%   dan laporan direksi tidak dapat dipercaya.
+Misalkan seorang pasien, Ibu Sari, memeriksakan gula darahnya di klinik
+Medikara di Bogor pada Januari. Pada Maret ia dirawat di rumah sakit Medikara
+Jakarta karena demam berdarah. Pada Juni ia kontrol di rumah sakit Medikara
+Depok yang dekat dengan rumahnya, lalu pada Agustus memesan telekonsultasi
+lewat Medikara+. Keempat layanan itu milik perusahaan yang sama, tetapi Ibu
+Sari tercatat dengan empat nomor yang berbeda. Dokter di Depok tidak melihat
+hasil gula darah dari Bogor, sehingga pemeriksaannya diulang. Laporan direksi
+pun menghitungnya sebagai empat pasien.
+
+Bab 6 menemukan masalah ini saat memotret data kondisi saat ini, dan Bab 8
+menetapkan arsitektur bisnis target yang menuntut layanan terintegrasi lintas
+fasilitas. Bab ini menjawab pertanyaan berikutnya: data dan aplikasi seperti
+apa yang dibutuhkan agar target itu berjalan? Dalam ADM (\textit{Architecture
+Development Method}), pertanyaan ini dijawab fase C, yaitu arsitektur sistem
+informasi yang mencakup domain data dan domain aplikasi \cite{togaf10}.
+Hasilnya empat keputusan: identitas pasien tunggal, alur data untuk laporan,
+lanskap aplikasi target beserta rasionalisasinya, dan cara memperoleh tiap
+aplikasi.
+
+Rujukan utama bab ini adalah TOGAF Standard untuk fase C \cite{togaf10},
+DAMA-DMBOK untuk manajemen data induk \cite{dmbok2}, Peraturan Menteri
+Kesehatan Nomor 24 Tahun 2022 tentang Rekam Medis \cite{permenkes24-2022},
+spesifikasi HL7 FHIR (\textit{Health Level Seven Fast Healthcare
+Interoperability Resources}) R4 dan dokumentasi SATUSEHAT \cite{c09-fhir-r4,
+c09-satusehat}, serta panduan portofolio aplikasi dalam BIZBOK
+\cite{bizbok15}.
 
 \section{Identitas Pasien Tunggal dan Data Induk}
 
-% TODO
-% Cakupan: MPI (Master Patient Index); pola manajemen data induk pada tingkat konsep (registri,
-%   konsolidasi, terpusat); aturan kepemilikan dan pembaruan data induk; prinsip satu sumber
-%   kebenaran dari C1.
-% Kasus Medikara: penyatuan identitas pasien dari lima rumah sakit dan 18 klinik.
-% Pendalaman teknis: aturan pencocokan identitas deterministik dan probabilistik beserta risiko
-%   salah gabung dan salah pisah.
+Masalah identitas ganda dapat diukur, bukan hanya dikeluhkan. Misalkan tim
+data Medikara menghitung seluruh catatan identitas pasien di tujuh sumber:
+lima SIMRS (Sistem Informasi Manajemen Rumah Sakit), SIM Klinik, dan
+Medikara+. Ke-18 klinik pratama diandaikan memakai satu aplikasi bersama yang
+disebut SIM Klinik. Seluruh catatan itu lalu dicocokkan secara kasar dengan Nomor Induk
+Kependudukan (NIK), tanggal lahir, dan nama. Tabel
+\ref{tab:ch09-sebaran-identitas} memuat hasilnya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Sebaran catatan identitas pasien Medikara di tujuh sumber (angka
+           rekaan)}
+  \label{tab:ch09-sebaran-identitas}
+  \begin{tabularx}{\textwidth}{Xrr}
+    \hline
+    \textbf{Sumber} & \textbf{Catatan identitas} & \textbf{NIK terisi} \\
+    \hline
+    SIMRS Jakarta & 620.000 & 81\% \\
+    \hline
+    SIMRS Bekasi & 380.000 & 74\% \\
+    \hline
+    SIMRS Depok & 310.000 & 77\% \\
+    \hline
+    SIMRS Bogor & 270.000 & 69\% \\
+    \hline
+    SIMRS Bandung & 290.000 & 72\% \\
+    \hline
+    SIM Klinik, 18 klinik pratama & 150.000 & 88\% \\
+    \hline
+    Medikara+ & 80.000 & 95\% \\
+    \hline
+    \textbf{Jumlah} & \textbf{2.100.000} & \textbf{77,4\%} \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Jumlah catatannya 2,1 juta, sedangkan hasil pencocokan memperkirakan jumlah
+orang yang berbeda hanya sekitar 1,5 juta. Artinya sekitar 600.000 catatan,
+atau 28,6 persen, adalah salinan identitas orang yang sama. Kolom terakhir
+menunjukkan salah satu sebabnya. Hampir seperempat catatan tidak memiliki NIK,
+terutama catatan lama. Padahal Permenkes 24/2022 Pasal 14 ayat (2) mewajibkan
+data identitas pasien paling sedikit berisi nomor rekam medis, nama pasien,
+dan NIK \cite{permenkes24-2022}. Gambar \ref{fig:ch09-satu-identitas}
+melukiskan arah yang dituju: berkas dari banyak fasilitas bermuara ke satu
+identitas.
+
+Gambar \ref{fig:ch09-satu-identitas} merangkum hubungan komponen dan konsep utama bab ini.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{../figures/ch09-diagram-konsep.png}
+  \caption{MPI menautkan identitas; rekam medis tetap pada sumbernya}
+  \label{fig:ch09-satu-identitas}
+\end{figure}
+
+\subsection*{Master Patient Index}
+
+\textit{Master Patient Index} (MPI) adalah indeks induk yang menautkan semua
+nomor lokal milik satu orang ke satu identitas induk. MPI tidak menyimpan
+rekam medis. Isinya data demografi untuk mengenali orang, yaitu nama, tanggal
+lahir, jenis kelamin, alamat, dan NIK, ditambah daftar tautan ke nomor lokal
+di tiap sistem. Cara kerjanya begini. Saat pasien mendaftar di fasilitas mana
+pun, aplikasi pendaftaran lebih dahulu bertanya ke MPI apakah orang ini sudah
+dikenal. Bila sudah, MPI mengembalikan ID induknya dan aplikasi menautkan
+nomor lokalnya. Bila belum, MPI membuat ID induk baru.
+
+Analoginya seperti buku induk warga di kantor RT. Setiap kegiatan warga punya
+daftar sendiri. Daftar arisan menulis ``Bu Sari'', daftar ronda menulis
+``Sariyah'', dan daftar posyandu menulis ``Ny. Sari R.''. Ketua RT tidak
+menghapus daftar-daftar itu. Ia cukup memegang satu buku induk berisi satu
+nomor untuk tiap warga, lengkap dengan catatan nama yang dipakai di tiap
+daftar. Ketika ada pertanyaan berapa warga yang ikut kegiatan apa pun, yang
+dihitung adalah nomor di buku induk, bukan baris di tiap daftar.
+
+Gambar \ref{fig:ch09-mpi-tautan} memperlihatkan Ibu Sari dari pendahuluan.
+Empat nomor lokalnya tetap ada, tetapi keempatnya ditautkan ke satu ID induk.
+Riwayat klinis, laporan, dan pengiriman data ke luar memakai ID induk itu.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch09-mpi-tautan.tex}
+  \caption{MPI menautkan empat nomor lokal milik satu pasien ke satu ID induk}
+  \label{fig:ch09-mpi-tautan}
+\end{figure}
+
+Dua contoh dari Medikara:
+\begin{enumerate}
+  \item Misalkan 18.000 pemeriksaan laboratorium per tahun diulang karena
+        hasil dari fasilitas lain tidak terlihat oleh dokter. Dengan biaya
+        rata-rata Rp150.000, pemborosannya sekitar Rp2.700 juta per tahun,
+        belum termasuk waktu pasien dan beban laboratorium.
+  \item Laporan direksi 2025 mencatat 150.000 pasien baru. Setelah
+        dicocokkan, 55.000 di antaranya ternyata pasien lama di fasilitas
+        Medikara lain. Pasien baru yang sesungguhnya sekitar 95.000, atau
+        36,7 persen lebih sedikit. Anggaran pemasaran yang dinilai berhasil
+        dari angka 150.000 itu dinilai dengan angka yang keliru.
+\end{enumerate}
+
+\subsection*{Pola Manajemen Data Induk}
+
+Bab 6 sudah membedakan data induk dari data referensi dan data transaksi.
+Data induk adalah data tentang hal-hal pokok yang dipakai berulang oleh banyak
+proses: pasien, dokter, fasilitas, obat, dan penjamin. Manajemen data induk
+adalah gabungan aturan, proses, dan teknologi yang menjaga data itu tetap sama
+di semua sistem \cite{dmbok2}. Pertanyaan arsitekturnya dua: di mana versi
+induk disimpan, dan siapa yang boleh mengubahnya? Tabel
+\ref{tab:ch09-pola-data-induk} merangkum tiga pola yang menjawabnya dengan
+cara berbeda.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Tiga pola manajemen data induk pada tingkat konsep}
+  \label{tab:ch09-pola-data-induk}
+  \small
+  \begin{tabularx}{\textwidth}{lXXl}
+    \hline
+    \textbf{Pola} & \textbf{Tempat versi induk} & \textbf{Yang mengubah} & \textbf{Biaya ubah} \\
+    \hline
+    Registri & Tetap di tiap sistem sumber, pusat hanya menyimpan tautan & Sistem sumber & Rendah \\
+    \hline
+    Konsolidasi & Salinan bersih di pusat, dipakai untuk dibaca dan dilaporkan & Sistem sumber, pusat merapikan & Sedang \\
+    \hline
+    Terpusat & Di pusat, sistem sumber membaca dari pusat & Hanya pusat & Tinggi \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Analoginya seperti perpustakaan dengan banyak cabang. Pada pola registri,
+kantor pusat hanya memegang katalog yang menunjuk rak di tiap cabang. Pada
+pola konsolidasi, kantor pusat menyimpan salinan rapi data seluruh buku,
+tetapi cabang tetap mencatat sendiri. Pada pola terpusat, setiap buku baru
+wajib dicatat lewat kantor pusat, dan cabang hanya membaca.
+
+Dua contoh pemakaian pola:
+\begin{enumerate}
+  \item Data induk obat untuk 12 apotek Medikara layak memakai pola terpusat
+        sejak awal. Katalog obat jarang berubah, dan satu tim farmasi pusat
+        sudah mengelolanya. Biaya mengubah aplikasi apotek juga kecil.
+  \item Data induk pasien layak dimulai dengan pola registri. Lima SIMRS
+        masih berjalan dan mengubah kelimanya mahal, sehingga yang paling
+        murah adalah menautkan dulu, baru memusatkan setelah SIMRS diganti.
+\end{enumerate}
+
+\subsection*{Kepemilikan dan Aturan Pembaruan}
+
+Pola saja belum cukup. Setiap atribut identitas butuh pemilik, sumber
+kebenaran, dan jalur resmi untuk mengubahnya. Tabel
+\ref{tab:ch09-aturan-identitas} memuat aturan yang diusulkan untuk Medikara.
+Pemilik bisnis data identitas adalah Direktur Pelayanan, sedangkan
+pengelola hariannya (\textit{data steward}) adalah kepala unit rekam medis di
+tiap fasilitas.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Aturan pembaruan atribut identitas pasien di Medikara}
+  \label{tab:ch09-aturan-identitas}
+  \small
+  \begin{tabularx}{\textwidth}{lXX}
+    \hline
+    \textbf{Atribut} & \textbf{Yang boleh mengubah} & \textbf{Syarat} \\
+    \hline
+    ID induk & Tidak ada, dibuat otomatis oleh MPI & Tidak pernah dipakai ulang \\
+    \hline
+    NIK, nama, tanggal lahir & Petugas pendaftaran & Sesuai dokumen identitas yang diperiksa \\
+    \hline
+    Alamat dan nomor telepon & Petugas pendaftaran, atau pasien lewat Medikara+ & Riwayat perubahan disimpan \\
+    \hline
+    Nomor SATUSEHAT & Tidak diubah di Medikara & Diambil dari layanan SATUSEHAT \\
+    \hline
+    Penggabungan dan pemisahan catatan & Tim pengelola data induk & Ditinjau dua orang dan tercatat \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Baris terakhir yang paling sering dilupakan. Menggabungkan dua catatan yang
+ternyata milik dua orang berbeda adalah kesalahan klinis, bukan sekadar
+kesalahan administrasi. Karena itu penggabungan tidak diserahkan kepada
+petugas pendaftaran, dan setiap penggabungan harus dapat dibatalkan.
+
+\subsection*{Satu Sumber Kebenaran}
+
+Prinsip ``satu sumber kebenaran untuk data pasien'' sudah dirumuskan dalam
+visi arsitektur C1 (Bab 3). Pada tahap ini prinsip itu diturunkan menjadi
+aturan desain yang dapat diperiksa.
+
+Dua hal pada prinsip ini sering tertukar. Pembagiannya begini. Satu sumber
+kebenaran berarti untuk setiap atribut ada satu tempat yang diakui sebagai
+acuan dan satu jalur resmi untuk mengubahnya. Satu basis data berarti semua
+data disimpan di satu tempat secara fisik. Yang pertama dapat dicapai tanpa
+yang kedua: pola registri menjaga satu sumber kebenaran untuk identitas
+walaupun datanya masih tersebar di lima SIMRS. Sebaliknya, satu basis data
+tanpa aturan kepemilikan tetap dapat berisi tiga versi alamat untuk orang
+yang sama.
+
+Keputusan ini punya dua konsekuensi. Pertama, setiap aplikasi baru wajib
+membaca identitas dari MPI dan dilarang membuat daftar pasien sendiri. Aturan
+ini masuk ke daftar periksa tinjauan arsitektur. Kedua, MPI menjadi layanan
+yang paling sering dipanggil di seluruh jaringan, sehingga ketersediaannya
+menjadi syarat yang dituliskan di arsitektur teknologi target (Bab 10).
+
+\begin{kasus}[title={Kasus Medikara Health: Menyatukan Identitas dari Lima Rumah Sakit dan 18 Klinik}]
+Medikara memilih dua tahap. Pada tahap pertama, MPI dipasang dengan pola
+registri di atas lima SIMRS, SIM Klinik, dan Medikara+. Pencocokan awal atas
+2,1 juta catatan menghasilkan sekitar 1,5 juta ID induk. Misalkan 9.000
+pasangan catatan tidak dapat diputuskan otomatis dan masuk antrean tinjauan.
+Dengan enam petugas yang masing-masing meninjau 60 pasangan per hari, antrean
+itu selesai dalam 25 hari kerja. Pada tahap kedua, setelah SIMRS tunggal
+berjalan, MPI berubah menjadi pola terpusat: pendaftaran di mana pun langsung
+menulis ke MPI.
+
+\medskip
+Dua MPI juga sering tertukar di sini. MPI Medikara berlaku di dalam jaringan
+Medikara. MPI Kementerian Kesehatan berlaku nasional dan menerbitkan nomor
+SATUSEHAT pasien, yang diambil fasilitas lewat layanan SATUSEHAT
+\cite{c09-satusehat}. MPI Medikara tidak menggantikan MPI nasional. Ia
+menyimpan nomor SATUSEHAT sebagai salah satu tautan, sehingga pengiriman data
+ke SATUSEHAT tidak perlu mencari ulang identitas pasien setiap kali.
+\end{kasus}
+
+\begin{pendalaman}[title={Pendalaman Teknis (opsional): Pencocokan Deterministik dan Probabilistik}]
+Pencocokan identitas memutuskan apakah dua catatan milik orang yang sama.
+Pendekatan \textbf{deterministik} memakai aturan pasti, misalnya ``NIK sama
+dan tanggal lahir sama berarti satu orang''. Aturannya mudah dijelaskan,
+tetapi gagal bila NIK kosong atau salah ketik. Pendekatan
+\textbf{probabilistik} memberi bobot pada tiap atribut. Atribut yang cocok
+menambah skor, atribut yang berbeda mengurangi skor, lalu skor totalnya
+dibandingkan dengan dua ambang. Di atas ambang atas, kedua catatan digabung.
+Di bawah ambang bawah, keduanya dianggap orang berbeda. Di antara keduanya,
+pasangan itu ditinjau petugas. Kerangka dua ambang ini berasal dari model
+Fellegi dan Sunter \cite{c09-fellegi1969}. Operasi \texttt{\$match} pada
+resource Patient di FHIR memakai gagasan serupa: MPI mengembalikan kandidat
+beserta skor 0 sampai 1 dan tingkat keyakinan kecocokannya
+\cite{c09-fhir-match}.
+
+\medskip
+Dua jenis kesalahan perlu dibedakan. \textbf{Salah gabung} terjadi ketika
+dua orang berbeda dijadikan satu. Akibatnya klinis dan hukum: alergi atau
+golongan darah orang lain muncul di riwayat pasien, dan riwayat seseorang
+terbuka bagi orang lain. \textbf{Salah pisah} terjadi ketika satu orang
+tercatat sebagai dua. Akibatnya riwayat tidak lengkap, pemeriksaan diulang,
+dan laporan menggelembung. Salah gabung lebih berbahaya, sehingga ambang atas
+dipasang tinggi. Tabel \ref{tab:ch09-pencocokan} membandingkan kedua
+pendekatan pada sampel rekaan 10.000 pasangan yang kebenarannya sudah
+diperiksa manual: 2.000 pasangan memang orang yang sama, dan 8.000 pasangan
+orang berbeda.
+
+\begin{center}
+  \captionof{table}{Hasil kedua pendekatan pada 10.000 pasangan rekaan}
+  \label{tab:ch09-pencocokan}
+  \small
+  \begin{tabularx}{\linewidth}{Xrr}
+    \hline
+    \textbf{Ukuran} & \textbf{Deterministik} & \textbf{Probabilistik} \\
+    \hline
+    Digabung otomatis & 1.484 & 1.700 \\
+    \hline
+    Salah gabung & 4 & 12 \\
+    \hline
+    Salah pisah & 520 & 82 \\
+    \hline
+    Ditinjau petugas & 0 & 300 \\
+    \hline
+  \end{tabularx}
+\end{center}
+
+\medskip
+Aturan deterministik hampir tidak pernah salah gabung. Empat kasusnya adalah
+pasangan kembar yang didaftarkan dengan NIK ibunya. Namun aturan ini
+melewatkan 520 pasangan, kebanyakan karena NIK kosong. Pendekatan
+probabilistik menekan salah pisah menjadi 82, dengan harga 12 salah gabung
+dan 300 pasangan yang harus ditinjau. Pilihan ambang adalah keputusan
+\textit{tradeoff} yang harus disetujui pemilik data, bukan diputuskan tim
+teknologi informasi sendiri. Mutu data masukan juga menentukan. Standardisasi data demografi,
+misalnya format nama dan alamat, terbukti memengaruhi akurasi pencocokan
+\cite{c09-grannis2019}.
+
+\medskip
+Hasil penggabungan disimpan sebagai tautan, sehingga dapat dibatalkan. Berkas
+\berkas{sources/chapter09/contoh-patient-fhir.json} memperlihatkan resource
+Patient milik Ibu Sari: NIK, nomor SATUSEHAT, ID induk, dan nomor lokal
+disimpan sebagai \texttt{identifier}, sedangkan elemen \texttt{link} bertipe
+\texttt{replaces} mencatat catatan ganda yang sudah digabung. Bobot, ambang,
+dan contoh pasangan rekaan untuk latihan ada di
+\berkas{sources/chapter09/contoh-aturan-identitas-pasien.md}. Data pasien asli
+tidak boleh dipakai untuk latihan pencocokan.
+\end{pendalaman}
 
 \section{Arsitektur Data untuk Analitik dan Pelaporan}
 
-% TODO
-% Cakupan: beda data operasional dan data analitik; gudang data dan platform data pada tingkat
-%   konsep; mengganti laporan spreadsheet dengan sumber yang terkelola; kualitas data sebagai
-%   syarat laporan terpadu.
+Misalkan laporan bulanan direksi Medikara saat ini dirakit dari 23
+\textit{spreadsheet}, satu dari tiap rumah sakit dan satu dari tiap klinik.
+Penyusunannya memakan sembilan hari kerja setiap bulan. Angka kunjungan pada
+laporan pelayanan dan laporan keuangan untuk bulan yang sama selisih 4 persen,
+dan tidak ada yang dapat menjelaskan sebabnya. Pertanyaan kemudian muncul:
+mengapa data yang sudah ada di sistem masih harus disalin ke \textit{spreadsheet}?
+
+\subsection*{Data Operasional dan Data Analitik}
+
+Data operasional melayani transaksi yang sedang berjalan: mendaftarkan
+pasien, mencatat resep, menerbitkan tagihan. Satu catatan dibaca dan diubah
+berkali-kali dalam waktu singkat. Data analitik melayani pertanyaan tentang
+banyak transaksi sekaligus dan sepanjang waktu, misalnya tren waktu tunggu
+selama dua tahun. Datanya dibaca dalam jumlah besar dan hampir tidak pernah
+diubah. Tabel \ref{tab:ch09-operasional-analitik} merangkum perbedaannya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Perbedaan data operasional dan data analitik}
+  \label{tab:ch09-operasional-analitik}
+  \small
+  \begin{tabularx}{\textwidth}{lXX}
+    \hline
+    \textbf{Hal} & \textbf{Data operasional} & \textbf{Data analitik} \\
+    \hline
+    Pertanyaan khas & Jam berapa pasien ini dijadwalkan? & Berapa median waktu tunggu tiap rumah sakit selama 12 bulan? \\
+    \hline
+    Rentang waktu & Saat ini & Bertahun-tahun ke belakang \\
+    \hline
+    Pola pemakaian & Satu catatan diubah berulang & Banyak catatan dibaca sekaligus \\
+    \hline
+    Pemakai & Petugas layanan & Manajemen, analis, regulator \\
+    \hline
+    Bila dicampur & Laporan berat memperlambat pendaftaran & Angka berubah saat laporan sedang dibaca \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Analoginya seperti toko dengan kasir dan bagian pembukuan. Kasir melayani
+pembeli yang sedang antre dan tidak boleh diganggu. Bagian pembukuan merekap
+seluruh nota setiap malam untuk menjawab pertanyaan pemilik, misalnya barang
+apa yang paling laku bulan ini. Bila pemilik meminta rekap itu langsung dari
+kasir di jam ramai, antrean memanjang. Laporan \textit{spreadsheet} Medikara mirip
+keadaan ketika setiap kasir diminta menulis rekap sendiri di buku tulis, lalu
+buku-buku itu dijumlahkan dengan tangan.
+
+\subsection*{Gudang Data dan Platform Data}
+
+Gudang data (\textit{data warehouse}) adalah tempat data dari banyak sistem
+operasional disatukan, dibersihkan, dan disusun menurut pokok bisnis untuk
+analisis \cite{c09-kimball2013}. Generasi berikutnya menaruh data mentah dalam
+jumlah besar di \textit{data lake}, lalu menyalin sebagian ke gudang data.
+Armbrust dan rekan-rekannya mencatat bahwa susunan dua tingkat ini rawan data
+basi dan sulit dijaga konsisten, lalu mengusulkan \textit{lakehouse}, yaitu
+satu platform dengan format data terbuka yang melayani laporan sekaligus
+analitik lanjutan \cite{c09-armbrust2021}. Pada tingkat arsitektur, ketiganya
+menjawab kebutuhan yang sama: satu tempat terkelola untuk data analitik.
+Pilihan teknologinya diputuskan di arsitektur teknologi target (Bab 10).
+
+Gambar \ref{fig:ch09-alur-data-analitik} memperlihatkan alur data target
+untuk Medikara. Data dari aplikasi inti, yaitu SIMRS, SIM Klinik, ERP
+(\textit{Enterprise Resource Planning}) keuangan, dan Medikara+, disalin apa
+adanya ke zona mentah,
+sehingga selalu ada jejak asli untuk audit. Data lalu melewati pemeriksaan
+kualitas. Data yang gagal dikembalikan ke pemilik datanya untuk diperbaiki di
+sumber, bukan ditambal diam-diam di laporan. Data yang lolos masuk ke zona
+terolah, dirapikan dengan satu definisi untuk tiap angka, dan ditautkan ke ID
+induk dari MPI.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch09-alur-data-analitik.tex}
+  \caption{Alur data target untuk analitik dan pelaporan di Medikara}
+  \label{fig:ch09-alur-data-analitik}
+\end{figure}
+
+\subsection*{Mengganti Spreadsheet dengan Sumber yang Terkelola}
+
+\textit{Spreadsheet} tidak salah sebagai alat. Masalahnya muncul ketika \textit{spreadsheet}
+menjadi sumber angka resmi. Setiap salinan dapat diubah tanpa jejak, rumusnya
+berbeda di tiap fasilitas, dan definisinya tidak tertulis. Selisih 4 persen
+tadi, misalnya, ternyata berasal dari dua definisi kunjungan. Laporan keuangan
+menghitung tagihan, sedangkan laporan pelayanan menghitung pendaftaran,
+termasuk pasien yang batal diperiksa.
+
+Karena itu langkah pertamanya bukan membeli alat \textit{dashboard},
+melainkan menuliskan satu definisi untuk tiap angka penting beserta
+pemiliknya. Tabel \ref{tab:ch09-definisi-metrik} memuat contohnya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh definisi tunggal untuk angka laporan Medikara}
+  \label{tab:ch09-definisi-metrik}
+  \small
+  \begin{tabularx}{\textwidth}{lXl}
+    \hline
+    \textbf{Angka} & \textbf{Definisi tunggal} & \textbf{Pemilik} \\
+    \hline
+    Kunjungan & Pendaftaran layanan yang berakhir dengan pemeriksaan, dihitung per tanggal layanan & Direktur Pelayanan \\
+    \hline
+    Pasien unik & Jumlah ID induk MPI dengan minimal satu kunjungan dalam periode & Direktur Pelayanan \\
+    \hline
+    Waktu tunggu & Selisih jam pendaftaran dan jam mulai pemeriksaan, median per hari & Kepala rawat jalan \\
+    \hline
+    Klaim tertunda & Klaim BPJS (Badan Penyelenggara Jaminan Sosial) Kesehatan yang belum dibayar lebih dari 30 hari sejak diajukan & Direktur Keuangan \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Sesudah definisinya disepakati, penggantiannya berjalan dalam empat langkah.
+Pertama, semua laporan rutin didaftar beserta pemakainya. Kedua, tiap laporan
+dibangun ulang dari zona terolah. Ketiga, laporan lama dan laporan baru
+dijalankan paralel selama dua periode, lalu selisihnya dijelaskan satu per
+satu. Keempat, \textit{spreadsheet} dihentikan sebagai sumber resmi.
+
+\subsection*{Kualitas Data sebagai Syarat Laporan Terpadu}
+
+Laporan terpadu hanya sebaik data yang masuk. Karena itu dimensi kualitas dari
+Bab 6, yaitu akurasi, kelengkapan, konsistensi, dan ketepatan waktu, ditulis
+sebagai aturan yang dapat dihitung. Contohnya: NIK terisi pada sedikitnya 98
+persen pendaftaran baru, tanggal pulang tidak pernah lebih awal dari tanggal
+masuk, dan kode diagnosis terisi pada sedikitnya 99 persen kunjungan yang sudah
+ditutup. Aturan ini sejalan dengan Permenkes 24/2022, yang memasukkan
+pelaporan internal dan pelaporan eksternal ke dalam kegiatan pengolahan
+informasi rekam medis elektronik \cite{permenkes24-2022}. Medikara
+menargetkan dua dampak. Laporan bulanan direksi tersedia dua hari kerja
+setelah bulan berakhir, turun dari sembilan hari kerja. Kelengkapan NIK naik
+dari 77,4 persen pada data lama menjadi 98 persen pada pendaftaran baru,
+karena pemeriksaannya dipasang di layar pendaftaran, bukan di akhir bulan.
 
 \section{Lanskap Aplikasi Target dan Rasionalisasi}
 
-% TODO
-% Cakupan: keputusan per aplikasi (pertahankan, ganti, gabungkan, hentikan); aplikasi bersama dan
-%   aplikasi lokal; pemeriksaan sebelum menghentikan aplikasi.
-% Kasus Medikara: konsolidasi lima SIMRS dan posisi Medikara+ serta ERP.
+Misalkan katalog aplikasi pada Bab 7 mencatat 46 aplikasi di Medikara, belum
+termasuk \textit{spreadsheet} laporan. Kondisi target tidak cukup digambar sebagai
+daftar aplikasi baru. Setiap aplikasi lama juga butuh keputusan, karena
+aplikasi yang tidak pernah diputuskan nasibnya akan tetap berjalan, tetap
+dibayar, dan tetap menjadi celah keamanan.
+
+\subsection*{Empat Keputusan Rasionalisasi}
+
+Rasionalisasi aplikasi adalah pemberian satu keputusan untuk tiap aplikasi
+dalam portofolio, berdasarkan kapabilitas yang didukungnya dan arah
+arsitektur target \cite{bizbok15}. Keputusannya empat: pertahankan, ganti,
+gabungkan, atau hentikan. Tabel \ref{tab:ch09-empat-keputusan} menjelaskan
+arti tiap keputusan dan kuadran TIME (\textit{Tolerate, Invest, Migrate,
+Eliminate}) yang lazim mendahuluinya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Empat keputusan rasionalisasi dan kaitannya dengan penilaian TIME}
+  \label{tab:ch09-empat-keputusan}
+  \small
+  \begin{tabularx}{\textwidth}{lXl}
+    \hline
+    \textbf{Keputusan} & \textbf{Artinya} & \textbf{TIME yang lazim} \\
+    \hline
+    Pertahankan & Aplikasi tetap dipakai di kondisi target, mungkin dengan perbaikan & \textit{Invest}, \textit{Tolerate} \\
+    \hline
+    Ganti & Fungsinya tetap dibutuhkan, tetapi aplikasinya diganti & \textit{Migrate} \\
+    \hline
+    Gabungkan & Beberapa aplikasi sefungsi disatukan menjadi satu & \textit{Tolerate}, \textit{Migrate} \\
+    \hline
+    Hentikan & Fungsinya tidak lagi dibutuhkan atau sudah dilayani aplikasi lain & \textit{Eliminate} \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Analoginya seperti membereskan dapur setelah dua keluarga pindah serumah. Ada
+dua penanak nasi dan tiga blender. Tiap barang diberi keputusan: dipakai
+terus, diganti yang baru, disatukan, atau disumbangkan. Barang tidak
+disumbangkan sebelum dipastikan tidak ada anggota keluarga yang masih
+memakainya untuk keperluan khusus.
+
+Dua hal pada bagian ini sering tertukar. Pembagiannya begini. Penilaian TIME
+pada Bab 7 menilai kondisi aplikasi saat ini dari dua sumbu, yaitu nilai
+bisnis dan kualitas teknis, lalu memberi arah investasi. Rasionalisasi
+memutuskan nasib aplikasi di kondisi target, dengan pertimbangan yang tidak
+ada di TIME: kapabilitas target, prinsip arsitektur, dan aplikasi lain yang
+fungsinya sama. Aplikasi yang dinilai \textit{Invest} pun dapat digabungkan,
+bila aplikasi lain lebih cocok menjadi aplikasi bersama.
+
+\subsection*{Aplikasi Bersama dan Aplikasi Lokal}
+
+Pertanyaan berikutnya: aplikasi mana yang harus sama di seluruh jaringan, dan
+mana yang boleh berbeda per fasilitas? Jawabannya diturunkan dari model
+operasi target pada Bab 8. Kapabilitas yang distandarkan lintas fasilitas,
+misalnya pendaftaran pasien, rekam medis, dan penagihan, memakai aplikasi
+bersama. Ross, Beath, dan Mocker menyebut sistem, data, dan proses inti yang
+distandarkan seperti ini sebagai \textit{operational backbone}
+\cite{ross2019}. Kapabilitas yang sengaja diberi keleluasaan lokal boleh
+memakai aplikasi lokal, asalkan memenuhi dua syarat: membaca identitas dari
+MPI dan terhubung lewat platform integrasi.
+
+Dua contoh dari Medikara:
+\begin{enumerate}
+  \item Misalkan rumah sakit Bandung memakai aplikasi antrean sendiri yang dibeli
+        pada 2021. Fungsi antrean sudah tersedia di Medikara+ untuk kelima
+        rumah sakit. Keputusannya hentikan, setelah data antrean dua tahun
+        terakhir dipindahkan untuk analisis waktu tunggu.
+  \item SIM Klinik melayani 18 klinik pratama dengan fungsi yang sebagian
+        besar sama dengan modul rawat jalan SIMRS. Keputusannya gabungkan ke
+        SIMRS tunggal, sehingga riwayat pasien klinik dan rumah sakit berada
+        di satu aplikasi.
+\end{enumerate}
+
+Gambar \ref{fig:ch09-lanskap-aplikasi-target} memperlihatkan lanskap
+aplikasi target hasil keputusan-keputusan itu. Kanal pasien dan mitra berada
+di atas, aplikasi inti bersama di tengah, dan platform data di bawah. Seluruh
+pertukaran data, termasuk dengan SATUSEHAT dan BPJS Kesehatan, lewat satu
+platform integrasi yang membuka API (\textit{Application Programming
+Interface}) bagi aplikasi lain. Pemodel tim menggambar lanskap yang sama sebagai
+\textit{application cooperation view} di Archi.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch09-lanskap-aplikasi-target.tex}
+  \caption{Lanskap aplikasi target Medikara: kanal, platform integrasi,
+           aplikasi inti bersama, dan platform data}
+  \label{fig:ch09-lanskap-aplikasi-target}
+\end{figure}
+
+\begin{kasus}[title={Kasus Medikara Health: Konsolidasi Lima SIMRS, Posisi Medikara+, dan ERP}]
+Tabel \ref{tab:ch09-rasionalisasi-medikara} memuat sebagian tabel
+rasionalisasi Medikara. Kolom TIME diandaikan dari penilaian Bab 7.
+
+\begin{center}
+  \captionof{table}{Potongan tabel rasionalisasi aplikasi Medikara}
+  \label{tab:ch09-rasionalisasi-medikara}
+  \small
+  \begin{tabularx}{\linewidth}{llX}
+    \hline
+    \textbf{Aplikasi saat ini} & \textbf{Keputusan} & \textbf{Alasan singkat} \\
+    \hline
+    Lima SIMRS & Ganti & Lima versi hasil akuisisi diganti satu SIMRS tunggal (\textit{Migrate}) \\
+    \hline
+    SIM Klinik & Gabungkan & Modul rawat jalan SIMRS tunggal melayani 18 klinik (\textit{Tolerate}) \\
+    \hline
+    ERP keuangan & Pertahankan & Sudah terpusat, ditambah antarmuka tagihan dan klaim (\textit{Invest}) \\
+    \hline
+    Medikara+ & Pertahankan & Kanal pasien utama, akses datanya dipindah ke API (\textit{Invest}) \\
+    \hline
+    Antrean rumah sakit Bandung & Hentikan & Fungsinya sudah ada di Medikara+ (\textit{Eliminate}) \\
+    \hline
+    23 \textit{spreadsheet} laporan & Hentikan & Diganti laporan dari platform data (\textit{Eliminate}) \\
+    \hline
+    Integrasi ke BPJS dan SATUSEHAT & Ganti & Dipindah ke platform integrasi (\textit{Migrate}) \\
+    \hline
+  \end{tabularx}
+\end{center}
+
+Keputusan terbesar ada di baris pertama. Lima SIMRS diganti satu SIMRS untuk
+lima rumah sakit dan 18 klinik. Cara memperolehnya dibandingkan di seksi
+keputusan membangun, membeli, atau berlangganan. Medikara+ dipertahankan
+karena pasien sudah memakainya, tetapi hubungannya dengan SIMRS diubah.
+Aplikasi itu tidak lagi membaca basis data SIMRS secara langsung, melainkan
+lewat API yang hak aksesnya dibatasi. ERP keuangan dipertahankan karena
+sudah menjadi satu-satunya sumber data keuangan. Yang berubah hanya cara
+tagihan dari SIMRS masuk ke ERP.
+\end{kasus}
+
+\subsection*{Pemeriksaan sebelum Menghentikan Aplikasi}
+
+Keputusan hentikan paling sering menimbulkan masalah, karena pemakaian
+tersembunyi baru terlihat setelah aplikasinya mati. Tabel
+\ref{tab:ch09-periksa-hentikan} memuat enam pemeriksaan yang dilakukan
+sebelum sebuah aplikasi dihentikan.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Enam pemeriksaan sebelum sebuah aplikasi dihentikan}
+  \label{tab:ch09-periksa-hentikan}
+  \small
+  \begin{tabularx}{\textwidth}{lXX}
+    \hline
+    \textbf{Pemeriksaan} & \textbf{Pertanyaan} & \textbf{Bukti yang dicari} \\
+    \hline
+    Pengguna & Siapa yang masih masuk ke aplikasi dalam 90 hari terakhir? & Log akses \\
+    \hline
+    Keluaran wajib & Laporan apa yang masih dihasilkan, dan dikirim ke mana? & Daftar laporan dan jadwal pengirimannya \\
+    \hline
+    Data & Data apa yang wajib disimpan, dan di mana diarsipkan? & Aturan penyimpanan dan rencana arsip \\
+    \hline
+    Ketergantungan & Integrasi atau proses apa yang membaca dari aplikasi ini? & Katalog antarmuka Bab 7 \\
+    \hline
+    Kontrak & Kapan kontrak berakhir, dan bagaimana data dikembalikan? & Kontrak vendor \\
+    \hline
+    Pengganti & Apakah fungsi pengganti sudah diuji paralel? & Hasil uji dan persetujuan pemilik \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Pemeriksaan data perlu perhatian khusus di layanan kesehatan. Permenkes
+24/2022 Pasal 20 mewajibkan penyimpanan rekam medis elektronik menjamin
+keamanan, keutuhan, kerahasiaan, dan ketersediaan datanya
+\cite{permenkes24-2022}. Kewajiban itu tidak berhenti ketika aplikasinya
+dihentikan, sehingga rencana arsip harus siap sebelum tanggal penghentian
+ditetapkan.
 
 \section{Integrasi Target pada Tingkat Konsep}
 
-% TODO
-% Cakupan: dari point-to-point ke hub, platform integrasi, dan API pada tingkat konsep; integrasi
-%   eksternal dengan SATUSEHAT dan BPJS Kesehatan; batas tanggung jawab dengan mata kuliah IT40613
-%   yang membahas rinci desain dan tata kelola API.
-% Pendalaman teknis: memetakan sumber data Medikara ke resource HL7 FHIR.
+Bab 7 menghitung bahwa sembilan sistem Medikara, yaitu lima SIMRS, ERP,
+Medikara+, BPJS Kesehatan, dan SATUSEHAT, dapat membentuk paling banyak
+$9 \times 8 / 2 = 36$ koneksi \textit{point-to-point}. Setiap koneksi punya
+format, jadwal, akun akses, dan penanggung jawabnya sendiri. Pertanyaan
+kemudian muncul: bagaimana menambah mitra baru tanpa menambah koneksi baru ke
+setiap sistem?
+
+\subsection*{Hub, Platform Integrasi, dan API}
+
+Tiga konsep menjawab pertanyaan itu. \textbf{\textit{Hub}} adalah perantara
+tunggal: setiap aplikasi cukup terhubung ke \textit{hub}, dan \textit{hub}
+yang meneruskan pesan ke tujuannya \cite{hohpe2003}.
+\textbf{Platform integrasi} adalah \textit{hub} yang dilengkapi kemampuan
+pengelolaan, misalnya penerjemahan format, antrean pesan, pemantauan, dan
+pencatatan setiap pertukaran. \textbf{API} adalah kontrak antarmuka yang menyatakan data apa yang boleh
+diminta atau dikirim, dalam format apa, dan oleh siapa.
+
+Analoginya seperti sembilan kota yang ingin saling terhubung dengan bus.
+Tanpa terminal, setiap pasangan kota butuh trayek sendiri, yaitu 36 trayek,
+dan tiap trayek mengurus jadwal dan karcisnya sendiri. Dengan satu terminal
+pusat, setiap kota cukup punya satu trayek ke terminal. Penumpang berganti
+bus di terminal, dan aturan karcis, jadwal, serta pemeriksaan keamanan diurus
+di satu tempat. Harganya juga jelas: bila terminal tutup, semua perjalanan
+berhenti, jadi terminal harus dijaga paling ketat.
+
+Gambar \ref{fig:ch09-p2p-ke-hub} memperlihatkan perbedaannya. Agar terbaca,
+gambar itu memakai enam aplikasi dengan kelima SIMRS digambar sebagai satu:
+15 koneksi menjadi 6. Untuk sembilan sistem pada Bab 7, batas model 36 koneksi
+menjadi 9. Angka 36 adalah batas, bukan keadaan saat ini. Katalog Bab 7 mencatat
+21 pasangan aktif, sehingga penurunan nyata di Medikara berlangsung dari 21
+pasangan menjadi 9 koneksi.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch09-p2p-ke-hub.tex}
+  \caption{Koneksi \textit{point-to-point} dibandingkan dengan
+           \textit{hub} untuk enam aplikasi}
+  \label{fig:ch09-p2p-ke-hub}
+\end{figure}
+
+Keputusan ini punya dua konsekuensi. Pertama, jumlah koneksi turun dari 21
+pasangan aktif menjadi 9 dan tidak lagi dapat tumbuh menuju batas 36, sedangkan
+mitra baru seperti asuransi atau laboratorium mitra cukup dihubungkan sekali ke
+platform integrasi. Kedua, platform integrasi menjadi
+titik tunggal yang harus tersedia tinggi dan dijaga ketat. Syarat
+ketersediaannya ditulis di arsitektur teknologi target (Bab 10).
+
+\subsection*{Tiga Gaya Pertukaran Data}
+
+Pada tingkat konsep, pertukaran data target dibedakan menjadi tiga gaya.
+Gaya \textbf{permintaan dan jawaban} lewat API dipakai ketika jawabannya
+dibutuhkan saat itu juga, misalnya mencari pasien di MPI saat pendaftaran.
+Gaya \textbf{pesan} dipakai ketika pengirim tidak perlu menunggu, misalnya
+tagihan final yang dikirim ke ERP. Gaya \textbf{salinan terjadwal} dipakai
+untuk memindahkan data dalam jumlah besar, misalnya salinan harian ke
+platform data. Tabel \ref{tab:ch09-integrasi-target} memuat integrasi target
+utama beserta gayanya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Integrasi target utama Medikara pada tingkat konsep}
+  \label{tab:ch09-integrasi-target}
+  \small
+  \begin{tabularx}{\textwidth}{llXl}
+    \hline
+    \textbf{Dari} & \textbf{Ke} & \textbf{Data} & \textbf{Gaya} \\
+    \hline
+    SIMRS tunggal & MPI & Identitas pasien & Permintaan dan jawaban \\
+    \hline
+    SIMRS tunggal & SATUSEHAT & Kunjungan, diagnosis, hasil pemeriksaan & Pesan, format FHIR R4 \\
+    \hline
+    SIMRS tunggal & BPJS Kesehatan & Data klaim & Permintaan dan jawaban \\
+    \hline
+    SIMRS tunggal & ERP keuangan & Tagihan final & Pesan \\
+    \hline
+    Medikara+ & SIMRS tunggal & Jadwal dan janji temu & Permintaan dan jawaban \\
+    \hline
+    Aplikasi inti & Platform data & Transaksi harian & Salinan terjadwal \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Pihak Eksternal: SATUSEHAT dan BPJS Kesehatan}
+
+SATUSEHAT dan BPJS Kesehatan berada di luar kendali Medikara. Keduanya
+menetapkan format dan aturannya sendiri, sehingga arsitektur target
+menempatkan satu penghubung untuk tiap pihak eksternal di platform
+integrasi, bukan di tiap SIMRS. Untuk SATUSEHAT, kewajibannya jelas.
+Permenkes 24/2022 Pasal 21 mewajibkan rekam medis elektronik yang disimpan
+fasilitas pelayanan kesehatan terhubung atau terinteroperabilitas dengan
+platform layanan interoperabilitas dan integrasi data kesehatan yang dikelola
+Kementerian Kesehatan. Pasal 24 menambahkan bahwa transfer isi rekam medis
+elektronik untuk rujukan dilakukan melalui platform tersebut
+\cite{permenkes24-2022}. Platform itu adalah SATUSEHAT, yang memakai HL7
+FHIR R4 \cite{c09-fhir-r4,c09-satusehat}.
+
+Bab ini berhenti pada tingkat konsep: integrasi apa yang ada, lewat jalur
+mana, dan siapa pemiliknya. Gaya API, keamanan API, dan tata kelola API
+dibahas rinci di mata kuliah IT40613. Koordinator tim menyelaraskan tabel
+integrasi target dengan pekerjaan IT40613, supaya nama aplikasi dan
+integrasinya sama di kedua dokumen.
+
+\begin{pendalaman}[title={Pendalaman Teknis (opsional): Memetakan Sumber Data Medikara ke Resource FHIR}]
+FHIR membagi data kesehatan menjadi \textit{resource}, yaitu satuan data
+dengan struktur baku seperti Patient, Encounter, dan Observation
+\cite{c09-fhir-r4}. Memetakan data Medikara ke \textit{resource} sejak tahap
+arsitektur membantu dua hal: menemukan data yang belum dicatat, dan
+menentukan aplikasi mana yang menjadi sumber tiap \textit{resource}. Tabel
+\ref{tab:ch09-peta-fhir} memuat petanya.
+
+\begin{center}
+  \captionof{table}{Peta sumber data Medikara ke resource FHIR R4}
+  \label{tab:ch09-peta-fhir}
+  \small
+  \begin{tabularx}{\linewidth}{lXl}
+    \hline
+    \textbf{Data Medikara} & \textbf{Sumber di kondisi target} & \textbf{Resource FHIR} \\
+    \hline
+    Identitas pasien & MPI & Patient \\
+    \hline
+    Kunjungan rawat jalan dan rawat inap & SIMRS tunggal & Encounter \\
+    \hline
+    Diagnosis & SIMRS tunggal & Condition \\
+    \hline
+    Tanda vital dan hasil laboratorium & SIMRS tunggal, sistem laboratorium & Observation \\
+    \hline
+    Resep & SIMRS tunggal, aplikasi apotek & MedicationRequest \\
+    \hline
+    Rumah sakit, klinik, dan ruangan & Data induk fasilitas & Organization, Location \\
+    \hline
+    Dokter dan tenaga kesehatan & Data induk tenaga kesehatan & Practitioner \\
+    \hline
+  \end{tabularx}
+\end{center}
+
+Kolom tengah memperlihatkan manfaat MPI dan data induk lain. Setiap
+\textit{resource} yang dikirim harus merujuk pasien, fasilitas, dan tenaga
+kesehatan yang sudah dikenal. Bila identitas pasien masih ganda, pengiriman
+Encounter untuk orang yang sama dapat merujuk dua pasien berbeda. Peta ini
+menjadi bahan penilaian kesiapan interoperabilitas di IT40613.
+\end{pendalaman}
 
 \section{Keputusan Membangun, Membeli, atau Berlangganan}
 
-% TODO
-% Cakupan: kriteria berbobot (kesesuaian kapabilitas, biaya total, waktu, ketergantungan vendor,
-%   kepatuhan); risiko pihak ketiga dari sisi arsitektur (dibahas rinci di mata kuliah IT40813);
-%   mendokumentasikan alasan keputusan.
-% Kasus Medikara: pelajaran dari insiden kebocoran data lewat vendor pada 2025.
+Penggantian lima SIMRS adalah keputusan terbesar dalam kondisi target.
+Keputusan sebesar ini sering diambil dari demo vendor yang paling meyakinkan,
+lalu alasannya disusun belakangan. Insiden kebocoran data pasien lewat vendor
+pada 2025 memperlihatkan harga keputusan pengadaan yang tidak menimbang
+arsitektur.
+
+\subsection*{Tiga Cara Memperoleh Aplikasi}
+
+\textbf{Membangun} berarti tim sendiri atau kontraktor membuat aplikasi
+khusus, dan organisasi memiliki kodenya. \textbf{Membeli} berarti membeli
+lisensi paket aplikasi jadi, memasangnya di infrastruktur yang dikelola
+sendiri, lalu mengonfigurasinya. \textbf{Berlangganan} SaaS berarti memakai
+aplikasi milik penyedia yang berjalan di infrastruktur \textit{cloud}
+penyedia. Pelanggan tidak mengelola infrastruktur, sistem operasi, maupun
+aplikasinya, kecuali pengaturan terbatas yang disediakan penyedia
+\cite{nist800-145}. Tabel \ref{tab:ch09-tiga-opsi} membandingkan
+ketiganya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Perbandingan tiga cara memperoleh aplikasi}
+  \label{tab:ch09-tiga-opsi}
+  \small
+  \begin{tabularx}{\textwidth}{lXXX}
+    \hline
+    \textbf{Hal} & \textbf{Membangun} & \textbf{Membeli} & \textbf{Berlangganan SaaS} \\
+    \hline
+    Kesesuaian proses & Paling tinggi & Sedang, lewat konfigurasi & Mengikuti produk \\
+    \hline
+    Biaya awal & Tinggi & Sedang sampai tinggi & Rendah \\
+    \hline
+    Waktu sampai dipakai & Paling lama & Sedang & Paling cepat \\
+    \hline
+    Kendali atas data & Penuh & Penuh & Ditentukan kontrak \\
+    \hline
+    Ketergantungan & Pada tim sendiri & Pada vendor, sedang & Pada penyedia, tinggi \\
+    \hline
+    Tanggung jawab keamanan & Organisasi seluruhnya & Organisasi, dibantu vendor & Dibagi dengan penyedia \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Analoginya seperti memperoleh tempat tinggal. Membangun rumah sendiri memberi
+denah yang persis sesuai keinginan, tetapi lama, mahal di awal, dan semua
+perawatan ditanggung sendiri. Membeli rumah jadi lebih cepat. Denahnya
+ditentukan pengembang tetapi boleh direnovasi, dan perawatannya tetap
+tanggungan pemilik. Menyewa apartemen paling cepat ditempati dan perawatan
+gedung diurus pengelola. Namun penyewa tidak boleh membongkar dinding, terikat
+aturan gedung, dan harus siap pindah bila kontraknya tidak diperpanjang.
+
+\subsection*{Kriteria Berbobot}
+
+Keputusan yang dapat dipertanggungjawabkan memakai kriteria yang ditulis
+sebelum vendor dinilai. Lima kriteria berikut cukup untuk sebagian besar
+keputusan aplikasi inti.
+\begin{enumerate}
+  \item \textbf{Kesesuaian kapabilitas}: seberapa banyak kapabilitas target
+        dari Bab 8 yang didukung tanpa kustomisasi berat.
+  \item \textbf{Biaya total lima tahun}: lisensi atau langganan,
+        implementasi, migrasi data, operasi, dan pelatihan. Cara menghitung
+        TCO (\textit{Total Cost of Ownership}) dibahas di Bab 13.
+  \item \textbf{Waktu sampai bernilai}: kapan lima rumah sakit dan 18 klinik
+        benar-benar memakainya.
+  \item \textbf{Ketergantungan vendor}: kemudahan mengambil data saat
+        kontrak berakhir dan dukungan pada standar terbuka seperti FHIR.
+        Penelitian Opara-Martins dan rekan-rekannya mencatat bahwa
+        ketergantungan ini makin berat ketika sistem pindah ke
+        \textit{cloud}, dan menganjurkan format data serta API yang
+        terstandar sebagai penangkalnya \cite{c09-oparamartins2016}.
+  \item \textbf{Kepatuhan}: lokasi dan cara penyimpanan data. Permenkes
+        24/2022 Pasal 20 ayat (3) membatasi media penyimpanan rekam medis
+        elektronik pada server, komputasi awan yang tersertifikasi, atau
+        media digital lain yang tersertifikasi. Pasal 22 mensyaratkan mitra
+        penyimpanan memiliki fasilitas penyimpanan data di dalam negeri,
+        melarangnya memanfaatkan data, dan mewajibkan fasilitas kesehatan
+        tetap memperoleh akses tidak terbatas atas datanya
+        \cite{permenkes24-2022}. Kewajiban menurut Undang-Undang
+        Pelindungan Data Pribadi (UU PDP) dibahas rinci di IT40813
+        \cite{uu27-2022-pdp}.
+\end{enumerate}
+
+Tabel \ref{tab:ch09-matriks-sumber} menerapkan kelima kriteria itu pada
+pengganti lima SIMRS. Skornya 1 sampai 5, dan semua angka dalam tabel ini
+rekaan. Biaya total lima tahun untuk paket SIMRS diperkirakan Rp38 miliar untuk
+membangun, Rp29 miliar untuk membeli, dan Rp24 miliar untuk berlangganan. Waktu
+sampai seluruh fasilitas memakai diperkirakan 36, 30, dan 15 bulan.
+
+Angka biaya itu hanya membandingkan cara memperoleh paket SIMRS. Bab 13 memakai
+cakupan yang lebih luas untuk inisiatif konsolidasi SIMRS, yaitu Rp48,0 miliar
+pada opsi membeli. Selisih Rp19 miliar mencakup biaya menjalankan SIMRS lama dan
+baru berdampingan sampai September 2030, integrasi dengan MPI dan platform
+integrasi, serta pendampingan perubahan cara kerja di lima rumah sakit.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Matriks berbobot untuk pengganti lima SIMRS (angka rekaan)}
+  \label{tab:ch09-matriks-sumber}
+  \small
+  \begin{tabularx}{\textwidth}{Xrrrr}
+    \hline
+    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Membangun} & \textbf{Membeli} & \textbf{SaaS} \\
+    \hline
+    Kesesuaian kapabilitas & 30 & 4 & 4 & 3 \\
+    \hline
+    Biaya total lima tahun & 25 & 2 & 3 & 4 \\
+    \hline
+    Waktu sampai bernilai & 15 & 1 & 3 & 5 \\
+    \hline
+    Ketergantungan vendor & 15 & 5 & 3 & 2 \\
+    \hline
+    Kepatuhan & 15 & 4 & 4 & 3 \\
+    \hline
+    \textbf{Skor berbobot} & \textbf{100} & \textbf{3,20} & \textbf{3,45} & \textbf{3,40} \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Skor berbobot dihitung dengan mengalikan tiap skor dengan bobotnya, lalu
+menjumlahkannya dan membaginya dengan 100. Untuk opsi membeli, hitungannya
+$(30 \times 4 + 25 \times 3 + 15 \times 3 + 15 \times 3 + 15 \times 4) / 100
+= 3{,}45$. Opsi membeli unggul tipis atas SaaS. Selisih 0,05 terlalu kecil
+untuk dijadikan satu-satunya dasar, sehingga matriks itu diuji dengan
+mengubah bobot. Tabel \ref{tab:ch09-sensitivitas} memuat hasilnya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Uji sensitivitas bobot pada matriks pengganti SIMRS}
+  \label{tab:ch09-sensitivitas}
+  \small
+  \begin{tabularx}{\textwidth}{Xrrrl}
+    \hline
+    \textbf{Skenario bobot} & \textbf{Bangun} & \textbf{Beli} & \textbf{SaaS} & \textbf{Unggul} \\
+    \hline
+    Dasar: 30, 25, 15, 15, 15 & 3,20 & 3,45 & 3,40 & Beli \\
+    \hline
+    Kepatuhan diutamakan: 30, 25, 10, 15, 20 & 3,35 & 3,50 & 3,30 & Beli \\
+    \hline
+    Kecepatan diutamakan: 20, 25, 25, 15, 15 & 2,90 & 3,35 & 3,60 & SaaS \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Hasilnya terbaca begini. Opsi membeli bertahan selama kesesuaian dan
+kepatuhan dianggap paling penting, sedangkan SaaS menang bila kecepatan
+diutamakan. Membangun sendiri tidak pernah unggul, karena waktunya terlalu
+lama untuk strategi 2026 sampai 2030. Dengan kata lain, yang perlu disepakati
+direksi lebih dahulu adalah bobotnya, bukan opsinya.
+
+\subsection*{Risiko Pihak Ketiga dari Sisi Arsitektur}
+
+Setiap opsi membeli dan berlangganan menambah pihak ketiga ke dalam lanskap.
+Dari sisi arsitektur, empat pertanyaan perlu dijawab sebelum kontrak
+ditandatangani. Pertama, lewat jalur mana vendor menyentuh data: API dengan
+hak akses sempit, atau akses langsung ke basis data? Kedua, data apa yang
+keluar dari Medikara, dan di mana disimpan? Ketiga, bagaimana data diambil
+kembali dan dimusnahkan di sisi vendor ketika kontrak berakhir? Keempat,
+apakah vendor mendukung standar terbuka sehingga penggantinya tidak harus
+mulai dari nol? Uji tuntas vendor, klausul kontrak, dan pemantauan pihak
+ketiga dibahas rinci di IT40813.
+
+\subsection*{Mendokumentasikan Alasan Keputusan}
+
+Keputusan besar ditulis sebagai catatan, bukan disepakati lisan. Isinya
+konteks, opsi yang dibandingkan, kriteria dan bobotnya, skor beserta
+buktinya, keputusan, hal yang dikorbankan, dan syarat yang membuat keputusan
+itu ditinjau ulang. Untuk pengganti SIMRS, syarat peninjauan ulangnya
+misalnya ``bila tidak ada vendor yang lolos kriteria kepatuhan'' atau ``bila
+direksi menetapkan target seluruh fasilitas memakai SIMRS baru dalam 18
+bulan''. Format bakunya, yaitu ADR (\textit{Architecture Decision Record}),
+dibahas di Bab 10.
+
+\begin{kasus}[title={Kasus Medikara Health: Pelajaran dari Insiden Kebocoran Data lewat Vendor pada 2025}]
+Kronologi insiden 2025 mengikuti data latihan IT40613 Bab 6: 8 malam, 155
+panggilan per malam, 1.240 rekam kunjungan di dua rumah sakit, diketahui pada
+hari ke-11 lewat keluhan pasien, dan hanya 620 rekam yang masih terlacak.
+Misalkan penelusurannya menemukan tiga hal. Pertama, akun dukungan vendor yang
+masih aktif setelah kontrak selesai memanggil API bawaan dua SIMRS, karena
+integrasinya dibangun \textit{point-to-point}. Kedua, salinan
+data pasien untuk pengujian disimpan di server vendor tanpa disamarkan.
+Ketiga, kontrak tidak mengatur pengembalian dan pemusnahan data.
+
+Ketiga temuan itu diterjemahkan menjadi aturan arsitektur target. Vendor
+hanya menyentuh data lewat platform integrasi dan API dengan hak akses yang
+sempit, sejalan dengan Permenkes 24/2022 Pasal 30 yang membagi hak akses
+menjadi hak menginput, memperbaiki, dan melihat data \cite{permenkes24-2022}.
+Data untuk pengujian wajib disamarkan sebelum keluar dari Medikara. Kriteria
+kepatuhan dalam matriks berbobot memeriksa lokasi penyimpanan dan larangan
+pemanfaatan data, sedangkan rencana keluar beserta pemusnahan data menjadi
+syarat kontrak. Dengan aturan ini, kriteria ketergantungan vendor dan
+kriteria kepatuhan pada Tabel \ref{tab:ch09-matriks-sumber} bukan lagi
+formalitas, karena keduanya lahir dari kejadian nyata di organisasi sendiri.
+\end{kasus}
 
 \section{Aktivitas: Merancang Data dan Aplikasi Target}
 
-% TODO
-% Tujuan aktivitas: menghasilkan rancangan data dan aplikasi target yang dapat ditelusuri ke
-%   kapabilitas dan prinsip.
-% Peran dalam tim: analis teknologi memimpin rancangan data dan aplikasi target; analis bisnis
-%   memeriksa keterkaitan tiap keputusan dengan kapabilitas dan prinsip; pemodel menggambar
-%   application cooperation view target dan information structure view; koordinator menyelaraskan
-%   rancangan integrasi dengan tim IT40613.
-% Langkah: rancang identitas pasien tunggal dan data induk; rancang alur data untuk laporan;
-%   susun tabel rasionalisasi aplikasi; bandingkan minimal dua opsi untuk satu keputusan besar
-%   dengan kriteria berbobot; modelkan kondisi target.
-% Luaran dan tonggak capstone: arsitektur data dan aplikasi target (C3).
-% Berkas sources yang direncanakan: sources/chapter09/templat-tabel-rasionalisasi-aplikasi.csv,
-%   sources/chapter09/templat-matriks-bangun-beli-langganan.csv,
-%   sources/chapter09/contoh-aturan-identitas-pasien.md
+Aktivitas ini menghasilkan rancangan data dan aplikasi target yang dapat
+ditelusuri ke kapabilitas target dari Bab 8 dan ke prinsip arsitektur dari
+C1. Tim memakai organisasi yang sama dengan pertemuan sebelumnya, atau kasus
+Medikara Health. Data organisasi nyata dipakai seizin organisasi dan
+dianonimkan. Data pribadi pasien atau karyawan tidak boleh dipakai, termasuk
+untuk mencoba aturan pencocokan identitas.
+
+\subsection*{Pembagian Peran}
+
+Tabel \ref{tab:ch09-peran} memuat pembagian peran untuk aktivitas ini.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Pembagian peran pada aktivitas Bab 9}
+  \label{tab:ch09-peran}
+  \small
+  \begin{tabularx}{\textwidth}{lX}
+    \hline
+    \textbf{Peran} & \textbf{Tugas} \\
+    \hline
+    Analis teknologi & Memimpin rancangan data dan aplikasi target, termasuk pola data induk, alur data, dan integrasi \\
+    \hline
+    Analis bisnis & Memeriksa bahwa setiap keputusan mengacu pada kapabilitas target dan prinsip C1, serta menyusun kriteria berbobot bersama pengguna \\
+    \hline
+    Pemodel & Menggambar \textit{application cooperation view} target dan \textit{information structure view} di Archi \\
+    \hline
+    Koordinator & Menyelaraskan tabel integrasi target dengan tim IT40613 dan menjaga nama aplikasi tetap sama di semua dokumen \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Langkah Kerja}
+
+\begin{enumerate}
+  \item Rancang identitas tunggal untuk konsep data induk terpenting,
+        biasanya pelanggan atau pasien. Tentukan atribut identitas, pola data
+        induk, pemilik, dan aturan pembaruan seperti Tabel
+        \ref{tab:ch09-aturan-identitas}.
+  \item Pilih tiga laporan manajemen terpenting. Tulis definisi tunggal tiap
+        angkanya beserta pemiliknya, lalu gambar alur datanya dari sumber
+        sampai laporan.
+  \item Isi tabel rasionalisasi untuk setiap aplikasi di katalog C2. Setiap
+        baris memuat keputusan, kapabilitas yang didukung, dan alasan.
+  \item Untuk satu keputusan besar, bandingkan minimal dua opsi dengan
+        kriteria berbobot, lalu uji dengan minimal satu skenario bobot lain.
+  \item Susun tabel integrasi target pada tingkat konsep, lalu serahkan
+        kepada koordinator untuk diselaraskan dengan tim IT40613.
+  \item Modelkan kondisi target di Archi, lalu periksa bahwa nama aplikasi
+        dan konsep data sama dengan model \textit{baseline} C2.
+\end{enumerate}
+
+\subsection*{Luaran dan Kaitan dengan Capstone}
+
+Luarannya adalah arsitektur data dan aplikasi target untuk tonggak C3:
+rancangan identitas tunggal dan data induk, alur data laporan beserta
+definisi angkanya, tabel rasionalisasi aplikasi, matriks keputusan berbobot
+untuk satu keputusan besar, tabel integrasi target, serta dua \textit{view}
+Archi. Bersama arsitektur bisnis target dari Bab 8 dan arsitektur teknologi
+target dari Bab 10, luaran ini menjadi bahan \textit{gap analysis} di Bab 11.
+
+Kriteria penilaian singkat: keterlacakan setiap keputusan ke kapabilitas dan
+prinsip (30 persen), kelengkapan tabel rasionalisasi (25 persen), mutu
+matriks berbobot beserta uji sensitivitasnya (25 persen), dan konsistensi
+model Archi dengan dokumen (20 persen).
+
+Berkas pendukung tersedia di \berkas{sources/chapter09/}:
+\begin{itemize}
+  \item \berkas{sources/chapter09/lembar-kerja-aktivitas.md}, lembar kerja
+        langkah 1 sampai 6 beserta daftar periksa penghentian aplikasi.
+  \item \berkas{sources/chapter09/templat-tabel-rasionalisasi-aplikasi.csv},
+        templat tabel rasionalisasi dengan contoh baris Medikara.
+  \item \berkas{sources/chapter09/templat-matriks-bangun-beli-langganan.csv},
+        templat matriks berbobot dengan contoh pengganti SIMRS.
+  \item \berkas{sources/chapter09/contoh-aturan-identitas-pasien.md}, contoh
+        aturan identitas dan pencocokan dengan data rekaan.
+\end{itemize}
+
+\textit{Pendalaman teknis (opsional):} merancang aturan pencocokan identitas
+secara deterministik dan probabilistik pada pasangan rekaan di
+\berkas{sources/chapter09/contoh-aturan-identitas-pasien.md}, lalu
+membandingkan jumlah salah gabung dan salah pisah pada kedua pendekatan.
+Mahasiswa berlatar teknis juga dapat menyusun resource Patient untuk satu
+pasien rekaan seperti \berkas{sources/chapter09/contoh-patient-fhir.json}.
 
 \section{Ringkasan}
 
-% TODO
+Bab ini berangkat dari satu masalah sederhana: satu pasien tercatat dengan
+banyak nomor. Di Medikara, 2,1 juta catatan identitas ternyata mewakili
+sekitar 1,5 juta orang. Akibatnya pemeriksaan diulang, riwayat klinis
+terpecah, dan pasien baru yang sesungguhnya 36,7 persen lebih sedikit daripada
+angka di laporan direksi. Arsitektur data target dimulai dari identitas, bukan dari
+\textit{dashboard}.
+
+MPI menautkan semua nomor lokal milik satu orang ke satu ID induk, tanpa
+memindahkan rekam medisnya. Data induk dikelola dengan salah satu dari tiga
+pola, yaitu registri, konsolidasi, atau terpusat. Medikara memulai dengan
+registri karena lima SIMRS masih berjalan, lalu berpindah ke pola terpusat
+setelah SIMRS tunggal hadir. Prinsip satu sumber kebenaran tidak sama dengan
+satu basis data. Prinsip itu berarti satu acuan dan satu jalur resmi untuk
+mengubah setiap atribut.
+
+Data analitik dipisahkan dari data operasional dan dialirkan lewat zona
+mentah, pemeriksaan kualitas, dan zona terolah. \textit{Spreadsheet} berhenti menjadi
+sumber resmi setelah setiap angka punya definisi tunggal dan pemilik. Selisih
+4 persen antara dua laporan kunjungan, misalnya, ternyata lahir dari dua
+definisi yang berbeda, bukan dari data yang hilang.
+
+Lanskap aplikasi target memberi satu keputusan untuk tiap aplikasi:
+pertahankan, ganti, gabungkan, atau hentikan. Lima SIMRS diganti satu, SIM
+Klinik digabungkan, ERP dan Medikara+ dipertahankan dengan cara terhubung
+yang baru, dan 23 \textit{spreadsheet} laporan dihentikan bertahap. Integrasi
+berpindah dari 21 pasangan aktif \textit{point-to-point}, dengan batas model 36,
+ke satu platform integrasi dengan 9 koneksi, termasuk satu penghubung untuk SATUSEHAT dan
+satu untuk BPJS Kesehatan.
+
+Cara memperoleh aplikasi diputuskan dengan kriteria berbobot yang ditulis
+sebelum vendor dinilai. Pada contoh pengganti SIMRS, membeli unggul 3,45
+atas berlangganan 3,40, tetapi urutannya berbalik bila kecepatan diutamakan.
+Pesan utama bab ini: keputusan data dan aplikasi target harus dapat
+ditelusuri ke kapabilitas dan prinsip, dan bobot yang mendasarinya harus
+disepakati lebih dahulu daripada pilihan vendornya.
 
 \section{Latihan}
 
+Ketiga latihan memakai data Medikara di bab ini atau data organisasi tim yang
+sudah dianonimkan. Templat dan lembar kerja tersedia di
+\berkas{sources/chapter09/}. Hasil tiap mahasiswa boleh berbeda; yang
+dinilai adalah penalaran dan perbandingannya.
+
+\subsection*{Latihan 1: Menjelaskan MPI kepada Direksi}
+
+Latihan ini membuktikan bahwa kebutuhan MPI dapat dijelaskan lewat angka
+laporan, tanpa istilah teknis.
+
 \begin{enumerate}
-  \item Jelaskan tanpa istilah teknis mengapa MPI (\textit{Master Patient Index}) dibutuhkan sebelum laporan manajemen terpadu dapat dipercaya.
-  \item Susun lima kriteria untuk memilih antara membangun sendiri dan membeli SIMRS (Sistem Informasi Manajemen Rumah Sakit) baru. Beri bobot dan jelaskan alasannya.
-  \item Sebuah aplikasi dinilai \textit{Eliminate}, tetapi masih dipakai satu unit kecil untuk laporan ke regulator. Apa yang perlu diperiksa sebelum aplikasi itu dihentikan?
+  \item Pilih tiga sampai empat angka yang biasa dibaca direksi, misalnya
+        jumlah pasien, pasien baru, dan kunjungan per pasien.
+  \item Hitung atau perkirakan tiap angka dua kali: per nomor lokal, lalu
+        per orang setelah identitas disatukan. Pakai Tabel
+        \ref{tab:ch09-sebaran-identitas} atau data organisasi tim.
+  \item Isi Tabel \ref{tab:ch09-lat1-hasil}. Tabel \ref{tab:ch09-lat1-contoh}
+        memperlihatkan contoh yang sudah terisi.
+  \item Tulis penjelasan paling banyak 150 kata untuk direksi tanpa memakai
+        kata MPI, data induk, atau basis data.
+  \item Jawab tiga pertanyaan berikut. Pertama, angka mana yang paling
+        menyesatkan bila identitas tidak disatukan, dan keputusan apa yang
+        ikut keliru? Kedua, mengapa kunjungan per pasien naik setelah
+        identitas disatukan, padahal jumlah kunjungannya tetap? Ketiga, angka
+        mana yang tidak berubah, dan mengapa?
 \end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 1 yang sudah terisi, data Medikara 2025}
+  \label{tab:ch09-lat1-contoh}
+  \small
+  \begin{tabularx}{\textwidth}{Xrrrl}
+    \hline
+    \textbf{Angka laporan} & \textbf{Per nomor} & \textbf{Per orang} & \textbf{Selisih} & \textbf{Keputusan terdampak} \\
+    \hline
+    Pasien tercatat & 2.100.000 & 1.500.000 & 28,6\% & Anggaran per pasien \\
+    \hline
+    Pasien berkunjung 2025 & 520.000 & 455.000 & 12,5\% & Kapasitas layanan \\
+    \hline
+    Pasien baru 2025 & 150.000 & 95.000 & 36,7\% & Evaluasi pemasaran \\
+    \hline
+    Kunjungan per pasien & 2,31 & 2,64 & naik 14,3\% & Program pasien kronis \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 1}
+  \label{tab:ch09-lat1-hasil}
+  \small
+  \begin{tabularx}{\textwidth}{Xrrrl}
+    \hline
+    \textbf{Angka laporan} & \textbf{Per nomor} & \textbf{Per orang} & \textbf{Selisih} & \textbf{Keputusan terdampak} \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Latihan 2: Kriteria Membangun atau Membeli SIMRS}
+
+Latihan ini membuktikan bahwa pilihan membangun atau membeli bergantung pada
+bobot yang disepakati, dan setiap bobot harus punya alasan.
+
+\begin{enumerate}
+  \item Tulis lima kriteria untuk memilih antara membangun sendiri dan
+        membeli SIMRS baru. Beri tiap kriteria satu kalimat definisi dan cara
+        mengukurnya.
+  \item Beri bobot dengan total 100. Tulis alasan tiap bobot dengan merujuk
+        strategi organisasi atau prinsip C1.
+  \item Beri skor 1 sampai 5 untuk kedua opsi, lengkap dengan bukti atau
+        asumsinya. Pakai
+        \berkas{sources/chapter09/templat-matriks-bangun-beli-langganan.csv}.
+  \item Hitung skor berbobot, lalu ulangi dengan satu skenario bobot lain.
+  \item Isi Tabel \ref{tab:ch09-lat2-hasil}. Tabel \ref{tab:ch09-lat2-contoh}
+        memperlihatkan contoh yang sudah terisi.
+  \item Jawab dua pertanyaan berikut. Pertama, kriteria mana yang paling
+        mengubah hasil ketika bobotnya digeser? Kedua, bukti apa yang belum
+        dimiliki, dan dari mana bukti itu diperoleh?
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 2 yang sudah terisi, memakai Tabel
+           \ref{tab:ch09-matriks-sumber}}
+  \label{tab:ch09-lat2-contoh}
+  \small
+  \begin{tabularx}{\textwidth}{lrXrr}
+    \hline
+    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Alasan bobot} & \textbf{Bangun} & \textbf{Beli} \\
+    \hline
+    Kesesuaian kapabilitas & 30 & Layanan terintegrasi lintas fasilitas adalah inti strategi & 4 & 4 \\
+    \hline
+    Biaya total lima tahun & 25 & Biaya integrasi yang tinggi adalah pemicu transformasi & 2 & 3 \\
+    \hline
+    Waktu sampai bernilai & 15 & Strategi berakhir 2030 & 1 & 3 \\
+    \hline
+    Ketergantungan vendor & 15 & Insiden 2025 terjadi lewat vendor & 5 & 3 \\
+    \hline
+    Kepatuhan & 15 & Wajib rekam medis elektronik dan UU PDP & 4 & 4 \\
+    \hline
+    \textbf{Skor berbobot} & \textbf{100} & & \textbf{3,20} & \textbf{3,45} \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 2}
+  \label{tab:ch09-lat2-hasil}
+  \small
+  \begin{tabularx}{\textwidth}{lrXrr}
+    \hline
+    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Alasan bobot} & \textbf{Bangun} & \textbf{Beli} \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots & \dots \\
+    \hline
+    Skor berbobot, skenario dasar & 100 & & \dots & \dots \\
+    \hline
+    Skor berbobot, skenario lain & 100 & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Latihan 3: Memeriksa Aplikasi Eliminate sebelum Dihentikan}
+
+Latihan ini membuktikan bahwa keputusan menghentikan aplikasi baru aman
+setelah semua pemakaian tersembunyinya ditemukan. Misalkan aplikasi
+pencatatan surveilans infeksi lama di rumah sakit Bogor dinilai \textit{Eliminate}.
+Fungsinya akan tersedia di SIMRS tunggal dan platform data, tetapi unit
+pencegahan dan pengendalian infeksi masih memakainya setiap bulan untuk menyusun
+laporan ke dinas kesehatan.
+
+\begin{enumerate}
+  \item Daftar semua pengguna dan semua keluaran aplikasi itu, termasuk
+        laporan yang dikirim ke luar organisasi.
+  \item Telusuri laporan ke regulator: format, jadwal, penerima, dan dasar
+        aturannya.
+  \item Periksa data yang wajib disimpan, berapa lama, dan ke mana diarsipkan.
+  \item Periksa ketergantungan di katalog antarmuka dan masa berlaku
+        kontraknya.
+  \item Rancang uji paralel laporan pengganti selama dua periode pelaporan.
+  \item Isi Tabel \ref{tab:ch09-lat3-hasil}, lalu tentukan keputusan
+        akhirnya: hentikan sekarang, tunda dengan syarat, atau pertahankan
+        sementara. Tabel \ref{tab:ch09-lat3-contoh} memperlihatkan contoh
+        yang sudah terisi.
+  \item Jawab dua pertanyaan berikut. Pertama, pemeriksaan mana yang paling
+        mungkin terlewat bila keputusan hanya didasarkan pada kuadran TIME?
+        Kedua, siapa yang harus menyetujui penghentian, dan bukti apa yang
+        perlu ia lihat?
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 3 yang sudah terisi}
+  \label{tab:ch09-lat3-contoh}
+  \small
+  \begin{tabularx}{\textwidth}{lXX}
+    \hline
+    \textbf{Pemeriksaan} & \textbf{Temuan} & \textbf{Tindakan sebelum dihentikan} \\
+    \hline
+    Pengguna & 3 petugas unit infeksi, masuk tiap awal bulan & Latih ketiganya memakai laporan pengganti \\
+    \hline
+    Keluaran wajib & Laporan bulanan ke dinas kesehatan setiap tanggal 5 & Bangun laporan yang sama dari platform data \\
+    \hline
+    Data & Data surveilans enam tahun & Pindahkan ke arsip yang tetap dapat dibaca \\
+    \hline
+    Kontrak & Lisensi berakhir Juni 2027, laporan pengganti baru tersedia bersama P6 pada Maret 2029 & Perpanjang lisensi 21 bulan atau siapkan laporan sementara (Bab 11), lalu hentikan sesudah uji paralel lulus \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 3}
+  \label{tab:ch09-lat3-hasil}
+  \small
+  \begin{tabularx}{\textwidth}{lXX}
+    \hline
+    \textbf{Pemeriksaan} & \textbf{Temuan} & \textbf{Tindakan sebelum dihentikan} \\
+    \hline
+    Pengguna & \dots & \dots \\
+    \hline
+    Keluaran wajib & \dots & \dots \\
+    \hline
+    Data & \dots & \dots \\
+    \hline
+    Ketergantungan & \dots & \dots \\
+    \hline
+    Kontrak & \dots & \dots \\
+    \hline
+    Pengganti & \dots & \dots \\
+    \hline
+    Keputusan akhir & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}

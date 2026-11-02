@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.9cm, align=center,
+                font=\scriptsize\bfseries},
+  pemungkin/.style={kotak, fill=blue!8, minimum width=4.6cm, text width=4.4cm},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Sumber nilai: praktik EA yang dipakai dalam keputusan.
+  \node[kotak, fill=praditagreen!15, minimum width=2.3cm, text width=2.1cm] (ea) at (0,0)
+    {Praktik EA\\{\tiny\mdseries artefak, proses, dan arsitek yang dipakai}};
+
+  % Empat pemungkin manfaat menurut Tamm dkk. (2011).
+  \node[pemungkin] (selaras) at (4.7,2.1)
+    {Keselarasan organisasi\\{\tiny\mdseries proyek TI mengikuti arah strategi}};
+  \node[pemungkin] (info) at (4.7,0.7)
+    {Ketersediaan informasi\\{\tiny\mdseries data yang tepat sampai ke pengambil keputusan}};
+  \node[pemungkin] (porto) at (4.7,-0.7)
+    {Optimalisasi portofolio sumber daya\\{\tiny\mdseries aplikasi ganda dikurangi, investasi dipilih}};
+  \node[pemungkin] (lengkap) at (4.7,-2.1)
+    {Komplementaritas sumber daya\\{\tiny\mdseries sistem dan proses saling melengkapi}};
+
+  % Hasil akhir.
+  \node[kotak, fill=green!10, minimum width=2.5cm, text width=2.3cm] (manfaat) at (9.4,0)
+    {Manfaat organisasi\\{\tiny\mdseries biaya, kecepatan layanan, mutu keputusan}};
+
+  \foreach \tengah in {selaras, info, porto, lengkap} {
+    \draw[panah] (ea.east) -- (\tengah.west);
+    \draw[panah] (\tengah.east) -- (manfaat.west);
+  }
+
+  \node[font=\tiny, gray, anchor=north] at (4.7,-2.7)
+    {EA tidak menghasilkan manfaat secara langsung, melainkan lewat empat pemungkin ini};
+\end{tikzpicture}

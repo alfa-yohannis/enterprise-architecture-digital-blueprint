@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Contoh model ArchiMate 3.2 layanan janji temu rawat jalan Medikara Health. Buka di Archi 5.10.0 lewat File > Open. -->
+<archimate:model xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:archimate="http://www.archimatetool.com/archimate" name="Medikara Health: Janji Temu Rawat Jalan" id="id-model-medikara" version="5.0.0">
+  <folder name="Strategy" id="id-folder-strategy" type="strategy"/>
+  <folder name="Business" id="id-folder-business" type="business">
+    <element xsi:type="archimate:BusinessActor" name="Pasien" id="id-pasien">
+      <documentation>Orang yang membuat janji temu rawat jalan lewat Medikara+, telepon, atau loket.</documentation>
+    </element>
+    <element xsi:type="archimate:BusinessRole" name="Petugas Pendaftaran" id="id-petugas">
+      <documentation>Peran yang menangani janji temu lewat telepon dan loket.</documentation>
+    </element>
+    <element xsi:type="archimate:BusinessService" name="Layanan Janji Temu Rawat Jalan" id="id-layanan-janji">
+      <documentation>Layanan yang dirasakan pasien: mendapat slot dokter tanpa antre di loket.</documentation>
+      <property key="Pemilik" value="Direktorat Pelayanan Medik"/>
+    </element>
+    <element xsi:type="archimate:BusinessProcess" name="Membuat Janji Temu" id="id-proses-janji"/>
+    <element xsi:type="archimate:BusinessProcess" name="Memilih Dokter dan Jadwal" id="id-proses-pilih"/>
+    <element xsi:type="archimate:BusinessProcess" name="Mengonfirmasi Janji Temu" id="id-proses-konfirmasi"/>
+    <element xsi:type="archimate:BusinessProcess" name="Mengirim Pengingat" id="id-proses-ingat"/>
+    <element xsi:type="archimate:BusinessObject" name="Janji Temu" id="id-objek-janji"/>
+  </folder>
+  <folder name="Application" id="id-folder-application" type="application">
+    <element xsi:type="archimate:ApplicationComponent" name="Medikara+" id="id-medikara">
+      <documentation>Aplikasi pasien buatan vendor untuk janji temu dan telekonsultasi.</documentation>
+      <property key="Pemilik" value="Divisi Layanan Digital"/>
+      <property key="Status" value="Saat ini"/>
+      <property key="Sumber" value="Wawancara kepala Divisi Layanan Digital"/>
+    </element>
+    <element xsi:type="archimate:ApplicationComponent" name="SIMRS RS Jakarta" id="id-simrs-jakarta">
+      <documentation>SIMRS monolitik on-premise di RS Jakarta. Empat rumah sakit lain memakai versi berbeda.</documentation>
+      <property key="Pemilik" value="Divisi Teknologi Informasi"/>
+      <property key="Status" value="Saat ini"/>
+      <property key="Sumber" value="Katalog aset TI RS Jakarta"/>
+    </element>
+    <element xsi:type="archimate:ApplicationService" name="Layanan Pemesanan Jadwal" id="id-layanan-pesan"/>
+    <element xsi:type="archimate:ApplicationService" name="Layanan Jadwal Dokter" id="id-layanan-jadwal"/>
+    <element xsi:type="archimate:ApplicationFunction" name="Pengelolaan Jadwal Dokter" id="id-fungsi-jadwal"/>
+    <element xsi:type="archimate:DataObject" name="Data Jadwal Dokter" id="id-data-jadwal"/>
+    <element xsi:type="archimate:DataObject" name="Data Janji Temu" id="id-data-janji"/>
+  </folder>
+  <folder name="Technology &amp; Physical" id="id-folder-technology" type="technology">
+    <element xsi:type="archimate:Node" name="Server Basis Data SIMRS" id="id-server-db">
+      <property key="Pemilik" value="Divisi Teknologi Informasi"/>
+      <property key="Lokasi" value="Ruang server RS Jakarta"/>
+    </element>
+    <element xsi:type="archimate:SystemSoftware" name="Sistem Manajemen Basis Data" id="id-dbms"/>
+    <element xsi:type="archimate:TechnologyService" name="Layanan Basis Data" id="id-layanan-db"/>
+    <element xsi:type="archimate:Node" name="Server Vendor Medikara+" id="id-server-vendor">
+      <property key="Pemilik" value="Vendor Medikara+"/>
+    </element>
+  </folder>
+  <folder name="Motivation" id="id-folder-motivation" type="motivation">
+    <element xsi:type="archimate:Stakeholder" name="Direksi Medikara" id="id-direksi"/>
+    <element xsi:type="archimate:Driver" name="Antrean Layanan yang Panjang" id="id-driver-antrean"/>
+    <element xsi:type="archimate:Assessment" name="Sebagian Besar Janji Temu Masih Dibuat di Loket" id="id-asesmen-loket"/>
+    <element xsi:type="archimate:Goal" name="Akses Rawat Jalan Lebih Cepat" id="id-goal-akses"/>
+    <element xsi:type="archimate:Outcome" name="Waktu Tunggu Pendaftaran Turun 30 Persen" id="id-outcome-tunggu"/>
+    <element xsi:type="archimate:Principle" name="Satu Sumber Kebenaran untuk Data Pasien" id="id-prinsip-sumber"/>
+    <element xsi:type="archimate:Requirement" name="Jadwal Dokter Dibaca Langsung dari SIMRS" id="id-req-jadwal"/>
+  </folder>
+  <folder name="Implementation &amp; Migration" id="id-folder-implementation_migration" type="implementation_migration"/>
+  <folder name="Other" id="id-folder-other" type="other"/>
+  <folder name="Relations" id="id-folder-relations" type="relations">
+    <element xsi:type="archimate:ServingRelationship" id="id-r01" source="id-layanan-janji" target="id-pasien"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r02" source="id-proses-janji" target="id-layanan-janji"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="id-r03" source="id-petugas" target="id-proses-janji"/>
+    <element xsi:type="archimate:CompositionRelationship" id="id-r04" source="id-proses-janji" target="id-proses-pilih"/>
+    <element xsi:type="archimate:CompositionRelationship" id="id-r05" source="id-proses-janji" target="id-proses-konfirmasi"/>
+    <element xsi:type="archimate:CompositionRelationship" id="id-r06" source="id-proses-janji" target="id-proses-ingat"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="id-r07" source="id-proses-pilih" target="id-proses-konfirmasi"/>
+    <element xsi:type="archimate:TriggeringRelationship" id="id-r08" source="id-proses-konfirmasi" target="id-proses-ingat"/>
+    <element xsi:type="archimate:AccessRelationship" id="id-r09" source="id-proses-janji" target="id-objek-janji"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-r10" source="id-layanan-pesan" target="id-proses-janji"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r11" source="id-medikara" target="id-layanan-pesan"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-r12" source="id-layanan-jadwal" target="id-medikara"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r13" source="id-fungsi-jadwal" target="id-layanan-jadwal"/>
+    <element xsi:type="archimate:AssignmentRelationship" id="id-r14" source="id-simrs-jakarta" target="id-fungsi-jadwal"/>
+    <element xsi:type="archimate:AccessRelationship" id="id-r15" source="id-fungsi-jadwal" target="id-data-jadwal" accessType="3"/>
+    <element xsi:type="archimate:AccessRelationship" id="id-r16" source="id-medikara" target="id-data-janji"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r17" source="id-data-janji" target="id-objek-janji"/>
+    <element xsi:type="archimate:FlowRelationship" name="Permintaan Janji Temu" id="id-r18" source="id-medikara" target="id-simrs-jakarta"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-r19" source="id-layanan-db" target="id-simrs-jakarta"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r20" source="id-server-db" target="id-layanan-db"/>
+    <element xsi:type="archimate:CompositionRelationship" id="id-r21" source="id-server-db" target="id-dbms"/>
+    <element xsi:type="archimate:ServingRelationship" id="id-r22" source="id-server-vendor" target="id-medikara"/>
+    <element xsi:type="archimate:AssociationRelationship" id="id-r23" source="id-direksi" target="id-driver-antrean"/>
+    <element xsi:type="archimate:AssociationRelationship" id="id-r24" source="id-driver-antrean" target="id-asesmen-loket"/>
+    <element xsi:type="archimate:InfluenceRelationship" id="id-r25" source="id-asesmen-loket" target="id-goal-akses"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r26" source="id-outcome-tunggu" target="id-goal-akses"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r27" source="id-prinsip-sumber" target="id-goal-akses"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r28" source="id-req-jadwal" target="id-outcome-tunggu"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r29" source="id-req-jadwal" target="id-prinsip-sumber"/>
+    <element xsi:type="archimate:RealizationRelationship" id="id-r30" source="id-layanan-jadwal" target="id-req-jadwal"/>
+  </folder>
+  <folder name="Views" id="id-folder-views" type="diagrams">
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Layered View: Janji Temu Rawat Jalan" id="id-view-layered" viewpoint="layered">
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-pasien" targetConnections="id-view-layered-r01" archimateElement="id-pasien">
+        <bounds x="20" y="20" width="150" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-layanan-janji" targetConnections="id-view-layered-r02" archimateElement="id-layanan-janji">
+        <bounds x="220" y="20" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r01" source="id-view-layered-layanan-janji" target="id-view-layered-pasien" archimateRelationship="id-r01"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-objek-janji" targetConnections="id-view-layered-r09 id-view-layered-r17" archimateElement="id-objek-janji">
+        <bounds x="20" y="110" width="150" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-proses-janji" targetConnections="id-view-layered-r03 id-view-layered-r10" archimateElement="id-proses-janji">
+        <bounds x="220" y="110" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r02" source="id-view-layered-proses-janji" target="id-view-layered-layanan-janji" archimateRelationship="id-r02"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r09" source="id-view-layered-proses-janji" target="id-view-layered-objek-janji" archimateRelationship="id-r09"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-petugas" archimateElement="id-petugas">
+        <bounds x="420" y="110" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r03" source="id-view-layered-petugas" target="id-view-layered-proses-janji" archimateRelationship="id-r03"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-layanan-pesan" targetConnections="id-view-layered-r11" archimateElement="id-layanan-pesan">
+        <bounds x="220" y="230" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r10" source="id-view-layered-layanan-pesan" target="id-view-layered-proses-janji" archimateRelationship="id-r10"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-layanan-jadwal" targetConnections="id-view-layered-r13" archimateElement="id-layanan-jadwal">
+        <bounds x="420" y="230" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r12" source="id-view-layered-layanan-jadwal" target="id-view-layered-medikara" archimateRelationship="id-r12"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-data-janji" targetConnections="id-view-layered-r16" archimateElement="id-data-janji">
+        <bounds x="20" y="320" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r17" source="id-view-layered-data-janji" target="id-view-layered-objek-janji" archimateRelationship="id-r17"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-medikara" targetConnections="id-view-layered-r12 id-view-layered-r22" archimateElement="id-medikara">
+        <bounds x="220" y="320" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r11" source="id-view-layered-medikara" target="id-view-layered-layanan-pesan" archimateRelationship="id-r11"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r16" source="id-view-layered-medikara" target="id-view-layered-data-janji" archimateRelationship="id-r16"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r18" source="id-view-layered-medikara" target="id-view-layered-simrs-jakarta" archimateRelationship="id-r18"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-simrs-jakarta" targetConnections="id-view-layered-r18 id-view-layered-r19" archimateElement="id-simrs-jakarta">
+        <bounds x="620" y="320" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r14" source="id-view-layered-simrs-jakarta" target="id-view-layered-fungsi-jadwal" archimateRelationship="id-r14"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-fungsi-jadwal" targetConnections="id-view-layered-r14" archimateElement="id-fungsi-jadwal">
+        <bounds x="420" y="410" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r13" source="id-view-layered-fungsi-jadwal" target="id-view-layered-layanan-jadwal" archimateRelationship="id-r13"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r15" source="id-view-layered-fungsi-jadwal" target="id-view-layered-data-jadwal" archimateRelationship="id-r15"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-data-jadwal" targetConnections="id-view-layered-r15" archimateElement="id-data-jadwal">
+        <bounds x="420" y="500" width="150" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-server-vendor" archimateElement="id-server-vendor">
+        <bounds x="220" y="560" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r22" source="id-view-layered-server-vendor" target="id-view-layered-medikara" archimateRelationship="id-r22"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-layanan-db" targetConnections="id-view-layered-r20" archimateElement="id-layanan-db">
+        <bounds x="620" y="560" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r19" source="id-view-layered-layanan-db" target="id-view-layered-simrs-jakarta" archimateRelationship="id-r19"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-server-db" archimateElement="id-server-db">
+        <bounds x="620" y="650" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r20" source="id-view-layered-server-db" target="id-view-layered-layanan-db" archimateRelationship="id-r20"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-layered-r21" source="id-view-layered-server-db" target="id-view-layered-dbms" archimateRelationship="id-r21"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-layered-dbms" targetConnections="id-view-layered-r21" archimateElement="id-dbms">
+        <bounds x="820" y="650" width="150" height="55"/>
+      </child>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Motivation View: Antrean Rawat Jalan" id="id-view-motivasi" viewpoint="motivation">
+      <child xsi:type="archimate:DiagramObject" id="id-view-motivasi-direksi" archimateElement="id-direksi">
+        <bounds x="20" y="20" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-motivasi-r23" source="id-view-motivasi-direksi" target="id-view-motivasi-driver-antrean" archimateRelationship="id-r23"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-motivasi-driver-antrean" targetConnections="id-view-motivasi-r23" archimateElement="id-driver-antrean">
+        <bounds x="220" y="20" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-motivasi-r24" source="id-view-motivasi-driver-antrean" target="id-view-motivasi-asesmen-loket" archimateRelationship="id-r24"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-motivasi-asesmen-loket" targetConnections="id-view-motivasi-r24" archimateElement="id-asesmen-loket">
+        <bounds x="420" y="20" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-motivasi-r25" source="id-view-motivasi-asesmen-loket" target="id-view-motivasi-goal-akses" archimateRelationship="id-r25"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-motivasi-goal-akses" targetConnections="id-view-motivasi-r25 id-view-motivasi-r26 id-view-motivasi-r27" archimateElement="id-goal-akses">
+        <bounds x="420" y="130" width="150" height="55"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-motivasi-prinsip-sumber" targetConnections="id-view-motivasi-r29" archimateElement="id-prinsip-sumber">
+        <bounds x="220" y="240" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-motivasi-r27" source="id-view-motivasi-prinsip-sumber" target="id-view-motivasi-goal-akses" archimateRelationship="id-r27"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-motivasi-outcome-tunggu" targetConnections="id-view-motivasi-r28" archimateElement="id-outcome-tunggu">
+        <bounds x="420" y="240" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-motivasi-r26" source="id-view-motivasi-outcome-tunggu" target="id-view-motivasi-goal-akses" archimateRelationship="id-r26"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-motivasi-req-jadwal" targetConnections="id-view-motivasi-r30" archimateElement="id-req-jadwal">
+        <bounds x="420" y="350" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-motivasi-r28" source="id-view-motivasi-req-jadwal" target="id-view-motivasi-outcome-tunggu" archimateRelationship="id-r28"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-motivasi-r29" source="id-view-motivasi-req-jadwal" target="id-view-motivasi-prinsip-sumber" archimateRelationship="id-r29"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-motivasi-layanan-jadwal" archimateElement="id-layanan-jadwal">
+        <bounds x="420" y="460" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-motivasi-r30" source="id-view-motivasi-layanan-jadwal" target="id-view-motivasi-req-jadwal" archimateRelationship="id-r30"/>
+      </child>
+    </element>
+    <element xsi:type="archimate:ArchimateDiagramModel" name="Proses Membuat Janji Temu" id="id-view-proses">
+      <child xsi:type="archimate:DiagramObject" id="id-view-proses-petugas" archimateElement="id-petugas">
+        <bounds x="20" y="20" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-proses-r03" source="id-view-proses-petugas" target="id-view-proses-proses-janji" archimateRelationship="id-r03"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-proses-proses-janji" targetConnections="id-view-proses-r03" archimateElement="id-proses-janji">
+        <bounds x="220" y="20" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-proses-r04" source="id-view-proses-proses-janji" target="id-view-proses-proses-pilih" archimateRelationship="id-r04"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-proses-r05" source="id-view-proses-proses-janji" target="id-view-proses-proses-konfirmasi" archimateRelationship="id-r05"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-proses-r06" source="id-view-proses-proses-janji" target="id-view-proses-proses-ingat" archimateRelationship="id-r06"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-proses-proses-pilih" targetConnections="id-view-proses-r04" archimateElement="id-proses-pilih">
+        <bounds x="20" y="140" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-proses-r07" source="id-view-proses-proses-pilih" target="id-view-proses-proses-konfirmasi" archimateRelationship="id-r07"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-proses-proses-konfirmasi" targetConnections="id-view-proses-r05 id-view-proses-r07" archimateElement="id-proses-konfirmasi">
+        <bounds x="220" y="140" width="150" height="55"/>
+        <sourceConnection xsi:type="archimate:Connection" id="id-view-proses-r08" source="id-view-proses-proses-konfirmasi" target="id-view-proses-proses-ingat" archimateRelationship="id-r08"/>
+      </child>
+      <child xsi:type="archimate:DiagramObject" id="id-view-proses-proses-ingat" targetConnections="id-view-proses-r06 id-view-proses-r08" archimateElement="id-proses-ingat">
+        <bounds x="420" y="140" width="150" height="55"/>
+      </child>
+    </element>
+  </folder>
+  <purpose>Contoh model berlapis Bab 4: satu layanan inti dari pasien sampai server, ditambah rantai motivasi dari C1.</purpose>
+</archimate:model>

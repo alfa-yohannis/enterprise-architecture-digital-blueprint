@@ -1,0 +1,1457 @@
+{
+  "code": "IT40513",
+  "format_version": 1,
+  "description": "Diagram konsep orisinal, disusun dari naskah bab; kotak generik, tanpa TikZ.",
+  "chapters": [
+    {
+      "caption": "Lima sudut pandang untuk satu perubahan organisasi",
+      "nodes": [
+        {
+          "id": "strategi",
+          "text": "Strategi Medikara|Satu Pasien, Satu Rekam Medis",
+          "role": "control",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "bisnis",
+          "text": "Bisnis|kapabilitas dan layanan",
+          "role": "service",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "hasil",
+          "text": "Hasil organisasi|layanan lintas fasilitas",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "teknologi",
+          "text": "Teknologi|hosting dan konektivitas",
+          "role": "service",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "aplikasi",
+          "text": "Aplikasi|dukungan proses layanan",
+          "role": "service",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "data",
+          "text": "Data|identitas dan rekam medis",
+          "role": "data",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "strategi",
+          "target": "bisnis",
+          "label": "mengarahkan",
+          "dashed": false
+        },
+        {
+          "source": "bisnis",
+          "target": "hasil",
+          "label": "mewujudkan nilai",
+          "dashed": false,
+          "source_port": "t",
+          "target_port": "t"
+        },
+        {
+          "source": "data",
+          "target": "bisnis",
+          "label": "informasi layanan",
+          "dashed": false,
+          "source_port": "t",
+          "target_port": "r"
+        },
+        {
+          "source": "aplikasi",
+          "target": "bisnis",
+          "label": "mendukung pekerjaan",
+          "dashed": false
+        },
+        {
+          "source": "aplikasi",
+          "target": "data",
+          "label": "mengelola",
+          "dashed": false
+        },
+        {
+          "source": "teknologi",
+          "target": "aplikasi",
+          "label": "menjalankan",
+          "dashed": false
+        }
+      ],
+      "note": "Kelima sudut pandang membahas organisasi yang sama. Nilai arsitektur muncul melalui keputusan dan perubahan yang dijalankan.",
+      "basis": "Lima perspektif EA dan manfaat tidak langsung melalui keselarasan, informasi dan optimasi portofolio.",
+      "number": 1,
+      "filename": "ch01-diagram-konsep.png",
+      "source": "module/chapter01.tex",
+      "chapter_title": "Orientasi Mata Kuliah dan Dasar Arsitektur Enterprise",
+      "sections": [
+        "Pendahuluan",
+        "Enterprise, Arsitektur, dan Arsitektur Enterprise",
+        "Lima Sudut Pandang atas Organisasi",
+        "Penyetaraan Istilah untuk Dua Kelompok Latar Belakang",
+        "Nilai Arsitektur Enterprise dan Bukti Empirisnya",
+        "Peran Arsitek Enterprise",
+        "Proyek Capstone dan Kasus Medikara Health",
+        "Aktivitas: Membentuk Tim dan Memotret Organisasi",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Concern menentukan view; metode mengatur penyusunannya",
+      "nodes": [
+        {
+          "id": "stake",
+          "text": "Pemangku kepentingan|pertanyaan dan keputusan",
+          "role": "actor",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "concern",
+          "text": "Concern|hal yang perlu dijawab",
+          "role": "data",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "viewpoint",
+          "text": "Viewpoint|aturan untuk membuat view",
+          "role": "control",
+          "column": 2.13,
+          "row": 0
+        },
+        {
+          "id": "metode",
+          "text": "TOGAF ADM|iterasi dan kebutuhan",
+          "role": "control",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "model",
+          "text": "Model arsitektur|objek dan relasi bersama",
+          "role": "data",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "view",
+          "text": "View|jawaban untuk pembaca",
+          "role": "outcome",
+          "column": 2.13,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "stake",
+          "target": "concern",
+          "label": "menyampaikan",
+          "dashed": false
+        },
+        {
+          "source": "concern",
+          "target": "viewpoint",
+          "label": "memilih sudut pandang",
+          "dashed": false
+        },
+        {
+          "source": "viewpoint",
+          "target": "view",
+          "label": "mengatur bentuk",
+          "dashed": false
+        },
+        {
+          "source": "model",
+          "target": "view",
+          "label": "menyediakan isi",
+          "dashed": false
+        },
+        {
+          "source": "metode",
+          "target": "model",
+          "label": "memandu penyusunan",
+          "dashed": false
+        },
+        {
+          "source": "view",
+          "target": "stake",
+          "label": "dasar keputusan",
+          "dashed": true,
+          "source_port": "r",
+          "target_port": "t"
+        }
+      ],
+      "note": "Zachman mengelompokkan pertanyaan arsitektur; ADM memandu pekerjaan. SPBE diterapkan sesuai konteks sektor publik.",
+      "basis": "ISO 42010 stakeholder/concern/viewpoint/view, TOGAF sebagai metode, Zachman taksonomi dan SPBE.",
+      "number": 2,
+      "filename": "ch02-diagram-konsep.png",
+      "source": "module/chapter02.tex",
+      "chapter_title": "Kerangka Kerja Arsitektur: TOGAF, Zachman, dan Arsitektur SPBE",
+      "sections": [
+        "Pendahuluan",
+        "Stakeholder, Concern, View, dan Viewpoint",
+        "Struktur TOGAF Standard Edisi Ke-10",
+        "Siklus ADM",
+        "Zachman Framework sebagai Pembanding",
+        "Arsitektur SPBE",
+        "Menyesuaikan Kerangka untuk Organisasi",
+        "Aktivitas: Peta Pemangku Kepentingan dan Ruang Lingkup Arsitektur",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Keterlacakan pendorong, sasaran, dan kebutuhan arsitektur",
+      "nodes": [
+        {
+          "id": "driver",
+          "text": "Pendorong|antrean, biaya, temuan audit",
+          "role": "data",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "assess",
+          "text": "Penilaian keadaan|sebab dan bukti",
+          "role": "control",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "goal",
+          "text": "Tujuan|layanan pasien terpadu",
+          "role": "control",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "require",
+          "text": "Kebutuhan arsitektur|hasil yang harus didukung",
+          "role": "service",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "principle",
+          "text": "Prinsip arsitektur|arah dan implikasi",
+          "role": "control",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "outcome",
+          "text": "Outcome terukur|baseline, target, pemilik",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "driver",
+          "target": "assess",
+          "label": "memicu kajian",
+          "dashed": false
+        },
+        {
+          "source": "assess",
+          "target": "goal",
+          "label": "menentukan prioritas",
+          "dashed": false
+        },
+        {
+          "source": "goal",
+          "target": "outcome",
+          "label": "diterjemahkan",
+          "dashed": false
+        },
+        {
+          "source": "goal",
+          "target": "principle",
+          "label": "mengarahkan",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "t"
+        },
+        {
+          "source": "principle",
+          "target": "require",
+          "label": "membatasi rancangan",
+          "dashed": false
+        },
+        {
+          "source": "require",
+          "target": "outcome",
+          "label": "mendukung hasil",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "b"
+        }
+      ],
+      "note": "Model operasi menilai integrasi dan standardisasi secara terpisah. Prinsip harus menjelaskan akibat bagi keputusan proyek.",
+      "basis": "Motivation chain, operating model dua sumbu, Preliminary/Phase A, prinsip dan ukuran hasil.",
+      "number": 3,
+      "filename": "ch03-diagram-konsep.png",
+      "source": "module/chapter03.tex",
+      "chapter_title": "Strategi, Model Operasi, dan Visi Arsitektur",
+      "sections": [
+        "Pendahuluan",
+        "Rantai Motivasi: dari Pemicu sampai Kebutuhan",
+        "Model Operasi dan Core Diagram",
+        "Fase Preliminary dan Architecture Vision",
+        "Prinsip Arsitektur",
+        "Menulis Visi Arsitektur untuk Direksi",
+        "Aktivitas: Menyusun Visi Arsitektur",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Satu model bersama menghasilkan beberapa view",
+      "nodes": [
+        {
+          "id": "repo",
+          "text": "Repositori model|objek beridentitas tetap",
+          "role": "data",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "relasi",
+          "text": "Relasi bertipe|makna hubungan jelas",
+          "role": "control",
+          "column": 1,
+          "row": 0
+        },
+        {
+          "id": "model",
+          "text": "Model terhubung|bisnis, aplikasi, teknologi",
+          "role": "data",
+          "column": 1,
+          "row": 1
+        },
+        {
+          "id": "direksi",
+          "text": "View direksi|tujuan dan kapabilitas",
+          "role": "outcome",
+          "column": -0.15,
+          "row": 2
+        },
+        {
+          "id": "layanan",
+          "text": "View pemilik layanan|aplikasi dan informasi",
+          "role": "outcome",
+          "column": 1,
+          "row": 2
+        },
+        {
+          "id": "teknis",
+          "text": "View tim teknis|layanan dan teknologi",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 2
+        }
+      ],
+      "edges": [
+        {
+          "source": "repo",
+          "target": "relasi",
+          "label": "menghubungkan objek",
+          "dashed": false
+        },
+        {
+          "source": "relasi",
+          "target": "model",
+          "label": "menyusun struktur",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "t"
+        },
+        {
+          "source": "model",
+          "target": "direksi",
+          "label": "pilih unsur relevan",
+          "dashed": false,
+          "source_port": "l",
+          "target_port": "t"
+        },
+        {
+          "source": "model",
+          "target": "layanan",
+          "label": "pilih unsur relevan",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "t"
+        },
+        {
+          "source": "model",
+          "target": "teknis",
+          "label": "pilih unsur relevan",
+          "dashed": false,
+          "source_port": "r",
+          "target_port": "t"
+        }
+      ],
+      "note": "View tidak menjadi salinan model yang berdiri sendiri. Gambar ini memakai kotak generik, bukan notasi formal ArchiMate.",
+      "basis": "ArchiMate layers/aspects, repository, typed relationships, model versus view dan konsistensi versi.",
+      "number": 4,
+      "filename": "ch04-diagram-konsep.png",
+      "source": "module/chapter04.tex",
+      "chapter_title": "Pemodelan Arsitektur dengan ArchiMate dan Archi",
+      "sections": [
+        "Pendahuluan",
+        "Model, Diagram, dan Repositori",
+        "Kerangka Inti ArchiMate",
+        "Relasi dan Aturan Pemakaiannya",
+        "Viewpoint untuk Pemangku Kepentingan Berbeda",
+        "Bekerja dengan Archi",
+        "ArchiMate 4 dan Dampaknya bagi Pemodel",
+        "Aktivitas: Memodelkan Satu Layanan dari Pasien sampai Server",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Kapabilitas mendukung tahap value stream",
+      "nodes": [
+        {
+          "id": "data",
+          "text": "Pendaftaran Pasien|kapabilitas L01",
+          "role": "service",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "jadwal",
+          "text": "Penjadwalan Layanan|kapabilitas L03",
+          "role": "service",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "klinis",
+          "text": "Pelayanan Klinis|kapabilitas L05",
+          "role": "service",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "kenal",
+          "text": "1. Memesan layanan|nilai: kepastian waktu",
+          "role": "outcome",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "janji",
+          "text": "2. Hadir dan terverifikasi|nilai: identitas dan hak jelas",
+          "role": "outcome",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "layani",
+          "text": "3. Diperiksa, didiagnosis|nilai: kebutuhan klinis tertangani",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "jadwal",
+          "target": "kenal",
+          "label": "mendukung",
+          "dashed": false
+        },
+        {
+          "source": "data",
+          "target": "janji",
+          "label": "mendukung",
+          "dashed": false
+        },
+        {
+          "source": "klinis",
+          "target": "layani",
+          "label": "mendukung",
+          "dashed": false
+        },
+        {
+          "source": "kenal",
+          "target": "janji",
+          "label": "tahap berikut",
+          "dashed": false
+        },
+        {
+          "source": "janji",
+          "target": "layani",
+          "label": "tahap berikut",
+          "dashed": false
+        }
+      ],
+      "note": "Kotak atas bukan urutan kerja. Panah mendatar di bawah menunjukkan tiga dari enam tahap value stream; heatmap menilai kondisi kapabilitas.",
+      "basis": "Capability map sebagai dekomposisi, value stream sebagai urutan nilai, pemetaan banyak-ke-banyak dan heatmap.",
+      "number": 5,
+      "filename": "ch05-diagram-konsep.png",
+      "source": "module/chapter05.tex",
+      "chapter_title": "Arsitektur Bisnis Saat Ini: Capability Map dan Value Stream",
+      "sections": [
+        "Pendahuluan",
+        "Kapabilitas Bisnis",
+        "Menyusun Capability Map",
+        "Value Stream",
+        "Pemetaan Silang dan Peta Organisasi",
+        "Heatmap Kapabilitas Berbasis Bukti",
+        "Aktivitas: Memetakan Kapabilitas dan Value Stream",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Identitas pasien menjadi pangkal hubungan informasi",
+      "nodes": [
+        {
+          "id": "pasien",
+          "text": "Pasien|konsep dan identitas",
+          "role": "data",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "kunjungan",
+          "text": "Kunjungan|konteks layanan",
+          "role": "data",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "rekam",
+          "text": "Rekam medis|catatan pelayanan",
+          "role": "data",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "steward",
+          "text": "Pemilik dan steward|definisi, koreksi, kualitas",
+          "role": "control",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "klaim",
+          "text": "Tagihan, lalu klaim|klaim diajukan atas tagihan",
+          "role": "data",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "laporan",
+          "text": "Laporan direksi|gabungan data bersumber",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "pasien",
+          "target": "kunjungan",
+          "label": "memiliki",
+          "dashed": false
+        },
+        {
+          "source": "kunjungan",
+          "target": "rekam",
+          "label": "memuat catatan",
+          "dashed": false
+        },
+        {
+          "source": "kunjungan",
+          "target": "klaim",
+          "label": "menimbulkan tagihan",
+          "dashed": false
+        },
+        {
+          "source": "steward",
+          "target": "pasien",
+          "label": "menjaga identitas",
+          "dashed": false
+        },
+        {
+          "source": "klaim",
+          "target": "laporan",
+          "label": "data pembiayaan",
+          "dashed": false
+        },
+        {
+          "source": "rekam",
+          "target": "laporan",
+          "label": "data layanan",
+          "dashed": false
+        }
+      ],
+      "note": "Hubungan ini bersifat konseptual, bukan schema tabel. Nomor lokal berbeda perlu penautan, definisi, dan pemilik koreksi.",
+      "basis": "Enam konsep bisnis, relasi pasien-kunjungan, master/reference/transaction data, stewardship, klasifikasi dan kualitas.",
+      "number": 6,
+      "filename": "ch06-diagram-konsep.png",
+      "source": "module/chapter06.tex",
+      "chapter_title": "Arsitektur Data dan Informasi Saat Ini",
+      "sections": [
+        "Pendahuluan",
+        "Konsep Informasi Bisnis dan Model Data Konseptual",
+        "Data Induk, Kepemilikan, dan Stewardship",
+        "Lokasi dan Aliran Data",
+        "Klasifikasi Data dan Kewajiban Regulasi",
+        "Masalah Kualitas Data",
+        "Aktivitas: Menelusuri Data Pasien",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Menelusuri masalah layanan sampai ketergantungan teknologi",
+      "nodes": [
+        {
+          "id": "masalah",
+          "text": "Masalah layanan|bukti pengguna dan insiden",
+          "role": "risk",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "kap",
+          "text": "Kapabilitas terdampak|dukungan yang dibutuhkan",
+          "role": "service",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "app",
+          "text": "Katalog aplikasi|pemilik, biaya, fungsi",
+          "role": "data",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "c2",
+          "text": "Dokumen kondisi saat ini|bukti dan ketidakpastian",
+          "role": "outcome",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "time",
+          "text": "Penilaian TIME|nilai bisnis dan kualitas",
+          "role": "control",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "infra",
+          "text": "Integrasi dan teknologi|vendor, lokasi, dependensi",
+          "role": "data",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "masalah",
+          "target": "kap",
+          "label": "memengaruhi",
+          "dashed": false
+        },
+        {
+          "source": "kap",
+          "target": "app",
+          "label": "dipetakan ke dukungan",
+          "dashed": false
+        },
+        {
+          "source": "app",
+          "target": "infra",
+          "label": "menelusuri dependensi",
+          "dashed": false
+        },
+        {
+          "source": "app",
+          "target": "time",
+          "label": "bukti portofolio",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "t"
+        },
+        {
+          "source": "infra",
+          "target": "time",
+          "label": "risiko teknis",
+          "dashed": false
+        },
+        {
+          "source": "time",
+          "target": "c2",
+          "label": "alasan prioritas",
+          "dashed": false
+        }
+      ],
+      "note": "Duplikasi aplikasi memerlukan pemeriksaan konteks. Katalog antarmuka juga mencatat berkas, portal, dan salinan manual.",
+      "basis": "Application catalog, capability matrix, TIME, interface catalog, technical debt dan rangkaian bukti C2.",
+      "number": 7,
+      "filename": "ch07-diagram-konsep.png",
+      "source": "module/chapter07.tex",
+      "chapter_title": "Arsitektur Aplikasi dan Teknologi Saat Ini",
+      "sections": [
+        "Pendahuluan",
+        "Katalog Aplikasi",
+        "Pemetaan Aplikasi ke Kapabilitas",
+        "Penilaian Portofolio dengan Model TIME",
+        "Integrasi dan Antarmuka",
+        "Lanskap Teknologi Tingkat Tinggi",
+        "Utang Teknis",
+        "Merangkai Dokumen Kondisi Saat Ini",
+        "Aktivitas: Menilai Portofolio Aplikasi dan Merangkai C2",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Target bisnis menyatukan backbone dan platform digital",
+      "nodes": [
+        {
+          "id": "operasi",
+          "text": "Model operasi target|integrasi dan standardisasi",
+          "role": "control",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "backbone",
+          "text": "Operational backbone|proses inti yang andal",
+          "role": "service",
+          "column": 1.02,
+          "row": 0
+        },
+        {
+          "id": "platform",
+          "text": "Digital platform|komponen dapat dirangkai",
+          "role": "service",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "kap",
+          "text": "Kapabilitas target|baru, diperkuat, tetap, henti",
+          "role": "control",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "stream",
+          "text": "Value stream target|nilai dari sisi pasien",
+          "role": "outcome",
+          "column": 1.02,
+          "row": 1
+        },
+        {
+          "id": "tawaran",
+          "text": "Tawaran digital|Medikara+ dan layanan mitra",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "operasi",
+          "target": "backbone",
+          "label": "menentukan keseragaman",
+          "dashed": false
+        },
+        {
+          "source": "backbone",
+          "target": "platform",
+          "label": "fondasi data dan proses",
+          "dashed": false
+        },
+        {
+          "source": "platform",
+          "target": "tawaran",
+          "label": "memungkinkan perakitan",
+          "dashed": false
+        },
+        {
+          "source": "operasi",
+          "target": "kap",
+          "label": "arah perubahan",
+          "dashed": false
+        },
+        {
+          "source": "kap",
+          "target": "stream",
+          "label": "mendukung tahap",
+          "dashed": false
+        },
+        {
+          "source": "stream",
+          "target": "tawaran",
+          "label": "hasil dirasakan",
+          "dashed": false
+        }
+      ],
+      "note": "Pilihan inti yang distandarkan tetap dapat memberi ruang variasi lokal. Platform digital memerlukan fondasi operasional yang andal.",
+      "basis": "Designed for Digital, target operating model, opsi bisnis, capability change map dan target value stream.",
+      "number": 8,
+      "filename": "ch08-diagram-konsep.png",
+      "source": "module/chapter08.tex",
+      "chapter_title": "Arsitektur Bisnis Target untuk Transformasi Digital",
+      "sections": [
+        "Pendahuluan",
+        "Transformasi Digital dari Sudut Pandang Arsitektur",
+        "Model Operasi Target",
+        "Opsi Kondisi Target dan Business Scenario",
+        "Kapabilitas Target dan Peta Perubahan Kapabilitas",
+        "Value Stream Target",
+        "Aktivitas: Memilih Opsi Kondisi Target Bisnis",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "MPI menautkan identitas; rekam medis tetap pada sumbernya",
+      "nodes": [
+        {
+          "id": "sumber",
+          "text": "Sistem sumber|SIMRS, SIM Klinik, Medikara+",
+          "role": "data",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "mpi",
+          "text": "MPI pola registri|tautan ke ID pasien induk",
+          "role": "control",
+          "column": 1.02,
+          "row": 0
+        },
+        {
+          "id": "steward",
+          "text": "Steward identitas|tinjau pasangan meragukan",
+          "role": "actor",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "integrasi",
+          "text": "Platform integrasi|API dan pertukaran terkendali",
+          "role": "control",
+          "column": 1.02,
+          "row": 1
+        },
+        {
+          "id": "klinis",
+          "text": "Rekam medis sumber|kepemilikan tetap jelas",
+          "role": "data",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "analis",
+          "text": "Platform analitik|data turunan untuk laporan",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "sumber",
+          "target": "mpi",
+          "label": "cocokkan identitas",
+          "dashed": false
+        },
+        {
+          "source": "mpi",
+          "target": "steward",
+          "label": "kasus tidak pasti",
+          "dashed": false
+        },
+        {
+          "source": "sumber",
+          "target": "klinis",
+          "label": "menyimpan rekam medis",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "t"
+        },
+        {
+          "source": "mpi",
+          "target": "integrasi",
+          "label": "resolusi ID",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "t"
+        },
+        {
+          "source": "integrasi",
+          "target": "klinis",
+          "label": "sesuai kontrak",
+          "dashed": false
+        },
+        {
+          "source": "klinis",
+          "target": "analis",
+          "label": "ekstraksi terkendali",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "b"
+        }
+      ],
+      "note": "Satu identitas tidak berarti seluruh rekam medis dipindahkan ke satu basis data. Proyeksi analitik dipisahkan dari transaksi.",
+      "basis": "MPI registry menuju centralised MDM, operational/analytical data, target application landscape dan integration platform.",
+      "number": 9,
+      "filename": "ch09-diagram-konsep.png",
+      "source": "module/chapter09.tex",
+      "chapter_title": "Arsitektur Data dan Aplikasi Target",
+      "sections": [
+        "Pendahuluan",
+        "Identitas Pasien Tunggal dan Data Induk",
+        "Arsitektur Data untuk Analitik dan Pelaporan",
+        "Lanskap Aplikasi Target dan Rasionalisasi",
+        "Integrasi Target pada Tingkat Konsep",
+        "Keputusan Membangun, Membeli, atau Berlangganan",
+        "Aktivitas: Merancang Data dan Aplikasi Target",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Target teknologi dan pengawasan AI melintasi domain",
+      "nodes": [
+        {
+          "id": "kebutuhan",
+          "text": "Kapabilitas target|hasil layanan dan batas",
+          "role": "control",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "app",
+          "text": "Aplikasi dan AI terpilih|data serta pengawasan siap",
+          "role": "service",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "cloud",
+          "text": "Cloud region Indonesia|layanan target baru",
+          "role": "service",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "aman",
+          "text": "Keamanan lintas domain|tujuan, hak, klasifikasi, jaringan",
+          "role": "control",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "standar",
+          "text": "Standar dan ADR|status, alasan, jadwal tinjau",
+          "role": "control",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "lokal",
+          "text": "Infrastruktur transisi|ruang server, perangkat lokal",
+          "role": "service",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "kebutuhan",
+          "target": "app",
+          "label": "menetapkan kebutuhan",
+          "dashed": false
+        },
+        {
+          "source": "app",
+          "target": "cloud",
+          "label": "penempatan",
+          "dashed": false
+        },
+        {
+          "source": "app",
+          "target": "lokal",
+          "label": "kebutuhan transisi",
+          "dashed": false,
+          "source_port": "r",
+          "target_port": "t"
+        },
+        {
+          "source": "kebutuhan",
+          "target": "standar",
+          "label": "arah keputusan",
+          "dashed": false
+        },
+        {
+          "source": "standar",
+          "target": "aman",
+          "label": "standar minimum",
+          "dashed": false
+        },
+        {
+          "source": "aman",
+          "target": "app",
+          "label": "kontrol menyeluruh",
+          "dashed": false
+        }
+      ],
+      "note": "Lokasi merupakan arah desain kasus Medikara. Keamanan dan kesiapan AI diperiksa pada bisnis, data, aplikasi, dan teknologi.",
+      "basis": "Technology reference model, target placement, cross-domain security, ADR, AI capability and governance.",
+      "number": 10,
+      "filename": "ch10-diagram-konsep.png",
+      "source": "module/chapter10.tex",
+      "chapter_title": "Arsitektur Teknologi Target dan Kesiapan AI",
+      "sections": [
+        "Pendahuluan",
+        "Arsitektur Teknologi Tingkat Tinggi",
+        "Standar Teknologi dan Technology Reference Model",
+        "Keamanan sebagai Concern Lintas Domain",
+        "Keputusan Arsitektur dan ADR",
+        "AI sebagai Kapabilitas dan Concern Arsitektur",
+        "Peran EA dalam Tata Kelola AI",
+        "Aktivitas: Menulis ADR dan Menilai Kesiapan AI",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Gap lintas domain diubah menjadi paket kerja terukur",
+      "nodes": [
+        {
+          "id": "awal",
+          "text": "Baseline C2|unsur dan bukti saat ini",
+          "role": "data",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "gap",
+          "text": "Perbandingan setara|tetap, baru, hapus, terlewat",
+          "role": "control",
+          "column": 1.05,
+          "row": 0
+        },
+        {
+          "id": "target",
+          "text": "Target C3|unsur dan kebutuhan target",
+          "role": "data",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "siap",
+          "text": "Kesiapan perubahan|komitmen dan kemampuan",
+          "role": "control",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "paket",
+          "text": "Paket kerja|pemilik, luaran, penerimaan",
+          "role": "service",
+          "column": 1.05,
+          "row": 1
+        },
+        {
+          "id": "depend",
+          "text": "Dependensi paket|prasyarat dan sumber daya",
+          "role": "control",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "awal",
+          "target": "gap",
+          "label": "sisi baseline",
+          "dashed": false
+        },
+        {
+          "source": "target",
+          "target": "gap",
+          "label": "sisi target",
+          "dashed": false
+        },
+        {
+          "source": "gap",
+          "target": "paket",
+          "label": "kelompokkan perubahan",
+          "dashed": false
+        },
+        {
+          "source": "siap",
+          "target": "paket",
+          "label": "batas pelaksanaan",
+          "dashed": false
+        },
+        {
+          "source": "depend",
+          "target": "paket",
+          "label": "syarat mulai",
+          "dashed": false
+        }
+      ],
+      "note": "Unsur tanpa pasangan belum tentu sengaja dihentikan. Periksa fungsi yang masih wajib, termasuk proses dan peran manusianya.",
+      "basis": "TOGAF gap matrix, inadvertent gaps, cross-domain gaps, work packages, readiness and dependency types.",
+      "number": 11,
+      "filename": "ch11-diagram-konsep.png",
+      "source": "module/chapter11.tex",
+      "chapter_title": "Gap Analysis dan Paket Kerja",
+      "sections": [
+        "Pendahuluan",
+        "Teknik Gap Analysis dalam TOGAF",
+        "Gap yang Tidak Disengaja",
+        "Gap Lintas Domain",
+        "Dari Gap ke Paket Kerja",
+        "Matriks Dependensi",
+        "Analisis Dampak dan Kesiapan Perubahan",
+        "Merangkai Dokumen Kondisi Target",
+        "Aktivitas: Menyusun Matriks Gap dan Paket Kerja",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Keadaan transisi menjadi pijakan migrasi yang dapat dijalankan",
+      "nodes": [
+        {
+          "id": "awal",
+          "text": "Keadaan saat ini|SIMRS dan identitas terpisah",
+          "role": "data",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "t1",
+          "text": "Transisi 1|identitas dan kontrol akses",
+          "role": "service",
+          "column": 1.05,
+          "row": 0
+        },
+        {
+          "id": "t2",
+          "text": "Transisi berikut|konsolidasi bertahap",
+          "role": "service",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "paket",
+          "text": "Paket kerja dan kapasitas|dependensi lebih dahulu",
+          "role": "control",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "gerbang",
+          "text": "Gerbang migrasi|uji, peralihan, rencana mundur",
+          "role": "control",
+          "column": 1.05,
+          "row": 1
+        },
+        {
+          "id": "target",
+          "text": "Target 2030|layanan terintegrasi",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "awal",
+          "target": "t1",
+          "label": "perubahan terukur",
+          "dashed": false
+        },
+        {
+          "source": "t1",
+          "target": "t2",
+          "label": "prasyarat tersedia",
+          "dashed": false,
+          "source_port": "t",
+          "target_port": "t"
+        },
+        {
+          "source": "t2",
+          "target": "target",
+          "label": "perubahan lanjutan",
+          "dashed": false
+        },
+        {
+          "source": "paket",
+          "target": "gerbang",
+          "label": "luaran siap",
+          "dashed": false
+        },
+        {
+          "source": "gerbang",
+          "target": "t1",
+          "label": "bukti penerimaan",
+          "dashed": false
+        },
+        {
+          "source": "gerbang",
+          "target": "t2",
+          "label": "bukti penerimaan",
+          "dashed": false,
+          "source_port": "r",
+          "target_port": "l"
+        }
+      ],
+      "note": "Setiap transisi harus tetap berguna dan dapat dioperasikan jika langkah berikutnya ditunda. Peta jalan berbeda dari rencana migrasi.",
+      "basis": "Plateau/transition architecture, dependency/value/risk/capacity, roadmap audiences and migration planning.",
+      "number": 12,
+      "filename": "ch12-diagram-konsep.png",
+      "source": "module/chapter12.tex",
+      "chapter_title": "Arsitektur Transisi, Peta Jalan, dan Perencanaan Migrasi",
+      "sections": [
+        "Pendahuluan",
+        "Arsitektur Transisi",
+        "Mengurutkan Paket Kerja",
+        "Peta Jalan untuk Pembaca Berbeda",
+        "Perencanaan Migrasi",
+        "Memodelkan Migrasi di ArchiMate",
+        "Aktivitas: Menyusun Peta Jalan 2026 sampai 2030",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Manfaat memerlukan perubahan kerja yang dimiliki bisnis",
+      "nodes": [
+        {
+          "id": "tech",
+          "text": "MPI dan integrasi|teknologi pemungkin",
+          "role": "service",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "enable",
+          "text": "Definisi dan pelatihan|perubahan pemungkin",
+          "role": "control",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "kerja",
+          "text": "Verifikasi identitas tunggal|perubahan kerja pendaftaran",
+          "role": "service",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "tujuan",
+          "text": "Tujuan investasi|layanan lintas fasilitas",
+          "role": "outcome",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "manfaat",
+          "text": "Salah identitas turun|baseline, target, pemilik",
+          "role": "outcome",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "ukur",
+          "text": "Tinjauan manfaat|bukti setelah dipakai",
+          "role": "control",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "tech",
+          "target": "enable",
+          "label": "pemungkin",
+          "dashed": false
+        },
+        {
+          "source": "enable",
+          "target": "kerja",
+          "label": "menyiapkan perubahan",
+          "dashed": false
+        },
+        {
+          "source": "kerja",
+          "target": "manfaat",
+          "label": "menghasilkan",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "t"
+        },
+        {
+          "source": "manfaat",
+          "target": "tujuan",
+          "label": "mendukung",
+          "dashed": false
+        },
+        {
+          "source": "ukur",
+          "target": "manfaat",
+          "label": "menilai realisasi",
+          "dashed": false
+        }
+      ],
+      "note": "Jaringan disusun dari tujuan menuju pemungkin dan diuji dari pemungkin menuju manfaat. Sistem terpasang belum membuktikan manfaat.",
+      "basis": "Benefits dependency network, ownership, realisation reviews, TCO dan penilaian business case/portfolio.",
+      "number": 13,
+      "filename": "ch13-diagram-konsep.png",
+      "source": "module/chapter13.tex",
+      "chapter_title": "Business Case dan Portofolio Inisiatif",
+      "sections": [
+        "Pendahuluan",
+        "Manajemen Manfaat",
+        "Benefits Dependency Network",
+        "Biaya, TCO, dan Ukuran Finansial Sederhana",
+        "Manfaat yang Sulit Diukur",
+        "Portofolio Inisiatif dan Prioritas",
+        "Menulis Business Case yang Meyakinkan",
+        "Aktivitas: Menyusun Business Case dan Memprioritaskan Portofolio",
+        "Ringkasan",
+        "Latihan"
+      ]
+    },
+    {
+      "caption": "Tata kelola arsitektur menghubungkan rilis dan peninjauan target",
+      "nodes": [
+        {
+          "id": "repo",
+          "text": "Repositori arsitektur|target, standar, ADR",
+          "role": "data",
+          "column": -0.15,
+          "row": 0
+        },
+        {
+          "id": "tim",
+          "text": "Tim produk / proyek|rancangan dan implementasi",
+          "role": "actor",
+          "column": 1.0,
+          "row": 0
+        },
+        {
+          "id": "cek",
+          "text": "Tinjauan kepatuhan|kontrak dan prinsip",
+          "role": "control",
+          "column": 2.15,
+          "row": 0
+        },
+        {
+          "id": "ubah",
+          "text": "Perubahan target|nilai dampak dan kebutuhan",
+          "role": "control",
+          "column": -0.15,
+          "row": 1
+        },
+        {
+          "id": "board",
+          "text": "Architecture board|mandat lintas fungsi",
+          "role": "control",
+          "column": 1.0,
+          "row": 1
+        },
+        {
+          "id": "rilis",
+          "text": "Implementasi disetujui|bukti kesesuaian",
+          "role": "outcome",
+          "column": 2.15,
+          "row": 1
+        }
+      ],
+      "edges": [
+        {
+          "source": "repo",
+          "target": "tim",
+          "label": "arah dan batas",
+          "dashed": false
+        },
+        {
+          "source": "tim",
+          "target": "cek",
+          "label": "bukti rancangan",
+          "dashed": false
+        },
+        {
+          "source": "cek",
+          "target": "rilis",
+          "label": "sesuai kontrak",
+          "dashed": false
+        },
+        {
+          "source": "cek",
+          "target": "board",
+          "label": "gap atau dispensasi",
+          "dashed": false,
+          "source_port": "b",
+          "target_port": "t"
+        },
+        {
+          "source": "board",
+          "target": "ubah",
+          "label": "keputusan perubahan",
+          "dashed": false
+        },
+        {
+          "source": "ubah",
+          "target": "repo",
+          "label": "perbarui baseline",
+          "dashed": true
+        }
+      ],
+      "note": "Dispensasi memiliki alasan, kontrol sementara, pemilik, serta kedaluwarsa. Ukuran praktik arsitektur menilai hasil organisasi.",
+      "basis": "ADM G/H, architecture contract/board, compliance, dispensation, repository and agile architecture.",
+      "number": 14,
+      "filename": "ch14-diagram-konsep.png",
+      "source": "module/chapter14.tex",
+      "chapter_title": "Tata Kelola Arsitektur dan Praktik Arsitektur yang Lincah",
+      "sections": [
+        "Pendahuluan",
+        "Tata Kelola Implementasi dan Manajemen Perubahan Arsitektur",
+        "Architecture Board dan Tinjauan Kepatuhan",
+        "Repositori dan Kemampuan Arsitektur",
+        "Tata Kelola Arsitektur di Sektor Publik",
+        "Praktik Arsitektur yang Lincah",
+        "Mengukur Nilai Praktik Arsitektur",
+        "Aktivitas: Merancang Tata Kelola Arsitektur dan Presentasi Akhir",
+        "Ringkasan",
+        "Latihan"
+      ]
+    }
+  ]
+}

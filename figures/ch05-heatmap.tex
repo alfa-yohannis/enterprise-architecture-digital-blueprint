@@ -1,0 +1,47 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kap/.style={draw, text width=3.3cm, minimum height=0.72cm, align=center,
+              font=\tiny, inner sep=1.5pt},
+  satu/.style={kap, fill=red!22},
+  dua/.style={kap, fill=orange!12},
+  tiga/.style={kap, fill=green!10},
+  judul/.style={font=\scriptsize\bfseries, align=center}
+]
+  \draw[rounded corners, fill=praditagreen!15] (0,0.65) rectangle (3.8,-5.95);
+  \draw[rounded corners, fill=praditagreen!15] (4.0,0.65) rectangle (7.8,-5.95);
+  \draw[rounded corners, fill=praditagreen!15] (8.0,0.65) rectangle (11.8,-5.95);
+  \node[judul] at (1.9,0.3) {Kapabilitas Strategis};
+  \node[judul] at (5.9,0.3) {Kapabilitas Layanan Pasien};
+  \node[judul] at (9.9,0.3) {Kapabilitas Pendukung};
+
+  \node[tiga] at (1.9,-0.40) {S01 Manajemen Strategi\\kondisi 3, kepentingan sedang};
+  \node[dua] at (1.9,-1.24) {S02 Pengelolaan Kepatuhan\\kondisi 2, kepentingan tinggi};
+
+  \node[dua] at (5.9,-0.40) {L01 Pendaftaran Pasien\\kondisi 2, kepentingan tinggi};
+  \node[dua] at (5.9,-1.24)
+    {L02 Penerbitan Nomor\\Rekam Medis Lokal\\kondisi 2, kepentingan tinggi};
+  \node[dua] at (5.9,-2.08) {L03 Penjadwalan Layanan\\kondisi 2, kepentingan tinggi};
+  \node[satu] at (5.9,-2.92) {L04 Pengelolaan Rekam Medis\\kondisi 1, kepentingan tinggi};
+  \node[tiga] at (5.9,-3.76) {L05 Pelayanan Klinis\\kondisi 3, kepentingan sedang};
+  \node[tiga] at (5.9,-4.60)
+    {L06 Layanan Farmasi\\dan Laboratorium\\kondisi 3, kepentingan sedang};
+  \node[dua] at (5.9,-5.44) {L07 Telekonsultasi\\kondisi 2, kepentingan tinggi};
+
+  \node[dua] at (9.9,-0.40) {P01 Klaim dan Penjaminan\\kondisi 2, kepentingan tinggi};
+  \node[satu] at (9.9,-1.24)
+    {P02 Pengelolaan Akses Pengguna\\kondisi 1, kepentingan tinggi};
+  \node[satu] at (9.9,-2.08) {P03 Pelaporan Manajemen\\kondisi 1, kepentingan tinggi};
+  \node[tiga] at (9.9,-2.92) {P04 Keuangan dan Akuntansi\\kondisi 3, kepentingan sedang};
+  \node[tiga] at (9.9,-3.76) {P05 Pengelolaan Tenaga Kerja\\kondisi 3, kepentingan sedang};
+  \node[satu] at (9.9,-4.60)
+    {P06 Rekonsiliasi Data\\Manual Antarfasilitas\\kondisi 1, kepentingan sedang};
+
+  \draw[fill=red!22] (0.4,-6.32) rectangle (0.7,-6.52);
+  \node[font=\tiny, anchor=west] at (0.75,-6.42) {1: belum konsisten (4)};
+  \draw[fill=orange!12] (3.3,-6.32) rectangle (3.6,-6.52);
+  \node[font=\tiny, anchor=west] at (3.65,-6.42) {2: ada, belum merata (6)};
+  \draw[fill=green!10] (6.3,-6.32) rectangle (6.6,-6.52);
+  \node[font=\tiny, anchor=west] at (6.65,-6.42) {3: konsisten dan terukur (5)};
+  \draw[fill=gray!35] (9.3,-6.32) rectangle (9.6,-6.52);
+  \node[font=\tiny, anchor=west] at (9.65,-6.42) {belum dinilai (0)};
+\end{tikzpicture}

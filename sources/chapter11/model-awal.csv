@@ -1,0 +1,17 @@
+# Ekspor sintetis model awal Medikara, potongan dari katalog Bab 7. Pakai bersama bandingkan-model.py; hapus baris ini saat impor spreadsheet.
+id,nama,jenis,padanan_target,alasan_dihapus
+CAP-L01,Pendaftaran Pasien,kapabilitas,CAP-L01,
+CAP-L02,Penerbitan Nomor Rekam Medis Lokal,kapabilitas,,Diganti identitas terpadu; tabel padanan tetap dipelihara
+CAP-P06,Rekonsiliasi Data Manual Antarfasilitas,kapabilitas,,Data dipakai bersama
+APP-01,SIMRS Jakarta,aplikasi,APP-T01,
+APP-02,SIMRS Bekasi,aplikasi,APP-T01,
+APP-03,SIMRS Depok,aplikasi,APP-T01,
+APP-04,SIMRS Bogor,aplikasi,APP-T01,
+APP-05,SIMRS Bandung,aplikasi,APP-T01,
+APP-06,SIM Klinik,aplikasi,APP-T01,
+APP-07,ERP keuangan,aplikasi,APP-07,
+APP-08,Medikara+,aplikasi,APP-08,
+APP-09,Antrean Bandung,aplikasi,,Fungsi tersedia di Medikara+
+APP-10,Surveilans Infeksi Bogor,aplikasi,,
+APP-11,Laporan Klaim Lama,aplikasi,,
+SPR-01,Kumpulan 23 spreadsheet laporan,berkas,APP-T04,

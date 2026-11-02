@@ -1,0 +1,10 @@
+# Data paket kerja Medikara Bab 12 (bulan 0 = Juli 2026). Pakai: python jalur-kritis.py paket-kerja-medikara.csv
+kode,nama,ukuran,durasi_bulan,bergantung_pada,nilai,pengurangan_risiko,risiko_pelaksanaan,transisi,mulai_rencana_bulan
+P1,Kontrol akses terpusat,besar,9,,3,5,sedang,T1,0
+P2,Hub integrasi BPJS dan SATUSEHAT,sedang,6,,3,3,rendah,T1,0
+P3,Identitas pasien tunggal (MPI),besar,12,P1;P2,5,4,sedang,T1,0
+P4,Landing zone cloud,sedang,6,P1,1,2,rendah,T1,0
+P5,Konsolidasi SIMRS,besar,30,P3;P4,5,3,tinggi,T2 sampai Target,0
+P6,Laporan manajemen terpadu,sedang,12,P3;P4,4,2,sedang,T2,0
+P7,Antrean dan janji temu lintas fasilitas,sedang,9,P2;P3,4,1,rendah,T2,0
+P8,Portal dan API mitra,besar,12,P2;P3,4,1,sedang,T3,30

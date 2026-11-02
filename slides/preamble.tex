@@ -10,77 +10,153 @@
 \usepackage{booktabs}
 \usepackage{tikz}
 \usepackage{pgfplots}
+\usepackage{fontspec}
+\usepackage[english,bahasai]{babel}
 \pgfplotsset{compat=1.18}
 \usetikzlibrary{arrows.meta, positioning, calc, fit, shapes.geometric,
-	shapes.multipart, backgrounds, matrix, chains, trees}
+  shapes.multipart, backgrounds, matrix, chains, trees}
 
 \makeatletter
 \def\input@path{{../theme/}}
 \makeatother
 \graphicspath{{../theme/}{../../figures/}}
-\usetheme{Pradita}
+% Stub symlink Windows memakai tema cadangan sampai aset institusi tersedia.
+\IfFileExists{../theme/beamerthemePradita.sty}{%
+  \usetheme{Pradita}
+}{%
+  \usetheme{Madrid}
+  \setmainfont{TeX Gyre Heros}
+  \setsansfont{TeX Gyre Heros}
+  \setbeamertemplate{navigation symbols}{}
+}
 
 \definecolor{praditagreen}{RGB}{37, 113, 71}
+\setbeamercolor{structure}{fg=praditagreen}
+\setbeamercolor{palette primary}{bg=praditagreen,fg=white}
+\setbeamercolor{palette secondary}{bg=praditagreen!80!black,fg=white}
+\setbeamercolor{palette tertiary}{bg=praditagreen!60!black,fg=white}
+\setbeamerfont{frametitle}{size=\large}
+\setbeamertemplate{caption}[numbered]
+
+% Ukuran header mengikuti teks agar judul panjang tidak menabrak logo.
+\setbeamercolor{frametitle}{bg=white,fg=black}
+\setbeamertemplate{frametitle}{%
+  \begin{beamercolorbox}[wd=\paperwidth,sep=0.2cm]{frametitle}
+    \begin{minipage}[c]{0.77\paperwidth}
+      \raggedright\fontsize{16}{18}\selectfont\bfseries\insertframetitle
+      \ifx\insertframesubtitle\empty\else
+        \par\small\mdseries\insertframesubtitle
+      \fi
+    \end{minipage}\hfill
+    \begin{minipage}[c]{0.15\paperwidth}
+      \IfFileExists{../theme/classFiles/logo_universitas.png}{%
+        \includegraphics[width=\linewidth]{../theme/classFiles/logo_universitas.png}%
+      }{}
+    \end{minipage}
+  \end{beamercolorbox}
+}
+\setbeamertemplate{footline}{%
+  \ifnum\value{framenumber}>1
+    \begin{beamercolorbox}[wd=\paperwidth,ht=0.35cm,dp=0.15cm,
+      leftskip=0.3cm,rightskip=0.3cm]{palette primary}
+      \footnotesize\bfseries\insertframenumber/\inserttotalframenumber
+      \hfill IT40513
+    \end{beamercolorbox}
+  \fi
+}
+\DeclareRobustCommand{\berkas}[1]{\path{#1}}
 
 % Tema membuat garis tabel berwarna putih. Dikembalikan agar tabel terbaca.
 \arrayrulecolor{black}
 \setlength{\arrayrulewidth}{0.5pt}
 
 \lstdefinelanguage{yaml}{
-	basicstyle=\ttfamily\scriptsize,
-	keywordstyle=\color{blue}\bfseries,
-	commentstyle=\color{gray}\itshape,
-	stringstyle=\color{red},
-	showstringspaces=false,
-	breaklines=true,
-	frame=lines,
-	numbers=none,
-	backgroundcolor=\color{lightgray!10},
-	tabsize=2,
-	morecomment=[l]{\#}
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue}\bfseries,
+  commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red},
+  showstringspaces=false,
+  breaklines=true,
+  frame=lines,
+  numbers=none,
+  backgroundcolor=\color{lightgray!10},
+  tabsize=2,
+  morecomment=[l]{\#}
 }
 
 \lstdefinelanguage{json}{
-	basicstyle=\ttfamily\scriptsize,
-	stringstyle=\color{red},
-	commentstyle=\color{gray},
-	breaklines=true,
-	showstringspaces=false,
-	tabsize=2,
-	numbers=none,
-	frame=lines,
-	backgroundcolor=\color{lightgray!10},
-	string=[s]{"}{"}
+  basicstyle=\ttfamily\scriptsize,
+  stringstyle=\color{red},
+  commentstyle=\color{gray},
+  breaklines=true,
+  showstringspaces=false,
+  tabsize=2,
+  numbers=none,
+  frame=lines,
+  backgroundcolor=\color{lightgray!10},
+  string=[s]{"}{"}
 }
 
 \lstdefinelanguage{bash}{
-	keywords={},
-	basicstyle=\ttfamily\scriptsize,
-	ndkeywords={docker, kubectl, helm, curl, git, terraform},
-	ndkeywordstyle=\color{purple}\bfseries,
-	sensitive=true,
-	commentstyle=\color{gray},
-	numbers=none,
-	breaklines=true,
-	frame=lines,
-	backgroundcolor=\color{lightgray!10},
-	tabsize=2,
-	comment=[l]{\#},
-	showstringspaces=false
+  keywords={},
+  basicstyle=\ttfamily\scriptsize,
+  ndkeywords={docker, kubectl, helm, curl, git, terraform},
+  ndkeywordstyle=\color{purple}\bfseries,
+  sensitive=true,
+  commentstyle=\color{gray},
+  numbers=none,
+  breaklines=true,
+  frame=lines,
+  backgroundcolor=\color{lightgray!10},
+  tabsize=2,
+  comment=[l]{\#},
+  showstringspaces=false
 }
 
 \lstdefinelanguage{http}{
-	keywords={GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS, HTTP},
-	basicstyle=\ttfamily\scriptsize,
-	keywordstyle=\color{blue}\bfseries,
-	sensitive=true,
-	numbers=none,
-	breaklines=true,
-	frame=lines,
-	backgroundcolor=\color{lightgray!10},
-	tabsize=2,
-	showstringspaces=false
+  keywords={GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS, HTTP},
+  basicstyle=\ttfamily\scriptsize,
+  keywordstyle=\color{blue}\bfseries,
+  sensitive=true,
+  numbers=none,
+  breaklines=true,
+  frame=lines,
+  backgroundcolor=\color{lightgray!10},
+  tabsize=2,
+  showstringspaces=false
 }
 
 \subtitle{IT40513 · Enterprise Architecture \& Digital Blueprint}
 \author{\textbf{Alfa Yohannis}}
+
+
+% Sampul membatasi judul di panel putih tema rujukan Pradita.
+\setbeamertemplate{title page}{%
+  \begin{tikzpicture}[remember picture,overlay]
+    \node[anchor=north west,inner sep=0pt,text width=8.8cm]
+      at ([xshift=1cm,yshift=-3.15cm]current page.north west) {%
+        {\small\insertsubtitle\par}\vspace{0.25cm}
+        \resizebox{8.8cm}{!}{\begin{minipage}{12cm}
+          \raggedright\color{praditagreen}\bfseries\inserttitle
+        \end{minipage}}
+      };
+    \node[anchor=south west,inner sep=0pt]
+      at ([xshift=1cm,yshift=1.65cm]current page.south west)
+      {\small\insertdate};
+    \node[anchor=west,inner sep=0pt,text=white]
+      at ([xshift=0.8cm,yshift=0.75cm]current page.south west)
+      {\small\insertauthor};
+  \end{tikzpicture}
+}
+
+
+% Batasi kedua dimensi gambar agar diagram bersama tetap berada pada slide.
+\newsavebox{\eafigbox}
+\newcommand{\eadiagram}[1]{%
+  \sbox{\eafigbox}{\resizebox{0.94\textwidth}{!}{\input{#1}}}%
+  \ifdim\dimexpr\ht\eafigbox+\dp\eafigbox\relax>0.64\textheight
+    \resizebox{!}{0.64\textheight}{\usebox{\eafigbox}}%
+  \else
+    \usebox{\eafigbox}%
+  \fi
+}

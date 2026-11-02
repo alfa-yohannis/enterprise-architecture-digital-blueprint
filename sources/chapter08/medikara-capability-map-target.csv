@@ -1,0 +1,20 @@
+# Peta target Bab 8: 18 kapabilitas, yaitu 15 kapabilitas Bab 5 dengan kode yang sama ditambah 3 kapabilitas baru (CAP-S21, CAP-S22, CAP-L21). Status merupakan skenario. Salin lalu isi; hapus baris komentar saat impor spreadsheet.
+id,kapabilitas,perubahan,target,bukti_penerimaan
+CAP-S01,Manajemen Strategi,dipertahankan,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-S21,Pengelolaan Kemitraan Ekosistem,baru,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-S22,Wawasan Pasien dan Analitik,baru,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-S02,Pengelolaan Kepatuhan,diperkuat,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-L21,Pengelolaan Identitas Pasien Terpadu,baru,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-L01,Pendaftaran Pasien,diperkuat,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-L03,Penjadwalan Layanan,diperkuat,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-L04,Pengelolaan Rekam Medis,diperkuat,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-L05,Pelayanan Klinis,dipertahankan,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-L07,Telekonsultasi,diperkuat,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-L06,Layanan Farmasi dan Laboratorium,dipertahankan,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-L02,Penerbitan Nomor Rekam Medis Lokal,dihentikan,dihentikan sesudah identitas terpadu berjalan,Tabel padanan nomor lama tetap dipelihara
+CAP-P01,Klaim dan Penjaminan,diperkuat,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-P02,Pengelolaan Akses Pengguna,diperkuat,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-P03,Pelaporan Manajemen,diperkuat,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-P04,Keuangan dan Akuntansi,dipertahankan,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-P05,Pengelolaan Tenaga Kerja,dipertahankan,perlu persetujuan pemilik,Uji hasil dan kemampuan pada lingkup yang disepakati
+CAP-P06,Rekonsiliasi Data Manual Antarfasilitas,dihentikan,dihentikan sesudah data dipakai bersama,Pengalihan tugas petugas tercatat

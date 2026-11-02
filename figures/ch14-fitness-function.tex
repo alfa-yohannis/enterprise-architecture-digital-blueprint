@@ -1,0 +1,32 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.95cm, text width=2.2cm,
+                align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=blue!8] (ubah) at (0,0)
+    {Perubahan\\{\tiny\mdseries kode atau konfigurasi}};
+  \node[kotak, fill=blue!8] (uji) at (2.9,0)
+    {Build dan uji\\{\tiny\mdseries \textit{pipeline} CI}};
+  \node[kotak, fill=orange!12] (fungsi) at (5.8,0)
+    {\textit{Fitness function}\\{\tiny\mdseries periksa standar teknologi}};
+  \node[kotak, fill=green!10] (lolos) at (9.2,0.95)
+    {Lolos\\{\tiny\mdseries boleh digabung}};
+  \node[kotak, fill=red!22] (gagal) at (9.2,-0.95)
+    {Gagal\\{\tiny\mdseries diblokir}};
+  \node[kotak, fill=praditagreen!15] (catatan) at (5.8,-2.5)
+    {Catatan dispensasi\\{\tiny\mdseries nomor dan tanggal berakhir}};
+  \node[kotak, fill=blue!8] (board) at (9.2,-2.5)
+    {\textit{Architecture board}\\{\tiny\mdseries menilai pengecualian}};
+
+  \draw[panah] (ubah) -- (uji);
+  \draw[panah] (uji) -- (fungsi);
+  \draw[panah] (fungsi.east) -- ++(0.45,0) |- (lolos.west);
+  \draw[panah] (fungsi.east) -- ++(0.45,0) |- (gagal.west);
+  \draw[panah] (gagal) -- node[right, font=\tiny] {eskalasi} (board);
+  \draw[panah, dashed] (board) -- node[below, font=\tiny] {dispensasi dicatat}
+    (catatan);
+  \draw[panah, dashed] (catatan) -- node[left, font=\tiny] {dibaca} (fungsi);
+  \node[font=\tiny, gray, anchor=east] at (7.75,0.75) {sesuai standar};
+  \node[font=\tiny, gray, anchor=east] at (7.75,-0.75) {ada pelanggaran};
+\end{tikzpicture}

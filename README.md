@@ -6,26 +6,29 @@ Mata kuliah ini membahas cara organisasi memahami dirinya secara utuh, dari stra
 
 Mahasiswa datang dari dua kelompok latar belakang. Sebagian dari bisnis, manajemen, akuntansi, hukum, kesehatan, dan bidang lain. Sebagian lagi dari ilmu komputer, rekayasa perangkat lunak, atau teknologi informasi. Karena itu setiap pertemuan dimulai dari masalah organisasi yang nyata, baru kemudian masuk ke konsep dan istilah. Kemampuan memprogram tidak dibutuhkan. Materi teknis yang lebih dalam disediakan sebagai pendalaman opsional bagi mahasiswa berlatar CS (*Computer Science*), SE (*Software Engineering*), atau TI (Teknologi Informasi). Mata kuliah ini dijalankan sebagai satu proyek *capstone* bersama tiga mata kuliah lain: [IT40613 Digital Platform & API Economy](https://github.com/alfa-yohannis/digital-platform-api-economy), [IT40713 Cloud-Native & Microservices Architecture](https://github.com/alfa-yohannis/cloud-native-microservices-architecture), dan [IT40813 IT Governance, Risk & Compliance](https://github.com/alfa-yohannis/it-governance-risk-compliance). Di dalam proyek itu, mata kuliah ini memegang peta besarnya. Tatap muka hanya berlangsung hari Sabtu untuk membahas progres proyek, sehingga modul dan slide disusun agar dapat dipelajari secara mandiri.
 
+
+**Berkas siap pakai.** [Modul PDF](module/enterprise-architecture-digital-blueprint.pdf) memuat 14 bab. Slide setiap sesi tersedia di `slides/sessionNN/` dan melalui kolom PDF di bawah. Seluruh PDF dibuat dengan XeLaTeX dan BibTeX. Setiap bab dan sesi memakai satu diagram konsep PNG berlabel, `figures/chNN-diagram-konsep.png`, bersama diagram TikZ pendukung. Versi SVG dan spesifikasi diagram dijelaskan di [figures/ILLUSTRATIONS.md](figures/ILLUSTRATIONS.md). Ilustrasi JPG terdahulu disimpan sebagai arsip di `figures` dan tidak lagi dipasang.
+
 ## Peta Pertemuan
 
 Urutan pertemuan mengikuti empat tonggak *capstone* sekaligus alur ADM (*Architecture Development Method*) dalam TOGAF. Tim lebih dahulu memahami konteks dan strategi organisasi, lalu memotret kondisi saat ini, merancang kondisi target, dan terakhir menyusun peta jalan beserta tata kelolanya. Setiap pertemuan menghasilkan satu artefak yang langsung masuk ke cetak biru tim, sehingga tatap muka hari Sabtu dipakai untuk membahas artefak, bukan mengulang materi. Tonggak C2 ditinjau menjelang UTS (Ujian Tengah Semester), dan tonggak C4 dipresentasikan menjelang UAS (Ujian Akhir Semester). Kolom terakhir menunjukkan luaran untuk tonggak yang sedang berjalan.
 
-| # | Pertemuan | Aktivitas | Luaran Capstone |
-| --- | --- | --- | --- |
-| 1 | **Orientasi Mata Kuliah dan Dasar Arsitektur Enterprise** | Membentuk tim campuran, memilih organisasi, dan membagi peran | C1: piagam tim, profil organisasi, dan glosarium bersama |
-| 2 | Kerangka Kerja Arsitektur: TOGAF, Zachman, dan Arsitektur SPBE | Memetakan pemangku kepentingan dan menetapkan ruang lingkup kerja arsitektur | C1: peta pemangku kepentingan dan *Statement of Architecture Work* |
-| 3 | Strategi, Model Operasi, dan Visi Arsitektur | Menurunkan strategi menjadi rantai motivasi, model operasi, dan prinsip arsitektur | C1: visi arsitektur |
-| 4 | Pemodelan Arsitektur dengan ArchiMate dan Archi | Memodelkan satu layanan inti dari pasien sampai *server* | C2: model ArchiMate awal |
-| 5 | Arsitektur Bisnis Saat Ini: Capability Map dan Value Stream | Menyusun *capability map*, *value stream*, dan *heatmap* berbasis bukti | C2: arsitektur bisnis saat ini |
-| 6 | Arsitektur Data dan Informasi Saat Ini | Menelusuri lokasi dan aliran data penting, lalu menandai data pribadi | C2: peta informasi, matriks data dan aplikasi, daftar masalah data |
-| 7 | Arsitektur Aplikasi dan Teknologi Saat Ini | Menilai portofolio aplikasi dan memetakan integrasi | C2: dokumen kondisi saat ini untuk tinjauan UTS |
-| 8 | Arsitektur Bisnis Target untuk Transformasi Digital | Membandingkan opsi kondisi target bisnis, lalu memilih satu beserta alasannya | C3: arsitektur bisnis target |
-| 9 | Arsitektur Data dan Aplikasi Target | Merancang identitas pasien tunggal dan rasionalisasi aplikasi | C3: arsitektur data dan aplikasi target |
-| 10 | Arsitektur Teknologi Target dan Kesiapan AI | Menulis catatan keputusan arsitektur dan menilai kesiapan AI | C3: arsitektur teknologi target dan catatan keputusan |
-| 11 | Gap Analysis dan Paket Kerja | Menyusun matriks gap, lalu mengelompokkannya menjadi paket kerja | C3: dokumen kondisi target dan *gap analysis* |
-| 12 | Arsitektur Transisi, Peta Jalan, dan Perencanaan Migrasi | Menyusun arsitektur transisi dan peta jalan 2026 sampai 2030 | C4: peta jalan dan rencana migrasi |
-| 13 | Business Case dan Portofolio Inisiatif | Menyusun *business case* dan memprioritaskan portofolio inisiatif | C4: *business case* dan portofolio berprioritas |
-| 14 | Tata Kelola Arsitektur dan Praktik Arsitektur yang Lincah | Merancang tata kelola arsitektur dan mempresentasikan cetak biru | C4: rancangan tata kelola dan presentasi akhir |
+| # | Pertemuan | Aktivitas | Luaran Capstone | Slide |
+| --- | --- | --- | --- | --- |
+| 1 | **Orientasi Mata Kuliah dan Dasar Arsitektur Enterprise** | Membentuk tim campuran, memilih organisasi, dan membagi peran | C1: piagam tim, profil organisasi, dan glosarium bersama | [PDF](slides/session01/session01.pdf) |
+| 2 | Kerangka Kerja Arsitektur: TOGAF, Zachman, dan Arsitektur SPBE | Memetakan pemangku kepentingan dan menetapkan ruang lingkup kerja arsitektur | C1: peta pemangku kepentingan dan *Statement of Architecture Work* | [PDF](slides/session02/session02.pdf) |
+| 3 | Strategi, Model Operasi, dan Visi Arsitektur | Menurunkan strategi menjadi rantai motivasi, model operasi, dan prinsip arsitektur | C1: visi arsitektur | [PDF](slides/session03/session03.pdf) |
+| 4 | Pemodelan Arsitektur dengan ArchiMate dan Archi | Memodelkan satu layanan inti dari pasien sampai server | C2: model ArchiMate awal | [PDF](slides/session04/session04.pdf) |
+| 5 | Arsitektur Bisnis Saat Ini: Capability Map dan Value Stream | Menyusun *capability map*, *value stream*, dan *heatmap* berbasis bukti | C2: arsitektur bisnis saat ini | [PDF](slides/session05/session05.pdf) |
+| 6 | Arsitektur Data dan Informasi Saat Ini | Menelusuri lokasi dan aliran data penting, lalu menandai data pribadi | C2: peta informasi, matriks data dan aplikasi, daftar masalah data | [PDF](slides/session06/session06.pdf) |
+| 7 | Arsitektur Aplikasi dan Teknologi Saat Ini | Menilai portofolio aplikasi dan memetakan integrasi | C2: dokumen kondisi saat ini untuk tinjauan UTS | [PDF](slides/session07/session07.pdf) |
+| 8 | Arsitektur Bisnis Target untuk Transformasi Digital | Membandingkan opsi kondisi target bisnis, lalu memilih satu beserta alasannya | C3: arsitektur bisnis target | [PDF](slides/session08/session08.pdf) |
+| 9 | Arsitektur Data dan Aplikasi Target | Merancang identitas pasien tunggal dan rasionalisasi aplikasi | C3: arsitektur data dan aplikasi target | [PDF](slides/session09/session09.pdf) |
+| 10 | Arsitektur Teknologi Target dan Kesiapan AI | Menulis catatan keputusan arsitektur dan menilai kesiapan AI | C3: arsitektur teknologi target dan catatan keputusan | [PDF](slides/session10/session10.pdf) |
+| 11 | Gap Analysis dan Paket Kerja | Menyusun matriks gap, lalu mengelompokkannya menjadi paket kerja | C3: dokumen kondisi target dan *gap analysis* | [PDF](slides/session11/session11.pdf) |
+| 12 | Arsitektur Transisi, Peta Jalan, dan Perencanaan Migrasi | Menyusun arsitektur transisi dan peta jalan 2026 sampai 2030 | C4: peta jalan dan rencana migrasi | [PDF](slides/session12/session12.pdf) |
+| 13 | Business Case dan Portofolio Inisiatif | Menyusun *business case* dan memprioritaskan portofolio inisiatif | C4: *business case* dan portofolio berprioritas | [PDF](slides/session13/session13.pdf) |
+| 14 | Tata Kelola Arsitektur dan Praktik Arsitektur yang Lincah | Merancang tata kelola arsitektur dan mempresentasikan cetak biru | C4: rancangan tata kelola dan presentasi akhir | [PDF](slides/session14/session14.pdf) |
 
 Pertemuan dikelompokkan ke dalam empat Bagian yang sejajar dengan tonggak *capstone*. Bagian I (1 sampai 3) menyamakan kosakata, memperkenalkan kerangka kerja, dan menghasilkan visi arsitektur. Bagian ini setara dengan fase *Preliminary* dan *Architecture Vision* dalam ADM. Bagian II (4 sampai 7) membekali tim dengan bahasa pemodelan, lalu memotret kondisi saat ini domain demi domain: bisnis, data, aplikasi, dan teknologi. Ini adalah fase B, C, dan D untuk *baseline*. Bagian III (8 sampai 11) mengulang ketiga fase itu untuk kondisi target, lalu menutupnya dengan *gap analysis*. Bagian IV (12 sampai 14) mencakup fase E sampai H: arsitektur transisi, peta jalan, *business case*, dan tata kelola arsitektur.
 
@@ -43,7 +46,7 @@ Bagian ini menyamakan bahasa di dalam tim campuran dan menghasilkan tonggak C1.
 
 **Tujuan.**
 
-1. Menjelaskan masalah organisasi yang dijawab EA dan nilai yang dapat diharapkan darinya, dengan merujuk bukti empiris.
+1. Menjelaskan masalah organisasi yang dijawab EA (*Enterprise Architecture*) dan nilai yang dapat diharapkan darinya, dengan merujuk bukti empiris.
 2. Mendeskripsikan sebuah organisasi memakai lima sudut pandang bersama: strategi, bisnis, data, aplikasi, dan teknologi.
 3. Menyusun piagam tim dan profil organisasi sebagai titik awal *capstone*.
 
@@ -53,16 +56,16 @@ Bagian ini menyamakan bahasa di dalam tim campuran dan menghasilkan tonggak C1.
 
 **Latihan.**
 
-1. Sebuah rumah sakit memakai tiga aplikasi pendaftaran pasien yang berbeda. Jelaskan dua kerugian bisnis dari kondisi itu dan cara EA membantu mencegahnya.
-2. Seorang manajer berkata, "EA hanya menghasilkan diagram yang tidak dibaca orang." Tanggapi pernyataan itu dengan merujuk minimal satu temuan penelitian.
-3. Ambil satu contoh keputusan di sebuah organisasi yang gagal karena bagian bisnis dan bagian TI memakai istilah dengan arti berbeda. Uraikan istilah yang disalahpahami dan dampaknya.
+1. **Kerugian Tiga Aplikasi Pendaftaran.** Sebuah rumah sakit memakai tiga aplikasi pendaftaran pasien yang berbeda. Jelaskan dua kerugian bisnis dari kondisi itu dan cara EA membantu mencegahnya.
+2. **Menanggapi Anggapan "EA Hanya Menghasilkan Diagram".** Seorang manajer berkata, "EA hanya menghasilkan diagram yang tidak dibaca orang." Tanggapi pernyataan itu dengan merujuk minimal satu temuan penelitian.
+3. **Istilah yang Diartikan Berbeda.** Ambil satu contoh keputusan di sebuah organisasi yang gagal karena bagian bisnis dan bagian TI memakai istilah dengan arti berbeda. Uraikan istilah yang disalahpahami dan dampaknya.
 
 #### Pertemuan 02 · Kerangka Kerja Arsitektur: TOGAF, Zachman, dan Arsitektur SPBE
 
 **Tujuan.**
 
-1. Menjelaskan struktur TOGAF Standard edisi ke-10 dan urutan fase ADM.
-2. Membandingkan TOGAF, Zachman Framework, dan Arsitektur SPBE dari sisi tujuan, cakupan, dan cara pakai.
+1. Menjelaskan struktur TOGAF Standard edisi ke-10 dan urutan fase ADM (*Architecture Development Method*).
+2. Membandingkan TOGAF, Zachman Framework, dan Arsitektur SPBE (Sistem Pemerintahan Berbasis Elektronik) dari sisi tujuan, cakupan, dan cara pakai.
 3. Menyusun peta pemangku kepentingan beserta *concern* dan ruang lingkup kerja arsitektur.
 
 **Topik.** Masalah dokumen arsitektur yang tidak dapat dibandingkan satu sama lain. Konsep *stakeholder*, *concern*, *view*, dan *viewpoint* menurut ISO/IEC/IEEE 42010:2022. Struktur TOGAF Standard edisi ke-10 beserta pembaruan 2025. *Fundamental Content* dan *Series Guides*. Fase ADM dari *Preliminary* sampai *Architecture Change Management*. Perbedaan *deliverable*, artefak, dan *building block*. Zachman Framework sebagai ontologi, bukan metode. Arsitektur SPBE dan enam domainnya. Regulasi SPBE dan percepatan transformasi digital pemerintah. Penyesuaian (*tailoring*) kerangka untuk organisasi menengah.
@@ -71,9 +74,9 @@ Bagian ini menyamakan bahasa di dalam tim campuran dan menghasilkan tonggak C1.
 
 **Latihan.**
 
-1. Direktur keuangan dan kepala TI menilai proyek yang sama. Tuliskan dua *concern* yang mungkin untuk masing-masing, lalu tentukan *view* yang cocok untuk tiap *concern*.
-2. Jelaskan mengapa Zachman disebut ontologi, sedangkan ADM disebut metode. Apa akibatnya bila keduanya dipakai bersama dalam satu proyek?
-3. Bandingkan enam domain Arsitektur SPBE dengan empat domain arsitektur TOGAF. Tunjukkan domain yang tidak punya padanan langsung dan jelaskan cara menanganinya.
+1. **Concern Direktur Keuangan dan Kepala TI.** Direktur keuangan dan kepala TI menilai proyek yang sama. Tuliskan dua *concern* yang mungkin untuk masing-masing, lalu tentukan *view* yang cocok untuk tiap *concern*.
+2. **Ontologi dan Metode.** Jelaskan mengapa Zachman disebut ontologi, sedangkan ADM disebut metode. Apa akibatnya bila keduanya dipakai bersama dalam satu proyek?
+3. **Enam Domain SPBE dan Empat Domain TOGAF.** Bandingkan enam domain Arsitektur SPBE dengan empat domain arsitektur TOGAF. Tunjukkan domain yang tidak punya padanan langsung dan jelaskan cara menanganinya.
 
 #### Pertemuan 03 · Strategi, Model Operasi, dan Visi Arsitektur
 
@@ -89,9 +92,9 @@ Bagian ini menyamakan bahasa di dalam tim campuran dan menghasilkan tonggak C1.
 
 **Latihan.**
 
-1. Turunkan strategi "Satu Pasien, Satu Rekam Medis" menjadi satu *goal*, dua *outcome* terukur, dan satu *requirement*.
-2. Jaringan 12 apotek menjalankan proses yang sama di semua cabang, tetapi pelanggan di tiap kota berbeda dan jarang berpindah cabang. Model operasi mana yang paling cocok, dan apa akibatnya bagi aplikasi dan data?
-3. Kritik prinsip "Semua sistem harus memakai teknologi terbaru." Tulis ulang menjadi prinsip yang baik lengkap dengan alasan dan implikasi.
+1. **Menelusuri Strategi.** Turunkan strategi "Satu Pasien, Satu Rekam Medis" menjadi satu *goal*, dua *outcome* terukur, dan satu *requirement*.
+2. **Memilih Model Operasi.** Jaringan 12 apotek menjalankan proses yang sama di semua cabang, tetapi pelanggan di tiap kota berbeda dan jarang berpindah cabang. Model operasi mana yang paling cocok, dan apa akibatnya bagi aplikasi dan data?
+3. **Memperbaiki Prinsip.** Kritik prinsip "Semua sistem harus memakai teknologi terbaru." Tulis ulang menjadi prinsip yang baik lengkap dengan alasan dan implikasi.
 
 ### Bagian II. Memotret Kondisi Saat Ini (4 sampai 7)
 
@@ -107,13 +110,13 @@ Bagian ini membekali tim dengan bahasa pemodelan, lalu memotret organisasi domai
 
 **Topik.** Masalah diagram kotak dan panah yang dibaca berbeda oleh tiap orang. Perbedaan model, diagram, dan repositori. Kerangka inti ArchiMate: lapisan bisnis, aplikasi, dan teknologi. Aspek struktur aktif, perilaku, dan struktur pasif. Elemen strategi, motivasi, serta implementasi dan migrasi. Relasi struktural, dependensi, dan dinamis. *Viewpoint* dan *view*. Archi sebagai alat pemodelan gratis. ArchiMate 4 yang terbit April 2026 dan bedanya dengan ArchiMate 3.2 yang masih dipakai Archi.
 
-**Aktivitas.** Setiap anggota memasang Archi. Tim memodelkan satu layanan inti dari ujung ke ujung, misalnya janji temu rawat jalan Medikara: pasien, layanan bisnis, proses, aplikasi Medikara+ dan SIMRS (Sistem Informasi Manajemen Rumah Sakit), sampai *server*. Analis bisnis dan analis teknologi bekerja berpasangan. Satu memodelkan lapisan bisnis, satu lagi lapisan aplikasi dan teknologi, lalu keduanya menyepakati titik sambungnya. Pemodel menyiapkan struktur folder, konvensi penamaan, dan berkas model bersama. Rantai motivasi dari C1 dipindahkan ke *motivation view*. Luarannya adalah model ArchiMate awal berisi *layered view* dan *motivation view* sebagai fondasi C2. *Pendalaman teknis (opsional):* memeriksa konsistensi model secara otomatis dengan skrip jArchi, atau mengekspor model ke format pertukaran model ArchiMate (*Open Exchange Format*) lalu membaca strukturnya.
+**Aktivitas.** Setiap anggota memasang Archi. Tim memodelkan satu layanan inti dari ujung ke ujung, misalnya janji temu rawat jalan Medikara: pasien, layanan bisnis, proses, aplikasi Medikara+ dan SIMRS (Sistem Informasi Manajemen Rumah Sakit), sampai server. Analis bisnis dan analis teknologi bekerja berpasangan. Satu memodelkan lapisan bisnis, satu lagi lapisan aplikasi dan teknologi, lalu keduanya menyepakati titik sambungnya. Pemodel menyiapkan struktur folder, konvensi penamaan, dan berkas model bersama. Rantai motivasi dari C1 dipindahkan ke *motivation view*. Luarannya adalah model ArchiMate awal berisi *layered view* dan *motivation view* sebagai fondasi C2. *Pendalaman teknis (opsional):* memeriksa konsistensi model secara otomatis dengan skrip jArchi, atau mengekspor model ke format pertukaran model ArchiMate (*Open Exchange Format*) lalu membaca strukturnya.
 
 **Latihan.**
 
-1. Uraikan rantai elemen dan relasi dari "Pasien" sampai "*server* basis data SIMRS" untuk layanan pendaftaran. Sebutkan jenis relasi pada tiap langkah.
-2. Seorang direktur hanya ingin tahu aplikasi mana yang mendukung tiap layanan pasien. *Viewpoint* apa yang cocok, dan elemen apa yang sengaja tidak ditampilkan?
-3. ArchiMate 4 menggabungkan elemen perilaku lintas lapisan. Jelaskan satu keuntungan dan satu kerugian perubahan itu bagi organisasi yang sudah punya model ArchiMate 3.2.
+1. **Rantai Elemen untuk Layanan Pendaftaran.** Uraikan rantai elemen dan relasi dari "Pasien" sampai "server basis data SIMRS" untuk layanan pendaftaran. Sebutkan jenis relasi pada tiap langkah.
+2. **Memilih Viewpoint untuk Direktur.** Seorang direktur hanya ingin tahu aplikasi mana yang mendukung tiap layanan pasien. *Viewpoint* apa yang cocok, dan elemen apa yang sengaja tidak ditampilkan?
+3. **Menghitung Dampak ArchiMate 4.** ArchiMate 4 menggabungkan elemen perilaku lintas lapisan. Jelaskan satu keuntungan dan satu kerugian perubahan itu bagi organisasi yang sudah punya model ArchiMate 3.2.
 
 #### Pertemuan 05 · Arsitektur Bisnis Saat Ini: Capability Map dan Value Stream
 
@@ -129,9 +132,9 @@ Bagian ini membekali tim dengan bahasa pemodelan, lalu memotret organisasi domai
 
 **Latihan.**
 
-1. Apakah "Pendaftaran pasien di loket" sebuah kapabilitas, proses, atau unit organisasi? Ubah menjadi nama kapabilitas yang tepat dan jelaskan alasannya.
-2. Susun tahapan *value stream* "Klaim asuransi dibayar" dari sudut pandang perusahaan asuransi, lalu pasangkan satu kapabilitas dengan tiap tahap.
-3. Dua kapabilitas berwarna merah, tetapi anggaran hanya cukup untuk satu. Tentukan kriteria pemilihan dan bukti yang dibutuhkan.
+1. **Membedakan Jenis Konsep.** Apakah "Pendaftaran pasien di loket" sebuah kapabilitas, proses, atau unit organisasi? Ubah menjadi nama kapabilitas yang tepat dan jelaskan alasannya.
+2. **Menyusun Value Stream Klaim.** Susun tahapan *value stream* "Klaim asuransi dibayar" dari sudut pandang perusahaan asuransi, lalu pasangkan satu kapabilitas dengan tiap tahap.
+3. **Memilih Prioritas Berbukti.** Dua kapabilitas berwarna merah, tetapi anggaran hanya cukup untuk satu. Tentukan kriteria pemilihan dan bukti yang dibutuhkan.
 
 #### Pertemuan 06 · Arsitektur Data dan Informasi Saat Ini
 
@@ -147,9 +150,9 @@ Bagian ini membekali tim dengan bahasa pemodelan, lalu memotret organisasi domai
 
 **Latihan.**
 
-1. Tiga rumah sakit Medikara memberi nomor rekam medis sendiri-sendiri. Jelaskan dampaknya pada layanan pasien, laporan manajemen, dan kepatuhan.
-2. Bagaimana matriks CRUD membantu menemukan data yang tidak punya pemilik jelas? Berikan satu contoh.
-3. Tentukan klasifikasi untuk jadwal praktik dokter, hasil laboratorium, dan nomor rekening karyawan. Jelaskan alasannya.
+1. **Dampak Nomor Rekam Medis Sendiri-Sendiri.** Tiga rumah sakit Medikara memberi nomor rekam medis sendiri-sendiri. Jelaskan dampaknya pada layanan pasien, laporan manajemen, dan kepatuhan.
+2. **Menemukan Data Tanpa Pemilik dengan Matriks CRUD.** Bagaimana matriks CRUD membantu menemukan data yang tidak punya pemilik jelas? Berikan satu contoh.
+3. **Mengklasifikasikan Tiga Jenis Data.** Tentukan klasifikasi untuk jadwal praktik dokter, hasil laboratorium, dan nomor rekening karyawan. Jelaskan alasannya.
 
 #### Pertemuan 07 · Arsitektur Aplikasi dan Teknologi Saat Ini
 
@@ -165,9 +168,9 @@ Bagian ini membekali tim dengan bahasa pemodelan, lalu memotret organisasi domai
 
 **Latihan.**
 
-1. Aplikasi bernilai bisnis tinggi tetapi berkualitas teknis rendah masuk kuadran TIME yang mana? Langkah apa yang wajar untuknya?
-2. Medikara punya lima SIMRS berbeda versi, satu ERP (*Enterprise Resource Planning*), satu aplikasi pasien, dan dua sistem eksternal. Berapa koneksi maksimum bila semuanya saling terhubung *point-to-point*? Mengapa angka ini penting bagi direksi?
-3. Sebutkan tiga pertanyaan untuk vendor guna menilai risiko sebuah aplikasi lama, dan jelaskan alasan tiap pertanyaan.
+1. **Menilai Arah TIME.** Aplikasi bernilai bisnis tinggi tetapi berkualitas teknis rendah masuk kuadran TIME yang mana? Langkah apa yang wajar untuknya?
+2. **Menghitung Pasangan Integrasi.** Medikara punya lima SIMRS berbeda versi, satu ERP (*Enterprise Resource Planning*), satu aplikasi pasien, dan dua sistem eksternal. Berapa koneksi maksimum bila semuanya saling terhubung *point-to-point*? Mengapa angka ini penting bagi direksi?
+3. **Menguji Risiko Vendor.** Sebutkan tiga pertanyaan untuk vendor guna menilai risiko sebuah aplikasi lama, dan jelaskan alasan tiap pertanyaan.
 
 ### Bagian III. Merancang Kondisi Target (8 sampai 11)
 
@@ -187,9 +190,9 @@ Bagian ini mengulang domain yang sama untuk kondisi yang dituju, lalu membanding
 
 **Latihan.**
 
-1. Jelaskan perbedaan *operational backbone* dan *digital platform* dengan contoh dari Medikara.
-2. Sentralisasi layanan pasien memberi efisiensi tetapi mengurangi keleluasaan rumah sakit di daerah. Tuliskan *trade-off* ini dalam tiga kalimat yang dapat dibaca direksi.
-3. Mengapa kapabilitas pengelolaan kemitraan muncul di kondisi target tetapi tidak di kondisi saat ini? Apa syarat agar kapabilitas itu berjalan?
+1. **Membedakan Operational Backbone dan Digital Platform.** Jelaskan perbedaan *operational backbone* dan *digital platform* dengan contoh dari Medikara.
+2. **Menulis Tradeoff Sentralisasi untuk Direksi.** Sentralisasi layanan pasien memberi efisiensi tetapi mengurangi keleluasaan rumah sakit di daerah. Tuliskan *tradeoff* ini dalam tiga kalimat yang dapat dibaca direksi.
+3. **Syarat Kapabilitas Pengelolaan Kemitraan.** Mengapa kapabilitas pengelolaan kemitraan muncul di kondisi target tetapi tidak di kondisi saat ini? Apa syarat agar kapabilitas itu berjalan?
 
 #### Pertemuan 09 · Arsitektur Data dan Aplikasi Target
 
@@ -205,17 +208,17 @@ Bagian ini mengulang domain yang sama untuk kondisi yang dituju, lalu membanding
 
 **Latihan.**
 
-1. Jelaskan tanpa istilah teknis mengapa MPI dibutuhkan sebelum laporan manajemen terpadu dapat dipercaya.
-2. Susun lima kriteria untuk memilih antara membangun sendiri dan membeli SIMRS baru. Beri bobot dan jelaskan alasannya.
-3. Sebuah aplikasi dinilai *Eliminate*, tetapi masih dipakai satu unit kecil untuk laporan ke regulator. Apa yang perlu diperiksa sebelum aplikasi itu dihentikan?
+1. **Menjelaskan MPI kepada Direksi.** Jelaskan tanpa istilah teknis mengapa MPI dibutuhkan sebelum laporan manajemen terpadu dapat dipercaya.
+2. **Kriteria Membangun atau Membeli SIMRS.** Susun lima kriteria untuk memilih antara membangun sendiri dan membeli SIMRS baru. Beri bobot dan jelaskan alasannya.
+3. **Memeriksa Aplikasi Eliminate sebelum Dihentikan.** Sebuah aplikasi dinilai *Eliminate*, tetapi masih dipakai satu unit kecil untuk laporan ke regulator. Apa yang perlu diperiksa sebelum aplikasi itu dihentikan?
 
 #### Pertemuan 10 · Arsitektur Teknologi Target dan Kesiapan AI
 
 **Tujuan.**
 
 1. Merumuskan arah teknologi target tingkat tinggi beserta standar teknologi organisasi.
-2. Mendokumentasikan keputusan arsitektur penting sebagai ADR (*Architecture Decision Record*) lengkap dengan *trade-off*-nya.
-3. Menilai kesiapan organisasi memanfaatkan AI dari sisi kapabilitas, data, dan tata kelola.
+2. Mendokumentasikan keputusan arsitektur penting sebagai ADR (*Architecture Decision Record*) lengkap dengan *tradeoff*-nya.
+3. Menilai kesiapan organisasi memanfaatkan AI (*Artificial Intelligence*) dari sisi kapabilitas, data, dan tata kelola.
 
 **Topik.** Masalah keputusan teknologi yang diambil per proyek. Arsitektur teknologi tingkat tinggi dalam fase D. Katalog standar teknologi dan *technology reference model*. Pilihan lokasi penerapan: *on-premise*, *private cloud*, *public cloud*, dan *hybrid*, yang dibahas rinci di IT40713. Keamanan sebagai *concern* lintas domain, yang dibahas rinci di IT40813. Struktur ADR: konteks, opsi, keputusan, dan konsekuensi. AI sebagai kapabilitas baru. Kesiapan data untuk AI. Inventaris model dan agen AI. Peran EA dalam tata kelola AI.
 
@@ -223,9 +226,9 @@ Bagian ini mengulang domain yang sama untuk kondisi yang dituju, lalu membanding
 
 **Latihan.**
 
-1. Tulis satu ADR singkat untuk keputusan menyimpan rekam medis di pusat data sendiri atau di *cloud*. Sertakan minimal dua opsi beserta konsekuensinya.
-2. Mengapa peluang AI sebaiknya dipetakan dulu ke kapabilitas, bukan langsung ke produk atau vendor? Berikan satu contoh kegagalan bila urutannya dibalik.
-3. Survei industri 2026 menunjukkan banyak organisasi belum tahu agen AI apa saja yang berjalan di dalamnya. Artefak EA apa yang dapat menutup celah itu, dan siapa yang memeliharanya?
+1. **Menulis ADR Lokasi Rekam Medis.** Tulis satu ADR singkat untuk keputusan menyimpan rekam medis di pusat data sendiri atau di *cloud*. Sertakan minimal dua opsi beserta konsekuensinya.
+2. **Memetakan Peluang AI ke Kapabilitas.** Mengapa peluang AI sebaiknya dipetakan dulu ke kapabilitas, bukan langsung ke produk atau vendor? Berikan satu contoh kegagalan bila urutannya dibalik.
+3. **Menutup Celah Visibilitas Agen AI.** Survei industri 2026 menunjukkan banyak organisasi belum tahu agen AI apa saja yang berjalan di dalamnya. Artefak EA apa yang dapat menutup celah itu, dan siapa yang memeliharanya?
 
 #### Pertemuan 11 · Gap Analysis dan Paket Kerja
 
@@ -237,13 +240,13 @@ Bagian ini mengulang domain yang sama untuk kondisi yang dituju, lalu membanding
 
 **Topik.** Masalah daftar keinginan yang tidak pernah menjadi rencana. Teknik *gap analysis* dalam TOGAF: elemen yang dipertahankan, ditambahkan, dan dihapus. Gap yang tidak disengaja. Gap lintas domain bisnis, data, aplikasi, dan teknologi. Konsolidasi gap menjadi paket kerja dalam fase E. Matriks dependensi. Analisis dampak dan kesiapan perubahan. Merangkai dokumen kondisi target.
 
-**Aktivitas.** Tim membuat matriks gap untuk tiap domain. Analis bisnis memimpin gap bisnis dan dampak perubahan pada unit kerja. Analis teknologi memimpin gap data, aplikasi, dan teknologi. Tim mengelompokkan gap menjadi 6 sampai 10 paket kerja dan memetakan dependensinya. Pemodel memakai elemen *gap* dan *work package* di Archi. Koordinator merangkai kondisi target, ADR, dan *gap analysis* menjadi dokumen C3. Luarannya adalah matriks gap, daftar paket kerja beserta dependensinya, dan dokumen C3. *Pendalaman teknis (opsional):* memakai skrip jArchi untuk menemukan elemen target yang belum punya padanan di model *baseline*, lalu membandingkan hasilnya dengan matriks gap yang disusun manual.
+**Aktivitas.** Tim membuat matriks gap untuk tiap domain. Analis bisnis memimpin gap bisnis dan dampak perubahan pada unit kerja. Analis teknologi memimpin gap data, aplikasi, dan teknologi. Tim mengelompokkan gap menjadi 6 sampai 10 paket kerja dan memetakan dependensinya. Pemodel memakai elemen *gap* dan *work package* di Archi. Koordinator merangkai kondisi target, ADR, dan *gap analysis* menjadi dokumen C3. Luarannya adalah matriks gap, daftar paket kerja beserta dependensinya, dan dokumen C3. *Pendalaman teknis (opsional):* membandingkan ekspor CSV model awal dan target dengan `sources/chapter11/bandingkan-model.py`, lalu mencocokkan hasilnya dengan matriks gap manual. Integrasi jArchi dapat ditambahkan sebagai pendalaman.
 
 **Latihan.**
 
-1. Apa arti sel "ada di *baseline*, tidak ada di target" dalam matriks gap? Berikan contoh dari Medikara dan tindakan yang dibutuhkan.
-2. Paket kerja MPI dan paket kerja penggantian SIMRS saling bergantung. Mana yang didahulukan, dan apa risikonya bila urutannya dibalik?
-3. Jelaskan mengapa gap yang paling mahal belum tentu gap yang paling penting.
+1. **Menguji Penghapusan.** Apa arti sel "ada di *baseline*, tidak ada di target" dalam matriks gap? Berikan contoh dari Medikara dan tindakan yang dibutuhkan.
+2. **Mengurai Dependensi MPI dan SIMRS.** Paket kerja MPI dan paket kerja penggantian SIMRS saling bergantung. Mana yang didahulukan, dan apa risikonya bila urutannya dibalik?
+3. **Membedakan Biaya dan Prioritas.** Jelaskan mengapa gap yang paling mahal belum tentu gap yang paling penting.
 
 ### Bagian IV. Peta Jalan, Investasi, dan Tata Kelola (12 sampai 14)
 
@@ -259,13 +262,13 @@ Bagian ini mengubah rancangan menjadi rencana yang dapat didanai dan dijaga. Has
 
 **Topik.** Masalah transformasi besar yang dikerjakan sekaligus. Arsitektur transisi (*transition architecture*) dan *plateau*. Kriteria pengurutan: dependensi, nilai, risiko, dan kapasitas. Fase E dan F dalam ADM. Peta jalan untuk pembaca yang berbeda: direksi, unit bisnis, dan tim TI. Strategi migrasi aplikasi tingkat tinggi, sedangkan strategi 7R dibahas rinci di IT40713. Asumsi, titik keputusan, dan rencana mundur. *Migration view* di ArchiMate.
 
-**Aktivitas.** Tim menetapkan arsitektur transisi. Contohnya, tahun pertama berfokus pada identitas pasien dan kontrol akses, tahap berikutnya pada konsolidasi SIMRS, lalu pada ekosistem mitra. Analis bisnis memastikan tiap transisi menghasilkan manfaat yang terlihat oleh pasien atau manajemen. Analis teknologi memeriksa kelayakan urutan teknisnya. Pemodel membuat *migration view* di Archi. Koordinator menyelaraskan jadwal dengan rencana migrasi *cloud* di IT40713, rencana API di IT40613, dan rencana kendali di IT40813. Luarannya adalah arsitektur transisi, peta jalan, dan rencana migrasi untuk C4. *Pendalaman teknis (opsional):* menyusun jadwal dengan analisis jalur kritis (*critical path*) sederhana dari matriks dependensi Pertemuan 11.
+**Aktivitas.** Tim menetapkan arsitektur transisi. Contohnya, transisi pertama berfokus pada identitas pasien dan kontrol akses, tahap berikutnya pada konsolidasi SIMRS, lalu pada ekosistem mitra. Analis bisnis memastikan tiap transisi menghasilkan manfaat yang terlihat oleh pasien atau manajemen. Analis teknologi memeriksa kelayakan urutan teknisnya. Pemodel membuat *migration view* di Archi. Koordinator menyelaraskan jadwal dengan rencana migrasi *cloud* di IT40713, rencana API di IT40613, dan peta jalan tata kelola di IT40813. Luarannya adalah arsitektur transisi, peta jalan, dan rencana migrasi untuk C4. *Pendalaman teknis (opsional):* menyusun jadwal dengan analisis jalur kritis (*critical path*) sederhana dari matriks dependensi Pertemuan 11.
 
 **Latihan.**
 
-1. Mengapa setiap arsitektur transisi harus tetap bernilai bila proyek berikutnya ditunda? Berikan contoh transisi yang tidak memenuhi syarat itu.
-2. Ringkas peta jalan tim menjadi satu halaman untuk direksi. Informasi apa yang dihilangkan, dan mengapa?
-3. Tim TI Medikara hanya sanggup menangani dua proyek besar per tahun. Bagaimana batasan ini mengubah urutan peta jalan?
+1. **Menguji Nilai Tiap Transisi.** Mengapa setiap arsitektur transisi harus tetap bernilai bila proyek berikutnya ditunda? Berikan contoh transisi yang tidak memenuhi syarat itu.
+2. **Meringkas Peta Jalan untuk Direksi.** Ringkas peta jalan tim menjadi satu halaman untuk direksi. Informasi apa yang dihilangkan, dan mengapa?
+3. **Batas Dua Proyek Besar per Tahun.** Tim TI Medikara hanya sanggup menangani dua proyek besar per tahun. Bagaimana batasan ini mengubah urutan peta jalan?
 
 #### Pertemuan 13 · Business Case dan Portofolio Inisiatif
 
@@ -281,16 +284,16 @@ Bagian ini mengubah rancangan menjadi rencana yang dapat didanai dan dijaga. Has
 
 **Latihan.**
 
-1. Sebuah inisiatif menjanjikan "efisiensi meningkat". Tulis ulang menjadi manfaat terukur lengkap dengan pemilik manfaat dan cara mengukurnya.
-2. Inisiatif A punya NPV lebih tinggi, tetapi inisiatif B menutup temuan audit tentang kontrol akses. Bagaimana memutuskan di antara keduanya?
-3. Jelaskan mengapa manfaat sering tidak tercapai walaupun proyeknya selesai tepat waktu dan sesuai anggaran.
+1. **Menulis Ulang Manfaat yang Kabur.** Sebuah inisiatif menjanjikan "efisiensi meningkat". Tulis ulang menjadi manfaat terukur lengkap dengan pemilik manfaat dan cara mengukurnya.
+2. **Memilih antara NPV dan Temuan Audit.** Inisiatif A punya NPV lebih tinggi, tetapi inisiatif B menutup temuan audit tentang kontrol akses. Bagaimana memutuskan di antara keduanya?
+3. **Menelusuri Manfaat yang Tidak Tercapai.** Jelaskan mengapa manfaat sering tidak tercapai walaupun proyeknya selesai tepat waktu dan sesuai anggaran.
 
 #### Pertemuan 14 · Tata Kelola Arsitektur dan Praktik Arsitektur yang Lincah
 
 **Tujuan.**
 
 1. Merancang mekanisme tata kelola arsitektur: *architecture board*, tinjauan kepatuhan, dispensasi, dan repositori.
-2. Membandingkan praktik EA tradisional dengan praktik yang lincah, termasuk tata kelola arsitektur di sektor publik.
+2. Membandingkan praktik EA (*Enterprise Architecture*) tradisional dengan praktik yang lincah, termasuk tata kelola arsitektur di sektor publik.
 3. Mempresentasikan dan mempertahankan cetak biru transformasi digital di hadapan pemangku kepentingan.
 
 **Topik.** Masalah cetak biru yang berhenti sebagai dokumen. Fase G dan H dalam ADM: *implementation governance* dan *architecture change management*. *Architecture board*. Tinjauan kepatuhan, kontrak arsitektur, dan dispensasi. Repositori arsitektur dan pemeliharaannya. Tata kelola Arsitektur SPBE dan evaluasi Pemerintah Digital. Praktik arsitektur yang lincah menurut Open Agile Architecture Standard versi 2.0. Ukuran nilai praktik EA.
@@ -299,9 +302,9 @@ Bagian ini mengubah rancangan menjadi rencana yang dapat didanai dan dijaga. Has
 
 **Latihan.**
 
-1. Sebuah proyek mendesak meminta pengecualian dari prinsip "satu sumber data pasien". Rancang alur dispensasi yang tidak menghambat proyek, tetapi tetap menjaga arah arsitektur.
-2. Bandingkan peran *architecture board* di perusahaan swasta dengan Tim Koordinasi SPBE di instansi pemerintah.
-3. Pilih tiga ukuran untuk menilai apakah praktik EA memberi nilai dalam dua tahun pertama. Jelaskan mengapa "jumlah diagram yang dibuat" bukan ukuran yang baik.
+1. **Merancang Alur Dispensasi.** Sebuah proyek mendesak meminta pengecualian dari prinsip "satu sumber data pasien". Rancang alur dispensasi yang tidak menghambat proyek, tetapi tetap menjaga arah arsitektur.
+2. **Membandingkan Architecture Board dan Tim Koordinasi SPBE.** Bandingkan peran *architecture board* di perusahaan swasta dengan Tim Koordinasi SPBE di instansi pemerintah.
+3. **Memilih Ukuran Nilai Praktik EA.** Pilih tiga ukuran untuk menilai apakah praktik EA memberi nilai dalam dua tahun pertama. Jelaskan mengapa "jumlah diagram yang dibuat" bukan ukuran yang baik.
 
 ---
 
@@ -328,38 +331,51 @@ PT Medikara Nusa Sehat ("Medikara Health") adalah organisasi fiktif yang dipakai
 
 **Pemicu tambahan.** Insiden kebocoran data pasien skala kecil lewat vendor pada 2025. Temuan audit internal tentang kontrol akses yang lemah. Antrean layanan yang panjang. Biaya integrasi yang tinggi.
 
-**Pemakaian di mata kuliah ini.** Medikara menjadi contoh kerja di setiap bab. Bagian I memakai strategi dan pemicunya untuk menyusun visi arsitektur. Bagian II memotret kondisi saat ini: kapabilitas, data pasien yang tersebar, lima SIMRS, dan integrasi *point-to-point*. Bagian III merancang kondisi target "Satu Pasien, Satu Rekam Medis". Bagian IV menyusun peta jalan 2026 sampai 2030 beserta tata kelola arsitekturnya. Tim yang memakai organisasi sendiri menjadikan Medikara sebagai pembanding, lalu menerapkan langkah yang sama pada organisasinya. Contoh artefak Medikara disediakan bertahap di folder `sources`. Semua angka dan fakta Medikara wajib sama dengan yang dipakai tiga mata kuliah lain.
+**Pemakaian di mata kuliah ini.** Medikara menjadi contoh kerja di setiap bab. Bagian I memakai strategi dan pemicunya untuk menyusun visi arsitektur. Bagian II memotret kondisi saat ini: kapabilitas, data pasien yang tersebar, lima SIMRS, dan integrasi *point-to-point*. Bagian III merancang kondisi target "Satu Pasien, Satu Rekam Medis". Bagian IV menyusun peta jalan 2026 sampai 2030 beserta tata kelola arsitekturnya. Tim yang memakai organisasi sendiri menjadikan Medikara sebagai pembanding, lalu menerapkan langkah yang sama pada organisasinya. Contoh artefak Medikara dan lembar kerja tersedia di [indeks sumber](sources/README.md). Semua angka dan fakta Medikara wajib sama dengan yang dipakai tiga mata kuliah lain.
 
 ## Struktur Repositori
 
 | Folder | Isi |
 | --- | --- |
-| `figures` | Gambar bersama untuk modul dan slide. |
-| `module` | Naskah modul: berkas utama `enterprise-architecture-digital-blueprint.tex`, `titlepage.tex`, `chapter01.tex` sampai `chapter14.tex`, `references.bib` untuk rujukan inti, dan `bib/chapterNN.bib` untuk rujukan khusus tiap bab. |
-| `slides` | Slide Beamer: `preamble.tex` yang dipakai bersama, dan satu folder `sessionNN` untuk tiap pertemuan yang dibuat bertahap. |
-| `sources` | Berkas pendukung tiap bab di `sources/chapterNN`: templat, lembar kerja, data kasus Medikara, dan contoh model Archi. |
+| `figures` | Gambar bersama untuk modul dan slide: diagram TikZ `chNN-nama.tex`, diagram konsep `chNN-diagram-konsep.png` dan `.svg` beserta spesifikasinya `chapter-diagrams.json`, ilustrasi JPG `chNN-nama.jpg` sebagai arsip, serta logo dan foto gedung sebagai berkas asli. Daftarnya ada di [figures/README.md](figures/README.md). |
+| `module` | Naskah modul: berkas utama `enterprise-architecture-digital-blueprint.tex`, `titlepage.tex`, `chapter01.tex` sampai `chapter14.tex`, `references.bib` untuk rujukan inti dan rujukan lintas bab, `bib/chapterNN.bib` untuk rujukan khusus tiap bab, folder `fonts` berisi berkas font asli, dan PDF modul siap pakai. |
+| `slides` | Slide Beamer: `preamble.tex` yang dipakai bersama, folder `theme` berisi berkas tema asli, dan satu folder `sessionNN` untuk tiap pertemuan, berisi `sessionNN.tex` dan PDF slide siap pakai. |
+| `sources` | Berkas pendukung tiap bab di `sources/chapterNN`: templat, lembar kerja, data kasus Medikara, dan contoh model Archi. Indeksnya ada di [sources/README.md](sources/README.md). |
+| `tools` | Skrip bantu: pemeriksa materi, pembangun PDF, dan pembuat diagram konsep. |
 
-Modul dikompilasi dengan XeLaTeX dari folder `module`.
+### Kompilasi dan penggunaan editor
 
+Prasyarat: MiKTeX atau TeX Live dengan XeLaTeX, BibTeX, Beamer, TikZ/PGFPlots, dan Python 3 untuk skrip bantu. Python hanya memakai pustaka standar, kecuali `tools/render-diagrams.py` yang memerlukan Matplotlib dan Pillow untuk membuat ulang diagram konsep. Font Titillium Web, tema, logo, dan foto gedung tersedia sebagai berkas asli hasil salinan dari `advanced-web-engineering`; lisensi font ada di folder `fonts`. Kompilasi tidak memerlukan symlink.
+
+Dari akar repositori, periksa materi lalu bangun seluruh 15 PDF:
+
+```powershell
+python tools/check-materials.py
+python tools/build.py --engine xelatex
 ```
+
+Pilihan `--scope module` atau `--scope slides` membangun bagian tertentu. Bila XeLaTeX belum ada di PATH, gunakan `--executable "C:/jalur/ke/xelatex.exe"` dan pastikan BibTeX tersedia di PATH. PDF dan berkas bantu ditulis langsung di direktori masing-masing sumber.
+
+Kompilasi manual buku dari `module`:
+
+```powershell
 cd module
-xelatex enterprise-architecture-digital-blueprint
+xelatex enterprise-architecture-digital-blueprint.tex
 bibtex enterprise-architecture-digital-blueprint
-xelatex enterprise-architecture-digital-blueprint
-xelatex enterprise-architecture-digital-blueprint
+xelatex enterprise-architecture-digital-blueprint.tex
+xelatex enterprise-architecture-digital-blueprint.tex
 ```
 
-Slide dikompilasi dua kali dari folder sesinya, misalnya untuk Pertemuan 1:
+Slide memakai dua kali XeLaTeX dari folder sesinya, misalnya `slides/session01`:
 
+```powershell
+xelatex session01.tex
+xelatex session01.tex
 ```
-cd slides/session01
-xelatex session01
-xelatex session01
-```
 
-Selama bab masih berupa kerangka, BibTeX melaporkan "I found no \citation commands". Pesan ini wajar dan akan hilang setelah bab mulai mengutip rujukan.
-
-**Symlink.** `module/fonts`, `slides/theme`, `figures/logo_universitas.png`, dan `figures/building.png` adalah *symlink* ke repo `advanced-software-engineering`. Di Windows, *symlink* ini dapat muncul sebagai berkas teks berisi jalur tujuannya. Bila itu terjadi, aset aslinya perlu disalin dari repo tersebut sebelum kompilasi.
+- **TeXstudio:** buka berkas induk buku atau `sessionNN.tex`, lalu jalankan Compile. Komentar `% !TeX TXS-program:compile` memilih rangkaian XeLaTeX/BibTeX untuk buku dan dua kali XeLaTeX untuk slide. Setel default compiler ke XeLaTeX bila pengaturan editor menimpa komentar tersebut. Berkas `chapterNN.tex` menunjuk buku induk lewat `% !TeX root`.
+- **VS Code:** buka folder repositori dan pasang LaTeX Workshop. Pilih resep **XeLaTeX + BibTeX + XeLaTeX x2 (modul)** untuk buku atau **XeLaTeX x2 (slide)** untuk sesi. Konfigurasi ada di [`.vscode/settings.json`](.vscode/settings.json), dengan direktori kerja mengikuti sumber dan keluaran di folder yang sama.
+- Hentikan proses build sebelumnya sebelum memulai kompilasi lain pada dokumen yang sama. Buka kembali terminal/editor setelah memperbarui PATH MiKTeX.
 
 ## Rujukan Utama
 
@@ -428,24 +444,49 @@ Ketiga kurikulum memakai pola yang sama: fondasi dan kerangka kerja, pemodelan, 
 | CI | Continuous Integration |
 | CRUD | Create, Read, Update, Delete |
 | CS | Computer Science |
+| CSV | Comma-Separated Values |
+| CSVLOD | Considerations, Standards, Visions, Landscapes, Outlines, Designs |
+| DAMA-DMBOK | Data Management Association, Data Management Body of Knowledge |
+| DSM | Design Structure Matrix |
 | EA | Enterprise Architecture |
 | ERP | Enterprise Resource Planning |
 | FHIR | Fast Healthcare Interoperability Resources |
+| HIS | Hospital Information System |
 | HL7 | Health Level Seven |
+| HM | His Majesty's |
+| HTML | HyperText Markup Language |
+| ID | Identifier |
 | IEC | International Electrotechnical Commission |
 | IEEE | Institute of Electrical and Electronics Engineers |
 | ISO | International Organization for Standardization |
+| KPI | Key Performance Indicator |
+| MCDA | Multi-Criteria Decision Analysis |
 | MIT CISR | Massachusetts Institute of Technology Center for Information Systems Research |
 | MPI | Master Patient Index |
+| NIK | Nomor Induk Kependudukan |
+| NIST | National Institute of Standards and Technology |
 | NPV | Net Present Value |
 | PANRB | Pendayagunaan Aparatur Negara dan Reformasi Birokrasi |
 | PDP | Pelindungan Data Pribadi |
+| Permen | Peraturan Menteri |
+| Permenkes | Peraturan Menteri Kesehatan |
 | Perpres | Peraturan Presiden |
+| PT | Perseroan Terbatas |
+| QR | Quick Response |
+| RACI | Responsible, Accountable, Consulted, Informed |
+| RS | Rumah Sakit |
+| RT | Rukun Tetangga |
 | SaaS | Software as a Service |
+| SDM | Sumber Daya Manusia |
 | SE | Software Engineering |
+| SIM | Sistem Informasi Manajemen |
 | SIMRS | Sistem Informasi Manajemen Rumah Sakit |
+| SMART | Specific, Measurable, Actionable, Realistic, Time-bound |
 | SOP | Standard Operating Procedure |
+| SP | Special Publication |
 | SPBE | Sistem Pemerintahan Berbasis Elektronik |
+| SPOK | Subjek, Predikat, Objek, Keterangan |
+| SQL | Structured Query Language |
 | TCO | Total Cost of Ownership |
 | TI | Teknologi Informasi |
 | TIME | Tolerate, Invest, Migrate, Eliminate |
@@ -453,3 +494,4 @@ Ketiga kurikulum memakai pola yang sama: fondasi dan kerangka kerja, pemodelan, 
 | UAS | Ujian Akhir Semester |
 | UTS | Ujian Tengah Semester |
 | UU | Undang-Undang |
+| XML | Extensible Markup Language |

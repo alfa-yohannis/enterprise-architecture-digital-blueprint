@@ -1,0 +1,70 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kepala/.style={align=center, font=\tiny\bfseries},
+  label/.style={anchor=west, align=left, font=\scriptsize},
+  isi/.style={align=center, font=\tiny\bfseries}
+]
+  % Ukuran: kolom label 3,3 cm, delapan kolom masing-masing 1,08 cm,
+  % baris judul 0,9 cm, sembilan baris isi masing-masing 0,66 cm.
+  \fill[praditagreen!15] (0,0) rectangle (11.94,-0.9);
+
+  % Sel berisi, diwarnai sebelum garis kisi digambar.
+  \fill[green!10]  (3.30,-0.90) rectangle (4.38,-1.56);
+  \fill[blue!8]    (4.38,-1.56) rectangle (5.46,-2.22);
+  \fill[blue!8]    (4.38,-2.22) rectangle (5.46,-2.88);
+  \fill[blue!8]    (5.46,-2.88) rectangle (6.54,-3.54);
+  \fill[blue!8]    (6.54,-3.54) rectangle (7.62,-4.20);
+  \fill[blue!8]    (7.62,-4.20) rectangle (8.70,-4.86);
+  \fill[gray!35]   (10.86,-4.86) rectangle (11.94,-5.52);
+  \fill[red!22]    (10.86,-5.52) rectangle (11.94,-6.18);
+  \fill[orange!12] (8.70,-6.18) rectangle (9.78,-6.84);
+  \fill[orange!12] (9.78,-6.18) rectangle (10.86,-6.84);
+
+  % Garis kisi.
+  \foreach \y in {0,-0.9,-1.56,-2.22,-2.88,-3.54,-4.20,-4.86,-5.52,-6.18,-6.84}
+    \draw[gray!60] (0,\y) -- (11.94,\y);
+  \foreach \x in {0,3.30,4.38,5.46,6.54,7.62,8.70,9.78,10.86,11.94}
+    \draw[gray!60] (\x,0) -- (\x,-6.84);
+  \draw[thick] (10.86,0) -- (10.86,-6.84);
+  \draw[thick] (0,-6.18) -- (11.94,-6.18);
+
+  % Judul kolom: elemen target, ditambah kolom Dihapus.
+  \node[kepala] at (1.65,-0.45) {Baris: \textit{baseline}\\Kolom: target};
+  \node[kepala] at (3.84,-0.45) {ERP\\keuangan};
+  \node[kepala] at (4.92,-0.45) {SIMRS\\terpadu};
+  \node[kepala] at (6.00,-0.45) {Platform\\integrasi};
+  \node[kepala] at (7.08,-0.45) {Platform\\data};
+  \node[kepala] at (8.16,-0.45) {\textit{Landing}\\\textit{zone}};
+  \node[kepala] at (9.24,-0.45) {MPI};
+  \node[kepala] at (10.32,-0.45) {Akses\\terpusat};
+  \node[kepala] at (11.40,-0.45) {Dihapus};
+
+  % Judul baris: elemen baseline, ditambah baris Baru.
+  \node[label] at (0.08,-1.23) {ERP keuangan};
+  \node[label] at (0.08,-1.89) {Lima SIMRS lokal};
+  \node[label] at (0.08,-2.55) {SIM Klinik};
+  \node[label] at (0.08,-3.21) {Integrasi \textit{point-to-point}};
+  \node[label] at (0.08,-3.87) {23 laporan \textit{spreadsheet}};
+  \node[label] at (0.08,-4.53) {Server lokal rumah sakit};
+  \node[label] at (0.08,-5.19) {Antrean Bandung};
+  \node[label] at (0.08,-5.85) {Surveilans infeksi Bogor};
+  \node[label, font=\scriptsize\bfseries] at (0.08,-6.51) {Baru};
+
+  % Isi sel.
+  \node[isi] at (3.84,-1.23) {Tetap};
+  \node[isi] at (4.92,-1.89) {Diganti};
+  \node[isi] at (4.92,-2.55) {Digabung};
+  \node[isi] at (6.00,-3.21) {Diganti};
+  \node[isi] at (7.08,-3.87) {Diganti};
+  \node[isi] at (8.16,-4.53) {Diganti};
+  \node[isi] at (11.40,-5.19) {Sengaja};
+  \node[isi] at (11.40,-5.85) {Tidak\\[-2pt]sengaja};
+  \node[isi] at (9.24,-6.51) {Baru};
+  \node[isi] at (10.32,-6.51) {Baru};
+
+  % Keterangan.
+  \node[font=\tiny, text width=11.8cm, align=center] at (5.97,-7.27)
+    {Tetap: ada di kedua sisi. Diganti atau digabung: elemen lama punya padanan
+     baru. Baru: dibangun, dibeli, atau berlangganan. Dihapus: diperiksa, sengaja
+     atau tidak.};
+\end{tikzpicture}

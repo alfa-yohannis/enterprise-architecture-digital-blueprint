@@ -1,0 +1,53 @@
+\begin{tikzpicture}[font=\scriptsize,
+  sistem/.style={draw, rounded corners, text width=2.1cm, minimum height=0.62cm,
+    align=flush center, fill=blue!8},
+  luar/.style={sistem, fill=orange!12},
+  rs/.style={draw, rounded corners, text width=1.8cm, minimum height=0.44cm,
+    align=flush center, fill=blue!8, font=\tiny, inner sep=1pt},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  duaarah/.style={{Stealth[length=2mm]}-{Stealth[length=2mm]}, thick},
+  manual/.style={panah, dashed, red!70!black},
+  ket/.style={font=\tiny, inner sep=1.5pt}]
+  \draw[rounded corners, fill=praditagreen!15] (0,2.35) rectangle (2.5,-1.85);
+  \node[font=\scriptsize\bfseries] at (1.25,2.05) {Lima SIMRS};
+  \node[rs] at (1.25,1.6) {Jakarta};
+  \node[rs] at (1.25,1.0) {Bekasi};
+  \node[rs] at (1.25,0.4) {Depok};
+  \node[rs] at (1.25,-0.2) {Bogor};
+  \node[rs] at (1.25,-0.8) {Bandung};
+  \node[font=\tiny, align=flush center] at (1.25,-1.42)
+    {\textit{on-premise},\\versi berbeda};
+
+  \node[luar] (bpjs) at (9.2,1.75) {BPJS Kesehatan};
+  \node[luar] (ss) at (9.2,0.65) {SATUSEHAT};
+  \node[sistem] (erp) at (9.2,-0.45) {ERP keuangan};
+  \node[sistem] (plus) at (9.2,-1.55) {Medikara+};
+
+  \draw[duaarah] (2.5,1.75)--(bpjs.west)
+    node[midway, above, ket] {5 pasangan, 10 antarmuka: eligibilitas dan klaim};
+  \draw[panah] (2.5,0.65)--(ss.west)
+    node[midway, above, ket] {5 pasangan, 5 antarmuka: rata-rata terkirim 3 hari};
+  \draw[panah] (2.5,-0.45)--(erp.west)
+    node[midway, above, ket] {5 pasangan, 5 antarmuka: tagihan};
+  \draw[duaarah, draw=red!70!black] (2.5,-1.55)--(plus.west)
+    node[midway, above, ket, text=red!70!black]
+      {5 pasangan, 5 antarmuka: 2 membaca basis data langsung};
+  \draw[panah] (plus.north)--(erp.south)
+    node[midway, right, ket] {1 pasangan};
+
+  \node[draw, rounded corners, fill=green!10, text width=2.1cm, align=flush center,
+    minimum height=0.7cm] (laporan) at (1.25,-3.0)
+    {Laporan direksi\\{\tiny\mdseries terbit hari kerja ke-12}};
+  \node[draw, dashed, rounded corners, fill=red!22, text width=2.7cm, align=flush center,
+    minimum height=0.7cm] (spread) at (5.0,-3.0)
+    {23 \mbox{\textit{spreadsheet}} laporan\\{\tiny\mdseries 144 hari-orang per tahun}};
+  \draw[manual] (2.1,-1.85)--(spread.north west)
+    node[midway, right=2pt, ket] {5 ekspor manual};
+  \draw[manual] (spread.west)--(laporan.east);
+  \draw[manual] (erp.east)--++(0.35,0)|-(spread.east);
+  \draw[manual] (plus.south)|-(spread.east);
+  \node[ket] at (8.3,-3.2) {2 ekspor manual: ERP dan Medikara+};
+  \node[font=\tiny, text width=10.6cm, align=flush center] at (5.2,-4.0)
+    {Garis utuh: antarmuka otomatis. Garis putus merah: aliran manual. Jingga: sistem
+     eksternal. Angka antarmuka adalah pengandaian pembelajaran.};
+\end{tikzpicture}

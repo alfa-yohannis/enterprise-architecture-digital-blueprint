@@ -1,0 +1,59 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.95cm, text width=1.85cm,
+                align=center, font=\scriptsize},
+  judul/.style={text width=2.0cm, align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[judul] at (0,3.95) {Teknologi\\pemungkin};
+  \node[judul] at (2.45,3.95) {Perubahan\\pemungkin};
+  \node[judul] at (4.9,3.95) {Perubahan\\bisnis};
+  \node[judul] at (7.35,3.95) {Manfaat\\bisnis};
+  \node[judul] at (9.8,3.95) {Tujuan\\investasi};
+
+  \node[kotak, fill=blue!8] (t1) at (0,1.45) {Perangkat lunak MPI};
+  \node[kotak, fill=blue!8] (t2) at (0,0) {Integrasi MPI ke 5 SIMRS dan Medikara+};
+  \node[kotak, fill=blue!8] (t3) at (0,-1.45) {Riwayat hasil lab lintas fasilitas};
+
+  \node[kotak, fill=orange!12] (e1) at (2.45,1.45) {Aturan pencocokan identitas disepakati};
+  \node[kotak, fill=orange!12] (e2) at (2.45,0) {Steward data membersihkan data ganda};
+  \node[kotak, fill=orange!12] (e3) at (2.45,-1.45) {Dokter dan petugas 36 fasilitas dilatih};
+
+  \node[kotak, fill=orange!12] (c1) at (4.9,1.45) {Pendaftaran selalu mencari di MPI dulu};
+  \node[kotak, fill=orange!12] (c2) at (4.9,0) {Klaim dan laporan memakai satu identitas};
+  \node[kotak, fill=orange!12] (c3) at (4.9,-1.45) {Dokter melihat riwayat hasil sebelum memesan};
+
+  \node[kotak, fill=green!10] (m1) at (7.35,2.9) {Pendaftaran pasien lama lebih cepat};
+  \node[kotak, fill=green!10] (m2) at (7.35,1.45) {Insiden salah identitas turun};
+  \node[kotak, fill=green!10] (m3) at (7.35,0) {Klaim tertunda berkurang};
+  \node[kotak, fill=green!10] (m4) at (7.35,-1.45) {Rekonsiliasi laporan manual berhenti};
+  \node[kotak, fill=green!10] (m5) at (7.35,-2.9) {Pemeriksaan lab ulang berkurang};
+
+  \node[kotak, fill=praditagreen!15] (o1) at (9.8,1.45) {Setiap pasien dikenali sebagai satu orang};
+  \node[kotak, fill=praditagreen!15] (o2) at (9.8,-1.45) {Biaya akibat data ganda turun};
+
+  \draw[panah] (t1) -- (e1);
+  \draw[panah] (t2) -- (e2);
+  \draw[panah] (t3) -- (e3);
+  \draw[panah] (e1) -- (c1);
+  \draw[panah] (e2) -- (c2);
+  \draw[panah] (e3) -- (c3);
+  \draw[panah] (e3.east) -- (c1.west);
+  \draw[panah] (c1.east) -- (m1.west);
+  \draw[panah] (c1.east) -- (m2.west);
+  \draw[panah] (c2.east) -- (m3.west);
+  \draw[panah] (c2.east) -- (m4.west);
+  \draw[panah] (c3.east) -- (m5.west);
+  \draw[panah] (m1.east) -- (o1.west);
+  \draw[panah] (m2.east) -- (o1.west);
+  \draw[panah] (m3.east) -- (o2.west);
+  \draw[panah] (m4.east) -- (o2.west);
+  \draw[panah] (m5.east) -- (o2.west);
+
+  \draw[panah, gray] (10.75,-3.85) -- (-0.95,-3.85)
+    node[midway, fill=white, font=\tiny, text=black, inner sep=1pt]
+    {disusun dari kanan ke kiri: tujuan lebih dahulu, teknologi paling akhir};
+  \draw[panah, gray] (-0.95,-4.35) -- (10.75,-4.35)
+    node[midway, fill=white, font=\tiny, text=black, inner sep=1pt]
+    {diperiksa dari kiri ke kanan: apakah tiap perubahan benar-benar menghasilkan manfaat};
+\end{tikzpicture}

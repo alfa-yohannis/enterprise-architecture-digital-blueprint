@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.85cm,
+                minimum width=2.5cm, align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=blue!8] (rsj) at (0,1.8)
+    {SIMRS Jakarta\\{\tiny\mdseries nomor 0045812}};
+  \node[kotak, fill=blue!8] (rsd) at (0,0.6)
+    {SIMRS Depok\\{\tiny\mdseries nomor D-22017}};
+  \node[kotak, fill=blue!8] (kln) at (0,-0.6)
+    {Klinik Bogor\\{\tiny\mdseries nomor K-118230}};
+  \node[kotak, fill=blue!8] (app) at (0,-1.8)
+    {Medikara+\\{\tiny\mdseries akun 7731}};
+
+  \node[kotak, fill=praditagreen!15, minimum width=2.9cm,
+        minimum height=1.7cm] (mpi) at (4.5,0)
+    {MPI Medikara\\[2pt]{\tiny\mdseries ID induk MDK-0318274}\\
+     {\tiny\mdseries NIK dan nomor SATUSEHAT}\\
+     {\tiny\mdseries empat tautan nomor lokal}};
+
+  \node[kotak, fill=green!10] (rm) at (9,1.2) {Riwayat klinis\\lintas fasilitas};
+  \node[kotak, fill=green!10] (lap) at (9,0) {Laporan\\pasien unik};
+  \node[kotak, fill=green!10] (ss) at (9,-1.2) {Pengiriman data\\ke SATUSEHAT};
+
+  \draw[panah] (rsj.east) -- ([yshift=0.45cm]mpi.west);
+  \draw[panah] (rsd.east) -- ([yshift=0.15cm]mpi.west);
+  \draw[panah] (kln.east) -- ([yshift=-0.15cm]mpi.west);
+  \draw[panah] (app.east) -- ([yshift=-0.45cm]mpi.west);
+  \draw[panah] ([yshift=0.35cm]mpi.east) -- (rm.west);
+  \draw[panah] (mpi.east) -- (lap.west);
+  \draw[panah] ([yshift=-0.35cm]mpi.east) -- (ss.west);
+
+  \node[font=\tiny, gray, anchor=south] at (0,2.3) {satu orang, empat nomor lokal};
+  \node[font=\tiny, gray, anchor=south] at (9,1.75) {satu identitas dipakai ulang};
+\end{tikzpicture}

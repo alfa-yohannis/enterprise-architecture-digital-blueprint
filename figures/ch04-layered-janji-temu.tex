@@ -1,0 +1,63 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  elemen/.style={draw, rounded corners=1pt, minimum height=0.8cm, minimum width=3.0cm,
+                 align=center, font=\scriptsize\bfseries, fill=blue!8},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  layani/.style={-{Straight Barb[length=2mm, width=2.4mm]}, thick},
+  realisasi/.style={-{Triangle[open, length=2.2mm, width=2.4mm]}, thick, dashed},
+  akses/.style={-{Straight Barb[length=1.4mm, width=1.8mm]}, thick, dotted}
+]
+  % Pita lapisan.
+  \draw[gray, dashed] (-0.9,2.05) -- (10.6,2.05);
+  \draw[gray, dashed] (-0.9,-0.65) -- (10.6,-0.65);
+  \node[rotate=90, font=\scriptsize\bfseries, text=praditagreen] at (-0.6,3.3) {Bisnis};
+  \node[rotate=90, font=\scriptsize\bfseries, text=praditagreen] at (-0.6,0.7) {Aplikasi};
+  \node[rotate=90, font=\scriptsize\bfseries, text=praditagreen] at (-0.6,-1.9) {Teknologi};
+
+  % Lapisan bisnis.
+  \node[elemen, fill=green!10, minimum width=2.2cm] (pasien) at (1.3,3.9)
+    {Pasien\\{\tiny\mdseries aktor bisnis}};
+  \node[elemen] (layjanji) at (5.0,3.9)
+    {Layanan Janji Temu\\Rawat Jalan {\tiny\mdseries (layanan bisnis)}};
+  \node[elemen] (proses) at (5.0,2.65)
+    {Membuat Janji Temu\\{\tiny\mdseries proses bisnis}};
+  \node[elemen] (objek) at (9.0,2.65)
+    {Janji Temu\\{\tiny\mdseries objek bisnis}};
+
+  % Lapisan aplikasi.
+  \node[elemen, fill=orange!12] (laypesan) at (5.0,1.3)
+    {Layanan Pemesanan Jadwal\\{\tiny\mdseries layanan aplikasi}};
+  \node[elemen] (medikara) at (5.0,0.05)
+    {Medikara+\\{\tiny\mdseries komponen aplikasi}};
+  \node[elemen] (simrs) at (9.0,0.05)
+    {SIMRS RS Jakarta\\{\tiny\mdseries komponen aplikasi}};
+  \node[elemen] (data) at (9.0,1.3)
+    {Data Jadwal Dokter\\{\tiny\mdseries objek data}};
+
+  % Lapisan teknologi.
+  \node[elemen, fill=orange!12] (laydb) at (9.0,-1.3)
+    {Layanan Basis Data\\{\tiny\mdseries layanan teknologi}};
+  \node[elemen] (server) at (9.0,-2.55)
+    {Server Basis Data SIMRS\\{\tiny\mdseries \textit{node}}};
+
+  % Relasi.
+  \draw[layani] (layjanji) -- (pasien);
+  \draw[realisasi] (proses) -- (layjanji);
+  \draw[akses] (proses) -- (objek);
+  \draw[layani] (laypesan) -- (proses);
+  \draw[realisasi] (medikara) -- (laypesan);
+  \draw[layani] (simrs) -- (medikara);
+  \draw[akses] (simrs) -- (data);
+  \draw[layani] (laydb) -- (simrs);
+  \draw[realisasi] (server) -- (laydb);
+
+  % Keterangan notasi.
+  \draw[layani] (0.0,-3.55) -- (0.9,-3.55);
+  \node[anchor=west, font=\tiny] at (1.0,-3.55) {melayani};
+  \draw[realisasi] (2.5,-3.55) -- (3.4,-3.55);
+  \node[anchor=west, font=\tiny] at (3.5,-3.55) {merealisasikan};
+  \draw[akses] (5.4,-3.55) -- (6.3,-3.55);
+  \node[anchor=west, font=\tiny] at (6.4,-3.55) {mengakses (menulis)};
+  \node[anchor=west, font=\tiny, gray] at (0.0,-1.3)
+    {kotak oranye: titik sambung antarlapisan};
+\end{tikzpicture}

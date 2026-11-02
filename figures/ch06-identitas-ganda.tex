@@ -1,0 +1,32 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.9cm, minimum width=2.6cm,
+                align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=praditagreen!15] (orang) at (0,0)
+    {Satu orang\\{\tiny\mdseries Ibu Ratna, fiktif}};
+
+  \node[kotak, fill=blue!8] (jkt) at (4.0,1.4)
+    {RS Jakarta\\{\tiny\mdseries nomor JKT-0045821}\\{\tiny\mdseries riwayat diabetes}};
+  \node[kotak, fill=blue!8] (bks) at (4.0,0)
+    {RS Bekasi\\{\tiny\mdseries nomor BKS-118204}\\{\tiny\mdseries alergi penisilin}};
+  \node[kotak, fill=orange!12] (app) at (4.0,-1.4)
+    {Medikara+\\{\tiny\mdseries akun M-77120}\\{\tiny\mdseries telekonsultasi 2025}};
+
+  \node[kotak, fill=gray!35] (tanpa) at (8.3,0)
+    {Tiga catatan,\\tanpa kunci\\penghubung};
+  \node[kotak, fill=red!22] (alergi) at (8.3,1.6)
+    {Alergi tidak terlihat\\{\tiny\mdseries oleh dokter di Jakarta}};
+  \node[kotak, fill=red!22] (hitung) at (8.3,-1.6)
+    {Dihitung sebagai\\{\tiny\mdseries tiga pasien berbeda}};
+
+  \draw[panah] (orang.east) -- ++(0.5,0) |- (jkt.west);
+  \draw[panah] (orang.east) -- (bks.west);
+  \draw[panah] (orang.east) -- ++(0.5,0) |- (app.west);
+  \draw[panah] (jkt.east) -- (tanpa.west);
+  \draw[panah] (bks.east) -- (tanpa.west);
+  \draw[panah] (app.east) -- (tanpa.west);
+  \draw[panah] (tanpa) -- (alergi);
+  \draw[panah] (tanpa) -- (hitung);
+\end{tikzpicture}

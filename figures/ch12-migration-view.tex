@@ -1,0 +1,54 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  elemen/.style={draw, minimum height=0.95cm, text width=2.0cm, align=center,
+                 font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  wujud/.style={-{Triangle[open, length=2mm, width=2mm]}, thick, dashed},
+  kaitan/.style={thin, gray!80!black}
+]
+  % Plateau
+  \node[elemen, fill=gray!35] (awal) at (0,0)
+    {{\tiny\mdseries\itshape plateau}\\Kondisi awal 2026};
+  \node[elemen, fill=blue!8] (t1) at (4.7,0)
+    {{\tiny\mdseries\itshape plateau}\\T1 Maret 2028};
+  \node[elemen, fill=green!10] (t2) at (9.4,0)
+    {{\tiny\mdseries\itshape plateau}\\T2 Maret 2029};
+  \draw[panah] (awal) -- (t1);
+  \draw[panah] (t1) -- (t2);
+
+  % Gap
+  \node[elemen, fill=red!22, text width=2.15cm] (g1) at (2.35,1.5)
+    {{\tiny\mdseries\itshape gap}\\Data pasien ganda, akses tak terkendali};
+  \node[elemen, fill=red!22, text width=2.15cm] (g2) at (7.05,1.5)
+    {{\tiny\mdseries\itshape gap}\\Rekam medis terpisah per rumah sakit};
+  \draw[kaitan] (g1.south west) -- (awal.north);
+  \draw[kaitan] (g1.south east) -- (t1.north);
+  \draw[kaitan] (g2.south west) -- (t1.north);
+  \draw[kaitan] (g2.south east) -- (t2.north);
+
+  % Deliverable
+  \node[elemen, fill=blue!8] (d1) at (3.1,-1.6)
+    {{\tiny\mdseries\itshape deliverable}\\Direktori akses terpusat};
+  \node[elemen, fill=blue!8] (d2) at (6.1,-1.6)
+    {{\tiny\mdseries\itshape deliverable}\\Indeks pasien tunggal};
+  \draw[wujud] (d1.north) -- (t1.south west);
+  \draw[wujud] (d2.north) -- (t1.south east);
+
+  % Work package dan implementation event
+  \node[elemen, fill=orange!12, rounded corners=6pt] (w1) at (3.1,-3.1)
+    {{\tiny\mdseries\itshape work package}\\P1 Kontrol akses};
+  \node[elemen, fill=orange!12, rounded corners=6pt] (w2) at (6.1,-3.1)
+    {{\tiny\mdseries\itshape work package}\\P3 Identitas pasien};
+  \node[elemen, fill=praditagreen!15, rounded corners=2pt] (k1) at (8.9,-3.1)
+    {{\tiny\mdseries\itshape implementation event}\\K1 Anggaran 2027 disahkan};
+  \draw[wujud] (w1) -- (d1);
+  \draw[wujud] (w2) -- (d2);
+  \draw[panah] (w1) -- (w2);
+  \draw[panah] (k1) -- (w2);
+
+  \node[anchor=west, text width=11.4cm, font=\tiny] at (-1.15,-4.25)
+    {\textbf{Panah tebal}: \textit{triggering}, urutan waktu.
+     \textbf{Garis putus-putus berujung segitiga}: \textit{realization}.
+     \textbf{Garis tipis}: \textit{association} antara \textit{gap} dan dua
+     \textit{plateau} yang dibandingkannya.};
+\end{tikzpicture}

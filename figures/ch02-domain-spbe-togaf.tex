@@ -1,0 +1,35 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  dom/.style={draw, rounded corners, minimum height=0.7cm, minimum width=3.4cm,
+              align=center, font=\scriptsize},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  sebagian/.style={-{Stealth[length=2mm]}, thick, dashed}
+]
+  \node[font=\scriptsize\bfseries] at (0,3.3) {Arsitektur SPBE: enam domain};
+  \node[font=\scriptsize\bfseries] at (7.8,3.3) {TOGAF: empat domain};
+
+  \node[dom, fill=blue!8] (pb) at (0,2.5) {Proses Bisnis};
+  \node[dom, fill=orange!12] (lay) at (0,1.5) {Layanan SPBE};
+  \node[dom, fill=blue!8] (dat) at (0,0.5) {Data dan Informasi};
+  \node[dom, fill=blue!8] (apl) at (0,-0.5) {Aplikasi SPBE};
+  \node[dom, fill=blue!8] (inf) at (0,-1.5) {Infrastruktur SPBE};
+  \node[dom, fill=orange!12] (kea) at (0,-2.5) {Keamanan SPBE};
+
+  \node[dom, fill=praditagreen!15] (bis) at (7.8,2.0) {Arsitektur Bisnis};
+  \node[dom, fill=praditagreen!15] (tdat) at (7.8,0.5) {Arsitektur Data};
+  \node[dom, fill=praditagreen!15] (tapl) at (7.8,-0.5) {Arsitektur Aplikasi};
+  \node[dom, fill=praditagreen!15] (tek) at (7.8,-1.5) {Arsitektur Teknologi};
+  \node[dom, fill=green!10, dashed] (lintas) at (7.8,-2.7)
+    {\textit{Concern} lintas domain\\{\tiny\textit{Series Guide} keamanan}};
+
+  \draw[panah] (pb.east) -- (bis.west);
+  \draw[sebagian] (lay.east) -- node[font=\tiny, above, sloped] {layanan bisnis} (bis.west);
+  \draw[sebagian] (lay.east) -- node[font=\tiny, below, sloped, pos=0.62] {layanan aplikasi} (tapl.west);
+  \draw[panah] (dat.east) -- (tdat.west);
+  \draw[panah] (apl.east) -- (tapl.west);
+  \draw[panah] (inf.east) -- (tek.west);
+  \draw[sebagian] (kea.east) -- (lintas.west);
+
+  \node[font=\tiny, anchor=west] at (-1.7,-3.35) {garis utuh: padanan langsung};
+  \node[font=\tiny, anchor=west] at (2.0,-3.35) {garis putus: padanan sebagian atau lintas domain};
+\end{tikzpicture}

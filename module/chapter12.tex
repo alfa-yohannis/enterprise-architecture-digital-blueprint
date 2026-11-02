@@ -1,4 +1,7 @@
+% !TeX root = enterprise-architecture-digital-blueprint.tex
+% !TeX encoding = UTF-8
 \chapter{Arsitektur Transisi, Peta Jalan, dan Perencanaan Migrasi}
+\label{ch:ch12}
 
 \section*{Tujuan Pembelajaran}
 \begin{itemize}
@@ -9,67 +12,1171 @@
 
 \section{Pendahuluan}
 
-% TODO
-% Cakupan: transformasi besar yang dikerjakan sekaligus; ketika proyek raksasa itu gagal atau
-%   tertunda, tidak ada nilai yang tersisa bagi organisasi.
+Bab 11 menutup tonggak C3 dengan daftar paket kerja: identitas pasien tunggal,
+kontrol akses terpusat, konsolidasi Sistem Informasi Manajemen Rumah Sakit
+(SIMRS), portal dan Application Programming Interface (API) untuk mitra, dan
+beberapa lainnya. Godaan berikutnya adalah mengerjakan semuanya sekaligus dalam
+satu program raksasa bernama transformasi digital. Rencana seperti itu terlihat
+tegas di atas kertas. Masalahnya muncul ketika program itu terlambat atau
+berhenti di tengah jalan. SIMRS baru setengah jadi, data pasien baru separuh
+dipindahkan, dan sistem lama sudah terlanjur diubah. Organisasi sudah membayar
+mahal, tetapi tidak ada satu hasil pun yang dapat dipakai.
+
+Risiko itu nyata. Flyvbjerg dan Budzier meneliti 1.471 proyek teknologi
+informasi (TI) dan menemukan pembengkakan biaya rata-rata 27 persen. Angka
+rata-rata itu justru menyembunyikan bahaya yang lebih besar: satu dari enam
+proyek membengkak biayanya rata-rata 200 persen, dengan keterlambatan jadwal
+hampir 70 persen \cite{flyvbjerg2011}. Semakin besar dan semakin lama sebuah
+program, semakin banyak kesempatan bagi kejadian seperti itu. Jalan keluarnya
+bukan menghindari perubahan besar, melainkan memecahnya menjadi beberapa langkah
+yang masing-masing selesai dan bermanfaat.
+
+Bab ini membahas cara memecah perjalanan dari kondisi saat ini ke kondisi target
+menjadi arsitektur transisi, mengurutkan paket kerja menjadi peta jalan 2026
+sampai 2030, lalu menyusun rencana migrasi beserta asumsi dan titik
+keputusannya. Dalam TOGAF (The Open Group Architecture Framework), pekerjaan ini
+berada di fase E (\textit{Opportunities and Solutions}) dan fase F
+(\textit{Migration Planning}) dari Architecture Development Method (ADM)
+\cite{togaf10,c12-togaf-fasef}. Pemodelannya memakai elemen implementasi dan
+migrasi ArchiMate 3.2 \cite{archimate32}. Pembedaan peta jalan untuk pembaca
+bisnis dan pembaca TI mengikuti Kotusev \cite{kotusev2021}, sedangkan susunan
+peta jalan berlapis mengikuti Phaal, Farrukh, dan Probert \cite{c12-phaal2004}.
 
 \section{Arsitektur Transisi}
 
-% TODO
-% Cakupan: definisi arsitektur transisi dan plateau; syarat transisi yang tetap bernilai bila
-%   langkah berikutnya ditunda; jumlah transisi yang wajar.
-% Kasus Medikara: transisi pertama berfokus pada identitas pasien dan kontrol akses.
+Arsitektur transisi (\textit{transition architecture}) adalah gambaran formal
+arsitektur organisasi pada satu titik waktu penting di antara kondisi saat ini
+dan kondisi target \cite{togaf10}. Gambaran itu mencakup domain yang sama dengan
+arsitektur target, yaitu bisnis, data, aplikasi, dan teknologi. ArchiMate
+menyebut keadaan yang sama sebagai \textit{plateau}, yaitu keadaan arsitektur
+yang relatif stabil dan bertahan selama kurun waktu tertentu
+\cite{archimate32}. Dengan dua sampai tiga transisi, perjalanan ke target tidak
+lagi berupa satu lompatan, melainkan beberapa pijakan. Setiap pijakan adalah
+keadaan yang dijalankan sehari-hari, bukan sekadar tanggal di jadwal proyek.
+TOGAF menempatkan keputusan ini di fase E: tim arsitektur menilai apakah
+perubahan perlu dikerjakan bertahap, dan bila perlu, menetapkan arsitektur
+transisi yang memberi nilai bisnis secara berkesinambungan \cite{togaf10}.
+
+Analoginya seperti merenovasi rumah yang tetap dihuni. Pemilik rumah yang
+cermat tidak membongkar dapur, kamar mandi, dan atap pada bulan yang sama.
+Renovasi dibagi menjadi beberapa tahap, dan setiap tahap berakhir dengan rumah
+yang tetap layak ditinggali. Bila uang habis setelah tahap kedua, keluarga itu
+tetap punya kamar mandi baru yang berfungsi, bukan rumah tanpa atap.
+Setiap keadaan transisi menjadi pijakan yang tetap dapat dijalankan.
+Gerbang migrasi memeriksa bukti hasil sebelum tahap berikutnya dimulai.
+
+Gambar \ref{fig:ch12-pulau} merangkum hubungan komponen dan konsep utama bab ini.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{../figures/ch12-diagram-konsep.png}
+  \caption{Keadaan transisi menjadi pijakan migrasi yang dapat dijalankan}
+  \label{fig:ch12-pulau}
+\end{figure}
+
+Pertanyaan kemudian muncul: keadaan seperti apa yang layak disebut arsitektur
+transisi, bukan sekadar tahap proyek? Tabel \ref{tab:ch12-syarat} memuat empat
+syarat beserta pertanyaan untuk mengujinya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Empat syarat arsitektur transisi yang bernilai}
+  \label{tab:ch12-syarat}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.4cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Syarat} & \textbf{Pertanyaan uji} & \textbf{Contoh yang gagal} \\
+    \hline
+    Memberi manfaat yang terlihat & Siapa yang merasakan perubahannya, dan
+      dengan ukuran apa? & \textit{Cloud} sudah siap, tetapi belum ada
+      aplikasi yang pindah \\
+    \hline
+    Stabil bila langkah berikutnya ditunda & Bila langkah berikutnya mundur
+      dua tahun, apakah keadaan ini tetap berjalan dengan biaya wajar? & Data
+      pasien baru separuh dipindahkan, sehingga dua sumber data berjalan
+      bersamaan \\
+    \hline
+    Searah dengan target & Adakah bagian yang harus dibongkar lagi untuk
+      mencapai target? & SIMRS lama ditingkatkan besar-besaran, padahal akan
+      diganti dua tahun kemudian \\
+    \hline
+    Dapat dinyatakan tercapai & Adakah ukuran yang jelas untuk menyatakan
+      transisi ini tercapai? & Transisi bernama ``Digitalisasi Tahap 1''
+      tanpa daftar kemampuan dan ukuran \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Syarat kedua paling sering dilanggar. Cara mengujinya sederhana dan disebut uji
+penundaan di bab ini: andaikan langkah berikutnya ditunda dua tahun, lalu
+hitung apa yang tersisa. Uji ini punya dua konsekuensi. Pertama, sebagian
+pekerjaan sementara harus dianggarkan secara sadar, misalnya antarmuka yang
+menghubungkan sistem lama dengan sistem baru selama keduanya berjalan
+bersamaan. Kedua, ada paket kerja yang tidak boleh berhenti di tengah, sehingga
+batas transisi harus jatuh sesudah paket itu selesai, bukan di tengahnya.
+
+Pertanyaan berikutnya: berapa banyak transisi yang wajar? Untuk horizon empat
+sampai lima tahun, dua sampai tiga transisi biasanya cukup, masing-masing
+berjarak 9 sampai 24 bulan. Satu transisi saja sama dengan kembali ke program
+raksasa. Terlalu banyak transisi juga mahal, karena setiap transisi membutuhkan
+masa stabilisasi: sistem baru dipantau ketat, staf dilatih ulang, dan perubahan
+besar dibekukan. Misalkan masa stabilisasi itu tiga bulan. Lima transisi dalam
+54 bulan menghabiskan 15 bulan, atau hampir 28 persen waktu, untuk
+stabilisasi. Tiga transisi menghabiskan 9 bulan, atau sekitar 17 persen.
+
+Dua contoh berikut memperlihatkan perbedaan transisi yang lolos dan yang gagal
+uji penundaan:
+
+\begin{enumerate}
+  \item Misalkan sebuah pemerintah kabupaten ingin menyatukan 40 aplikasi
+        perizinan ke satu portal dalam empat tahun. Transisi pertama yang
+        bernilai adalah satu akun warga dan satu nomor permohonan untuk 12 izin
+        yang paling sering diajukan, walaupun aplikasi di belakangnya masih
+        terpisah. Bila tahap berikutnya ditunda, warga tetap menikmati satu
+        pintu untuk izin yang paling sering diurus.
+  \item Misalkan sebuah perusahaan distribusi dengan 25 gudang mengganti sistem
+        gudangnya. Transisi yang gagal adalah memindahkan basis data seluruh
+        gudang ke \textit{cloud} lebih dahulu tanpa mengubah aplikasinya. Biaya
+        sewa naik, misalnya Rp1,2 miliar per tahun, tetapi tidak ada satu
+        proses gudang pun yang berubah. Bila penggantian aplikasi ditunda dua
+        tahun, Rp2,4 miliar terbayar tanpa manfaat.
+\end{enumerate}
+
+Gambar \ref{fig:ch12-transisi} memperlihatkan tiga arsitektur transisi Medikara
+beserta hasil uji penundaannya. Baris bawah gambar adalah jawaban atas
+pertanyaan ``apa yang tersisa bila perjalanan berhenti di sini''.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch12-transisi-medikara.tex}
+  \caption{Tiga arsitektur transisi Medikara menuju target 2030. Kode P1
+           sampai P8 adalah paket kerja pada Tabel \ref{tab:ch12-paket}}
+  \label{fig:ch12-transisi}
+\end{figure}
+
+\begin{kasus}[title={Kasus Medikara Health: Transisi Pertama untuk Identitas Pasien dan Kontrol Akses}]
+  Tim arsitektur Medikara menetapkan tiga arsitektur transisi sebelum target
+  September 2030. Transisi pertama, T1, sengaja berfokus pada identitas pasien
+  dan kontrol akses. Ada tiga alasan.
+
+  \begin{enumerate}
+    \item \textbf{Pemicunya mendesak.} Insiden kebocoran data lewat vendor pada
+          2025 dan temuan audit internal tentang kontrol akses yang lemah belum
+          tertutup. Pasal 74 Undang-Undang Pelindungan Data Pribadi (UU PDP)
+          memberi masa penyesuaian paling lama dua tahun sejak diundangkan
+          pada 17 Oktober 2022 \cite{uu27-2022-pdp}. Sejak Oktober 2024,
+          kewajiban itu berlaku penuh.
+    \item \textbf{Paket lain bergantung padanya.} Konsolidasi SIMRS membutuhkan
+          satu identitas pasien sebagai kunci penggabungan data dari lima rumah
+          sakit. Karena itu Master Patient Index (MPI) harus mendahului SIMRS
+          terpadu, seperti dibahas di Bab 11.
+    \item \textbf{Lolos uji penundaan.} Bila T2 tertunda dua tahun, T1 tetap
+          meninggalkan satu nomor pasien untuk 5 rumah sakit dan 18 klinik
+          pratama, akses 4.800 karyawan yang dikelola dari satu tempat, dan
+          satu \textit{hub} integrasi ke Badan Penyelenggara Jaminan Sosial
+          (BPJS) Kesehatan dan SATUSEHAT.
+  \end{enumerate}
+
+  Stabilitas itu ada harganya. Misalkan lima adaptor yang menghubungkan SIMRS
+  lama ke MPI masing-masing membutuhkan biaya pemeliharaan Rp150 juta per
+  tahun. Bila T2 tertunda dua tahun, biaya sementaranya menjadi
+  $5 \times \text{Rp150 juta} \times 2 = \text{Rp1,5 miliar}$. Angka ini ditulis
+  terang di rencana, karena itulah harga yang dibayar agar T1 tetap dapat
+  dijalankan sendiri.
+\end{kasus}
 
 \section{Mengurutkan Paket Kerja}
 
-% TODO
-% Cakupan: kriteria dependensi, nilai, risiko, dan kapasitas; fondasi versus hasil cepat;
-%   penyelarasan dengan siklus anggaran organisasi.
+Delapan paket kerja Medikara punya pendukungnya masing-masing. Direktur pelayanan
+menginginkan konsolidasi SIMRS lebih dahulu, kepala kepatuhan menginginkan
+kontrol akses, dan direktur pemasaran menginginkan portal mitra. Semua alasan
+itu masuk akal, dan justru karena itu tidak dapat dipakai untuk memutuskan.
+Urutan membutuhkan kriteria yang disepakati sebelum perdebatan dimulai.
+
+Urutan paket kerja ditentukan oleh empat kriteria: dependensi, nilai, risiko,
+dan kapasitas. Keempatnya tidak setara. Dependensi adalah syarat mutlak: paket
+yang membutuhkan hasil paket lain tidak dapat dimulai lebih dahulu, setinggi
+apa pun skornya. Nilai dan risiko adalah skor untuk memilih di antara paket
+yang sama-sama siap dimulai. Kapasitas adalah batas jumlah paket yang dapat
+berjalan pada waktu yang sama. Tabel \ref{tab:ch12-kriteria} merangkum
+keempatnya, sedangkan Gambar \ref{fig:ch12-saringan} memperlihatkan urutan
+penerapannya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Empat kriteria pengurutan paket kerja}
+  \label{tab:ch12-kriteria}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.6cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}p{2.3cm}
+                               >{\raggedright\arraybackslash}p{2.5cm}}
+    \hline
+    \textbf{Kriteria} & \textbf{Pertanyaan} & \textbf{Sifat} & \textbf{Sumber data} \\
+    \hline
+    De\-pen\-den\-si & Paket apa yang harus selesai sebelum paket ini dimulai? &
+      Syarat mutlak & Matriks dependensi Bab 11 \\
+    \hline
+    Nilai & Seberapa besar manfaat yang dirasakan pasien atau manajemen? &
+      Skor 1 sampai 5 & Rantai motivasi Bab 3, \textit{heatmap} Bab 5 \\
+    \hline
+    Risiko & Seberapa besar risiko organisasi yang turun bila paket selesai?
+      Seberapa sulit paket itu dikerjakan? & Skor 1 sampai 5, ditambah
+      catatan risiko pelaksanaan & Temuan audit, daftar risiko IT40813 \\
+    \hline
+    Kapasitas & Berapa paket besar yang sanggup dikerjakan dalam setahun? &
+      Batas per tahun & Jumlah staf TI, vendor, kesiapan unit bisnis \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch12-saringan-urutan.tex}
+  \caption{Kriteria pengurutan diterapkan berurutan: dependensi menyaring,
+           skor memilih, kapasitas membatasi, dan siklus anggaran menetapkan
+           titik keputusan}
+  \label{fig:ch12-saringan}
+\end{figure}
+
+Analoginya seperti juru masak hajatan. Nasi harus ditanak sebelum nasi tumpeng
+dibentuk, dan itu dependensi. Hidangan yang paling ditunggu tamu disiapkan
+lebih dahulu, dan itu nilai. Masakan yang paling mudah gagal dikerjakan pagi
+hari, saat masih ada waktu untuk mengulang, dan itu risiko. Dapurnya hanya
+punya dua kompor besar, dan itu kapasitas.
+
+Tabel \ref{tab:ch12-paket} memuat delapan paket kerja Medikara hasil Bab 11
+beserta skornya. Skor prioritas adalah jumlah skor nilai dan skor pengurangan
+risiko. Durasi dihitung dalam bulan. Ukuran paket menyatakan beban pada tim
+inti TI, bukan durasi. Paket besar membangun atau mengganti sistem inti, atau
+mengubah akses di seluruh jaringan dan bagi pihak luar, sehingga menyita tim
+inti selama paket berjalan. Paket sedang dibangun di atas fondasi yang sudah
+ada dan hanya memakai sebagian tim inti. Karena itu P6 tetap sedang walaupun
+berlangsung 12 bulan, sama dengan P8 yang besar.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Paket kerja Medikara beserta dependensi dan skornya, tersedia di
+           \berkas{sources/chapter12/paket-kerja-medikara.csv}}
+  \label{tab:ch12-paket}
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xlrlrrr}
+    \hline
+    \textbf{Kode} & \textbf{Paket kerja} & \textbf{Ukuran} & \textbf{Bulan} &
+      \textbf{Pendahulu} & \textbf{Nilai} & \textbf{Risiko} & \textbf{Skor} \\
+    \hline
+    P1 & Kontrol akses terpusat & besar & 9 & tidak ada & 3 & 5 & 8 \\
+    \hline
+    P2 & \textit{Hub} integrasi BPJS dan SATUSEHAT & sedang & 6 & tidak ada & 3 & 3 & 6 \\
+    \hline
+    P3 & Identitas pasien tunggal (MPI) & besar & 12 & P1, P2 & 5 & 4 & 9 \\
+    \hline
+    P4 & \textit{Landing zone} \textit{cloud} & sedang & 6 & P1 & 1 & 2 & 3 \\
+    \hline
+    P5 & Konsolidasi SIMRS & besar & 30 & P3, P4 & 5 & 3 & 8 \\
+    \hline
+    P6 & Laporan manajemen terpadu & sedang & 12 & P3, P4 & 4 & 2 & 6 \\
+    \hline
+    P7 & Antrean dan janji temu lintas fasilitas & sedang & 9 & P2, P3 & 4 & 1 & 5 \\
+    \hline
+    P8 & Portal dan API mitra & besar & 12 & P2, P3 & 4 & 1 & 5 \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Dua hal terbaca dari tabel itu. Pertama, P3 punya skor tertinggi, yaitu 9,
+tetapi tidak dapat dimulai sebelum P1 dan P2 selesai. Kedua, P4 punya skor
+terendah, yaitu 3, tetapi P5 dan P6 menunggunya. Bila P4 diletakkan di akhir
+karena skornya rendah, konsolidasi SIMRS ikut mundur. Skor tidak pernah boleh
+mengalahkan dependensi.
+
+\subsection*{Fondasi dan hasil cepat}
+
+Dua hal pada urutan sering tertukar, yaitu fondasi dan hasil cepat
+(\textit{quick win}). Pembagiannya begini. Fondasi adalah paket yang nilainya
+kecil bila berdiri sendiri, tetapi menjadi syarat bagi banyak paket lain. P2 dan
+P4 termasuk fondasi. Hasil cepat adalah paket yang manfaatnya cepat terlihat
+dan dependensinya sedikit. P7, yaitu antrean daring lintas fasilitas di
+Medikara+, termasuk hasil cepat begitu MPI tersedia. Aturan praktisnya: setiap
+transisi memuat paling sedikit satu hasil yang terlihat, agar dukungan direksi
+dan pengguna tidak habis sebelum fondasi selesai. Hasil cepat yang tidak searah
+dengan target justru menambah gap baru. Aplikasi antrean terpisah untuk tiap
+rumah sakit, misalnya, cepat dibuat tetapi harus dibongkar ketika SIMRS
+disatukan.
+
+Dua contoh di luar Medikara memperjelas pembagian itu:
+
+\begin{enumerate}
+  \item Misalkan sebuah bank perkreditan rakyat dengan 15 kantor cabang ingin
+        membuka rekening secara daring. Fondasinya adalah satu data nasabah.
+        Bila aplikasi daring dibangun lebih dahulu, nasabah lama yang membuka
+        rekening baru tercatat sebagai nasabah baru, dan data ganda bertambah
+        setiap hari.
+  \item Misalkan sebuah perusahaan logistik dengan 60 truk sedang mengganti
+        sistem pengirimannya. Pelacakan posisi truk adalah hasil cepat yang
+        searah dengan target. Pelacakan itu selesai dalam tiga bulan, tidak
+        bergantung pada sistem pengiriman baru, dan datanya nanti dipakai
+        sistem baru itu.
+\end{enumerate}
+
+\subsection*{Kapasitas dan siklus anggaran}
+
+Tim TI Medikara hanya sanggup menangani dua proyek besar per tahun. Batas ini
+dihitung per tahun kalender: proyek besar dihitung pada setiap tahun yang
+dilaluinya. Bila setiap paket dimulai sedini mungkin, tahun 2028 memuat tiga
+proyek besar, yaitu P3 yang selesai Maret 2028, P5 yang mulai April 2028, dan
+P8 yang juga dapat mulai April 2028. Salah satunya harus digeser. P8 dipilih
+karena punya kelonggaran paling besar di antara ketiganya. P8 bergeser ke
+Januari 2029, dan tanggal target tetap September 2030. Bila yang digeser P5,
+target ikut mundur, karena P5 berada di jalur kritis yang dibahas pada seksi
+pemodelan.
+
+Urutan juga harus mengikuti siklus anggaran. Misalkan tahun anggaran Medikara
+berjalan Januari sampai Desember, usulan anggaran disusun Agustus sampai
+Oktober, lalu disahkan direksi bersama dewan komisaris pada Desember. Keputusan
+mendanai paket besar yang mulai April 2028 harus masuk usulan anggaran yang
+disusun pada Oktober 2027. Keadaan ini punya dua konsekuensi. Pertama, keputusan
+mendanai P5 diambil ketika P3 baru berjalan enam bulan, sehingga kriteria
+lanjutnya harus ditetapkan sejak awal dan diukur dari hasil antara. Kedua,
+paket fondasi sebaiknya selesai sebelum rapat anggaran. Karena itulah P4
+dijadwalkan selesai September 2027, sebulan sebelum keputusan pendanaan P5.
 
 \section{Peta Jalan untuk Pembaca Berbeda}
 
-% TODO
-% Cakupan: versi direksi, unit bisnis, dan tim TI; horizon 2026 sampai 2030; peta jalan sebagai
-%   dokumen hidup yang ditinjau berkala.
-% Kasus Medikara: peta jalan satu halaman untuk direksi.
+Peta jalan, yang dalam TOGAF disebut \textit{Architecture Roadmap}, menyusun
+paket kerja di atas garis waktu sehingga perjalanan dari kondisi saat ini ke
+target terlihat utuh \cite{togaf10}. Phaal, Farrukh, dan Probert menunjukkan
+bahwa peta jalan yang berguna menghubungkan beberapa lapisan pada satu sumbu
+waktu: kebutuhan bisnis di atas, produk atau layanan di tengah, dan teknologi
+serta sumber daya di bawah \cite{c12-phaal2004}. Kotusev membedakan dua jenis
+peta jalan dalam praktik arsitektur \textit{enterprise}. Jenis pertama menghadap bisnis, berupa rencana
+investasi yang disusun menurut kapabilitas. Jenis kedua adalah peta jalan TI
+yang menghadap tim teknis \cite{kotusev2021}. Keduanya menggambarkan perjalanan
+yang sama untuk pembaca yang berbeda.
+
+Analoginya seperti rencana mudik satu keluarga besar. Penumpang ingin tahu jam
+berangkat, tempat beristirahat, dan perkiraan tiba di kampung. Sopir
+membutuhkan rute, gerbang tol, dan titik pengisian bahan bakar. Keduanya
+membicarakan perjalanan yang sama, tetapi memberi sopir daftar tempat makan
+atau memberi penumpang nomor gerbang tol hanya membingungkan.
+
+Tabel \ref{tab:ch12-tiga-versi} memuat tiga versi peta jalan beserta
+pembacanya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Tiga versi peta jalan untuk tiga kelompok pembaca}
+  \label{tab:ch12-tiga-versi}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.7cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}p{2.0cm}}
+    \hline
+    \textbf{Versi} & \textbf{Pertanyaan pembaca} & \textbf{Isi utama} &
+      \textbf{Satuan waktu dan panjang} \\
+    \hline
+    Direksi & Apa manfaatnya, kapan tercapai, dan keputusan apa yang diminta? &
+      Transisi, manfaat terukur, jalur kritis, titik keputusan & Semester;
+      satu halaman \\
+    \hline
+    Unit bisnis & Kapan unit ini berubah, dan apa yang harus disiapkan? &
+      Jadwal per fasilitas, pelatihan, masa peralihan, dampak pada layanan &
+      Bulan; dua sampai empat halaman per unit \\
+    \hline
+    Tim TI & Siapa mengerjakan apa, dan apa bergantung pada apa? & Paket kerja,
+      dependensi, antarmuka sementara, lingkungan, sumber daya & Minggu atau
+      bulan; lembar kerja rinci \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Horizon 2026 sampai 2030 tidak dirinci dengan ketelitian yang sama. Rencana
+2026 dan 2027 dirinci per bulan, rencana 2028 per triwulan, dan rencana 2029
+sampai 2030 per semester. Alasannya sederhana: semakin jauh sebuah rencana,
+semakin banyak asumsi yang belum terbukti. Rincian per bulan untuk tahun 2030
+memberi kesan pasti yang palsu.
+
+Peta jalan juga dokumen hidup. Pertanyaan kemudian muncul: kapan peta jalan
+boleh berubah? Jawabannya ada pada tiga pemicu. Pemicu pertama adalah tinjauan
+triwulanan oleh tim arsitektur bersama pemilik paket kerja. Pemicu kedua adalah
+tinjauan tahunan bersama siklus anggaran. Pemicu ketiga adalah kejadian besar,
+misalnya regulasi baru, kegagalan rumah sakit percontohan, atau akuisisi.
+Perlakuan ini punya dua konsekuensi. Pertama, setiap perubahan dicatat dengan
+nomor versi, tanggal, dan alasannya, sehingga perbedaan dua versi dapat
+dijelaskan. Kedua, versi direksi tidak boleh berubah diam-diam. Setiap
+pergeseran transisi dilaporkan sebagai keputusan yang diminta, bukan sebagai
+catatan kaki.
+
+\begin{kasus}[title={Kasus Medikara Health: Peta Jalan Satu Halaman untuk Direksi}]
+  Gambar \ref{fig:ch12-peta-direksi} adalah versi direksi dari peta jalan
+  Medikara. Lima lajur ditulis dalam bahasa manfaat: keamanan dan akses, data
+  pasien, rekam medis, layanan pasien dan mitra, serta fondasi teknologi. Paket
+  di jalur kritis diberi warna berbeda, karena hanya keterlambatan paket itulah
+  yang menggeser target. Empat titik keputusan K1 sampai K4 ditaruh di baris
+  paling bawah, karena itulah yang diminta dari direksi.
+
+  Beberapa informasi sengaja dihilangkan. Kode paket kerja, sebelas dependensi
+  antarpaket, lima adaptor sementara, dan rincian lingkungan teknis tidak
+  muncul. Nama calon vendor SIMRS juga tidak muncul, karena seleksinya baru
+  selesai menjelang K2, dan menyebut nama lebih awal memberi kesan pilihan
+  sudah dibuat. Semua informasi itu tetap ada di versi tim TI.
+\end{kasus}
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch12-peta-jalan-direksi.tex}
+  \caption{Peta jalan Medikara 2026 sampai 2030 versi direksi, dengan tiga
+           transisi, target, dan empat titik keputusan}
+  \label{fig:ch12-peta-direksi}
+\end{figure}
 
 \section{Perencanaan Migrasi}
 
-% TODO
-% Cakupan: fase F dalam ADM; strategi migrasi aplikasi pada tingkat tinggi (strategi 7R dibahas
-%   rinci di mata kuliah IT40713); asumsi, titik keputusan, dan rencana mundur; penyelarasan
-%   dengan rencana API (IT40613) dan rencana kendali (IT40813).
+Peta jalan menjawab apa yang dikerjakan dan kapan. Rencana migrasi menjawab
+pertanyaan yang lebih sulit: bagaimana berpindah tanpa menghentikan layanan?
+Rumah sakit tidak dapat berhenti melayani pasien selama seminggu karena
+SIMRS-nya diganti.
+
+TOGAF membagi pekerjaan ini menjadi dua fase. Di fase E, tim menyusun versi
+pertama peta jalan yang lengkap, menetapkan perlu tidaknya pendekatan bertahap,
+dan mengelompokkan gap menjadi paket kerja dan arsitektur transisi. Di fase F,
+peta jalan difinalkan bersama \textit{Implementation and Migration Plan}.
+Rencana itu diselaraskan dengan cara organisasi mengelola portofolio dan
+proyeknya, dan nilai serta biaya tiap paket kerja dan transisi dipastikan
+dipahami pemangku kepentingan \cite{togaf10,c12-togaf-fasef}. TOGAF juga
+menyediakan teknik pendukung, misalnya katalog faktor implementasi untuk
+mencatat hal yang memengaruhi rencana, serta matriks yang menghimpun gap,
+solusinya, dan dependensinya \cite{c12-togaf-teknik}.
+
+\subsection*{Pola peralihan}
+
+Keputusan pertama dalam rencana migrasi adalah pola peralihan, yaitu cara
+organisasi berpindah dari sistem lama ke sistem baru. Tabel \ref{tab:ch12-pola}
+memuat empat pola yang lazim.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Empat pola peralihan pada tingkat organisasi}
+  \label{tab:ch12-pola}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.0cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Pola} & \textbf{Cara kerja} & \textbf{Cocok bila} &
+      \textbf{Risiko utama} \\
+    \hline
+    Sekaligus (\textit{big bang}) & Semua lokasi pindah pada satu tanggal &
+      Sistem kecil, atau sistem lama dan baru tidak dapat berjalan bersamaan &
+      Kegagalan berdampak ke semua lokasi sekaligus \\
+    \hline
+    Bertahap per lokasi & Satu lokasi percontohan, lalu lokasi lain bergelombang &
+      Tiap lokasi cukup mandiri & Dua sistem berjalan bersamaan, biaya ganda \\
+    \hline
+    Bertahap per fungsi & Modul demi modul, misalnya pendaftaran dulu, farmasi
+      kemudian & Sistem lama dapat dipecah & Banyak antarmuka sementara \\
+    \hline
+    Berjalan paralel & Sistem lama dan baru berjalan bersamaan, hasilnya
+      dibandingkan & Kesalahan berakibat fatal, misalnya tagihan atau data
+      klinis & Beban kerja ganda bagi staf \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Pada tingkat aplikasi, setiap aplikasi juga diberi keputusan migrasi, misalnya
+dipindahkan apa adanya ke \textit{cloud}, diganti produk lain, atau dihentikan.
+Kumpulan pilihan itu dikenal sebagai strategi 7R dan dibahas rinci di IT40713
+\cite{c12-aws-7r}, termasuk pola \textit{strangler fig} untuk penggantian
+bertahap per fungsi. Bab ini cukup menetapkan pola peralihan dan urutannya pada
+tingkat organisasi.
+
+\subsection*{Asumsi, titik keputusan, dan rencana mundur}
+
+Rencana migrasi berdiri di atas tiga unsur. Asumsi adalah pernyataan yang
+dianggap benar ketika rencana disusun, tetapi belum terbukti. Titik keputusan
+adalah tanggal yang ditetapkan sejak awal, ketika direksi memutuskan lanjut,
+ubah, atau berhenti berdasarkan kriteria yang sudah disepakati. Rencana mundur
+adalah cara kembali ke keadaan stabil sebelumnya bila sebuah langkah gagal,
+lengkap dengan batas waktunya.
+
+Analoginya seperti pindah rumah. Asumsinya, truk datang pukul delapan pagi dan
+listrik di rumah baru sudah menyala. Titik keputusannya Jumat sore: bila rumah
+baru belum siap, pindahan diundur seminggu. Rencana mundurnya, kunci rumah lama
+belum diserahkan sampai keluarga benar-benar tidur di rumah baru. Rencana
+mundur itu punya batas waktu, karena kunci rumah lama harus diserahkan pada
+akhir bulan.
+
+Dua hal pada rencana migrasi sering tertukar, yaitu asumsi dan risiko.
+Pembagiannya begini. Asumsi dianggap benar dan dipakai sebagai dasar hitungan,
+misalnya ``tim TI sanggup menangani dua proyek besar per tahun''. Risiko adalah
+kejadian yang mungkin terjadi dan sudah diperkirakan dampaknya, misalnya
+``vendor SIMRS terlambat menyerahkan modul farmasi''. Asumsi yang ternyata
+salah tidak lagi berupa risiko, melainkan masalah yang harus segera ditangani,
+dan biasanya menggeser rencana. Karena itu asumsi diperiksa pada tanggal
+tertentu, sedangkan risiko dipantau terus-menerus. Pengelolaan daftar risiko
+dibahas rinci di IT40813.
+
+Tabel \ref{tab:ch12-keputusan} memuat empat titik keputusan Medikara yang
+ditaruh pada peta jalan direksi.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Titik keputusan Medikara beserta kriteria lanjutnya}
+  \label{tab:ch12-keputusan}
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}p{1.65cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Kode} & \textbf{Waktu} & \textbf{Keputusan} & \textbf{Kriteria lanjut} \\
+    \hline
+    K1 & Oktober 2026 & Mendanai P3 dan P4 dalam anggaran 2027 & P1 sesuai
+      jadwal; rancangan MPI disetujui pemilik data pasien \\
+    \hline
+    K2 & Oktober 2027 & Mendanai P5 dalam anggaran 2028 & Uji MPI di Depok:
+      salah gabung di bawah 0,1 persen; \textit{landing zone} selesai; vendor
+      SIMRS terpilih \\
+    \hline
+    K3 & Maret 2029 & Melanjutkan SIMRS terpadu ke empat rumah sakit lain &
+      Tiga bulan setelah dipakai di Depok: waktu pendaftaran tidak naik lebih
+      dari 10 persen, tidak ada data klinis hilang \\
+    \hline
+    K4 & Oktober 2029 & Mendanai gelombang terakhir, Jakarta dan Bandung &
+      Depok stabil; Bekasi dan Bogor lulus uji siap pakai untuk Desember 2029;
+      biaya ganda SIMRS sesuai rencana \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{kasus}[title={Kasus Medikara Health: Rencana Migrasi SIMRS}]
+  Medikara memilih pola bertahap per lokasi untuk SIMRS. Misalkan rumah sakit
+  Depok dipilih sebagai percontohan karena SIMRS-nya paling tua dan jumlah
+  kunjungannya paling kecil di antara lima rumah sakit. SIMRS terpadu mulai
+  dipakai di Depok pada Desember 2028, lalu dinilai pada K3 tiga bulan
+  kemudian. Bekasi dan Bogor menyusul pada Desember 2029. Jakarta dan Bandung,
+  yang kunjungannya paling banyak, menjadi gelombang terakhir pada September
+  2030, ketika tim sudah dua kali berlatih.
+
+  Empat asumsi dicatat beserta pemilik dan tanggal pemeriksaannya.
+  \begin{enumerate}
+    \item[A1.] Tim TI sanggup menangani dua proyek besar per tahun. Pemilik:
+          kepala divisi TI. Diperiksa setiap Oktober.
+    \item[A2.] Vendor SIMRS terpilih mampu melayani lima rumah sakit dalam satu
+          basis data. Pemilik: direktur pelayanan bersama kepala divisi TI.
+          Diperiksa saat seleksi vendor, sebelum K2.
+    \item[A3.] SIMRS lama masih didukung vendornya sampai akhir 2030. Pemilik:
+          kepala divisi TI. Diperiksa Juni 2027.
+    \item[A4.] Tidak ada akuisisi rumah sakit baru sebelum 2029. Pemilik:
+          direktur utama. Diperiksa setiap rapat anggaran.
+  \end{enumerate}
+
+  Rencana mundur di Depok punya batas waktu 30 hari. Selama masa itu, SIMRS
+  lama tetap menyala dalam keadaan baca saja, dan transaksi harian di SIMRS
+  terpadu diekspor setiap malam ke basis data SIMRS lama. Bila percontohan gagal
+  pada masa itu, rumah sakit kembali ke SIMRS lama dengan kehilangan data
+  paling banyak satu hari. Sesudah 30 hari, jalan mundur ditutup, dan masalah
+  diselesaikan di sistem baru.
+\end{kasus}
+
+\subsection*{Penyelarasan dengan tiga mata kuliah lain}
+
+Rencana migrasi di mata kuliah ini adalah payung bagi tiga rencana lain.
+Tabel \ref{tab:ch12-selaras} memuat titik sambungnya. Koordinator tim
+memastikan tanggal pada keempat rencana tidak saling bertentangan.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Titik sambung peta jalan dengan tiga mata kuliah lain}
+  \label{tab:ch12-selaras}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.6cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Mata kuliah} & \textbf{Artefak yang diselaraskan} &
+      \textbf{Yang harus cocok} \\
+    \hline
+    IT40613 & Peta jalan platform dan API dalam tiga gelombang rilis & API
+      mitra (P8) tidak dirilis sebelum MPI (P3) dan \textit{hub} integrasi (P2)
+      selesai. Rentang P8 pada 2029 dibaca sebagai masa rilis ke mitra, karena API
+      dasarnya dibangun lebih dulu pada peta jalan IT40613 \\
+    \hline
+    IT40713 & Peta jalan modernisasi tiga gelombang dan strategi 7R per
+      aplikasi & \textit{Landing zone} (P4) selesai sebelum SIMRS terpadu;
+      gelombang \textit{cloud} mengikuti T1 sampai target. Gelombang 1 berjalan
+      bersama P4, April sampai September 2027, ditambah pemindahan aplikasi di
+      luar paket ini. Gelombang 2, sampai September 2028, memuat sisi teknis P3
+      dan P7. Gelombang 3 memuat peralihan rumah sakit pada P5 dan berakhir
+      September 2030 \\
+    \hline
+    IT40813 & Model tata kelola target dan peta jalan tata kelola terpadu &
+      P1 menutup temuan audit kontrol akses; penilaian risiko vendor selesai
+      sebelum K2 dan sebelum P8 \\
+    \hline
+  \end{tabularx}
+\end{table}
 
 \section{Memodelkan Migrasi di ArchiMate}
 
-% TODO
-% Cakupan: elemen work package, deliverable, plateau, dan gap; migration view dan implementation
-%   and migration viewpoint; menjaga keterkaitan dengan model baseline dan target.
-% Pendalaman teknis: analisis jalur kritis sederhana dari matriks dependensi Bab 11.
+ArchiMate 3.2 menyediakan lima elemen implementasi dan migrasi
+\cite{archimate32}. Elemen \textit{work package} mewakili rangkaian tindakan
+untuk mencapai hasil tertentu dalam batas waktu dan sumber daya. Elemen
+\textit{deliverable} mewakili hasil yang terdefinisi tepat dari sebuah
+\textit{work package}. Elemen \textit{implementation event} mewakili perubahan
+keadaan yang berkaitan dengan implementasi atau migrasi. Elemen
+\textit{plateau} mewakili keadaan arsitektur yang relatif stabil, dan elemen
+\textit{gap} mewakili perbedaan antara dua \textit{plateau}. Tabel
+\ref{tab:ch12-elemen} memasangkan tiap elemen dengan contoh Medikara.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Elemen implementasi dan migrasi ArchiMate 3.2 dengan contoh Medikara}
+  \label{tab:ch12-elemen}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Elemen} & \textbf{Relasi yang lazim} & \textbf{Contoh Medikara} \\
+    \hline
+    \textit{Work package} & Me-\textit{realize} \textit{deliverable}; dipicu
+      \textit{work package} lain atau \textit{implementation event} & P3
+      Identitas pasien tunggal \\
+    \hline
+    \textit{Deliverable} & Me-\textit{realize} elemen inti, misalnya komponen
+      aplikasi & Indeks pasien tunggal yang dipakai lima rumah sakit \\
+    \hline
+    \textit{Implementation event} & Memicu \textit{work package} & K1 Anggaran
+      2027 disahkan \\
+    \hline
+    \textit{Plateau} & Menghimpun elemen inti yang ada pada keadaan itu; memicu
+      \textit{plateau} berikutnya & T1 Maret 2028 \\
+    \hline
+    \textit{Gap} & Berasosiasi dengan dua \textit{plateau} yang dibandingkan &
+      Data pasien ganda dan akses tak terkendali \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Analoginya seperti berkas gambar renovasi bertahap yang dibuat arsitek
+bangunan. Ada denah untuk tiap tahap, yaitu \textit{plateau}. Ada daftar
+perbedaan antardenah, yaitu \textit{gap}. Ada surat perintah kerja untuk
+tukang, yaitu \textit{work package}, yang menghasilkan barang jadi seperti
+dinding baru atau jaringan pipa, yaitu \textit{deliverable}. Pemilik rumah
+cukup melihat urutan denah, sedangkan mandor membutuhkan surat perintah
+kerjanya.
+
+Pembagian pembaca itu terwujud dalam \textit{viewpoint}. ArchiMate menyediakan
+tiga \textit{viewpoint} implementasi dan migrasi, dan ketiganya tersedia di
+Archi \cite{archimate32,archi}. \textit{Migration viewpoint} hanya memuat
+\textit{plateau} dan \textit{gap}, sehingga cocok untuk menjelaskan urutan
+transisi kepada manajemen. \textit{Implementation and migration viewpoint}
+menghubungkan \textit{work package}, \textit{deliverable}, \textit{plateau},
+dan \textit{gap} dengan tujuan, kebutuhan, dan elemen inti, sehingga
+keterlacakan dari strategi sampai proyek terlihat. \textit{Project viewpoint}
+memusatkan perhatian pada \textit{work package}, \textit{deliverable}, dan
+pihak yang mengerjakannya. Gambar \ref{fig:ch12-migration-view} memperlihatkan
+potongan \textit{implementation and migration view} Medikara di sekitar T1.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch12-migration-view.tex}
+  \caption{Potongan \textit{implementation and migration view} Medikara di
+           sekitar T1. Hanya dua dari empat paket T1 yang digambar}
+  \label{fig:ch12-migration-view}
+\end{figure}
+
+Model migrasi hanya berguna bila tetap terhubung dengan model
+\textit{baseline} dari C2 dan model target dari C3. Kesalahan yang paling
+sering adalah menggambar ulang elemen. Komponen aplikasi ``SIMRS Depok'' pada
+\textit{plateau} kondisi awal harus elemen yang sama dengan komponen pada model
+\textit{baseline}, bukan salinannya. Di Archi, elemen yang sudah ada ditarik
+dari pohon model ke dalam \textit{view}, sehingga satu elemen muncul di banyak
+\textit{view} sekaligus. Keputusan ini punya dua konsekuensi. Pertama,
+perubahan nama atau properti elemen langsung terlihat di semua \textit{view}.
+Kedua, pertanyaan seperti ``\textit{plateau} mana yang masih memuat SIMRS
+Bandung lama'' dijawab dari relasi di model, bukan dengan membaca gambar satu
+per satu.
+
+\begin{pendalaman}[title={Pendalaman Teknis (opsional): Analisis Jalur Kritis Sederhana}]
+  Matriks dependensi Bab 11 dapat diubah menjadi jadwal dengan analisis jalur
+  kritis (\textit{critical path}), metode yang diperkenalkan Kelley dan Walker
+  \cite{c12-kelley1959}. Hitungannya dua arah. Hitungan maju menetapkan bulan
+  mulai paling awal tiap paket, yaitu bulan selesai pendahulunya yang paling
+  akhir. Hitungan mundur berjalan dari tanggal selesai proyek dan menetapkan
+  bulan mulai paling lambat yang tidak menggeser tanggal itu. Selisih keduanya
+  disebut kelonggaran (\textit{slack}). Paket berkelonggaran nol membentuk
+  jalur kritis.
+
+  Listing \ref{lst:ch12-hitung-maju} memperlihatkan hitungan maju. Kolom
+  \texttt{mulai\_rencana\_bulan} pada data dipakai untuk menahan sebuah paket,
+  misalnya karena batas kapasitas. Nilai 30 pada P8 berarti P8 tidak dimulai
+  sebelum Januari 2029.
+
+\begin{lstlisting}[language=Python, basicstyle=\ttfamily\scriptsize, frame=lines,
+  numbers=left, numberstyle=\tiny\color{gray}, backgroundcolor=\color{lightgray!10},
+  keywordstyle=\color{blue}\bfseries, commentstyle=\color{gray}\itshape,
+  stringstyle=\color{red}, showstringspaces=false, breaklines=true,
+  caption={Hitungan maju jalur kritis, tersedia di \berkas{sources/chapter12/jalur-kritis.py}},
+  label={lst:ch12-hitung-maju}]
+def hitung_maju(daftar_paket, urutan):
+  """Menghitung bulan mulai dan selesai paling awal untuk tiap paket.
+
+  Paket baru boleh mulai sesudah pendahulu terakhirnya selesai, dan tidak lebih
+  awal dari bulan mulai rencana, misalnya karena batas kapasitas.
+  """
+  jadwal = {}
+  for kode in urutan:
+    paket = daftar_paket[kode]
+    selesai_pendahulu = [
+        jadwal[pendahulu]["selesai"] for pendahulu in paket["pendahulu"]
+    ]
+    mulai = max(selesai_pendahulu + [paket["mulai_rencana"]])
+    jadwal[kode] = {"mulai": mulai, "selesai": mulai + paket["durasi"]}
+  return jadwal
+\end{lstlisting}
+
+  Listing \ref{lst:ch12-jalankan} memuat cara menjalankannya beserta
+  keluarannya. Bulan 0 adalah Juli 2026, dan angka selesai adalah bulan
+  pertama sesudah paket rampung.
+
+\begin{lstlisting}[language=bash, caption={Menjalankan analisis jalur kritis, tersedia di \berkas{sources/chapter12/jalur-kritis.py}},
+  label={lst:ch12-jalankan}]
+cd sources/chapter12
+python jalur-kritis.py paket-kerja-medikara.csv
+
+# Keluarannya (dipotong):
+# Kode  Mulai     Selesai      Bulan  Longgar  Nama
+# P1    Jul 2026  Mar 2027     0-9          0  Kontrol akses terpusat
+# P3    Apr 2027  Mar 2028     9-21         0  Identitas pasien tunggal (MPI)
+# P5    Apr 2028  Sep 2030    21-51         0  Konsolidasi SIMRS
+# P8    Jan 2029  Des 2029    30-42         9  Portal dan API mitra
+#
+# Jalur kritis: P1 -> P3 -> P5
+# Selesai: Sep 2030, cadangan 3 bulan terhadap batas Des 2030
+#
+# Proyek besar per tahun (kapasitas 2):
+#   2028: 2 (P3, P5) aman
+\end{lstlisting}
+
+  Gambar \ref{fig:ch12-jalur-kritis} menggambarkan hasil yang sama sebagai
+  jaringan. Jalur P1, P3, dan P5 berjumlah $9 + 12 + 30 = 51$ bulan, sehingga
+  target tercapai September 2030 dengan cadangan tiga bulan. Kelonggaran P8
+  turun dari 18 menjadi 9 bulan karena penundaan akibat kapasitas, tetapi
+  masih positif, sehingga target tidak bergeser. Analisis ini sengaja
+  sederhana. Durasi dianggap pasti, dan sumber daya dianggap tidak saling
+  berebut di luar batas proyek besar.
+\end{pendalaman}
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch12-jalur-kritis.tex}
+  \caption{Jaringan paket kerja Medikara. Angka di tiap kotak adalah durasi,
+           bulan mulai sampai bulan selesai, dan kelonggaran. Jalur kritis
+           diberi warna jingga}
+  \label{fig:ch12-jalur-kritis}
+\end{figure}
 
 \section{Aktivitas: Menyusun Peta Jalan 2026 sampai 2030}
 
-% TODO
-% Tujuan aktivitas: mengubah daftar paket kerja menjadi urutan transisi dan peta jalan yang
-%   realistis.
-% Peran dalam tim: analis bisnis memastikan tiap transisi memberi manfaat yang terlihat; analis
-%   teknologi memeriksa kelayakan urutan teknis; pemodel membuat migration view; koordinator
-%   menyelaraskan jadwal dengan tiga mata kuliah lain.
-% Langkah: tetapkan dua sampai tiga arsitektur transisi; urutkan paket kerja dengan kriteria
-%   eksplisit; susun peta jalan untuk direksi dan untuk tim pelaksana; tulis asumsi dan titik
-%   keputusan; modelkan migrasi di Archi.
-% Luaran dan tonggak capstone: arsitektur transisi, peta jalan, dan rencana migrasi (C4).
-% Berkas sources yang direncanakan: sources/chapter12/templat-arsitektur-transisi.md,
-%   sources/chapter12/templat-peta-jalan.csv, sources/chapter12/templat-rencana-migrasi.md
+\subsection*{Tujuan}
+
+Aktivitas ini mengubah daftar paket kerja dari C3 menjadi urutan transisi dan
+peta jalan yang realistis. Tim memakai organisasi nyata yang sudah dipilih sejak
+Pertemuan 1, dengan izin dan data yang dianonimkan, atau memakai kasus Medikara
+Health. Jadwal investasi organisasi nyata sering bersifat rahasia, sehingga
+nama proyek, angka anggaran, dan tanggal yang sensitif disamarkan sebelum
+dibagikan di kelas.
+
+\subsection*{Pembagian peran}
+
+Tabel \ref{tab:ch12-peran} memuat pembagian peran dalam tim.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Pembagian peran dalam Aktivitas Bab 12}
+  \label{tab:ch12-peran}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.1cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}p{3.3cm}}
+    \hline
+    \textbf{Peran} & \textbf{Tanggung jawab} & \textbf{Hasil} \\
+    \hline
+    Analis bisnis & Memastikan tiap transisi memberi manfaat yang terlihat
+      oleh pasien atau manajemen; menjalankan uji penundaan & Lembar arsitektur
+      transisi, versi direksi \\
+    \hline
+    Analis teknologi & Memeriksa kelayakan urutan teknis, antarmuka sementara,
+      dan kapasitas tim TI & Urutan paket kerja, rencana migrasi \\
+    \hline
+    Pemodel & Membuat \textit{migration view} dan \textit{implementation and
+      migration view} di Archi dari elemen model C2 dan C3 & Model migrasi \\
+    \hline
+    Koordinator & Menyelaraskan jadwal dengan IT40613, IT40713, dan IT40813;
+      menjaga daftar asumsi dan titik keputusan & Tabel penyelarasan, daftar
+      asumsi \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Langkah kerja}
+
+\begin{enumerate}
+  \item Kumpulkan bahan: daftar paket kerja dan matriks dependensi dari C3,
+        rantai motivasi dan prinsip arsitektur dari C1, serta
+        \textit{heatmap} kapabilitas dari C2.
+  \item Tetapkan dua sampai tiga arsitektur transisi dengan
+        \berkas{sources/chapter12/templat-arsitektur-transisi.md}. Jalankan uji
+        penundaan untuk tiap transisi, lalu catat biaya sementaranya.
+  \item Urutkan paket kerja dengan kriteria eksplisit. Terapkan dependensi
+        lebih dahulu, lalu skor nilai dan risiko, lalu batas kapasitas, lalu
+        siklus anggaran. Catat hasilnya di
+        \berkas{sources/chapter12/templat-peta-jalan.csv}.
+  \item Susun dua versi peta jalan: satu halaman untuk direksi dan lembar rinci
+        untuk tim pelaksana.
+  \item Tulis rencana migrasi dengan
+        \berkas{sources/chapter12/templat-rencana-migrasi.md}: pola peralihan,
+        asumsi beserta pemiliknya, titik keputusan beserta kriterianya, dan
+        rencana mundur beserta batas waktunya.
+  \item Selaraskan tanggal dengan rencana API di IT40613, peta jalan
+        modernisasi di IT40713, dan peta jalan tata kelola di IT40813.
+  \item Modelkan migrasi di Archi memakai \textit{plateau}, \textit{gap},
+        \textit{work package}, \textit{deliverable}, dan \textit{implementation
+        event}.
+  \item Tinjau silang: pemodel memeriksa bahwa nama paket, transisi, dan
+        aplikasi sama di dokumen, CSV, dan model.
+\end{enumerate}
+
+\subsection*{Luaran dan kaitan dengan capstone}
+
+Luarannya adalah arsitektur transisi, peta jalan 2026 sampai 2030 dalam dua
+versi, rencana migrasi, dan model migrasi di Archi. Keempatnya masuk tonggak C4
+Peta Jalan dan Tata Kelola, yang dipresentasikan menjelang Ujian Akhir Semester
+(UAS). Peta jalan ini juga menjadi bahan Bab 13: biaya dan manfaat dihitung per
+transisi, bukan per program.
+
+\subsection*{Kriteria penilaian}
+
+Tabel \ref{tab:ch12-penilaian} memuat kriteria penilaian singkat.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Kriteria penilaian Aktivitas Bab 12}
+  \label{tab:ch12-penilaian}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.4cm}
+                               r>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Ciri hasil yang baik} \\
+    \hline
+    Nilai tiap transisi & 25\% & Tiap transisi lolos uji penundaan, manfaatnya
+      terukur dan punya pemilik \\
+    \hline
+    Dasar pengurutan & 25\% & Dependensi, skor, kapasitas, dan anggaran
+      diterapkan eksplisit dan dapat ditelusuri \\
+    \hline
+    Dua versi peta jalan & 20\% & Versi direksi muat satu halaman dan menyebut
+      keputusan yang diminta \\
+    \hline
+    Asumsi dan titik keputusan & 20\% & Asumsi punya pemilik dan tanggal
+      pemeriksaan; kriteria keputusan terukur \\
+    \hline
+    Konsistensi & 10\% & Nama dan tanggal sama di dokumen, model, dan tiga mata
+      kuliah lain \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Berkas pendukung}
+
+Seluruh berkas tersedia di \berkas{sources/chapter12/}:
+\berkas{templat-arsitektur-transisi.md} untuk mendeskripsikan dan menguji tiap
+transisi, \berkas{templat-peta-jalan.csv} untuk lembar peta jalan rinci,
+\berkas{templat-rencana-migrasi.md} untuk rencana migrasi, serta
+\berkas{paket-kerja-medikara.csv} sebagai data contoh Medikara.
+
+\subsection*{Pendalaman teknis (opsional)}
+
+Anggota berlatar ilmu komputer, rekayasa perangkat lunak, atau TI mengubah
+matriks dependensi tim menjadi berkas CSV dengan format
+\berkas{sources/chapter12/paket-kerja-medikara.csv}, lalu menjalankan
+\berkas{sources/chapter12/jalur-kritis.py}. Hasilnya dibandingkan dengan
+urutan yang disusun manual. Perbedaan keduanya, misalnya paket yang dikira
+mendesak padahal masih longgar, dibahas dalam tatap muka hari Sabtu.
 
 \section{Ringkasan}
 
-% TODO
+Program transformasi yang dikerjakan sekaligus menumpuk risiko di satu titik.
+Bila program itu terlambat atau berhenti, organisasi sudah membayar tetapi
+tidak memegang hasil apa pun. Arsitektur transisi memecah perjalanan menjadi
+dua sampai tiga keadaan antara yang stabil. Setiap keadaan harus memberi
+manfaat yang terlihat, tetap dapat dijalankan bila langkah berikutnya ditunda,
+searah dengan target, dan dapat dinyatakan tercapai. Uji penundaan dua tahun
+adalah cara paling sederhana untuk memeriksanya, termasuk menghitung biaya
+sementara yang harus diterima.
+
+Urutan paket kerja ditentukan oleh empat kriteria yang sifatnya berbeda.
+Dependensi adalah syarat mutlak, nilai dan risiko adalah skor, dan kapasitas
+adalah batas. Pada Medikara, P4 punya skor terendah tetapi harus selesai lebih
+awal karena konsolidasi SIMRS menunggunya. Batas dua proyek besar per tahun
+memaksa P8 bergeser ke 2029, dan pergeseran itu tidak mengubah target karena
+P8 masih punya kelonggaran. Siklus anggaran menambahkan titik keputusan yang
+tanggalnya tidak dapat ditawar.
+
+Satu perjalanan membutuhkan beberapa versi peta jalan. Direksi membutuhkan satu
+halaman berisi manfaat, transisi, jalur kritis, dan keputusan yang diminta.
+Unit bisnis membutuhkan jadwal per fasilitas, dan tim TI membutuhkan lembar
+kerja rinci. Peta jalan adalah dokumen hidup yang ditinjau triwulanan dan
+tahunan, dengan setiap perubahan tercatat dan setiap pergeseran transisi
+dilaporkan sebagai keputusan.
+
+Rencana migrasi menjawab cara berpindah tanpa menghentikan layanan. Pola
+peralihan dipilih pada tingkat organisasi, sedangkan pilihan 7R per aplikasi
+dibahas di IT40713. Asumsi dicatat dengan pemilik dan tanggal pemeriksaan,
+titik keputusan diberi kriteria terukur sejak awal, dan rencana mundur diberi
+batas waktu. Di ArchiMate, semua itu dimodelkan dengan \textit{plateau},
+\textit{gap}, \textit{work package}, \textit{deliverable}, dan
+\textit{implementation event} yang memakai elemen yang sama dengan model
+\textit{baseline} dan target.
+
+Pesan utama bab ini sederhana: peta jalan yang baik bukan janji bahwa semua
+akan selesai tepat waktu. Peta jalan yang baik menjamin bahwa di mana pun
+perjalanan berhenti, organisasi berdiri di tempat yang lebih baik daripada
+sebelumnya.
 
 \section{Latihan}
 
+Berkas yang dipakai pada latihan ini tersedia di \berkas{sources/chapter12/}.
+Latihan tidak membutuhkan kemampuan memprogram. Skrip
+\berkas{sources/chapter12/jalur-kritis.py} hanya dipakai sebagai pemeriksa
+opsional pada Latihan 3. Hasil tiap mahasiswa boleh berbeda, karena arsitektur
+transisi dan peta jalan tiap tim berbeda. Yang dinilai adalah penalaran dan
+perbandingannya.
+
+\subsection*{Latihan 1: Menguji Nilai Tiap Transisi}
+
+Latihan ini membuktikan bahwa setiap arsitektur transisi harus tetap bernilai
+bila proyek berikutnya ditunda, dan memperlihatkan seperti apa transisi yang
+tidak memenuhi syarat itu.
+
 \begin{enumerate}
-  \item Mengapa setiap arsitektur transisi harus tetap bernilai bila proyek berikutnya ditunda? Berikan contoh transisi yang tidak memenuhi syarat itu.
-  \item Ringkas peta jalan tim menjadi satu halaman untuk direksi. Informasi apa yang dihilangkan, dan mengapa?
-  \item Tim teknologi informasi Medikara hanya sanggup menangani dua proyek besar per tahun. Bagaimana batasan ini mengubah urutan peta jalan?
+  \item Ambil arsitektur transisi tim dari Aktivitas, atau tiga transisi
+        Medikara pada Gambar \ref{fig:ch12-transisi}.
+  \item Untuk tiap transisi, tulis manfaat yang tersisa bila langkah berikutnya
+        ditunda dua tahun, lengkap dengan ukurannya.
+  \item Hitung biaya sementara selama dua tahun penundaan, misalnya antarmuka
+        sementara, lisensi ganda, atau kerja manual tambahan.
+  \item Beri hasil uji: lolos bila manfaatnya nyata dan biaya sementaranya
+        wajar, gagal bila sebaliknya. Isi Tabel \ref{tab:ch12-lat1-hasil}.
+        Tabel \ref{tab:ch12-lat1-contoh} memperlihatkan contoh yang sudah
+        terisi.
+  \item Tulis satu contoh transisi yang gagal, lalu ubah batasnya sampai lolos.
+  \item Jawab tiga pertanyaan berikut. Pertama, transisi mana yang biaya
+        sementaranya paling besar, dan apakah manfaatnya sebanding? Kedua,
+        mengapa contoh yang gagal tetap menarik bagi sebagian pemangku
+        kepentingan? Ketiga, perubahan batas apa yang membuat contoh itu lolos,
+        dan apa yang dikorbankan?
 \end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 1 yang sudah terisi, kasus Medikara}
+  \label{tab:ch12-lat1-contoh}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.4cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}p{3.0cm}l}
+    \hline
+    \textbf{Transisi} & \textbf{Manfaat bila ditunda dua tahun} &
+      \textbf{Biaya sementara dua tahun} & \textbf{Hasil} \\
+    \hline
+    T1 Pasien dan akses & Satu nomor pasien untuk 23 fasilitas; akses 4.800
+      karyawan terkendali & Lima adaptor: Rp1,5 miliar & lolos \\
+    \hline
+    T2 Rekam medis tahap awal & Depok memakai SIMRS terpadu; antrean daring;
+      laporan tanpa \textit{spreadsheet} & Empat antarmuka ke SIMRS lama,
+      misalkan Rp1,6 miliar & lolos \\
+    \hline
+    Contoh gagal: semua server SIMRS lama dipindah ke \textit{cloud}
+      sebelum diganti & Tidak ada layanan yang berubah; lima SIMRS tetap
+      berbeda versi & Sewa \textit{cloud}, misalkan Rp1,8 miliar & gagal \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 1}
+  \label{tab:ch12-lat1-hasil}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.4cm}
+                               >{\raggedright\arraybackslash}X
+                               >{\raggedright\arraybackslash}p{3.0cm}l}
+    \hline
+    \textbf{Transisi} & \textbf{Manfaat bila ditunda dua tahun} &
+      \textbf{Biaya sementara dua tahun} & \textbf{Hasil} \\
+    \hline
+    T1 \dots & \dots & \dots & \dots \\
+    \hline
+    T2 \dots & \dots & \dots & \dots \\
+    \hline
+    T3 \dots & \dots & \dots & \dots \\
+    \hline
+    Contoh gagal & \dots & \dots & \dots \\
+    \hline
+    Contoh setelah batasnya diubah & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Latihan 2: Meringkas Peta Jalan untuk Direksi}
+
+Latihan ini membuktikan bahwa versi direksi bukan versi rinci yang diperkecil,
+melainkan hasil memilih informasi secara sengaja.
+
+\begin{enumerate}
+  \item Mulai dari peta jalan rinci tim di
+        \berkas{sources/chapter12/templat-peta-jalan.csv}. Daftar semua jenis
+        informasi yang ada di dalamnya.
+  \item Tulis pertanyaan yang ingin dijawab direksi: manfaat, waktu, biaya,
+        risiko, dan keputusan yang diminta.
+  \item Untuk tiap jenis informasi, tentukan apakah dipertahankan, diringkas,
+        atau dihilangkan, beserta alasannya. Isi Tabel
+        \ref{tab:ch12-lat2-hasil}. Tabel \ref{tab:ch12-lat2-contoh}
+        memperlihatkan contoh yang sudah terisi.
+  \item Gambar versi satu halaman. Gambar \ref{fig:ch12-peta-direksi} dapat
+        dipakai sebagai contoh bentuk.
+  \item Minta satu orang berlatar non-teknis membaca versi itu selama satu
+        menit, lalu tanyakan keputusan apa yang diminta pada K2. Catat
+        jawabannya.
+  \item Jawab tiga pertanyaan berikut. Pertama, informasi apa yang paling sulit
+        dihilangkan, dan mengapa? Kedua, apakah pembaca uji dapat menyebut
+        keputusan yang diminta? Bila tidak, bagian mana yang menghalanginya?
+        Ketiga, informasi apa yang dihilangkan tetapi wajib tersedia bila
+        direksi bertanya?
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 2 yang sudah terisi, kasus Medikara}
+  \label{tab:ch12-lat2-contoh}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.2cm}
+                               >{\raggedright\arraybackslash}p{2.6cm}
+                               >{\raggedright\arraybackslash}p{2.2cm}
+                               >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Informasi} & \textbf{Versi tim TI} & \textbf{Versi direksi} &
+      \textbf{Alasan} \\
+    \hline
+    Paket kerja & Delapan paket berkode P1 sampai P8 & Diringkas menjadi nama
+      manfaat per lajur & Direksi mengingat manfaat, bukan kode \\
+    \hline
+    De\-pen\-den\-si & Sebelas panah antarpaket & Hanya jalur kritis &
+      Hanya rantai itu yang menentukan tanggal target \\
+    \hline
+    Antarmuka sementara & Lima adaptor beserta jadwalnya & Dihilangkan &
+      Rincian teknis; biayanya masuk biaya transisi \\
+    \hline
+    Titik keputusan & K1 sampai K4 beserta kriteria rinci & Di\-per\-ta\-han\-kan
+      sebagai empat tanda & Itulah yang diminta dari direksi \\
+    \hline
+    Calon vendor & Tiga calon vendor SIMRS & Dihilangkan & Seleksi belum
+      selesai \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 2}
+  \label{tab:ch12-lat2-hasil}
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.2cm}
+                               >{\raggedright\arraybackslash}p{2.6cm}
+                               >{\raggedright\arraybackslash}p{2.2cm}
+                               >{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Informasi} & \textbf{Versi tim TI} & \textbf{Versi direksi} &
+      \textbf{Alasan} \\
+    \hline
+    Paket kerja & \dots & \dots & \dots \\
+    \hline
+    De\-pen\-den\-si & \dots & \dots & \dots \\
+    \hline
+    Antarmuka sementara & \dots & \dots & \dots \\
+    \hline
+    Titik keputusan & \dots & \dots & \dots \\
+    \hline
+    \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\subsection*{Latihan 3: Batas Dua Proyek Besar per Tahun}
+
+Latihan ini membuktikan bahwa batas kapasitas mengubah urutan peta jalan, dan
+bahwa akibatnya pada target bergantung pada kelonggaran paket yang digeser.
+Tim TI Medikara hanya sanggup menangani dua proyek besar per tahun.
+
+\begin{enumerate}
+  \item Tandai paket besar pada peta jalan tim, memakai definisi yang sama
+        dengan Tabel \ref{tab:ch12-paket}.
+  \item Susun jadwal paling awal tanpa batas kapasitas, lalu hitung jumlah
+        proyek besar pada tiap tahun kalender.
+  \item Tandai tahun yang memuat lebih dari dua proyek besar.
+  \item Coba dua penyelesaian: menggeser paket yang kelonggarannya paling
+        besar, atau memecah satu paket besar menjadi dua paket yang lebih
+        kecil.
+  \item Catat akibat tiap penyelesaian pada tanggal target dan pada isi tiap
+        transisi. Isi Tabel \ref{tab:ch12-lat3-hasil}. Tabel
+        \ref{tab:ch12-lat3-contoh} memperlihatkan contoh yang sudah terisi.
+  \item Bila ingin memeriksa hitungan, ubah kolom
+        \texttt{mulai\_rencana\_bulan} di CSV, lalu jalankan
+        \berkas{sources/chapter12/jalur-kritis.py}.
+  \item Jawab tiga pertanyaan berikut. Pertama, mengapa menggeser P8 tidak
+        menggeser target, sedangkan menggeser P5 menggeser target? Kedua, bila
+        kapasitas dihitung sebagai proyek besar yang berjalan pada bulan yang
+        sama, bukan per tahun kalender, apakah P8 tetap harus digeser? Ketiga,
+        transisi mana yang isinya berubah akibat batas ini?
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 3 yang sudah terisi, kasus Medikara}
+  \label{tab:ch12-lat3-contoh}
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xr
+                               >{\raggedright\arraybackslash}Xr}
+    \hline
+    \textbf{Tahun} & \textbf{Tanpa batas} & \textbf{Jumlah} &
+      \textbf{P8 digeser ke Januari 2029} & \textbf{Jumlah} \\
+    \hline
+    2026 & P1 & 1 & P1 & 1 \\
+    \hline
+    2027 & P1, P3 & 2 & P1, P3 & 2 \\
+    \hline
+    2028 & P3, P5, P8 & 3 & P3, P5 & 2 \\
+    \hline
+    2029 & P5, P8 & 2 & P5, P8 & 2 \\
+    \hline
+    2030 & P5 & 1 & P5 & 1 \\
+    \hline
+    Target & September 2030 & & September 2030 & \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 3}
+  \label{tab:ch12-lat3-hasil}
+  \begin{tabularx}{\textwidth}{l>{\raggedright\arraybackslash}Xr
+                               >{\raggedright\arraybackslash}Xr}
+    \hline
+    \textbf{Tahun} & \textbf{Tanpa batas} & \textbf{Jumlah} &
+      \textbf{Setelah penyelesaian} & \textbf{Jumlah} \\
+    \hline
+    2026 & \dots & \dots & \dots & \dots \\
+    \hline
+    2027 & \dots & \dots & \dots & \dots \\
+    \hline
+    2028 & \dots & \dots & \dots & \dots \\
+    \hline
+    2029 & \dots & \dots & \dots & \dots \\
+    \hline
+    2030 & \dots & \dots & \dots & \dots \\
+    \hline
+    Target & \dots & & \dots & \\
+    \hline
+  \end{tabularx}
+\end{table}

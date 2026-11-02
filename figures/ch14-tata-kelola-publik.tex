@@ -1,0 +1,42 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  lapis/.style={draw, rounded corners, minimum height=0.95cm, text width=2.1cm,
+                align=center, font=\scriptsize\bfseries},
+  isi/.style={draw, rounded corners, minimum height=0.95cm, text width=3.7cm,
+              align=center, font=\scriptsize\bfseries}
+]
+  \node[font=\footnotesize\bfseries] at (4.0,0.95) {Sektor publik};
+  \node[font=\footnotesize\bfseries] at (8.5,0.95) {Medikara Health};
+
+  \node[lapis, fill=praditagreen!15] (l1) at (0,0) {Arah dan percepatan};
+  \node[isi, fill=blue!8] (p1) at (4.0,0)
+    {Komite Digital Pemerintah\\{\tiny\mdseries Perpres 83/2025, di bawah Presiden}};
+  \node[isi, fill=green!10] (m1) at (8.5,0)
+    {Direksi dan komite pengarah TI\\{\tiny\mdseries dibahas rinci di IT40813}};
+
+  \node[lapis, fill=praditagreen!15] (l2) at (0,-1.35) {Koordinasi arsitektur};
+  \node[isi, fill=blue!8] (p2) at (4.0,-1.35)
+    {Tim Koordinasi SPBE Nasional\\{\tiny\mdseries Perpres 95/2018 Pasal 59, ketua
+    menteri PANRB}};
+  \node[isi, fill=green!10] (m2) at (8.5,-1.35)
+    {\textit{Architecture board}\\{\tiny\mdseries piagam disahkan direksi}};
+
+  \node[lapis, fill=praditagreen!15] (l3) at (0,-2.7) {Pelaksana di unit};
+  \node[isi, fill=blue!8] (p3) at (4.0,-2.7)
+    {Koordinator SPBE instansi\\{\tiny\mdseries Pasal 60 dan 61, ditetapkan pimpinan
+    instansi}};
+  \node[isi, fill=green!10] (m3) at (8.5,-2.7)
+    {Arsitek domain dan tim proyek\\{\tiny\mdseries terikat kontrak arsitektur}};
+
+  \node[lapis, fill=praditagreen!15] (l4) at (0,-4.05) {Pengukuran};
+  \node[isi, fill=orange!12] (p4) at (4.0,-4.05)
+    {Evaluasi Kinerja Pemerintah Digital\\{\tiny\mdseries Permen PANRB 8/2026,
+    asesor internal dan eksternal}};
+  \node[isi, fill=orange!12] (m4) at (8.5,-4.05)
+    {Ukuran nilai EA\\{\tiny\mdseries dilaporkan ke direksi tiap kuartal}};
+
+  \draw[dashed, gray, thick] (p1) -- (m1);
+  \draw[dashed, gray, thick] (p2) -- (m2);
+  \draw[dashed, gray, thick] (p3) -- (m3);
+  \draw[dashed, gray, thick] (p4) -- (m4);
+\end{tikzpicture}

@@ -1,0 +1,30 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  konsep/.style={draw, rounded corners, minimum height=0.85cm, minimum width=2.4cm,
+                 align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  hubungan/.style={font=\tiny, fill=white, inner sep=1pt, align=center}
+]
+  \node[konsep, fill=blue!8] (penjamin) at (0,1.8) {Penjamin\\{\tiny\mdseries BPJS, asuransi}};
+  \node[konsep, fill=blue!8] (fasilitas) at (4.3,1.8) {Fasilitas\\{\tiny\mdseries RS, klinik, apotek}};
+  \node[konsep, fill=blue!8] (dokter) at (8.6,1.8) {Dokter};
+
+  \node[konsep, fill=praditagreen!15] (pasien) at (0,0) {Pasien};
+  \node[konsep, fill=orange!12] (kunjungan) at (4.3,0) {Kunjungan};
+  \node[konsep, fill=blue!8] (rekam) at (8.6,0) {Rekam Medis};
+
+  \node[konsep, fill=blue!8] (klaim) at (0,-1.8) {Klaim};
+  \node[konsep, fill=blue!8] (tagihan) at (4.3,-1.8) {Tagihan};
+  \node[konsep, fill=blue!8] (resep) at (8.6,-1.8) {Resep};
+
+  \draw[panah] (pasien) -- node[hubungan] {menjalani\\1 : banyak} (kunjungan);
+  \draw[panah] (kunjungan) -- node[hubungan] {berlangsung di} (fasilitas);
+  \draw[panah] (kunjungan) -- node[hubungan] {ditangani} (dokter);
+  \draw[panah] (kunjungan) -- node[hubungan] {dicatat dalam} (rekam);
+  \draw[panah] (rekam) -- node[hubungan] {memuat} (resep);
+  \draw[panah] (kunjungan) -- node[hubungan] {ditagihkan lewat} (tagihan);
+  \draw[panah] (tagihan) -- node[hubungan] {diajukan sebagai} (klaim);
+  \draw[panah] (pasien) -- node[hubungan] {dijamin oleh} (penjamin);
+  \draw[panah] (klaim.west) -- ++(-0.45,0) |- node[hubungan, pos=0.25] {dibayar\\oleh}
+    (penjamin.west);
+\end{tikzpicture}

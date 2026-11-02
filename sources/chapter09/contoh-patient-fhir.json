@@ -1,0 +1,60 @@
+{
+  "resourceType": "Patient",
+  "id": "MDK-0318274",
+  "active": true,
+  "identifier": [
+    {
+      "use": "official",
+      "system": "https://fhir.kemkes.go.id/id/nik",
+      "value": "0000000000000001"
+    },
+    {
+      "use": "secondary",
+      "system": "https://fhir.kemkes.go.id/id/patient-ihs-number",
+      "value": "P00000000001"
+    },
+    {
+      "use": "usual",
+      "system": "https://fhir.medikara.example/id/mpi",
+      "value": "MDK-0318274"
+    },
+    {
+      "use": "secondary",
+      "system": "https://fhir.medikara.example/id/rm/rs-jakarta",
+      "value": "0045812"
+    },
+    {
+      "use": "secondary",
+      "system": "https://fhir.medikara.example/id/rm/rs-depok",
+      "value": "D-22017"
+    },
+    {
+      "use": "secondary",
+      "system": "https://fhir.medikara.example/id/rm/klinik-bogor",
+      "value": "K-118230"
+    }
+  ],
+  "name": [
+    {
+      "use": "official",
+      "text": "Sari Contoh"
+    }
+  ],
+  "gender": "female",
+  "birthDate": "1978-04-12",
+  "address": [
+    {
+      "use": "home",
+      "city": "Depok",
+      "country": "ID"
+    }
+  ],
+  "link": [
+    {
+      "other": {
+        "reference": "Patient/MDK-0402291"
+      },
+      "type": "replaces"
+    }
+  ]
+}

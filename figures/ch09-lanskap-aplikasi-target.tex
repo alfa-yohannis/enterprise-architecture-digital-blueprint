@@ -1,0 +1,49 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.8cm,
+                minimum width=1.8cm, align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  garis/.style={thick}
+]
+  % Kanal
+  \node[kotak, fill=blue!8, minimum width=2.6cm] (medi) at (2.0,2.6)
+    {Medikara+\\{\tiny\mdseries pasien}};
+  \node[kotak, fill=orange!12, minimum width=2.6cm] (mitra) at (6.1,2.6)
+    {Portal mitra\\{\tiny\mdseries klinik mitra, asuransi}};
+
+  % Platform integrasi
+  \node[kotak, fill=orange!12, minimum width=8.1cm, minimum height=0.7cm]
+    (integ) at (4.05,1.3) {Platform integrasi dan \textit{API gateway}};
+
+  % Aplikasi inti bersama
+  \node[kotak, fill=blue!8] (simrs) at (0.9,0)
+    {SIMRS tunggal\\{\tiny\mdseries 5 rumah sakit, 18 klinik}};
+  \node[kotak, fill=blue!8] (erp) at (3.0,0)
+    {ERP\\{\tiny\mdseries keuangan}};
+  \node[kotak, fill=praditagreen!15] (mpi) at (5.1,0)
+    {MPI\\{\tiny\mdseries data induk pasien}};
+  \node[kotak, fill=blue!8] (lis) at (7.2,0)
+    {Sistem lab\\dan apotek};
+
+  % Platform data
+  \node[kotak, fill=green!10, minimum width=8.1cm, minimum height=0.7cm]
+    (data) at (4.05,-1.3) {Platform data analitik dan \textit{dashboard} manajemen};
+
+  % Pihak eksternal
+  \node[kotak, fill=white, dashed, minimum width=1.9cm] (ss) at (10.1,1.9)
+    {SATUSEHAT\\{\tiny\mdseries FHIR R4}};
+  \node[kotak, fill=white, dashed, minimum width=1.9cm] (bpjs) at (10.1,0.7)
+    {BPJS\\Kesehatan};
+
+  \draw[panah] (medi) -- (medi |- integ.north);
+  \draw[panah] (mitra) -- (mitra |- integ.north);
+  \foreach \apl in {simrs, erp, mpi, lis} {
+    \draw[garis] (\apl.north) -- (\apl |- integ.south);
+    \draw[panah] (\apl.south) -- (\apl |- data.north);
+  }
+  \draw[panah] (integ.east) -- ++(0.35,0) |- (ss.west);
+  \draw[panah] (integ.east) -- ++(0.35,0) |- (bpjs.west);
+
+  \node[font=\tiny, gray, anchor=north] at (10.1,0.15)
+    {pihak eksternal};
+\end{tikzpicture}

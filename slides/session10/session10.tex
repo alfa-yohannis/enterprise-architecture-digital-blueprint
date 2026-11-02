@@ -1,0 +1,608 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+% !TeX TXS-program:compile = txs:///xelatex | txs:///xelatex
+\documentclass[aspectratio=169, table, 12pt]{beamer}
+
+\input{../preamble}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+\title{\Huge Arsitektur Teknologi\\ \vspace{10pt} Target dan Kesiapan AI}
+\date{Pertemuan 10}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+  \frametitle{Isi Pertemuan}
+  \vspace{14pt}
+  \begin{columns}[t]
+    \column{0.5\textwidth}
+    {\small\tableofcontents[sections={1-3}]}
+
+    \column{0.5\textwidth}
+    {\small\tableofcontents[sections={4-5}]}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Mengapa pilihan teknologi\\yang masuk akal per proyek\\berakhir mahal?}}
+\end{frame}
+
+\section{Tujuan dan Konteks}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Tujuan dan Konteks}}
+\end{frame}
+
+\begin{frame}{{\Large Tujuan Pembelajaran}}
+  \vspace{10pt}
+  \begin{itemize}
+    \item Merumuskan arah teknologi target tingkat tinggi beserta standar teknologi organisasi.
+    \item Mendokumentasikan keputusan arsitektur penting sebagai ADR (\textit{Architecture Decision
+          Record}) lengkap dengan \textit{tradeoff}-nya.
+    \item Menilai kesiapan organisasi memanfaatkan AI (\textit{Artificial Intelligence}) dari sisi
+          kapabilitas, data, dan tata kelola.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Masalah: Keputusan Diambil per Proyek}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Tiap proyek memilih teknologi sendiri, dan tiap pilihan masuk akal saat diambil.
+    \item Lima tahun kemudian ada empat merek basis data, enam alat pelaporan, dan dua cara menyimpan
+          cadangan.
+    \item Biayanya muncul di tiga tempat: lisensi tumpang tindih, keahlian tersebar tipis, dan celah
+          keamanan.
+    \item Fase D ADM (\textit{Architecture Development Method}) menutup rancangan kondisi target.
+  \end{itemize}
+  \vspace{6pt}
+  Empat pertanyaan bab ini: layanan teknologi apa, dijalankan di mana, standar apa yang mengikat
+  proyek berikutnya, dan bagaimana keputusan besar dicatat.
+\end{frame}
+
+\begin{frame}{{\Large Diagram Konsep Bab 10}}
+  \centering
+  \includegraphics[width=0.96\textwidth,height=0.77\textheight,keepaspectratio]{../../figures/ch10-diagram-konsep.png}
+  \label{fig:session10-ilustrasi-bab}
+\end{frame}
+
+\section{Arah, Standar, dan Keamanan}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Arah, Standar,\\dan Keamanan}}
+\end{frame}
+
+\begin{frame}{{\Large Arsitektur Teknologi Tingkat Tinggi}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Menjelaskan layanan teknologi yang dibutuhkan aplikasi dan data target, beserta tempat
+          layanan itu dijalankan.
+    \item Yang diputuskan adalah arah, bukan ukuran server atau versi pustaka perangkat lunak.
+    \item Rincian di bawah arah itu menjadi urusan arsitektur solusi tiap proyek.
+    \item Lima tim dengan lima jenis basis data diganti satu layanan terkelola dengan dua pilihan
+          standar.
+  \end{itemize}
+  \vspace{6pt}
+  Analogi: utilitas gedung. Penyewa membutuhkan jaminan listrik, air, lift, dan pengamanan pintu yang
+  sama di setiap lantai.
+\end{frame}
+
+\begin{frame}{{\Large Arah Teknologi Target Medikara}}
+  \centering
+  \begin{figure}
+    \resizebox{0.86\textwidth}{!}{\input{../../figures/ch10-arah-teknologi.tex}}
+    \caption{Aplikasi target membutuhkan layanan teknologi bersama, dan layanan itu dijalankan di
+             lokasi yang ditetapkan}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Empat Pilihan Lokasi Penerapan}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{1.7cm}YYY}
+    \hline
+    \textbf{Pilihan} & \textbf{Artinya} & \textbf{Cocok untuk} & \textbf{Yang dikorbankan} \\
+    \hline
+    \textit{On-premise} & Server milik dan dikelola sendiri di lokasi sendiri &
+      Sistem yang terikat perangkat lokal atau kontrak lama &
+      Modal awal besar, kapasitas tetap, pemulihan bencana ditanggung sendiri \\
+    \hline
+    \textit{Private cloud} & Infrastruktur \textit{cloud} khusus untuk satu organisasi &
+      Organisasi besar yang butuh kendali penuh dan elastisitas &
+      Tetap butuh tim dan skala besar agar efisien \\
+    \hline
+    \textit{Public cloud} & Infrastruktur penyedia yang dipakai banyak pelanggan, dibayar sesuai pemakaian &
+      Beban yang naik turun, layanan baru, analitik &
+      Ketergantungan pada penyedia, biaya berulang yang harus dikendalikan \\
+    \hline
+    \textit{Hybrid cloud} & Dua model atau lebih yang terpisah tetapi terhubung &
+      Masa transisi, beban yang belum dapat dipindahkan &
+      Dua lingkungan yang harus dikelola dan diamankan sekaligus \\
+    \hline
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{{\Large Lokasi Rekam Medis Dibatasi Regulasi}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item EA (\textit{Enterprise Architecture}) menetapkan arah dan aturan pemilihan, misalnya
+          \textit{cloud} publik di region Indonesia untuk aplikasi baru.
+    \item Permenkes 24/2022 Pasal 20: server, komputasi awan tersertifikasi, atau media digital lain
+          yang tersertifikasi.
+    \item Cadangan wajib berada di tempat berbeda dari fasilitas. Medikara punya 23 fasilitas yang
+          terkena kewajiban ini.
+    \item Pasal 22: Penyelenggara Sistem Elektronik harus punya fasilitas penyimpanan di dalam negeri
+          dan rekomendasi Kementerian Kesehatan.
+    \item Strategi 7R dan \textit{landing zone} dibahas rinci di IT40713.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Arah Modernisasi ke Cloud dan Batasannya}}
+  \begin{block}{Kasus Medikara Health}
+    \small
+    \begin{itemize}
+      \item \textit{Cloud} publik di region Indonesia untuk SIMRS (Sistem Informasi Manajemen Rumah
+            Sakit) terpadu, MPI (\textit{Master Patient Index}), platform integrasi, dan platform data.
+      \item Ruang server tiap rumah sakit dipakai selama transisi, lalu ditutup bertahap.
+      \item Rumah sakit dan klinik hanya menyimpan perangkat yang harus dekat dengan pasien.
+    \end{itemize}
+    \vspace{4pt}
+    Empat batasan: regulasi rekam medis, jaringan (misalkan dua klinik Bogor hanya punya satu jalur
+    internet), keterampilan tim, dan kontrak vendor SIMRS lama.
+  \end{block}
+\end{frame}
+
+\begin{frame}{{\Large Katalog Standar Teknologi}}
+  \small Katalog berisi teknologi yang disepakati beserta versi, status, pemilik, dan jadwal peninjauan.
+  Analogi: formularium rumah sakit. Technology Radar hanya pendapat satu perusahaan, katalog mengikat
+  proyek sendiri.
+
+  \centering
+  \begin{figure}
+    \resizebox{0.84\textwidth}{!}{\input{../../figures/ch10-siklus-standar.tex}}
+    \caption{Setiap teknologi masuk lewat uji coba dan keluar lewat tanggal akhir yang pasti}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Potongan Katalog Standar Medikara}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{Yl Y}
+    \hline
+    \textbf{Standar} & \textbf{Status} & \textbf{Catatan} \\
+    \hline
+    Basis data relasional sumber terbuka sebagai layanan terkelola & Dipakai & Pilihan pertama untuk aplikasi baru \\
+    \hline
+    Basis data relasional komersial bawaan SIMRS lama & Dibatasi & Hanya dipelihara sampai SIMRS diganti \\
+    \hline
+    Sistem operasi server versi lama tanpa dukungan vendor & Dihentikan & Tanggal akhir 31 Desember 2027 \\
+    \hline
+    Layanan identitas terpusat dengan autentikasi multifaktor & Dipakai & Wajib untuk semua aplikasi baru \\
+    \hline
+    HL7 (\textit{Health Level Seven}) FHIR (\textit{Fast Healthcare Interoperability Resources}) untuk data klinis & Dipakai & Sejalan dengan SATUSEHAT \\
+    \hline
+    Platform analitik dan \textit{dashboard} tunggal & Baru & Uji coba di rumah sakit Depok sampai Juni 2027 \\
+    \hline
+    \textit{Spreadsheet} sebagai sumber laporan manajemen & Dibatasi & Diganti platform analitik \\
+    \hline
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{{\Large Dua Konsekuensi Standardisasi}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Biaya rutin turun: misalkan lisensi dan dukungan empat merek basis data Rp2,4 miliar per
+          tahun menjadi Rp1,5 miliar untuk dua merek.
+    \item Penghematannya Rp0,9 miliar per tahun.
+    \item Keahlian terpusat: dengan dua administrator per merek, delapan orang menjadi empat orang.
+    \item Biaya di depan: migrasi satu kali Rp2,7 miliar baru tertutup dalam tiga tahun.
+    \item Biaya tersembunyi: ketergantungan pada vendor yang lebih sedikit makin besar, dan proyek
+          terhambat bila jalur status Baru tidak tersedia.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Technology Reference Model}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Taksonomi layanan platform generik: manajemen data, keamanan, jaringan, antarmuka pengguna.
+    \item TOGAF \textit{Technical Reference Model} kini tersedia sebagai \textit{Series Guide} G175:
+          konten historis yang masih berguna.
+    \item Nilai utamanya bahasa bersama. ``Sistem laporan'', ``platform analitik'', dan
+          \textit{business intelligence} merujuk kategori yang sama.
+    \item \textit{Technology reference model} adalah rak berlabel. Katalog standar adalah isi rak.
+    \item Organisasi boleh meminjam rak dari luar, tetapi isi rak diputuskan sendiri.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Keamanan sebagai Concern Lintas Domain}}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{L{1.7cm}YY}
+    \hline
+    \textbf{Domain} & \textbf{Pertanyaan keamanan} & \textbf{Contoh keputusan arsitektur} \\
+    \hline
+    Bisnis & Peran apa yang boleh melihat rekam medis? & Hanya tenaga kesehatan yang merawat pasien itu \\
+    \hline
+    Data & Data mana yang paling dilindungi? & Data kesehatan diklasifikasi sebagai data pribadi spesifik \\
+    \hline
+    Aplikasi & Di mana hak akses diperiksa? & Semua aplikasi memakai satu layanan identitas dan peran baku \\
+    \hline
+    Teknologi & Dari mana basis data klinis dapat dijangkau? & Hanya dari zona aplikasi, tidak dari jaringan umum \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small UU 27/2022 tentang Pelindungan Data Pribadi (PDP) menggolongkan data kesehatan sebagai data
+  pribadi yang bersifat spesifik. Kewajibannya dibahas rinci di IT40813.
+\end{frame}
+
+\begin{frame}{{\Large Tiga Keputusan Keamanan Terpenting}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Identitas terpusat: satu akun untuk semua sistem, termasuk dokter mitra dan teknisi vendor.
+    \item Kontrol akses berbasis peran dengan hak minimum.
+    \item Pemisahan jaringan menjadi zona: pembobolan satu zona tidak langsung membuka zona lain.
+    \item Ketiganya sejalan dengan \textit{zero trust} dan diambil sejak rancangan (\textit{security by
+          design}).
+    \item Misalkan akun di tujuh sistem. Bila 8 persen dari 4.800 karyawan keluar, 384 orang berarti
+          2.688 pencabutan manual, atau 384 pencabutan bila terpusat.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Zona Keamanan Target}}
+  \centering
+  \begin{figure}
+    \resizebox{0.80\textwidth}{!}{\input{../../figures/ch10-zona-keamanan.tex}}
+    \caption{Satu pintu identitas, satu pengatur hak, dan zona yang dipisahkan. Kotak merah adalah
+             kondisi 2025 yang diganti}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Audit Kontrol Akses dan Insiden Vendor}}
+  \begin{block}{Kasus Medikara Health}
+    \small
+    Misalkan penelusuran menemukan empat hal: akun vendor dipakai bersama dengan satu kata sandi, akun
+    aktif terus-menerus, jaringan rumah sakit datar, dan 212 akun aktif milik orang yang sudah keluar.
+    \vspace{2pt}
+    \begin{itemize}
+      \item Satu layanan identitas dengan autentikasi multifaktor.
+      \item Peran baku di semua aplikasi, sehingga pencabutan cukup sekali.
+      \item Zona data klinis hanya dari zona aplikasi. Akses vendor per permintaan.
+      \item Catatan akses terpusat: siapa membuka data apa dan kapan.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Keputusan Arsitektur dan ADR}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Keputusan Arsitektur\\dan ADR}}
+\end{frame}
+
+\begin{frame}{{\Large Struktur ADR}}
+  \small ADR mencatat satu keputusan penting beserta alasannya. Keputusan yang dibatalkan ditandai
+  digantikan, tidak dihapus.
+
+  \vspace{4pt}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{L{2.5cm}YL{4.0cm}}
+    \hline
+    \textbf{Bagian} & \textbf{Isinya} & \textbf{Pertanyaan yang dijawab} \\
+    \hline
+    Nomor dan judul & ADR-001, frasa benda singkat & Keputusan tentang apa? \\
+    \hline
+    Status & Diusulkan, diterima, atau digantikan oleh ADR lain & Masih berlaku atau tidak? \\
+    \hline
+    Konteks & Masalah, batasan, asumsi, prinsip yang terkait & Mengapa harus diputuskan sekarang? \\
+    \hline
+    Opsi dan kriteria & Minimal dua opsi, kriteria berbobot yang ditetapkan lebih dahulu & Apa saja yang dipertimbangkan? \\
+    \hline
+    Keputusan & Satu kalimat aktif beserta syaratnya & Apa yang dipilih? \\
+    \hline
+    Konsekuensi & Dampak positif, negatif, dan pekerjaan lanjutan & Apa harga pilihan ini? \\
+    \hline
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{{\Large Penilaian Tiga Opsi Lokasi Rekam Medis}}
+  \small A: pusat data sendiri. B: \textit{cloud} publik tersertifikasi region Indonesia. C:
+  \textit{hybrid}. Skor 1 sampai 5.
+
+  \vspace{4pt}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{Xrrrr}
+    \hline
+    \textbf{Kriteria} & \textbf{Bobot} & \textbf{A} & \textbf{B} & \textbf{C} \\
+    \hline
+    Kepatuhan regulasi dan lokasi data & 30\% & 5 & 4 & 4 \\
+    \hline
+    Keamanan dan kendali akses & 20\% & 3 & 4 & 3 \\
+    \hline
+    Ketersediaan dan pemulihan bencana & 20\% & 2 & 5 & 4 \\
+    \hline
+    Biaya lima tahun & 15\% & 2 & 4 & 3 \\
+    \hline
+    Keterampilan tim dan ketergantungan vendor & 15\% & 3 & 3 & 2 \\
+    \hline
+    \textbf{Skor berbobot} & 100\% & \textbf{3,25} & \textbf{4,05} & \textbf{3,35} \\
+    \hline
+  \end{tabularx}
+
+  \vspace{4pt}
+  \small Bobot ditetapkan sebelum opsi dinilai. Selisih 0,8 antara B dan A sebagian besar berasal dari
+  kriteria ketersediaan.
+\end{frame}
+
+\begin{frame}{{\Large Kapan Keputusan Layak Dicatat}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Mahal atau lama untuk dibatalkan, misalnya lokasi data dan platform inti.
+    \item Berdampak pada lebih dari satu tim atau domain, misalnya pola integrasi.
+    \item Menyimpang dari standar atau prinsip arsitektur.
+    \item Menyentuh kepatuhan atau keselamatan pasien.
+  \end{itemize}
+  \vspace{6pt}
+  ADR mencatat satu keputusan dan alasannya. Dokumen rancangan menjelaskan cara membangun dan berubah
+  mengikuti pekerjaan. ADR yang sudah diterima tidak diubah isinya.
+
+  \vspace{6pt}
+  Analogi: notulen rapat RT yang mencatat alasan, opsi yang ditolak, dan pihak yang menanggung akibat.
+\end{frame}
+
+\begin{frame}{{\Large ADR-001 Lokasi Rekam Medis Elektronik}}
+  \begin{block}{Kasus Medikara Health}
+    \footnotesize
+    \textbf{Status.} Diusulkan untuk forum arsitektur, Oktober 2026.
+
+    \textbf{Konteks.} 5 rumah sakit dan 18 klinik disatukan ke SIMRS terpadu dan MPI. Pasal 20 dan 22
+    Permenkes 24/2022 mengikat. Ruang server RS Jakarta tidak punya lokasi cadangan.
+
+    \textbf{Keputusan.} Opsi B, dengan tiga syarat: sertifikasi penyedia diperiksa sebelum kontrak,
+    cadangan di zona lain di dalam negeri, kunci enkripsi dikelola Medikara.
+
+    \textbf{Konsekuensi.} Positif: pusat data sendiri tidak perlu dibangun. Negatif: ketergantungan pada
+    satu penyedia, biaya bulanan, dan pelatihan \textit{cloud} bagi tim TI.
+  \end{block}
+\end{frame}
+
+\section{AI dan Tata Kelola AI}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{AI dan Tata Kelola AI}}
+\end{frame}
+
+\begin{frame}{{\Large AI sebagai Kapabilitas dan Concern}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Urutan: kapabilitas, \textit{value stream}, ukuran keberhasilan, data, aplikasi dan teknologi,
+          tata kelola. Produk dipilih paling akhir.
+    \item Gartner: 63 persen organisasi tidak punya, atau tidak yakin punya, praktik data yang tepat
+          untuk AI.
+    \item Gartner memperkirakan sampai 2026 organisasi meninggalkan 60 persen proyek AI tanpa data yang
+          siap.
+    \item Kesiapan data: ketersediaan, mutu, identitas, dasar hukum, dan asal-usul.
+    \item Model AI memberi keluaran. Agen AI juga bertindak, sehingga butuh identitas, hak terbatas,
+          pemilik, dan catatan kegiatan.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Tahap Kematangan AI Enterprise}}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{Xrrr}
+    \hline
+    \textbf{Tahap} & \textbf{Perusahaan} & \textbf{Pertumbuhan} & \textbf{Laba} \\
+    \hline
+    1. \textit{Experiment and Prepare} & 28\% & $-12{,}6$ & $-9{,}6$ \\
+    \hline
+    2. \textit{Build Pilots and Capabilities} & 34\% & $-3{,}5$ & $-2{,}2$ \\
+    \hline
+    3. \textit{Develop AI Ways of Working} & 31\% & $+11{,}3$ & $+8{,}7$ \\
+    \hline
+    4. \textit{Become AI Future Ready} & 7\% & $+17{,}1$ & $+10{,}4$ \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small
+  \begin{itemize}
+    \item Survei MIT CISR terhadap 721 perusahaan. Kinerja dalam poin persentase terhadap rata-rata
+          industri.
+    \item Sebanyak 62 persen perusahaan masih di tahap 1 dan 2.
+    \item Tabel ini menunjukkan keterkaitan, bukan sebab akibat.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Empat Model Operasi TI di Era AI}}
+  \centering
+  \begin{figure}
+    \resizebox{0.66\textwidth}{!}{\input{../../figures/ch10-model-operasi-ti.tex}}
+    \caption{Empat model operasi TI di era AI menurut MIT CISR, dengan posisi Medikara menurut
+             tafsiran bab ini}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Dua Peluang AI}}
+  \begin{block}{Kasus Medikara Health}
+    \scriptsize
+    \begin{tabularx}{\linewidth}{L{2.6cm}YY}
+      \hline
+      \textbf{Aspek} & \textbf{Prediksi antrean} & \textbf{Ringkasan rekam medis} \\
+      \hline
+      Kapabilitas & Pengelolaan kapasitas layanan & Pengelolaan rekam medis \\
+      \hline
+      Ukuran keberhasilan & Waktu tunggu rawat jalan turun 20\% & Waktu dokter membaca riwayat turun separuh \\
+      \hline
+      Kesiapan kapabilitas & 2: manajer rawat jalan siap memakai prediksi & 2: dokter mau mencoba, alur persetujuan belum ada \\
+      \hline
+      Kesiapan data & 2: dua dari lima SIMRS tidak mencatat waktu dipanggil & 1: identitas pasien ganda, MPI belum berjalan \\
+      \hline
+      Kesiapan tata kelola & 3: tidak menyentuh keputusan klinis & 1: data kesehatan, kebijakan AI belum ada \\
+      \hline
+      Syarat mulai & Pencatatan waktu diseragamkan & MPI dari Bab 9 dan kebijakan AI dari IT40813 \\
+      \hline
+    \end{tabularx}
+
+    \vspace{4pt}
+    \footnotesize Prediksi antrean dapat dimulai sebagai uji coba di satu rumah sakit pada 2027.
+    Ringkasan rekam medis menunggu MPI dan kebijakan AI.
+  \end{block}
+\end{frame}
+
+\begin{frame}{{\Large Pendalaman: Lima Titik Kendali}}
+  \centering
+  \begin{figure}
+    \resizebox{0.88\textwidth}{!}{\input{../../figures/ch10-pipeline-ai.tex}}
+    \caption{Komponen teknis ringkasan rekam medis dan lima titik kendalinya}
+  \end{figure}
+  \vspace{-4pt}
+  \small Hanya K3 yang menyangkut model. Empat lainnya menyangkut data, alur kerja, dan pemantauan,
+  yaitu wilayah yang sudah dikenal arsitek.
+\end{frame}
+
+\begin{frame}{{\Large Celah Visibilitas Agen AI}}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{Xr}
+    \hline
+    \textbf{Temuan SAP LeanIX Agentic AI Survey 2026} & \textbf{Angka} \\
+    \hline
+    Sudah memakai agen AI (44\%), bereksperimen (40\%), atau berencana (14\%) & 98\% \\
+    \hline
+    Punya visibilitas, walau sebagian, atas agen dan fitur AI yang berjalan & 49\% \\
+    \hline
+    Punya visibilitas atas kinerja atau kepatuhan agen & 17\% \\
+    \hline
+    Tanggung jawab pengelolaan agen tidak jelas, tersebar di banyak bagian & 48\% \\
+    \hline
+    Tim EA terlibat dalam pengelolaan agen & 34\% \\
+    \hline
+    Menilai EA seharusnya memimpin adopsi dan tata kelola agen & 63\% \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Dua catatan kritis: survei terhadap 228 responden ini disusun vendor alat EA, dan 70 persen
+  respondennya bekerja di perusahaan Eropa.
+\end{frame}
+
+\begin{frame}{{\Large Inventaris Model dan Agen AI}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{4.2cm}Y}
+    \hline
+    \textbf{Atribut} & \textbf{Alasan dicatat} \\
+    \hline
+    Nama dan jenis & Membedakan model, agen, dan fitur AI bawaan aplikasi \\
+    \hline
+    Kapabilitas yang didukung & Menautkan AI ke \textit{capability map}, sehingga manfaatnya dapat diukur \\
+    \hline
+    Pemilik bisnis & Satu nama yang bertanggung jawab atas manfaat dan dampaknya \\
+    \hline
+    Aplikasi induk dan vendor & Menunjukkan dari mana AI itu datang dan siapa yang dapat mengubahnya \\
+    \hline
+    Data yang dibaca dan klasifikasinya & Menandai pemakaian data pribadi dan data kesehatan \\
+    \hline
+    Tindakan yang boleh dilakukan & Membatasi agen: membaca saja, membuat draf, atau mengubah data \\
+    \hline
+    Pengawasan manusia & Menyatakan siapa yang meninjau keluaran sebelum dipakai \\
+    \hline
+    Status dan tanggal tinjau & Mengikuti siklus status seperti standar teknologi \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Misalkan inventaris awal Medikara menemukan 11 pemakaian AI. Daftar proyek TI hanya menemukan
+  1 dari 11.
+\end{frame}
+
+\begin{frame}{{\Large Peran EA dalam Tata Kelola AI}}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{L{3.6cm}Y}
+    \hline
+    \textbf{Peran} & \textbf{Tanggung jawab} \\
+    \hline
+    Arsitek \textit{enterprise} & Memelihara inventaris, menautkan AI ke kapabilitas, menetapkan pola integrasi dan standar teknologi AI \\
+    \hline
+    Fungsi tata kelola, risiko, dan kepatuhan & Mengklasifikasi risiko, menyusun kebijakan pemakaian AI, memeriksa kepatuhan pada UU PDP \\
+    \hline
+    Pemilik bisnis & Menetapkan ukuran manfaat, menunjuk pengawas manusia, menghentikan pemakaian bila mutunya turun \\
+    \hline
+    Tim keamanan & Memberi identitas dan hak akses pada agen, memantau catatan kegiatannya \\
+    \hline
+    \textit{Architecture board} & Memutuskan status tiap entri dan menerima ADR yang terkait AI (Bab 14) \\
+    \hline
+  \end{tabularx}
+\end{frame}
+
+\section{Aktivitas dan Penutup}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Aktivitas dan Penutup}}
+\end{frame}
+
+\begin{frame}{{\Large Aktivitas: ADR dan Kesiapan AI}}
+  \small
+  \begin{itemize}
+    \item Rumuskan arah teknologi target dalam tiga sampai lima kalimat beserta batasannya.
+    \item Susun katalog standar minimal sepuluh baris, masing-masing berstatus.
+    \item Tulis minimal tiga ADR. Tetapkan bobot kriteria sebelum menilai opsi.
+    \item Pilih dua sampai tiga peluang AI, nilai kesiapannya, lalu mulai inventaris AI.
+    \item Modelkan kondisi target teknologi di Archi.
+  \end{itemize}
+  \footnotesize Peran: analis teknologi, analis bisnis, pemodel, koordinator. Luaran masuk tonggak C3,
+  menjadi bahan matriks gap Bab 11 dan portofolio inisiatif Bab 13.
+  Templat: \berkas{sources/chapter10/templat-adr.md}.
+\end{frame}
+
+\begin{frame}{{\Large Ringkasan}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Arsitektur teknologi target menetapkan arah, bukan rincian: layanan bersama, lokasi, dan
+          aturan bagi proyek berikutnya.
+    \item Katalog standar mengubah arah menjadi aturan yang dapat diperiksa.
+    \item Keamanan muncul di setiap domain: identitas terpusat, hak minimum, dan zona jaringan.
+    \item ADR-001 memilih \textit{cloud} publik tersertifikasi (4,05), di atas \textit{hybrid} (3,35) dan
+          pusat data sendiri (3,25).
+    \item Keputusan teknologi dan AI baru bernilai bila alasannya tercatat, datanya siap, dan
+          pemiliknya jelas.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Latihan}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item \textbf{Latihan 1: Menulis ADR Lokasi Rekam Medis.} Tetapkan lima kriteria berbobot, minimal
+          dua opsi, lalu tulis keputusan dan konsekuensinya.
+    \item \textbf{Latihan 2: Memetakan Peluang AI ke Kapabilitas.} Nilai kesiapan kapabilitas, data, dan
+          tata kelola, lalu tulis satu skenario kegagalan bila dimulai dari produk.
+    \item \textbf{Latihan 3: Menutup Celah Visibilitas Agen AI.} Kumpulkan entri dari tiga sumber, isi
+          atribut inventaris, lalu tetapkan pemilik dan pemelihara.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Bacaan dan Berkas Pendukung}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item \href{https://www.opengroup.org/togaf}{The TOGAF Standard, 10th Edition (2025 Update)}
+    \item \href{https://publications.opengroup.org/standards/archimate/c226}{ArchiMate 3.2 Specification}
+    \item \href{https://cognitect.com/blog/2011/11/15/documenting-architecture-decisions}{Documenting Architecture Decisions}
+    \item \berkas{sources/chapter10/README.md}
+  \end{itemize}
+\end{frame}
+
+\end{document}

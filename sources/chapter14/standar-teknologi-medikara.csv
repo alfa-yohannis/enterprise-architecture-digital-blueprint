@@ -1,0 +1,17 @@
+# Katalog standar teknologi Medikara untuk tinjauan kepatuhan dan fitness function Bab 14. Baris berawalan # diabaikan skrip; ubah isi lewat keputusan architecture board.
+kategori,teknologi,status,prinsip,catatan
+identitas pasien,Layanan MPI Medikara,standar,PT1 Satu sumber data pasien,Satu-satunya sumber nomor identitas pasien
+identitas pasien,Basis data pasien lokal aplikasi,dihentikan,PT1 Satu sumber data pasien,Hanya boleh dengan dispensasi yang masih berlaku
+identitas pengguna,Layanan identitas terpusat (OpenID Connect),standar,PT2 Akses berbasis peran dan tercatat,Masuk sekali untuk seluruh aplikasi
+identitas pengguna,Akun lokal per aplikasi,dihentikan,PT2 Akses berbasis peran dan tercatat,Menyulitkan pencabutan akses karyawan yang keluar
+integrasi klinis,HL7 FHIR R4,standar,PT3 Integrasi lewat antarmuka standar,Format yang dipakai SATUSEHAT
+integrasi klinis,HL7 versi 2,dibolehkan,PT3 Integrasi lewat antarmuka standar,Hanya untuk alat laboratorium lama
+integrasi,Platform integrasi Medikara,standar,PT3 Integrasi lewat antarmuka standar,Seluruh koneksi antaraplikasi lewat platform ini
+integrasi,Koneksi langsung antarbasis data,dihentikan,PT3 Integrasi lewat antarmuka standar,Pola point-to-point yang sedang dikurangi
+basis data,PostgreSQL 16,standar,PT4 Utamakan layanan bersama,Basis data untuk aplikasi baru
+basis data,Oracle Database 19c,dibolehkan,PT4 Utamakan layanan bersama,Hanya untuk ERP keuangan yang sudah berjalan
+basis data,Microsoft Access,dihentikan,PT4 Utamakan layanan bersama,Tidak boleh menyimpan data operasional
+laporan manajemen,Platform analitik Medikara,standar,PT1 Satu sumber data pasien,Sumber resmi laporan manajemen
+laporan manajemen,Spreadsheet sebagai sumber laporan,dihentikan,PT1 Satu sumber data pasien,Boleh untuk analisis pribadi saja
+lokasi data,Region cloud di Indonesia,standar,PT5 Data pasien dilindungi sejak rancangan,Selaras dengan guardrail cloud di IT40713
+lokasi data,Region cloud di luar Indonesia,dihentikan,PT5 Data pasien dilindungi sejak rancangan,Tidak untuk data pasien

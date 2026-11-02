@@ -1,0 +1,31 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, text width=1.85cm, align=center,
+                minimum height=1.15cm, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=praditagreen!15] (prinsip) at (0,0)
+    {Prinsip arsitektur\\[1pt]{\tiny\mdseries dari visi C1}};
+  \node[kotak, fill=blue!8] (kriteria) at (2.45,0)
+    {Kriteria berbobot\\[1pt]{\tiny\mdseries disepakati lebih dahulu}};
+  \node[kotak, fill=blue!8] (opsi) at (4.9,0)
+    {Dua sampai tiga opsi\\[1pt]{\tiny\mdseries berbeda sungguhan}};
+  \node[kotak, fill=orange!12] (nilai) at (7.35,0)
+    {Penilaian dan uji kepekaan};
+  \node[kotak, fill=green!10] (putus) at (9.8,0)
+    {Keputusan\\[1pt]{\tiny\mdseries alasan dan yang dikorbankan}};
+
+  \draw[panah] (prinsip) -- (kriteria);
+  \draw[panah] (kriteria) -- (opsi);
+  \draw[panah] (opsi) -- (nilai);
+  \draw[panah] (nilai) -- (putus);
+
+  \node[kotak, fill=blue!8] (skenario) at (4.9,-1.75)
+    {Business scenario\\[1pt]{\tiny\mdseries masalah, aktor, tujuan SMART}};
+  \node[kotak, fill=blue!8] (saatini) at (7.35,-1.75)
+    {Kondisi saat ini\\[1pt]{\tiny\mdseries dokumen C2}};
+  \draw[panah] (skenario) -- (opsi);
+  \draw[panah] (saatini) -- (nilai);
+  \node[font=\tiny, gray, anchor=east] at (3.75,-1.75) {bahan menyusun opsi};
+  \node[font=\tiny, gray, anchor=west] at (8.45,-1.75) {bahan menilai kelayakan};
+\end{tikzpicture}

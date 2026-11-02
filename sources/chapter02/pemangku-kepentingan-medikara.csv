@@ -1,0 +1,7 @@
+# Contoh pemangku kepentingan sintetis. Salin lalu isi; hapus baris komentar saat impor spreadsheet.
+id,peran,concern,pengaruh,kepentingan,view,bukti_validasi
+SH-01,Direksi,Nilai dan risiko transformasi,tinggi,tinggi,Visi dan peta jalan,Simulasi wawancara
+SH-02,Direktur Pelayanan,Keselamatan dan waktu layanan,tinggi,tinggi,Value stream dan arsitektur bisnis,Simulasi wawancara
+SH-03,Kepala TI,Ketergantungan dan operasi,tinggi,tinggi,Application cooperation dan technology view,Simulasi wawancara
+SH-04,Petugas pendaftaran,Beban pencatatan ulang,sedang,tinggi,Proses dan informasi,Simulasi wawancara
+SH-05,Pasien,Kepastian layanan dan privasi,bervariasi,tinggi,Perjalanan layanan,Skenario sintetis

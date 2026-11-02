@@ -1,0 +1,35 @@
+# Contoh dan templat katalog antarmuka: seluruh angka sintetis, 26 antarmuka otomatis dan 7 ekspor manual. Salin, ganti barisnya, hapus baris komentar ini saat impor spreadsheet.
+id,pengirim,penerima,tujuan,jenis_data,pola,frekuensi,pemilik,penanganan_gagal,insiden_per_tahun,perubahan_per_tahun,bukti
+INT-01,SIMRS Jakarta,BPJS Kesehatan,Pemeriksaan eligibilitas,Data peserta minimum,Panggilan layanan,Saat pendaftaran,Kepala pendaftaran Jakarta,Petugas memeriksa lewat portal,2,0,Sintetis
+INT-02,SIMRS Bekasi,BPJS Kesehatan,Pemeriksaan eligibilitas,Data peserta minimum,Panggilan layanan,Saat pendaftaran,Kepala pendaftaran Bekasi,Petugas memeriksa lewat portal,2,0,Sintetis
+INT-03,SIMRS Depok,BPJS Kesehatan,Pemeriksaan eligibilitas,Data peserta minimum,Panggilan layanan,Saat pendaftaran,Kepala pendaftaran Depok,Petugas memeriksa lewat portal,2,0,Sintetis
+INT-04,SIMRS Bogor,BPJS Kesehatan,Pemeriksaan eligibilitas,Data peserta minimum,Panggilan layanan,Saat pendaftaran,Kepala pendaftaran Bogor,Petugas memeriksa lewat portal,2,0,Sintetis
+INT-05,SIMRS Bandung,BPJS Kesehatan,Pemeriksaan eligibilitas,Data peserta minimum,Panggilan layanan,Saat pendaftaran,Kepala pendaftaran Bandung,Petugas memeriksa lewat portal,2,0,Sintetis
+INT-06,SIMRS Jakarta,BPJS Kesehatan,Pengajuan klaim,Berkas klaim,Transfer berkas,Harian,Kepala klaim,Unggah ulang,2,7,Sintetis
+INT-07,SIMRS Bekasi,BPJS Kesehatan,Pengajuan klaim,Berkas klaim,Transfer berkas,Harian,Kepala klaim,Unggah ulang,2,7,Sintetis
+INT-08,SIMRS Depok,BPJS Kesehatan,Pengajuan klaim,Berkas klaim,Transfer berkas,Harian,Kepala klaim,Unggah ulang,2,7,Sintetis
+INT-09,SIMRS Bogor,BPJS Kesehatan,Pengajuan klaim,Berkas klaim,Transfer berkas,Harian,Kepala klaim,Unggah ulang,2,7,Sintetis
+INT-10,SIMRS Bandung,BPJS Kesehatan,Pengajuan klaim,Berkas klaim,Transfer berkas,Harian,Kepala klaim,Unggah ulang,2,7,Sintetis
+INT-11,SIMRS Jakarta,SATUSEHAT,Pengiriman data kunjungan,Kunjungan dan ringkasan klinis,Panggilan layanan,Per kelompok rata-rata 3 hari,Kepala rekam medis Jakarta,Kirim ulang manual,9,5,Sintetis
+INT-12,SIMRS Bekasi,SATUSEHAT,Pengiriman data kunjungan,Kunjungan dan ringkasan klinis,Panggilan layanan,Per kelompok rata-rata 3 hari,Kepala rekam medis Bekasi,Kirim ulang manual,9,4,Sintetis
+INT-13,SIMRS Depok,SATUSEHAT,Pengiriman data kunjungan,Kunjungan dan ringkasan klinis,Panggilan layanan,Per kelompok rata-rata 3 hari,Kepala rekam medis Depok,Kirim ulang manual,9,4,Sintetis
+INT-14,SIMRS Bogor,SATUSEHAT,Pengiriman data kunjungan,Kunjungan dan ringkasan klinis,Panggilan layanan,Per kelompok rata-rata 3 hari,Kepala rekam medis Bogor,Kirim ulang manual,9,4,Sintetis
+INT-15,SIMRS Bandung,SATUSEHAT,Pengiriman data kunjungan,Kunjungan dan ringkasan klinis,Panggilan layanan,Per kelompok rata-rata 3 hari,Kepala rekam medis Bandung,Kirim ulang manual,9,4,Sintetis
+INT-16,SIMRS Jakarta,ERP keuangan,Pencatatan tagihan,Tagihan,Transfer berkas,Harian,Direktur Keuangan,Rekonsiliasi akhir bulan,4,2,Sintetis
+INT-17,SIMRS Bekasi,ERP keuangan,Pencatatan tagihan,Tagihan,Transfer berkas,Harian,Direktur Keuangan,Rekonsiliasi akhir bulan,4,2,Sintetis
+INT-18,SIMRS Depok,ERP keuangan,Pencatatan tagihan,Tagihan,Transfer berkas,Harian,Direktur Keuangan,Rekonsiliasi akhir bulan,4,2,Sintetis
+INT-19,SIMRS Bogor,ERP keuangan,Pencatatan tagihan,Tagihan,Transfer berkas,Harian,Direktur Keuangan,Rekonsiliasi akhir bulan,4,1,Sintetis
+INT-20,SIMRS Bandung,ERP keuangan,Pencatatan tagihan,Tagihan,Transfer berkas,Harian,Direktur Keuangan,Rekonsiliasi akhir bulan,4,1,Sintetis
+INT-21,Medikara+,SIMRS Jakarta,Janji temu dan jadwal,Janji temu dan jadwal praktik,Panggilan layanan,Saat pemesanan,Direktur Pelayanan,Tiket ke vendor,8,4,Sintetis
+INT-22,Medikara+,SIMRS Bekasi,Janji temu dan jadwal,Janji temu dan jadwal praktik,Basis data bersama,Saat pemesanan,Direktur Pelayanan,Tiket ke vendor,8,4,Sintetis; satu akun bersama membaca basis data langsung
+INT-23,Medikara+,SIMRS Depok,Janji temu dan jadwal,Janji temu dan jadwal praktik,Panggilan layanan,Saat pemesanan,Direktur Pelayanan,Tiket ke vendor,8,4,Sintetis
+INT-24,Medikara+,SIMRS Bogor,Janji temu dan jadwal,Janji temu dan jadwal praktik,Basis data bersama,Saat pemesanan,Direktur Pelayanan,Tiket ke vendor,8,4,Sintetis; satu akun bersama membaca basis data langsung
+INT-25,Medikara+,SIMRS Bandung,Janji temu dan jadwal,Janji temu dan jadwal praktik,Panggilan layanan,Saat pemesanan,Direktur Pelayanan,Tiket ke vendor,8,4,Sintetis
+INT-26,Medikara+,ERP keuangan,Pembayaran telekonsultasi,Transaksi pembayaran,Transfer berkas,Harian,Direktur Keuangan,Rekonsiliasi akhir bulan,1,0,Sintetis
+INT-27,SIMRS Jakarta,Spreadsheet laporan,Laporan direksi,Rekap kunjungan,Ekspor manual,Bulanan,Staf perencanaan,Diulang manual,0,0,Sintetis; aliran dari Bab 6
+INT-28,SIMRS Bekasi,Spreadsheet laporan,Laporan direksi,Rekap kunjungan,Ekspor manual,Bulanan,Staf perencanaan,Diulang manual,0,0,Sintetis; aliran dari Bab 6
+INT-29,SIMRS Depok,Spreadsheet laporan,Laporan direksi,Rekap kunjungan,Ekspor manual,Bulanan,Staf perencanaan,Diulang manual,0,0,Sintetis; aliran dari Bab 6
+INT-30,SIMRS Bogor,Spreadsheet laporan,Laporan direksi,Rekap kunjungan,Ekspor manual,Bulanan,Staf perencanaan,Diulang manual,0,0,Sintetis; aliran dari Bab 6
+INT-31,SIMRS Bandung,Spreadsheet laporan,Laporan direksi,Rekap kunjungan,Ekspor manual,Bulanan,Staf perencanaan,Diulang manual,0,0,Sintetis; aliran dari Bab 6
+INT-32,ERP keuangan,Spreadsheet laporan,Laporan direksi,Rekap keuangan,Ekspor manual,Bulanan,Staf perencanaan,Diulang manual,0,0,Sintetis; aliran dari Bab 6
+INT-33,Medikara+,Spreadsheet laporan,Laporan direksi,Rekap janji temu,Ekspor manual,Bulanan,Staf perencanaan,Diulang manual,0,0,Sintetis; aliran dari Bab 6

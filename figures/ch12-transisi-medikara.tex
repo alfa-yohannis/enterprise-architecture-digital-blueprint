@@ -1,0 +1,40 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  tahap/.style={draw, rounded corners, minimum height=1.25cm, text width=1.62cm,
+                align=center, font=\scriptsize\bfseries},
+  baris/.style={text width=1.12cm, align=right, font=\tiny\bfseries},
+  isi/.style={text width=1.72cm, align=center, font=\tiny},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[tahap, fill=gray!35] (awal) at (0,0)
+    {Kondisi awal\\[2pt]{\tiny\mdseries Juli 2026}};
+  \node[tahap, fill=blue!8] (t1) at (2.2,0)
+    {T1: Pasien dan akses\\[2pt]{\tiny\mdseries Maret 2028}};
+  \node[tahap, fill=blue!8] (t2) at (4.4,0)
+    {T2: Rekam medis tahap awal\\[2pt]{\tiny\mdseries Maret 2029}};
+  \node[tahap, fill=blue!8] (t3) at (6.6,0)
+    {T3: Ekosistem mitra\\[2pt]{\tiny\mdseries Desember 2029}};
+  \node[tahap, fill=green!10] (target) at (8.8,0)
+    {Target: satu rekam medis\\[2pt]{\tiny\mdseries September 2030}};
+
+  \draw[panah] (awal) -- (t1);
+  \draw[panah] (t1) -- (t2);
+  \draw[panah] (t2) -- (t3);
+  \draw[panah] (t3) -- (target);
+
+  \node[baris] at (-1.55,-1.15) {Paket yang selesai};
+  \node[isi] at (0,-1.15) {lima SIMRS, integrasi \textit{point-to-point}};
+  \node[isi] at (2.2,-1.15) {P1, P2, P3, P4};
+  \node[isi] at (4.4,-1.15) {P6, P7, dan P5 di Depok};
+  \node[isi] at (6.6,-1.15) {P8, dan P5 di tiga rumah sakit};
+  \node[isi] at (8.8,-1.15) {P5 di lima rumah sakit};
+
+  \draw[gray!60] (-2.15,-1.68) -- (9.7,-1.68);
+
+  \node[baris] at (-1.55,-2.25) {Tersisa bila berhenti di sini};
+  \node[isi] at (0,-2.25) {temuan audit terbuka, data pasien ganda};
+  \node[isi] at (2.2,-2.25) {satu nomor pasien, akses terkendali};
+  \node[isi] at (4.4,-2.25) {antrean daring, laporan tanpa \textit{spreadsheet}};
+  \node[isi] at (6.6,-2.25) {mitra terhubung lewat API};
+  \node[isi] at (8.8,-2.25) {satu rekam medis untuk tiap pasien};
+\end{tikzpicture}

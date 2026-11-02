@@ -1,0 +1,35 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  elemen/.style={draw, rounded corners=1pt, align=center, text width=2.6cm,
+                 minimum height=1.0cm, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  realisasi/.style={-{Triangle[open, length=2mm, width=2mm]}, thick, dashed},
+  agregasi/.style={{Diamond[open, length=2.6mm, width=1.8mm]}-, thick},
+  asosiasi/.style={thick, gray!70!black},
+  ket/.style={font=\tiny, gray!40!black, fill=white, inner sep=1pt}
+]
+  \node[elemen, fill=blue!8] (pb) at (0,0)
+    {\textit{Baseline} 2026\\{\tiny\mdseries\itshape Plateau}};
+  \node[elemen, fill=orange!12] (gap) at (4.4,0)
+    {G-D01\\Banyak nomor\\{\tiny\mdseries\itshape Gap}};
+  \node[elemen, fill=green!10] (pt) at (8.8,0)
+    {T1 Maret 2028\\{\tiny\mdseries\itshape Plateau}};
+
+  \node[elemen, fill=blue!8] (eb) at (0,-2.1)
+    {Nomor lokal per\\rumah sakit\\{\tiny\mdseries\itshape Data Object}};
+  \node[elemen, fill=green!10] (et) at (8.8,-2.1)
+    {MPI\\{\tiny\mdseries\itshape Application Component}};
+
+  \node[elemen, fill=praditagreen!15] (wp) at (2.2,-4.1)
+    {P3 Identitas\\pasien\\{\tiny\mdseries\itshape Work Package}};
+  \node[elemen, fill=blue!8] (dl) at (6.6,-4.1)
+    {Indeks pasien\\tunggal\\{\tiny\mdseries\itshape Deliverable}};
+
+  \draw[asosiasi] (pb) -- node[ket, above=1pt] {asosiasi} (gap);
+  \draw[asosiasi] (gap) -- node[ket, above=1pt] {asosiasi} (pt);
+  \draw[agregasi] (pb) -- node[ket, right=1pt] {agregasi} (eb);
+  \draw[agregasi] (pt) -- node[ket, left=1pt] {agregasi} (et);
+  \draw[asosiasi] (wp) -- node[ket, left=2pt] {asosiasi: menutup} (gap);
+  \draw[realisasi] (wp) -- node[ket, above=1pt] {realisasi} (dl);
+  \draw[realisasi] (dl) -- node[ket, right=2pt] {realisasi} (et);
+\end{tikzpicture}

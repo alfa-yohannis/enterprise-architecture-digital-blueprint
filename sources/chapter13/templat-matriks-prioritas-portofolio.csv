@@ -1,0 +1,11 @@
+# Templat matriks prioritas portofolio. Skor 1 sampai 5. Bobot dalam persen. Biaya lima tahun dalam miliar rupiah. Baris I1 sampai I8 adalah contoh Medikara (fiktif) dan diganti dengan inisiatif tim. Hitung indeks dengan: python analisis-business-case.py portofolio templat-matriks-prioritas-portofolio.csv
+kode,inisiatif,kategori,biaya_5_tahun_miliar,strategis,finansial,kepatuhan,fondasi,ukuran,teknologi,kapasitas,dampak_gagal
+bobot,Bobot kriteria (persen),,,35,25,25,15,30,20,30,20
+I1,Identitas pasien tunggal (MPI),Fondasi,7.8,5,4,4,5,3,2,3,3
+I2,Manajemen identitas dan akses terpusat,Kepatuhan,4.2,3,1,5,4,2,2,2,3
+I3,Konsolidasi lima SIMRS menjadi satu,Fondasi,48.0,5,3,4,4,5,4,5,5
+I4,Platform integrasi dan API,Fondasi,9.5,4,3,3,5,3,3,2,3
+I5,Data terpadu untuk laporan manajemen,Fondasi,6.0,3,3,2,2,2,2,3,2
+I6,Portal ekosistem mitra,Pertumbuhan,12.0,4,4,2,1,4,3,4,3
+I7,Antrean dan janji temu terpadu,Pertumbuhan,3.5,4,3,1,1,2,1,2,2
+I8,Ringkasan rekam medis berbasis AI,Pertumbuhan,5.0,3,2,1,1,3,5,4,4

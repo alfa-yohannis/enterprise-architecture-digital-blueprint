@@ -1,0 +1,20 @@
+# Contoh peta dua tingkat Medikara untuk Aktivitas Bab 5; seluruh skor dan bukti adalah pengandaian. Salin lalu ganti isinya; hapus baris ini saat impor spreadsheet.
+id,induk,nama,definisi,pemilik,skor_kondisi,kepentingan,keyakinan,bukti
+CAP-S,,Kapabilitas Strategis,Kemampuan menentukan arah dan aturan main organisasi,Direksi,,,,
+CAP-L,,Kapabilitas Layanan Pasien,Kemampuan menghadirkan layanan kesehatan bagi pasien,Direktur Pelayanan,,,,
+CAP-P,,Kapabilitas Pendukung,Kemampuan menopang operasi seluruh fasilitas,Direksi,,,,
+CAP-S01,CAP-S,Manajemen Strategi,Menetapkan arah dan sasaran serta pilihan investasi organisasi,Direktur Utama,3,sedang,tinggi,Strategi 2026 sampai 2030 disahkan; capaian ditinjau 4 kali setahun
+CAP-S02,CAP-S,Pengelolaan Kepatuhan,Mengenali kewajiban hukum dan memeriksa pemenuhannya,Kepala Kepatuhan,2,tinggi,sedang,Register kewajiban terpisah pada 5 rumah sakit; pemetaan UU PDP belum selesai
+CAP-L01,CAP-L,Pendaftaran Pasien,Mencatat kedatangan pasien agar dapat dilayani,Lima kepala pendaftaran,2,tinggi,tinggi,Median datang sampai terverifikasi 25 menit; prosedur berbeda antar rumah sakit
+CAP-L02,CAP-L,Penerbitan Nomor Rekam Medis Lokal,Memberi nomor rekam medis pasien di tiap rumah sakit,Lima direktur rumah sakit,2,tinggi,tinggi,Konsisten di tiap rumah sakit; tidak ada kunci lintas 5 rumah sakit
+CAP-L03,CAP-L,Penjadwalan Layanan,Memberi kepastian waktu layanan dan mengatur kapasitas dokter,Direktur Pelayanan,2,tinggi,sedang,Janji temu daring 28 persen; tunggu dokter 70 menit
+CAP-L04,CAP-L,Pengelolaan Rekam Medis,Menjaga catatan layanan pasien tetap lengkap dan dapat dibuka sesuai kewenangan,Lima kepala rekam medis,1,tinggi,tinggi,1.140 dari 10.000 nomor milik orang yang sudah punya nomor lain; riwayat lintas fasilitas terbuka 10 persen
+CAP-L05,CAP-L,Pelayanan Klinis,Menangani kebutuhan klinis pasien sesuai standar,Direktur Pelayanan,3,sedang,sedang,Indikator mutu klinis dilaporkan tiap bulan dan stabil selama 12 bulan
+CAP-L06,CAP-L,Layanan Farmasi dan Laboratorium,Menyediakan obat dan hasil pemeriksaan penunjang,Kepala Penunjang Medis,3,sedang,sedang,Mutu internal terpenuhi; tunggu obat 45 menit berakar pada resep kertas
+CAP-L07,CAP-L,Telekonsultasi,Melayani konsultasi jarak jauh dan tindak lanjut,Direktur Pelayanan,2,tinggi,sedang,Pengingat kontrol terkirim 20 persen; fitur bergantung pada vendor
+CAP-P01,CAP-P,Klaim dan Penjaminan,Memastikan hak penjaminan pasien dan menyelesaikan klaim,Kepala Klaim,2,tinggi,tinggi,Klaim BPJS dikembalikan 9 persen dari sekitar 40.000 berkas per bulan
+CAP-P02,CAP-P,Pengelolaan Akses Pengguna,Menentukan dan memberi serta meninjau hak akses sistem,Kepala Keamanan Informasi,1,tinggi,tinggi,Audit internal: 212 akun aktif milik orang yang sudah keluar; insiden vendor 2025
+CAP-P03,CAP-P,Pelaporan Manajemen,Menyediakan informasi keputusan yang tepat waktu dan dapat dipercaya,Kepala Perencanaan,1,tinggi,tinggi,Laporan direksi terbit hari kerja ke-12; 144 hari-orang per tahun
+CAP-P04,CAP-P,Keuangan dan Akuntansi,Mencatat transaksi dan menyusun laporan keuangan,Direktur Keuangan,3,sedang,tinggi,ERP terpusat; tutup buku pada hari kerja kelima
+CAP-P05,CAP-P,Pengelolaan Tenaga Kerja,Menjaga jumlah dan kompetensi sekitar 4.800 karyawan,Direktur Sumber Daya Manusia,3,sedang,sedang,Data kepegawaian terpusat; audit 2025 tanpa temuan berat
+CAP-P06,CAP-P,Rekonsiliasi Data Manual Antarfasilitas,Mencocokkan data pasien dan layanan antarfasilitas secara manual,Lima kepala rekam medis,1,sedang,sedang,640 permintaan pencocokan per bulan; median 2 hari kerja

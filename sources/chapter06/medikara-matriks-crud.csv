@@ -1,0 +1,12 @@
+# Contoh matriks CRUD Medikara Health (Bab 06). C buat, R baca, U ubah, D hapus. Kolom simrs mewakili lima SIMRS. Periksa dengan: python periksa-matriks-crud.py medikara-matriks-crud.csv
+konsep,pemilik_bisnis,simrs,medikara_plus,erp,spreadsheet
+Pasien,Direktur tiap rumah sakit,CRU,CRU,R,R
+Janji Temu,Manajer Layanan Digital,RU,CRUD,,
+Kunjungan,Direktur Pelayanan,CRU,CR,,R
+Rekam Medis,Manajer Rekam Medis Korporat,CRU,CR,,
+Hasil Laboratorium,Kepala Laboratorium Rujukan,CRU,R,,R
+Resep,Kepala Instalasi Farmasi,CRU,R,,
+Jadwal Praktik Dokter,Direktur Pelayanan,CRUD,R,,
+Tagihan,Direktur Keuangan,CRU,R,RU,R
+Klaim,Direktur Keuangan,CRU,,R,CRU
+Kontrak Penjamin,,R,,R,CRUD

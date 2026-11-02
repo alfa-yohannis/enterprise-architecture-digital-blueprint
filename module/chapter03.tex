@@ -1,83 +1,1123 @@
+% !TeX root = enterprise-architecture-digital-blueprint.tex
+% !TeX encoding = UTF-8
 \chapter{Strategi, Model Operasi, dan Visi Arsitektur}
 
 \section*{Tujuan Pembelajaran}
 \begin{itemize}
-  \item Menurunkan pemicu, tujuan, dan \textit{outcome} organisasi menjadi kebutuhan arsitektur yang dapat ditelusuri.
-  \item Menentukan model operasi organisasi berdasarkan tingkat integrasi dan standardisasi proses bisnisnya.
-  \item Merumuskan visi arsitektur dan prinsip arsitektur lengkap dengan alasan dan implikasinya.
+  \item Menurunkan pemicu, tujuan, dan \textit{outcome} organisasi menjadi
+        kebutuhan arsitektur yang dapat ditelusuri.
+  \item Menentukan model operasi organisasi berdasarkan tingkat integrasi dan
+        standardisasi proses bisnisnya.
+  \item Merumuskan visi arsitektur dan prinsip arsitektur lengkap dengan alasan
+        dan implikasinya.
 \end{itemize}
 
 \section{Pendahuluan}
 
-% TODO
-% Cakupan: strategi direksi yang tidak pernah sampai ke keputusan sistem; proyek TI berjalan dan
-%   selesai, tetapi tujuan strategis tidak tercapai.
+Direksi Medikara Health menetapkan strategi ``Satu Pasien, Satu Rekam Medis''
+untuk 2026 sampai 2030. Dokumennya memuat empat arah: layanan terintegrasi
+lintas fasilitas, ekosistem mitra, modernisasi ke \textit{cloud}, dan kepatuhan
+pada Undang-Undang Pelindungan Data Pribadi (UU PDP) serta aturan rekam medis
+elektronik. Namun strategi itu belum menjawab sistem mana yang berubah, siapa
+memiliki identitas pasien, atau layanan mana yang harus tetap berjalan. Padahal
+Medikara menjalankan lima Sistem Informasi Manajemen Rumah Sakit (SIMRS) dengan
+versi berbeda. Misalkan dalam enam bulan pertama muncul tiga usulan proyek. Tim
+Medikara+ ingin menambah nomor akun pasien baru. Satu rumah sakit ingin membeli
+aplikasi antrean sendiri. Seorang vendor menawarkan pemindahan seluruh aplikasi
+ke \textit{cloud} pada 2027. Ketiganya mengaku mendukung strategi, padahal
+usulan pertama menambah satu lagi nomor pasien dan usulan kedua menambah satu
+lagi salinan jadwal dokter.
 
-\section{Dari Strategi ke Kebutuhan Arsitektur}
+Gejala ini lazim: strategi berhenti di ruang rapat direksi dan tidak pernah
+sampai ke keputusan sistem. Bab ini menyediakan empat alat untuk menutup celah
+itu. Rantai motivasi menurunkan pemicu dan tujuan menjadi hasil terukur dan
+kebutuhan arsitektur. Model operasi menentukan data yang perlu dipakai bersama
+dan proses yang perlu seragam. Prinsip arsitektur memberi aturan untuk pilihan
+yang berulang. Visi arsitektur merangkum semuanya menjadi kesepakatan awal
+dengan direksi. Keempatnya dikerjakan pada fase \textit{Preliminary} dan fase A
+(\textit{Architecture Vision}) dalam Architecture Development Method
+(ADM). Hasilnya melengkapi tonggak C1, bersama peta pemangku kepentingan dan
+\textit{Statement of Architecture Work} dari Bab 2.
 
-% TODO
-% Cakupan: elemen motivasi (driver, assessment, goal, outcome, principle, requirement); rantai
-%   keterlacakan dari strategi ke kebutuhan; outcome yang terukur dan yang tidak.
-% Kasus Medikara: pemicu Medikara (insiden kebocoran data lewat vendor pada 2025, temuan audit
-%   kontrol akses, antrean panjang, biaya integrasi tinggi) diturunkan ke strategi
-%   Satu Pasien, Satu Rekam Medis.
+\IfFileExists{../figures/ch03-diagram-konsep.png}{%
+Pendorong dan bukti keadaan ditelusuri menuju tujuan, outcome terukur,
+prinsip, serta kebutuhan arsitektur sebelum memilih produk.
+Gambar \ref{fig:ch03-ilustrasi-bab} merangkum hubungan komponen dan konsep utama bab ini.
+\begin{figure}[!htb]
+  \centering
+  \includegraphics[width=\textwidth]{../figures/ch03-diagram-konsep.png}
+  \caption{Keterlacakan pendorong, sasaran, dan kebutuhan arsitektur}
+  \label{fig:ch03-ilustrasi-bab}
+\end{figure}
+}{}
 
-\section{Model Operasi}
+Rujukan utama bab ini adalah The Open Group Architecture Framework (TOGAF)
+Standard edisi ke-10 untuk kedua fase itu dan untuk format prinsip arsitektur
+\cite{togaf10}, buku Ross, Weill, dan Robertson untuk model operasi dan
+\textit{core diagram} \cite{ross2006}, serta spesifikasi ArchiMate 3.2 untuk
+elemen motivasi \cite{archimate32}. Buku Greefhorst dan Proper menjadi bacaan
+pendamping tentang prinsip arsitektur \cite{c03-greefhorst2011}. Model operasi
+dipakai sebagai alat menguji pilihan. Tidak ada satu kuadran yang otomatis
+paling baik bagi semua organisasi.
 
-% TODO
-% Cakupan: dua dimensi integrasi dan standardisasi proses menurut Ross, Weill, dan Robertson; empat
-%   model operasi (diversifikasi, koordinasi, replikasi, unifikasi); konsekuensi tiap model pada
-%   data dan aplikasi; core diagram sebagai gambaran satu halaman.
-% Kasus Medikara: kondisi saat ini cenderung diversifikasi karena akuisisi; strategi baru menuntut
-%   pergeseran ke koordinasi atau unifikasi.
+\section{Rantai Motivasi: dari Pemicu sampai Kebutuhan}
+
+Strategi menyatakan arah dan pilihan organisasi. Arsitektur menerjemahkannya
+menjadi kebutuhan yang dapat ditinjau. Penghubung keduanya adalah rantai
+motivasi, yaitu susunan alasan dari tekanan pada organisasi sampai kebutuhan
+atas sistem. ArchiMate 3.2 menyediakan elemen untuk menyusunnya
+\cite{archimate32}. \textit{Driver} adalah kondisi di dalam atau di luar
+organisasi yang mendorong perubahan. \textit{Assessment} adalah hasil analisis
+atas \textit{driver} itu. \textit{Goal} menyatakan arah atau keadaan akhir yang
+diinginkan. \textit{Outcome} adalah hasil akhir yang nyata dan terkait waktu.
+Prinsip adalah aturan umum yang berlaku bagi banyak sistem, sedangkan
+\textit{requirement} adalah kebutuhan yang berlaku bagi satu sistem tertentu.
+Setiap elemen menunjuk induknya, sehingga setiap kebutuhan dapat ditelusuri
+sampai ke alasan bisnisnya.
+
+Analoginya seperti keluarga yang ingin mengurangi waktu perjalanan pagi.
+Pemicunya, anak sering terlambat masuk sekolah. Penilaiannya, perjalanan makan
+waktu 90 menit, dan 60 menit di antaranya habis di satu ruas jalan yang selalu
+macet. Tujuannya, anak tiba di sekolah tanpa terburu-buru. Hasil terukurnya,
+waktu tempuh paling lama 40 menit mulai tahun ajaran depan. Membeli mobil baru
+tidak muncul di rantai ini, karena mobil baru tidak melancarkan ruas jalan itu.
+Ukuran hasil perlu dipisahkan dari daftar barang yang dibeli.
+
+Tabel \ref{tab:ch03-elemen-motivasi} merangkum keenam elemen beserta pertanyaan
+yang dijawab tiap elemen, dan Gambar \ref{fig:ch03-rantai-motivasi}
+memperlihatkan hubungannya pada satu rantai Medikara.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Enam elemen motivasi dan pertanyaan yang dijawabnya}
+  \label{tab:ch03-elemen-motivasi}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.8cm}*{3}{>{\raggedright\arraybackslash}X}}
+    \hline
+    \textbf{Elemen} & \textbf{Arti singkat} & \textbf{Pertanyaan} & \textbf{Contoh Medikara} \\
+    \hline
+    \textit{Driver} & Kondisi yang mendorong perubahan & Apa yang menekan organisasi? & Antrean rawat jalan di rumah sakit panjang \\
+    \hline
+    \textit{Assessment} & Hasil analisis atas \textit{driver} & Seberapa parah dan apa penyebabnya? & Tunggu rata-rata 96 menit; jadwal dokter disalin manual sekali sehari \\
+    \hline
+    \textit{Goal} & Arah atau keadaan akhir yang diinginkan & Ke mana organisasi bergerak? & Pasien dilayani tepat waktu di fasilitas mana pun \\
+    \hline
+    \textit{Outcome} & Hasil akhir yang terukur & Bagaimana tahu sudah tercapai? & Tunggu 96 menjadi 60 menit pada Desember 2028 \\
+    \hline
+    Prinsip & Aturan umum bagi banyak sistem & Aturan apa yang memandu pilihan? & Satu sumber kebenaran untuk data pasien \\
+    \hline
+    \textit{Requirement} & Kebutuhan atas satu sistem & Apa yang harus dipenuhi sistem itu? & Jadwal di Medikara+ dibaca dari SIMRS dengan jeda paling lama 5 menit \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch03-rantai-motivasi.tex}
+  \caption{Rantai motivasi Medikara dari pemicu antrean sampai kebutuhan atas
+           Medikara+: ke atas menjawab mengapa, ke bawah menjawab bagaimana}
+  \label{fig:ch03-rantai-motivasi}
+\end{figure}
+
+Dua contoh dari Medikara Health:
+
+\begin{enumerate}
+  \item \textbf{Rantai antrean.} Misalkan audit layanan menemukan waktu tunggu
+        rata-rata dari pendaftaran sampai diperiksa dokter 96 menit, dan jadwal
+        dokter di Medikara+ disalin manual sekali sehari. Pasien yang memesan
+        lewat aplikasi sering mendapat slot yang sudah terisi. \textit{Goal}:
+        pasien dilayani tepat waktu di fasilitas mana pun. \textit{Outcome}:
+        tunggu turun dari 96 menjadi 60 menit pada Desember 2028, yaitu 36 menit
+        atau 37,5 persen, dengan pemilik Direktur Pelayanan.
+        \textit{Requirement}: jadwal di Medikara+ dibaca langsung dari SIMRS
+        kelima rumah sakit dengan jeda paling lama 5 menit.
+  \item \textbf{Rantai akses.} Insiden kebocoran data lewat vendor pada 2025 dan
+        temuan audit internal menjadi dua \textit{driver}. Misalkan penilaiannya
+        menemukan 17 akun vendor tetap aktif setelah kontrak berakhir, dan hak
+        akses SIMRS tidak pernah ditinjau ulang. \textit{Goal}: data pasien
+        hanya dapat dibuka oleh pihak yang berhak. Dua \textit{outcome}
+        mengukurnya: akun vendor tanpa kontrak berlaku turun dari 17 menjadi 0
+        pada Juni 2027, dan akun SIMRS yang ditinjau dalam tiga bulan terakhir
+        naik dari 0 menjadi 100 persen pada Maret 2027. \textit{Requirement}:
+        setiap akun vendor memakai autentikasi dua faktor dan kedaluwarsa
+        otomatis pada tanggal akhir kontrak. Kebutuhan ini tidak menyebut produk
+        identitas mana pun.
+\end{enumerate}
+
+Pemicu juga dapat datang dari luar organisasi. Masa penyesuaian UU PDP berakhir
+pada Oktober 2024 \cite{uu27-2022-pdp}, dan Peraturan Menteri Kesehatan Nomor 24
+Tahun 2022 mewajibkan rekam medis elektronik \cite{permenkes24-2022}. Keduanya
+adalah \textit{driver} yang tidak dapat ditawar, sehingga \textit{goal} yang
+diturunkan darinya berbeda sifatnya dari \textit{goal} yang dipilih direksi.
+Rincian kewajiban hukumnya dibahas di IT40813.
+
+\subsection*{Lima Isian pada Setiap Outcome}
+
+\textit{Outcome} yang baik punya lima isian: ukuran, kondisi awal
+(\textit{baseline}), target, tenggat, dan pemilik. Tanpa salah satunya,
+\textit{outcome} tidak pernah dapat dinyatakan tercapai atau gagal. TOGAF
+menganjurkan sasaran bisnis yang spesifik, terukur, dapat ditindaklanjuti,
+realistis, dan berbatas waktu \cite{togaf10}. Kalimat ``data lebih baik'' tidak
+memenuhi syarat itu. Tabel \ref{tab:ch03-isian-outcome} memperlihatkan dua
+\textit{outcome} yang memenuhinya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lima isian \textit{outcome} pada dua contoh Medikara}
+  \label{tab:ch03-isian-outcome}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.6cm}>{\raggedright\arraybackslash}p{2.7cm}*{2}{>{\raggedright\arraybackslash}X}}
+    \hline
+    \textbf{Isian} & \textbf{Pertanyaan} & \textbf{Antrean rawat jalan} & \textbf{Identitas ganda} \\
+    \hline
+    Ukuran & Apa yang dihitung? & Rata-rata menit dari pendaftaran sampai diperiksa dokter & Persentase nomor rekam medis milik orang yang sudah punya nomor di rumah sakit lain \\
+    \hline
+    Kondisi awal & Berapa nilainya sekarang? & 96 menit & Diukur pada C2 dengan sampel 10.000 nomor \\
+    \hline
+    Target & Berapa nilai yang dituju? & 60 menit & Paling banyak 2\% \\
+    \hline
+    Tenggat & Kapan dinilai? & Desember 2028 & Desember 2028 \\
+    \hline
+    Pemilik & Siapa yang bertanggung jawab? & Direktur Pelayanan & Direktur Pelayanan \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Pertanyaan kemudian muncul: bagaimana bila kondisi awal belum tersedia saat C1
+disusun? Itu wajar. \textit{Outcome} boleh ditulis dengan kondisi awal ``diukur
+pada C2'', asalkan cara mengukurnya sudah disepakati. Bab 6 memperlihatkan
+pengukuran itu: dari sampel 10.000 nomor, 1.140 nomor atau 11,4 persen ternyata
+milik orang yang sudah punya nomor di rumah sakit lain. Target 2 persen berarti
+paling banyak 200 nomor pada sampel yang sama, atau berkurang paling sedikit 940
+nomor. Angka 2 persen adalah usulan latihan yang masih perlu disetujui pemilik
+layanan. Tenggat Desember 2028 mengikuti rencana pada Bab 12, yaitu paket kerja
+identitas pasien selesai pada Maret 2028, sehingga masih ada sembilan bulan untuk
+membersihkan data.
+
+\subsection*{Hasil Proyek dan Hasil Bisnis}
+
+Dua hal pada \textit{outcome} sering tertukar. Pembagiannya begini. Hasil proyek
+adalah barang yang diserahkan, misalnya fitur jadwal yang selesai. Hasil bisnis
+adalah perubahan yang dialami pasien atau organisasi, misalnya pendaftaran ulang
+yang berkurang. Hasil proyek dapat tercapai sementara hasil bisnis belum, dan
+rantai motivasi hanya mengakui yang kedua sebagai \textit{outcome}.
+
+Misalkan fitur pemesanan jadwal baru di Medikara+ selesai tepat waktu dan sesuai
+anggaran. Enam bulan kemudian, tunggu rata-rata baru turun dari 96 menjadi 91
+menit. Penurunan 5 menit itu baru sekitar 14 persen dari penurunan 36 menit yang
+ditargetkan. Penyebabnya bukan aplikasi. Petugas loket tetap meminta pasien
+mengisi formulir kertas, dan dua rumah sakit masih menyalin jadwal secara manual.
+Karena itu rantai motivasi perlu menyertakan perubahan cara kerja, bukan hanya
+perubahan sistem.
+
+\subsection*{Keterlacakan Dua Arah}
+
+Rantai dibaca dua arah. Ke atas menjawab ``mengapa kebutuhan ini ada?'', dan ke
+bawah menjawab ``bagaimana \textit{goal} ini dicapai?''. Pertanyaan kemudian
+muncul: apakah satu kebutuhan harus hanya memiliki satu induk? Tidak selalu.
+Kontrol akses mendukung kerahasiaan dan keselamatan, sedangkan identitas tunggal
+mendukung layanan dan laporan. Tim boleh membuat banyak hubungan, tetapi setiap
+hubungan perlu alasan. Garis pada model tidak menggantikan pembuktian hubungan
+sebab akibat.
+
+Pembacaan dua arah itu menemukan dua pola cacat:
+
+\begin{enumerate}
+  \item \textbf{Kebutuhan tanpa induk.} ``Seluruh aplikasi dipindahkan ke
+        \textit{cloud} pada 2027'' tidak menunjuk \textit{outcome} atau prinsip
+        apa pun. Kebutuhan seperti ini mungkin benar, tetapi alasannya belum
+        ditulis. Tim mencari induknya, atau menghapusnya bila tidak ditemukan.
+  \item \textbf{\textit{Goal} tanpa \textit{outcome}.} ``Menjadi jaringan
+        kesehatan paling inovatif'' tidak punya ukuran. Niat seperti ini tidak
+        dapat ditagih kepada siapa pun.
+\end{enumerate}
+
+Misalkan rantai C1 Medikara berisi 15 elemen: 3 \textit{driver}, 2
+\textit{assessment}, 2 \textit{goal}, 3 \textit{outcome}, 2 prinsip, dan 3
+\textit{requirement}. Pemeriksaan keterlacakan menemukan 1 dari 3
+\textit{requirement} tanpa induk. Temuan ini murah bila muncul pada C1, karena
+belum ada anggaran yang dikeluarkan untuknya.
+
+\begin{kasus}[title={Kasus Medikara Health: Menguji Tiga Usulan dengan Rantai Motivasi}]
+  Tiga usulan pada awal bab diuji dengan satu pertanyaan: elemen mana yang
+  menjadi induknya?
+
+  \begin{itemize}
+    \item \textbf{Nomor akun baru di Medikara+.} Usulan ini tidak menunjuk
+          \textit{outcome} mana pun, dan bertentangan dengan prinsip satu sumber
+          kebenaran. Tim meminta rancangan ulang: akun Medikara+ dipetakan ke
+          identitas pasien yang sudah ada.
+    \item \textbf{Aplikasi antrean satu rumah sakit.} Usulan ini tampak mendukung
+          \textit{outcome} tunggu 60 menit. Namun bila aplikasi itu menyimpan
+          salinan jadwal sendiri, salinan keenam muncul di samping lima SIMRS.
+          Tim memeriksa apakah kebutuhannya cukup dijawab \textit{requirement}
+          jadwal yang sudah ada.
+    \item \textbf{Pemindahan seluruh aplikasi ke \textit{cloud} pada 2027.}
+          Modernisasi ke \textit{cloud} memang salah satu arah strategi, tetapi
+          usulan ini belum punya \textit{outcome} yang terukur. Tim mengembalikannya kepada
+          pengusul dengan pertanyaan: ukuran apa yang akan berubah, dan berapa
+          targetnya? Pilihan cara migrasinya dibahas di IT40713.
+  \end{itemize}
+
+  Pemicu keempat Medikara, yaitu biaya integrasi yang tinggi, sengaja belum
+  dirantai. Pemicu ini menjadi bahan Aktivitas.
+\end{kasus}
+
+\begin{pendalaman}[title={Pendalaman Teknis (opsional): Elemen Motivasi di ArchiMate}]
+  Elemen motivasi ArchiMate berakar pada penelitian tentang pemodelan tujuan dan
+  kebutuhan, yang memperluas pemodelan arsitektur \textit{enterprise} dengan
+  alasan di balik rancangan \cite{c03-engelsman2011}. Pada ArchiMate 3.2, relasi
+  yang lazim adalah realisasi, misalnya \textit{outcome} mewujudkan \textit{goal}
+  dan \textit{requirement} mewujudkan \textit{outcome}, serta pengaruh
+  (\textit{influence}) bila hubungannya berupa dukungan sebagian.
+  \textit{Assessment} dihubungkan dengan \textit{driver} lewat relasi asosiasi.
+  Spesifikasi juga menyatakan bahwa prinsip perlu diperinci menjadi satu atau
+  beberapa \textit{requirement} agar kepatuhan suatu sistem dapat dipastikan
+  \cite{archimate32}. Bab 4 memindahkan rantai ini ke \textit{motivation view} di
+  Archi dan menghubungkan \textit{requirement} ke elemen inti yang mewujudkannya.
+\end{pendalaman}
+
+\section{Model Operasi dan Core Diagram}
+
+Pertanyaan berikutnya: seberapa jauh unit organisasi harus berbagi data dan
+menyamakan cara kerja? Model operasi menjawabnya. Ross, Weill, dan Robertson
+mendefinisikan model operasi sebagai tingkat integrasi dan standardisasi proses
+bisnis yang dibutuhkan untuk melayani pelanggan \cite{ross2006}. Integrasi berarti
+unit perlu berbagi data atau transaksi agar layanan berjalan. Standardisasi
+berarti unit mengikuti cara kerja yang serupa. Kedua dimensi dinilai terpisah,
+sehingga menghasilkan empat model: diversifikasi, koordinasi, replikasi, dan
+unifikasi. Pemilihannya didasarkan pada kebutuhan layanan, bukan pada anggapan
+bahwa semua organisasi harus menjadi unifikasi.
+
+Gambar \ref{fig:ch03-model-operasi} memperlihatkan keempatnya sebagai kuadran, dan
+Tabel \ref{tab:ch03-model-operasi} merinci cirinya.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch03-model-operasi.tex}
+  \caption{Empat model operasi pada dua dimensi, dengan posisi layanan pasien dan
+           keuangan Medikara}
+  \label{fig:ch03-model-operasi}
+\end{figure}
+
+Analoginya terdapat pada jaringan kedai dan bengkel. Cabang kedai yang menjual
+menu sama dengan resep yang sama membutuhkan keseragaman proses, tetapi tidak
+perlu berbagi pesanan setiap pelanggan. Sebaliknya, bengkel rujukan perlu berbagi
+riwayat kendaraan walaupun tiap lokasi memiliki peralatan dan cara pemeriksaan
+yang berbeda. Berbagi data tidak selalu berarti seluruh langkah harus sama, dan
+langkah yang sama tidak selalu berarti data harus dibagi.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Empat model operasi menurut Ross, Weill, dan Robertson}
+  \label{tab:ch03-model-operasi}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.6cm}ll*{2}{>{\raggedright\arraybackslash}X}}
+    \hline
+    \textbf{Model} & \textbf{Integrasi} & \textbf{Standardisasi} & \textbf{Ciri} & \textbf{Ditonjolkan di \textit{core diagram}} \\
+    \hline
+    Diversifikasi & Rendah & Rendah & Unit mandiri dengan pelanggan dan keahlian berbeda & Teknologi dan layanan bersama \\
+    \hline
+    Koordinasi & Tinggi & Rendah & Unit berbeda melayani pelanggan yang sama dan perlu saling melihat transaksi & Data bersama, teknologi penghubung, pelanggan utama \\
+    \hline
+    Replikasi & Rendah & Tinggi & Unit mandiri tetapi serupa; efisiensi datang dari cara kerja yang sama & Proses utama dan teknologi otomasi \\
+    \hline
+    Unifikasi & Tinggi & Tinggi & Satu bisnis dengan proses baku dan akses data global & Proses utama, data bersama, teknologi penghubung dan otomasi, pelanggan utama \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Dua contoh dari Medikara Health:
+
+\begin{enumerate}
+  \item \textbf{Rujukan antarfasilitas.} Misalkan setiap bulan sekitar 2.400
+        pasien dirujuk ke rumah sakit Medikara lain, atau sekitar 2,4 persen dari
+        seluruh kunjungan. Setiap rujukan membutuhkan identitas pasien dan riwayat
+        dari fasilitas asal, jadi integrasinya tinggi. Prosedur klinis di tiap
+        rumah sakit berbeda karena layanan unggulannya berbeda, jadi
+        standardisasinya tidak harus tinggi. Hipotesis awalnya koordinasi.
+  \item \textbf{Keuangan.} Enterprise Resource Planning (ERP) keuangan Medikara
+        sudah terpusat. Misalkan seluruh 36 fasilitas memakai satu bagan akun dan
+        satu jadwal tutup buku. Integrasi dan standardisasinya sama-sama tinggi,
+        jadi lingkup ini sudah berada di kuadran unifikasi.
+\end{enumerate}
+
+\subsection*{Model Operasi per Lingkup}
+
+Kedua contoh itu memperlihatkan satu hal penting: satu organisasi dapat
+menerapkan kombinasi pada ruang lingkup yang berbeda, asalkan batasnya dinyatakan.
+Tim menuliskan bukti integrasi dan standardisasi secara terpisah, lalu memberi
+skor 1 sampai 3. Skor 1 berarti rendah, skor 3 berarti tinggi, dan skor 2 berarti
+bukti belum cukup dan perlu dicari lagi. Banyaknya cabang bukan bukti replikasi,
+dan adanya satu server bukan bukti unifikasi. Wawancara perlu memeriksa apakah
+pasien, transaksi, dan keputusan benar-benar melintasi batas unit.
+
+Penetapan model punya dua konsekuensi. Pertama, organisasi harus menunjuk pemilik
+definisi data bersama. Untuk koordinasi layanan pasien, 36 fasilitas harus memakai
+satu definisi ``pasien'' dan ``kunjungan''. Kedua, organisasi harus menyediakan
+mekanisme keputusan ketika kebutuhan lokal berbeda. Memasang satu aplikasi tanpa
+wewenang atas definisi data belum menghasilkan integrasi yang dapat dipercaya.
+
+Tiga hal pada model operasi sering tertukar. Pembagiannya begini. Model operasi
+menurut Ross, Weill, dan Robertson membicarakan proses dan data bisnis. Struktur
+organisasi membicarakan siapa melapor kepada siapa. Model operasi teknologi
+informasi (TI) membicarakan cara fungsi TI diorganisasi, misalnya seberapa
+terpusat, dan dibahas di Bab 10 \cite{thorogood2025}. Sebuah rumah sakit dapat
+punya direktur sendiri, sedangkan identitas pasiennya tetap wajib dipakai bersama
+dengan fasilitas lain.
+
+\subsection*{Core Diagram}
+
+\textit{Core diagram} adalah gambar satu halaman tentang fondasi yang harus sama
+agar model operasi berjalan: proses inti, data bersama, teknologi penghubung dan
+otomasi, serta pelanggan utama \cite{ross2006}. Isinya mengikuti model yang
+dipilih, seperti kolom terakhir Tabel \ref{tab:ch03-model-operasi}. Koordinasi
+menonjolkan data bersama, sedangkan replikasi menonjolkan proses baku.
+
+Gambar \ref{fig:ch03-core-diagram} memperlihatkan \textit{core diagram} arah
+Medikara. Pasien, penjamin, dan mitra berada di atas. Di bawahnya ada kanal,
+empat data bersama, dan platform integrasi yang menghubungkan fasilitas dengan
+SATUSEHAT serta Badan Penyelenggara Jaminan Sosial (BPJS) Kesehatan. Empat jenis
+fasilitas berada paling bawah dengan alurnya masing-masing. Pesan gambarnya
+sederhana: yang wajib sama hanya data bersama dan antarmukanya.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch03-core-diagram.tex}
+  \caption{\textit{Core diagram} arah Medikara: data bersama di tengah, proses
+           tiap fasilitas tetap beragam}
+  \label{fig:ch03-core-diagram}
+\end{figure}
+
+\begin{kasus}[title={Kasus Medikara Health: Posisi Saat Ini dan Arah yang Diinginkan}]
+  Layanan pasien Medikara saat ini berada di kuadran diversifikasi. Posisi itu
+  bukan hasil pilihan, melainkan akibat akuisisi: tiap rumah sakit membawa SIMRS,
+  nomor pasien, dan alurnya sendiri. Strategi ``Satu Pasien, Satu Rekam Medis''
+  menuntut integrasi tinggi, sehingga arah yang diinginkan paling tidak berada di
+  kuadran koordinasi, dengan standardisasi lebih kuat pada identitas dan
+  pertukaran informasi. Prosedur klinis yang berbeda tidak langsung dihapus.
+
+  Keuangan sudah berada di kuadran unifikasi dan tidak perlu digeser. C1 belum
+  memutuskan seberapa jauh standardisasi layanan pasien didorong. Pertanyaan itu
+  menjadi inti opsi kondisi target pada Bab 8. Jaringan apotek sengaja belum
+  dinilai, karena menjadi bahan Latihan 2.
+\end{kasus}
 
 \section{Fase Preliminary dan Architecture Vision}
 
-% TODO
-% Cakupan: kesiapan organisasi untuk kerja arsitektur; Request for Architecture Work; isi
-%   Architecture Vision; business scenario singkat untuk menggali kebutuhan.
+Fase \textit{Preliminary} menyiapkan kemampuan organisasi menjalankan arsitektur.
+Tim menentukan mandat, sponsor, prinsip awal, kerangka yang disesuaikan, dan cara
+mengambil keputusan. Fase A atau \textit{Architecture Vision} menyepakati arah,
+ruang lingkup, nilai yang diharapkan, pemangku kepentingan, serta rencana kerja
+arsitektur. Keduanya berulang ketika konteks berubah, dan tidak dimaksudkan
+sebagai gerbang dokumen yang panjang tanpa keputusan \cite{togaf10}.
+
+Analoginya seperti renovasi gedung. Permintaan awal menyebut kebutuhan ruang dan
+keluhan pengguna. Sebelum menggambar seluruh detail, pemilik menetapkan penanggung
+jawab, anggaran studi, batas bangunan, serta pihak yang menyetujui. Gambar arah
+renovasi lalu dinilai bersama sebelum perhitungan struktur dan jadwal rinci
+dikerjakan.
+
+Tiga dokumen pada tahap ini sering dicampur. \textit{Request for Architecture
+Work} menyampaikan permintaan awal dan alasan bisnisnya. \textit{Statement of
+Architecture Work} menyepakati pekerjaan arsitektur yang akan dilaksanakan,
+termasuk lingkup dan hasilnya. Visi menjelaskan kondisi yang hendak diwujudkan.
+Ketiganya saling melengkapi, tetapi tidak perlu disamakan menjadi satu templat
+yang kehilangan fungsi keputusan. Tabel \ref{tab:ch03-artefak-awal} memisahkan
+fungsinya, dan Gambar \ref{fig:ch03-alur-visi} memperlihatkan urutannya.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Artefak pada fase \textit{Preliminary} dan fase A}
+  \label{tab:ch03-artefak-awal}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.6cm}>{\raggedright\arraybackslash}p{1.7cm}*{2}{>{\raggedright\arraybackslash}X}}
+    \hline
+    \textbf{Artefak} & \textbf{Tempat} & \textbf{Pertanyaan keputusan} & \textbf{Bukti persetujuan} \\
+    \hline
+    \textit{Request for Architecture Work} & Masukan fase A & Mengapa arsitektur diperlukan sekarang? & Sponsor, pemicu bisnis, batas anggaran dan waktu \\
+    \hline
+    Prinsip arsitektur & \textit{Preliminary}, dipertajam di fase A & Aturan apa yang memandu pilihan? & Disahkan direksi \\
+    \hline
+    Visi arsitektur & Fase A & Arah dan nilai apa yang hendak diwujudkan? & Hasil, lingkup, dan risiko disepakati \\
+    \hline
+    \textit{Statement of Architecture Work} & Fase A & Siapa mengerjakan apa dan kapan? & Ditandatangani sponsor dan pemilik arsitektur \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch03-alur-visi.tex}
+  \caption{Urutan persiapan, permintaan, visi, dan persetujuan sebelum fase B, C,
+           dan D}
+  \label{fig:ch03-alur-visi}
+\end{figure}
+
+Dua contoh dari Medikara Health:
+
+\begin{enumerate}
+  \item \textbf{Batas lingkup.} Misalkan sponsor meminta integrasi identitas
+        pasien untuk 36 fasilitas. Lingkup awal tidak mencakup penggantian alat
+        medis, dan ERP keuangan tidak diganti pada siklus ini. Tim mencatat kedua
+        batas tersebut agar rancangan tidak meluas tanpa persetujuan.
+  \item \textbf{Visi yang diperbaiki.} Misalkan pimpinan klinik meminta seluruh
+        proses lokal disamakan. Lokakarya membahas 14 proses, lalu menyimpulkan
+        12 proses dapat diseragamkan dan 2 proses perlu tetap berbeda karena jenis
+        layanan. Visi diperbaiki dan alasan pengecualian dicatat sebelum analisis
+        target dilanjutkan.
+\end{enumerate}
+
+TOGAF merinci fase A menjadi sejumlah langkah \cite{togaf10}. Sebagian sudah selesai pada
+Bab 2, yaitu mengenali pemangku kepentingan dan menetapkan lingkup. Bab ini mengerjakan
+sisanya: mengonfirmasi tujuan dan pemicu, menilai kesiapan, mengonfirmasi prinsip, menyusun
+visi beserta nilai dan risikonya, lalu memperoleh persetujuan. Penilaian kapabilitas
+dikerjakan lebih rinci pada Bab 5.
+
+\subsection*{Skenario Bisnis}
+
+Skenario bisnis (\textit{business scenario}) adalah teknik TOGAF untuk menggali
+kebutuhan dari situasi nyata \cite{togaf10}. Tim menyebut pelaku, pemicu, kondisi
+awal, kejadian normal, kegagalan penting, dan hasil yang diharapkan. Skenario
+lebih mudah ditinjau daripada daftar nama produk. Anggota teknis lalu menelusuri
+data dan aplikasi yang diperlukan untuk menjalankannya.
+
+Misalkan skenarionya pasien klinik pratama di Depok dirujuk ke rumah sakit
+Medikara di Jakarta. Pasien membawa amplop berisi fotokopi hasil laboratorium.
+Dokter di Jakarta tidak dapat membuka riwayat di klinik, lalu mengulang 2 dari 5
+pemeriksaan. Kegagalan pentingnya, alergi yang tercatat di klinik tidak terbaca
+di rumah sakit. Hasil yang diharapkan, dokter membuka ringkasan riwayat begitu
+pasien terdaftar. Ukuran \textit{outcome} yang muncul dari skenario ini adalah
+persentase pemeriksaan yang diulang pada pasien rujukan.
+
+\subsection*{Kesiapan Transformasi}
+
+Kesiapan organisasi juga perlu dinilai. TOGAF menyediakan penilaian kesiapan
+transformasi bisnis dengan faktor seperti visi, kebutuhan, pendanaan, sponsor,
+tata kelola, serta kapasitas TI dan organisasi \cite{togaf10}. Asumsi akses data dan
+ketersediaan narasumber juga harus tampak dalam rencana kerja.
+
+Misalkan tim Medikara menilai enam faktor dengan skala 1 sampai 3. Empat faktor
+mendapat skor 2 atau 3, karena sponsornya Direktur Utama dan pemicunya mendesak.
+Dua faktor mendapat skor 1: tata kelola data lintas rumah sakit belum ada, dan
+kapasitas tim TI hanya cukup untuk dua proyek besar per tahun. Keduanya masuk ke visi
+sebagai risiko beserta tindakannya, yaitu membentuk forum keputusan lintas fasilitas
+dan membatasi jumlah proyek yang berjalan bersamaan.
 
 \section{Prinsip Arsitektur}
 
-% TODO
-% Cakupan: format prinsip TOGAF (nama, pernyataan, alasan, implikasi); ciri prinsip yang baik;
-%   contoh prinsip yang buruk dan cara memperbaikinya; jumlah prinsip yang wajar.
-% Kasus Medikara: prinsip satu sumber kebenaran untuk data pasien dan prinsip akses berdasarkan
-%   kebutuhan.
-% Pendalaman teknis: menurunkan prinsip menjadi aturan desain dan kriteria tinjauan rancangan yang
-%   dapat diperiksa.
+Prinsip arsitektur adalah aturan umum yang tahan lama untuk membimbing pilihan
+yang berulang. TOGAF memakai format empat bagian: nama, pernyataan, alasan, dan
+implikasi \cite{togaf10}. Nama mudah diingat. Pernyataan menunjukkan aturan
+pilihan. Alasan menunjukkan nilai bagi organisasi. Implikasi menunjukkan
+perubahan, biaya, batas wewenang, atau tindak lanjut yang harus ditanggung.
+Greefhorst dan Proper menempatkan prinsip sebagai penghubung antara niat strategis
+dan rancangan konkret \cite{c03-greefhorst2011}. Kotusev menggolongkannya ke dalam
+artefak berisi pertimbangan umum yang disepakati pihak bisnis dan TI
+\cite{kotusev2021}.
+
+Analoginya seperti aturan pinjaman di koperasi karyawan. ``Pinjaman hanya untuk
+kebutuhan produktif atau darurat'' adalah prinsip: aturan itu menjawab banyak
+permohonan yang belum pernah ada, dan alasannya jelas, yaitu dana anggota harus
+kembali. ``Koperasi harus maju'' bukan prinsip, karena setiap keputusan dapat
+mengaku memenuhinya. ``Formulir pinjaman memakai kertas ukuran F4'' juga bukan
+prinsip, melainkan standar yang dapat berganti kapan saja tanpa mengubah arah
+koperasi.
+
+Gambar \ref{fig:ch03-anatomi-prinsip} memperlihatkan keempat bagian pada satu prinsip
+Medikara, sekaligus cara prinsip itu dipakai menilai rancangan.
+
+\begin{figure}[!htb]
+  \centering
+  \input{../figures/ch03-anatomi-prinsip.tex}
+  \caption{Kartu prinsip diturunkan menjadi kriteria tinjauan, lalu dipakai menilai
+           dua opsi rancangan. Bila keduanya sama-sama lolos, pernyataannya perlu
+           dipertajam}
+  \label{fig:ch03-anatomi-prinsip}
+\end{figure}
+
+Dua contoh dari Medikara Health:
+
+\begin{enumerate}
+  \item \textbf{Identitas pasien.} Misalkan prinsipnya identitas pasien lintas
+        fasilitas memiliki satu pemilik korporat. Implikasinya, 36 fasilitas
+        memetakan nomor lokal, petugas menangani salah cocok, dan perubahan
+        identitas memiliki jejak keputusan. Satu pemilik tidak berarti satu tabel
+        fisik untuk semua aplikasi.
+  \item \textbf{Akses.} Misalkan prinsipnya akses diberikan sesuai kebutuhan
+        layanan. Implikasinya, peran ditinjau tiap tiga bulan, akun vendor berakhir
+        bersama kontraknya, dan akses darurat dicatat. Pada kondisi awal, prinsip ini
+        langsung menjawab 17 akun vendor yang masih aktif. Rancangan kendalinya
+        dibahas di IT40813.
+\end{enumerate}
+
+\subsection*{Prinsip, Slogan, dan Standar}
+
+Tiga hal ini sering tertukar. Pembagiannya begini. Slogan menyatakan harapan tanpa
+konsekuensi, misalnya ``Utamakan pasien''. Prinsip menyatakan aturan pilihan yang
+bertahan bertahun-tahun, misalnya ``Akses berdasarkan kebutuhan''. Prinsip seperti
+ini memerlukan implikasi untuk akses, pengecualian darurat, dan audit. Standar
+menyatakan pilihan teknis yang lebih mudah berubah, misalnya ``Gunakan versi produk
+X''. Keduanya dapat berkaitan, tetapi tingkat keputusan dan jadwal peninjauannya
+berbeda. Prinsip ditinjau saat strategi berubah, sedangkan standar ditinjau saat
+versi produk berubah. Katalog standar dibahas di Bab 10.
+
+\subsection*{Ciri Prinsip yang Baik}
+
+TOGAF menyebut lima ciri prinsip yang baik: mudah dipahami, kokoh, lengkap,
+konsisten, dan stabil \cite{togaf10}. Tabel \ref{tab:ch03-kriteria-prinsip}
+mengubah kelima ciri itu menjadi pertanyaan uji.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lima ciri prinsip yang baik sebagai pertanyaan uji}
+  \label{tab:ch03-kriteria-prinsip}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.7cm}*{2}{>{\raggedright\arraybackslash}X}}
+    \hline
+    \textbf{Ciri} & \textbf{Pertanyaan uji} & \textbf{Contoh gagal} \\
+    \hline
+    Mudah dipahami & Apakah anggota nonteknis dapat menjelaskannya dengan kata sendiri? & Pernyataan penuh istilah produk \\
+    \hline
+    Kokoh & Apakah dua opsi nyata akan dinilai berbeda? & ``Sistem harus andal'': semua opsi mengaku lolos \\
+    \hline
+    Lengkap & Apakah keputusan penting sudah tercakup? & Tidak ada prinsip tentang data, padahal strategi berpusat pada data \\
+    \hline
+    Konsisten & Apakah konflik antarprinsip sudah punya aturan? & Berbagi data dan pembatasan akses tanpa urutan pertimbangan \\
+    \hline
+    Stabil & Apakah masih berlaku saat produk diganti? & ``Semua integrasi memakai produk X'' \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Lima sampai delapan prinsip cukup untuk latihan awal. Setiap prinsip diuji pada
+satu keputusan nyata: apakah dua opsi akan dinilai berbeda setelah prinsip
+diterapkan? Jika jawabannya tidak, pernyataan perlu diperjelas. Misalkan tim
+mengusulkan 9 prinsip. Tiga di antaranya gagal uji dua opsi, karena semua opsi
+sama-sama lolos. Ketiganya dihapus atau dipertajam, sehingga tersisa 6 prinsip yang
+benar-benar membedakan pilihan.
+
+\subsection*{Konflik dan Dispensasi}
+
+Prinsip yang baik dapat menghadapi konflik. Integrasi luas mungkin bertentangan
+dengan pembatasan data. Tim menjelaskan urutan pertimbangan, kewenangan dispensasi,
+serta syarat pengurangan risiko. Menuliskan konflik lebih berguna daripada
+mengklaim semua prinsip selalu terpenuhi bersamaan. Untuk Medikara, data pasien
+dibagi lewat antarmuka, tetapi setiap pembacaan tetap melewati kontrol akses.
+
+Pengecualian memiliki pemilik, masa berlaku, alasan, dan rencana kembali ke arah
+yang disepakati. Misalkan satu rumah sakit meminta dispensasi 6 bulan untuk tetap
+memakai \textit{spreadsheet} antrean, karena penggantinya belum siap. Dispensasi
+disetujui dengan syarat data itu tidak dipakai laporan direksi dan kepala layanan
+menjadi pemiliknya. Bab 14 merancang alur dispensasi secara lengkap.
+
+\subsection*{Siapa yang Memutuskan Prinsip}
+
+Pertanyaan kemudian muncul: siapa yang memutuskan? Weill dan Ross menempatkan
+prinsip TI sebagai satu dari lima keputusan TI utama, bersama arsitektur TI,
+infrastruktur TI, kebutuhan aplikasi bisnis, serta investasi dan prioritas TI.
+Hak mengambil tiap keputusan harus ditetapkan secara eksplisit \cite{c03-weill2004}.
+Keputusan ini punya dua konsekuensi. Pertama, prinsip yang hanya ditulis tim TI
+tidak mengikat unit bisnis. Kedua, prinsip yang disahkan direksi tanpa masukan
+teknis mudah menjadi slogan. Karena itu tim arsitektur menyusun rancangannya, kepala
+TI dan pemilik layanan menguji implikasinya, lalu direksi mengesahkan. Bab 14
+memindahkan tugas pemeliharaannya ke \textit{architecture board}, dan struktur tata
+kelola TI secara lengkap dibahas di IT40813.
+
+\begin{kasus}[title={Kasus Medikara Health: Enam Prinsip Arsitektur C1}]
+  Tim Medikara menyepakati enam prinsip pada Tabel \ref{tab:ch03-prinsip-medikara}.
+  PA1 dan PA2 sudah muncul pada rantai motivasi. PA3 menegaskan kepemilikan identitas,
+  dan pemiliknya adalah Direktur Pelayanan. PA4 mengikuti gagasan perubahan
+  berbasis kebutuhan yang dicontohkan TOGAF \cite{togaf10}, dan langsung menjawab
+  usulan pemindahan seluruh aplikasi ke \textit{cloud}. PA5 mengakhiri penambahan
+  sambungan \textit{point-to-point}. Pertukaran dengan SATUSEHAT memakai Health Level
+  Seven (HL7) Fast Healthcare Interoperability Resources (FHIR). PA6 menjaga
+  keleluasaan yang diminta rumah sakit, dan sejalan dengan arah koordinasi.
+\end{kasus}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Enam prinsip arsitektur Medikara pada tonggak C1}
+  \label{tab:ch03-prinsip-medikara}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.5cm}*{2}{>{\raggedright\arraybackslash}X}}
+    \hline
+    \textbf{Nama} & \textbf{Pernyataan} & \textbf{Implikasi utama} \\
+    \hline
+    PA1 Satu sumber kebenaran untuk data pasien & Tiap atribut data pasien punya satu sistem acuan dan satu jalur resmi untuk mengubahnya & Pemilik data ditunjuk; sistem lain membaca dari acuan; salinan diberi tanda waktu \\
+    \hline
+    PA2 Akses berdasarkan kebutuhan & Akses data pasien diberikan menurut tugas dan dibatasi waktu & Peran ditinjau tiap tiga bulan; akun vendor berakhir bersama kontrak; akses darurat dicatat \\
+    \hline
+    PA3 Identitas pasien milik organisasi & Identitas pasien lintas fasilitas punya satu pemilik korporat & 36 fasilitas memetakan nomor lokal; salah gabung punya prosedur koreksi \\
+    \hline
+    PA4 Perubahan berangkat dari kebutuhan & Aplikasi dan teknologi diubah hanya bila menjawab kebutuhan bisnis yang tertelusur & Setiap usulan menyebut \textit{outcome} atau \textit{requirement} induknya \\
+    \hline
+    PA5 Pertukaran lewat antarmuka baku & Data antarsistem dan dengan pihak luar dipertukarkan lewat antarmuka yang terdokumentasi & Sambungan \textit{point-to-point} baru butuh dispensasi; ada biaya platform integrasi \\
+    \hline
+    PA6 Keleluasaan lokal di luar inti & Proses yang tidak menyentuh data bersama boleh berbeda antarfasilitas & Daftar inti yang wajib sama disahkan; fasilitas bebas mengatur sisanya \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{pendalaman}[title={Pendalaman Teknis (opsional): Dari Prinsip ke Aturan Desain}]
+  Prinsip menjadi berguna bagi tim teknis setelah diturunkan menjadi aturan yang
+  dapat diperiksa. PA1 dapat menjadi kriteria tinjauan rancangan integrasi berikut:
+
+  \begin{enumerate}
+    \item Setiap rancangan menyebut sistem acuan untuk tiap atribut pasien yang
+          disentuhnya.
+    \item Operasi tulis atas atribut identitas hanya lewat layanan identitas.
+    \item Salinan baca mencatat waktu sinkronisasi dan batas usia data, misalnya 5
+          menit untuk jadwal dokter.
+    \item Katalog antarmuka diperiksa secara berkala: operasi tulis ke atribut
+          identitas di luar sistem acuan dilaporkan sebagai pelanggaran.
+  \end{enumerate}
+
+  Aturan pertama dan kedua diperiksa manusia saat tinjauan. Aturan keempat dapat
+  diotomatisasi. Bab 9 memakai aturan ini untuk arsitektur data, dan Bab 14 membahas
+  pemeriksaan otomatis sebagai \textit{fitness function}.
+\end{pendalaman}
 
 \section{Menulis Visi Arsitektur untuk Direksi}
 
-% TODO
-% Cakupan: struktur dokumen dua sampai tiga halaman; bahasa untuk pembaca non-teknis; nilai,
-%   risiko, dan ruang lingkup yang eksplisit; cara meminta persetujuan.
+Visi arsitektur merangkum masalah, hasil yang diharapkan, pilihan model operasi,
+ruang lingkup, prinsip, risiko, dan keputusan yang diminta. Dokumen dua sampai tiga
+halaman perlu cukup konkret untuk memandu pekerjaan berikutnya. Diagram satu halaman
+membantu pembaca melihat hubungan layanan, data, aplikasi, dan pihak yang menerima
+nilai, tetapi diagram tidak menggantikan penjelasan keputusan. Dalam TOGAF, visi ini
+menjadi dasar persetujuan sponsor sebelum fase B dimulai \cite{togaf10}.
+
+Analoginya seperti usulan rute perjalanan kepada kelompok besar. Pengambil keputusan
+membutuhkan tujuan, waktu, perkiraan biaya, risiko rute, dan pilihan yang perlu
+diputuskan. Daftar seluruh merek kendaraan hanya menghabiskan ruang sebelum tujuan
+perjalanannya disepakati.
+
+Tabel \ref{tab:ch03-kerangka-visi} memuat kerangka delapan bagian. Setiap bagian
+menjawab satu pertanyaan direksi. Bagian yang tidak menjawab pertanyaan apa pun
+dihapus.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Kerangka visi arsitektur dan pertanyaan direksi yang dijawabnya}
+  \label{tab:ch03-kerangka-visi}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{2.3cm}*{2}{>{\raggedright\arraybackslash}X}}
+    \hline
+    \textbf{Bagian} & \textbf{Isi minimum} & \textbf{Pertanyaan direksi} \\
+    \hline
+    Masalah dan pemicu & Pemicu utama, bukti, kondisi awal & Mengapa perlu bertindak sekarang? \\
+    \hline
+    Visi dan hasil & Satu kalimat visi, tiga sampai lima \textit{outcome} berpemilik & Apa yang berubah bagi pasien dan organisasi? \\
+    \hline
+    Arah model operasi & Model saat ini, model yang diinginkan, \textit{core diagram} & Pilihan apa yang disetujui, dan apa yang dikorbankan? \\
+    \hline
+    Prinsip & Lima sampai delapan prinsip dengan implikasi & Aturan apa yang mengikat proyek berikutnya? \\
+    \hline
+    Lingkup dan batas & Unit, horizon, domain, hal yang tidak termasuk & Apa yang tidak akan dikerjakan? \\
+    \hline
+    Nilai dan ukuran & Manfaat layanan, penghindaran kerugian, penghematan, beserta asumsinya & Apa nilainya, dan seberapa yakin angkanya? \\
+    \hline
+    Risiko dan kesiapan & Risiko transformasi, mandat, tindakan & Apa yang dapat menggagalkan, dan siapa yang menangani? \\
+    \hline
+    Keputusan yang diminta & Daftar keputusan, pemilik, tenggat & Apa yang harus diputuskan hari ini? \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+Dua contoh dari Medikara Health:
+
+\begin{enumerate}
+  \item \textbf{Memilih arah, bukan produk.} Misalkan satu pihak mengusulkan kelima
+        SIMRS diganti satu SIMRS dalam 24 bulan. Pihak lain mengusulkan inti data
+        distandarkan lebih dahulu, lalu konsolidasi bertahap sampai 2030. Tim
+        membandingkan gangguan layanan, kesiapan data, dan kewenangan lintas
+        fasilitas. Visi menetapkan arah integrasi tinggi beserta kriteria menilainya,
+        sedangkan pilihan di antara kedua opsi diputuskan pada Bab 8.
+  \item \textbf{Menandai hipotesis.} Misalkan presentasi vendor menjanjikan
+        penghematan biaya integrasi 30 persen, tetapi Medikara belum pernah mencatat
+        biaya integrasinya per antarmuka. Dokumen menandai angka itu sebagai
+        hipotesis dan menugaskan analis bisnis mengukur kondisi awal. Sponsor
+        menyetujui studi, bukan mengesahkan manfaat seolah sudah pasti.
+\end{enumerate}
+
+\subsection*{Nilai, Ukuran, dan Asumsi}
+
+Perkiraan nilai ditulis bersama asumsi. Tim membedakan tiga jenis nilai: manfaat
+layanan, penghindaran kerugian, dan penghematan anggaran. Pengurangan waktu tunggu
+dapat membebaskan kapasitas, tetapi belum tentu mengurangi biaya kas. TOGAF meminta
+fase A menetapkan nilai yang ditawarkan beserta Key Performance Indicator (KPI)
+\cite{togaf10}. Perhitungan
+rinci dilanjutkan pada Bab 13 dengan kerangka manajemen manfaat \cite{ward2012},
+sementara visi menetapkan ukuran serta pemilik manfaatnya.
+
+Misalkan rumah sakit Medikara di Jakarta melayani 200.000 kunjungan rawat jalan per
+tahun. Bila \textit{outcome} tunggu 60 menit tercapai, tiap kunjungan menunggu 36
+menit lebih singkat. Totalnya $200.000 \times 36 = 7.200.000$ menit, atau 120.000 jam
+waktu tunggu pasien per tahun. Angka ini manfaat layanan, bukan kas masuk. Visi yang
+menulis ``menghemat 120.000 jam'' di kolom penghematan anggaran akan dibantah
+direktur keuangan pada menit pertama.
+
+\subsection*{Pemeriksaan Akhir dan Visi yang Hidup}
+
+Keterlacakan menjadi pemeriksaan akhir. Setiap kebutuhan memiliki alasan, setiap
+hasil memiliki pemilik, dan setiap batas ruang lingkup memiliki konsekuensi yang
+dipahami. Detail teknologi yang belum diperlukan tidak dipaksakan masuk ke visi.
+Pertanyaan yang belum terjawab tetap dicatat bersama penanggung jawab dan waktu
+penyelesaiannya.
+
+Visi yang disetujui tidak membekukan semua keputusan. Temuan data pada C2 dapat
+mengubah asumsi. Misalkan identitas ganda ternyata 11,4 persen, jauh di atas dugaan
+awal direksi. Tim meninjau ulang visi ketika bukti baru mengubah nilai, risiko, atau
+lingkup. Riwayat perubahan menjaga agar rancangan target tidak bergeser diam-diam
+dari tujuan awal.
+
+\begin{kasus}[title={Kasus Medikara Health: Ringkasan Visi Arsitektur C1}]
+  \textbf{Pernyataan visi.} Pada 2030, setiap pasien Medikara punya satu identitas dan
+  satu rekam medis yang dapat dibuka dengan aman oleh tenaga kesehatan yang berhak di
+  fasilitas Medikara mana pun.
+
+  \textbf{Keputusan yang diminta dari direksi.}
+
+  \begin{enumerate}
+    \item Mengesahkan koordinasi sebagai batas minimum arah layanan pasien, dengan
+          standardisasi lebih kuat pada identitas dan pertukaran informasi.
+    \item Mengesahkan enam prinsip pada Tabel \ref{tab:ch03-prinsip-medikara}.
+    \item Menetapkan Direktur Pelayanan sebagai pemilik data identitas pasien,
+          dan membentuk forum keputusan lintas fasilitas.
+    \item Menyetujui pengukuran kondisi awal pada C2, termasuk sampel 10.000 nomor
+          rekam medis.
+  \end{enumerate}
+
+  \textbf{Yang belum diputuskan.} Pemilihan produk SIMRS, lokasi penyimpanan, dan
+  urutan paket kerja tetap memerlukan penilaian pada C3 dan C4. Penggantian alat medis
+  dan ERP keuangan berada di luar lingkup siklus ini.
+\end{kasus}
 
 \section{Aktivitas: Menyusun Visi Arsitektur}
 
-% TODO
-% Tujuan aktivitas: menghasilkan visi arsitektur yang menghubungkan strategi organisasi dengan
-%   arah arsitektur.
-% Peran dalam tim: analis bisnis memimpin telaah dokumen strategi dan wawancara; analis teknologi
-%   menilai pemicu yang berasal dari sistem; seluruh tim menentukan model operasi dan prinsip;
-%   koordinator merangkai dokumen visi arsitektur.
-% Langkah: kumpulkan dokumen strategi; susun rantai motivasi dari pemicu sampai outcome terukur;
-%   tentukan model operasi saat ini dan yang diinginkan; tulis 5 sampai 8 prinsip arsitektur;
-%   rangkai visi arsitektur dua sampai tiga halaman.
-% Luaran dan tonggak capstone: visi arsitektur dengan rantai motivasi, model operasi, dan prinsip
-%   arsitektur, yang melengkapi C1.
-% Berkas sources yang direncanakan: sources/chapter03/templat-rantai-motivasi.md,
-%   sources/chapter03/lembar-penilaian-model-operasi.md,
-%   sources/chapter03/templat-prinsip-arsitektur.md, sources/chapter03/templat-visi-arsitektur.md
+Aktivitas ini menghasilkan visi arsitektur yang dapat disetujui sponsor, sekaligus
+menutup tonggak C1. Tim yang memakai organisasi sendiri menurunkan rantai motivasi
+dari dokumen strategi dan wawancara di organisasinya. Tim yang memakai Medikara Health
+melanjutkan contoh pada bab ini, lalu merantai pemicu keempat, yaitu biaya integrasi
+yang tinggi.
+
+\textbf{Pembagian peran.}
+
+\begin{itemize}
+  \item \textbf{Analis bisnis} memimpin telaah dokumen strategi dan wawancara singkat
+        dengan pemangku kepentingan, lalu menyusun \textit{goal} dan \textit{outcome}.
+  \item \textbf{Analis teknologi} menilai pemicu yang berasal dari sistem, misalnya
+        biaya integrasi atau kontrol akses yang lemah, serta kendala teknisnya.
+  \item \textbf{Pemodel} menjaga keterlacakan rantai motivasi dan menyiapkan
+        \textit{core diagram}.
+  \item \textbf{Koordinator} merangkai seluruh hasil menjadi visi dua sampai tiga
+        halaman, lalu menyelaraskannya dengan tiga mata kuliah lain.
+\end{itemize}
+
+\textbf{Langkah kerja.}
+
+\begin{enumerate}
+  \item Kumpulkan strategi, hasil wawancara, dan bukti pemicu. Pisahkan fakta dari angka
+        pengandaian.
+  \item Isi \berkas{sources/chapter03/templat-rantai-motivasi.csv}. Tetapkan ukuran,
+        kondisi awal, target, tenggat, dan pemilik untuk setiap \textit{outcome}.
+  \item Gunakan \berkas{sources/chapter03/lembar-penilaian-model-operasi.md} untuk menilai
+        integrasi dan standardisasi per lingkup. Tentukan model saat ini dan model yang
+        diinginkan.
+  \item Rumuskan lima sampai delapan prinsip melalui
+        \berkas{sources/chapter03/templat-prinsip-arsitektur.md}. Uji setiap prinsip pada dua
+        alternatif keputusan.
+  \item Susun visi dua sampai tiga halaman memakai
+        \berkas{sources/chapter03/templat-visi-arsitektur.md}. Cantumkan keputusan yang
+        diminta serta asumsi yang belum terverifikasi.
+  \item Lakukan tinjauan silang. Anggota nonteknis menjelaskan nilai, anggota teknis
+        menjelaskan konsekuensi, dan sponsor menyetujui atau meminta revisi. Tim yang
+        memakai Medikara menunjuk satu anggota sebagai sponsor pengandaian.
+\end{enumerate}
+
+\textbf{Luaran dan kaitan dengan \textit{capstone}.} Luarannya berupa visi arsitektur
+yang memuat rantai motivasi, pilihan model operasi, prinsip, dan \textit{core diagram}.
+Luaran ini menutup tonggak C1 Konteks dan Strategi. Rantai motivasi dipindahkan ke Archi
+pada Bab 4. Prinsip menjadi kriteria penilaian opsi pada Bab 8 dan daftar periksa kepatuhan
+pada Bab 14. Nama dan nomor elemen dijaga sama dengan artefak tiga mata kuliah lain.
+
+\textbf{Kriteria penilaian.} Tabel \ref{tab:ch03-kriteria-aktivitas} memuat kriteria
+yang dipakai saat visi ditinjau pada tatap muka hari Sabtu.
+
+\begin{table}[!htb]
+  \centering
+  \caption{Kriteria penilaian visi arsitektur}
+  \label{tab:ch03-kriteria-aktivitas}
+  \small
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{3.8cm}r>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Kriteria} & \textbf{Bobot} & \textbf{Tanda terpenuhi} \\
+    \hline
+    Keterlacakan & 30\% & Setiap \textit{requirement} dapat ditelusuri sampai \textit{driver} \\
+    \hline
+    Kejelasan hasil & 25\% & Setiap \textit{outcome} punya lima isian \\
+    \hline
+    Alasan pilihan dan konsekuensi & 25\% & Model operasi dan prinsip disertai bukti dan hal yang dikorbankan \\
+    \hline
+    Konsistensi bukti dan lingkup & 20\% & Fakta dan pengandaian terpisah; lingkup sama dengan \textit{Statement of Architecture Work} \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\textbf{Berkas pendukung.} Seluruh berkas tersedia di \berkas{sources/chapter03/}: templat
+rantai motivasi dalam format Comma-Separated Values (CSV), lembar penilaian model operasi,
+templat prinsip arsitektur, templat visi arsitektur, dan skrip pemeriksa keterlacakan.
+
+\textbf{Etika.} Data organisasi nyata wajib seizin organisasi dan dianonimkan. Temuan
+audit dan rincian insiden diringkas tanpa nama sistem yang sensitif. Data pribadi pasien
+atau karyawan tidak boleh dipakai sebagai bukti.
+
+\begin{pendalaman}[title={Pendalaman Teknis (opsional): Memeriksa Keterlacakan dengan Skrip}]
+  Skrip \berkas{sources/chapter03/periksa-keterlacakan.py} memeriksa hubungan pada berkas
+  CSV. Aturan intinya dua: tiap jenis elemen hanya boleh berinduk jenis tertentu, dan tiap
+  \textit{outcome} wajib punya kelima isiannya. Jalankan \texttt{python
+  periksa-keterlacakan.py} dari folder skrip itu. Contoh bawaannya sengaja memuat R3 tanpa
+  induk, sehingga kode keluar 1 adalah temuan yang diharapkan. Hapus satu induk atau target
+  pada salinan berkas untuk melihat temuan lain. Aturan skrip merupakan konvensi latihan,
+  bukan seluruh aturan semantik ArchiMate. Hasil lolos struktur belum membuktikan hubungan
+  sebab akibat benar.
+\end{pendalaman}
 
 \section{Ringkasan}
 
-% TODO
+Strategi perlu diterjemahkan menjadi keputusan arsitektur, karena strategi yang berhenti
+di ruang rapat ditafsirkan sendiri oleh tiap proyek. Rantai motivasi menghubungkan
+\textit{driver}, \textit{assessment}, \textit{goal}, \textit{outcome}, prinsip, dan
+\textit{requirement}. Setiap \textit{outcome} punya lima isian: ukuran, kondisi awal,
+target, tenggat, dan pemilik. Pada contoh Medikara, tunggu rawat jalan turun dari 96
+menjadi 60 menit pada Desember 2028, dengan Direktur Pelayanan sebagai pemiliknya.
+Rantai yang dibaca dua arah juga menemukan kebutuhan tanpa induk dan \textit{goal} tanpa
+\textit{outcome} sebelum anggaran keluar.
+
+Model operasi menjelaskan kebutuhan integrasi dan standardisasi proses bisnis. Keempat
+kuadran, yaitu diversifikasi, koordinasi, replikasi, dan unifikasi, membantu menguji
+pilihan tanpa menetapkan satu resep untuk seluruh organisasi. Layanan pasien Medikara
+berada di diversifikasi akibat akuisisi dan diarahkan paling tidak ke koordinasi,
+sedangkan keuangannya sudah di unifikasi. \textit{Core diagram} merangkum yang wajib sama
+dalam satu halaman.
+
+Fase \textit{Preliminary} dan fase A menetapkan mandat, lingkup, nilai, serta rencana kerja.
+Skenario bisnis menggali kebutuhan dari situasi nyata, sedangkan penilaian kesiapan
+menjadikan mandat yang lemah dan kapasitas yang terbatas sebagai risiko tertulis.
+
+Prinsip arsitektur membimbing pilihan melalui nama, pernyataan, alasan, dan implikasi.
+Uji utamanya sederhana: dua opsi nyata harus dinilai berbeda setelah prinsip diterapkan.
+Konflik antarprinsip ditulis terbuka, dan pengecualian punya pemilik serta masa berlaku.
+Medikara menyepakati enam prinsip, dari satu sumber kebenaran untuk data pasien sampai
+keleluasaan lokal di luar inti.
+
+Visi untuk direksi menampilkan hasil, pilihan, asumsi, risiko, dan keputusan yang diminta.
+Nilai ditulis menurut jenisnya, sehingga 120.000 jam waktu tunggu pasien tidak dibaca
+sebagai penghematan kas. Pesan utama bab ini adalah bahwa rancangan yang baik dimulai dari
+arah yang dapat ditelusuri dan disepakati, sebelum produk teknologi dipilih.
 
 \section{Latihan}
 
+Seluruh berkas pendukung tersedia di \berkas{sources/chapter03/}. Angka tambahan pada contoh
+Medikara merupakan asumsi pembelajaran. Hasil tiap mahasiswa boleh berbeda, dan yang dinilai
+adalah penalaran serta perbandingannya.
+
+\subsection*{Latihan 1: Menelusuri Strategi}
+
+Latihan ini membuktikan bahwa satu kalimat strategi dapat diturunkan menjadi elemen yang
+berbeda jenis, dan setiap elemen dapat diuji. Turunkan strategi ``Satu Pasien, Satu Rekam
+Medis'' menjadi satu \textit{goal}, dua \textit{outcome} terukur, dan satu
+\textit{requirement}.
+
 \begin{enumerate}
-  \item Turunkan strategi ``Satu Pasien, Satu Rekam Medis'' menjadi satu \textit{goal}, dua \textit{outcome} terukur, dan satu \textit{requirement}.
-  \item Jaringan 12 apotek menjalankan proses yang sama di semua cabang, tetapi pelanggan di tiap kota berbeda dan jarang berpindah cabang. Model operasi mana yang paling cocok, dan apa akibatnya bagi aplikasi dan data?
-  \item Kritik prinsip ``Semua sistem harus memakai teknologi terbaru.'' Tulis ulang menjadi prinsip yang baik lengkap dengan alasan dan implikasi.
+  \item Pilih satu masalah yang paling dekat dengan strategi, misalnya identitas pasien yang
+        terpisah di lima SIMRS.
+  \item Tulis satu \textit{goal} yang menyatakan arah, tanpa angka dan tanpa nama sistem.
+  \item Tulis dua \textit{outcome} lengkap dengan lima isiannya. Bila kondisi awal belum
+        ada, tulis cara mengukurnya.
+  \item Tulis satu \textit{requirement}, tautkan ke salah satu \textit{outcome}, lalu
+        jelaskan cara mengujinya.
+  \item Salin hasilnya ke Tabel \ref{tab:ch03-lat1-hasil}. Tabel \ref{tab:ch03-lat1-contoh}
+        memperlihatkan contoh terisi untuk rantai akses, bukan untuk identitas pasien.
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 1 yang sudah terisi: rantai akses Medikara}
+  \label{tab:ch03-lat1-contoh}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.7cm}*{2}{>{\raggedright\arraybackslash}X}>{\raggedright\arraybackslash}p{2.5cm}}
+    \hline
+    \textbf{Elemen} & \textbf{Pernyataan} & \textbf{Ukuran, kondisi awal, target, tenggat} & \textbf{Pemilik atau cara uji} \\
+    \hline
+    \textit{Goal} & Data pasien hanya dapat dibuka oleh pihak yang berhak & Arah, tanpa angka & Disepakati sponsor \\
+    \hline
+    \textit{Outcome} 1 & Akun pihak ketiga tanpa kontrak berlaku hilang & Jumlah akun vendor aktif tanpa kontrak berlaku; 17 menjadi 0; Juni 2027 & Kepala Keamanan Informasi \\
+    \hline
+    \textit{Outcome} 2 & Hak akses SIMRS ditinjau berkala & Persentase akun SIMRS yang ditinjau dalam tiga bulan terakhir; 0\% menjadi 100\%; Maret 2027 & Kepala Keamanan Informasi \\
+    \hline
+    \textit{Requirement} & Setiap akun vendor memakai autentikasi dua faktor dan kedaluwarsa otomatis pada tanggal akhir kontrak & Induk: \textit{outcome} 1 dan prinsip akses berdasarkan kebutuhan & Akun uji dengan kontrak berakhir harus tertolak \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 1: strategi ``Satu Pasien, Satu Rekam Medis''}
+  \label{tab:ch03-lat1-hasil}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.7cm}*{2}{>{\raggedright\arraybackslash}X}>{\raggedright\arraybackslash}p{2.5cm}}
+    \hline
+    \textbf{Elemen} & \textbf{Pernyataan} & \textbf{Ukuran, kondisi awal, target, tenggat} & \textbf{Pemilik atau cara uji} \\
+    \hline
+    \textit{Goal} & \dots & \dots & \dots \\
+    \hline
+    \textit{Outcome} 1 & \dots & \dots & \dots \\
+    \hline
+    \textit{Outcome} 2 & \dots & \dots & \dots \\
+    \hline
+    \textit{Requirement} & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\textbf{Pertanyaan analisis.}
+
+\begin{enumerate}
+  \item Apakah \textit{requirement} yang ditulis sudah memilih produk tertentu? Bila ya, tulis
+        ulang tanpa nama produk.
+  \item Misalkan kunjungan naik 20 persen setelah ekosistem mitra berjalan. Bagaimana kedua
+        \textit{outcome} tetap dapat dinilai secara adil?
+  \item \textit{Outcome} mana yang bergantung pada perubahan cara kerja petugas, bukan hanya
+        pada sistem?
+\end{enumerate}
+
+\subsection*{Latihan 2: Memilih Model Operasi}
+
+Latihan ini membuktikan bahwa integrasi dan standardisasi harus dinilai terpisah. Jaringan 12
+apotek menjalankan proses yang sama di semua cabang, tetapi pelanggan di tiap kota berbeda dan
+jarang berpindah cabang. Model operasi mana yang paling cocok, dan apa akibatnya bagi aplikasi
+dan data?
+
+\begin{enumerate}
+  \item Catat transaksi yang mungkin dibagi antarapotek: stok, resep, data pelanggan, dan harga.
+  \item Beri skor integrasi 1 sampai 3, lengkap dengan buktinya.
+  \item Beri skor standardisasi 1 sampai 3, lengkap dengan buktinya.
+  \item Pilih model awal, lalu tulis akibatnya bagi aplikasi dan data.
+  \item Nyatakan satu kondisi yang dapat mengubah pilihan itu, lalu salin hasilnya ke Tabel
+        \ref{tab:ch03-lat2-hasil}. Tabel \ref{tab:ch03-lat2-contoh} memperlihatkan contoh
+        terisi untuk dua lingkup lain.
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 2 yang sudah terisi: dua lingkup selain apotek}
+  \label{tab:ch03-lat2-contoh}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.8cm}*{2}{>{\raggedright\arraybackslash}X}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Lingkup} & \textbf{Bukti integrasi (skor)} & \textbf{Bukti standardisasi (skor)} & \textbf{Model awal} & \textbf{Akibat bagi aplikasi dan data} \\
+    \hline
+    Permintaan dan hasil laboratorium rujukan & Misalkan 1.500 permintaan per hari dari 23 fasilitas; hasil kembali ke rekam medis asal (3) & Cara pengambilan sampel dan formulir berbeda di tiap fasilitas (1) & Koordinasi & Data permintaan dan hasil dibagi lewat antarmuka baku; formulir lokal boleh tetap \\
+    \hline
+    Layanan dasar 18 klinik pratama & Misalkan 93 persen pasien hanya berkunjung ke satu klinik (1) & Standard Operating Procedure (SOP) sama di 18 klinik (3) & Replikasi & Satu konfigurasi aplikasi dipakai berulang; rujukan ke rumah sakit tetap perlu integrasi \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 2: jaringan 12 apotek}
+  \label{tab:ch03-lat2-hasil}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.8cm}*{2}{>{\raggedright\arraybackslash}X}>{\raggedright\arraybackslash}p{1.5cm}>{\raggedright\arraybackslash}X}
+    \hline
+    \textbf{Lingkup} & \textbf{Bukti integrasi (skor)} & \textbf{Bukti standardisasi (skor)} & \textbf{Model awal} & \textbf{Akibat bagi aplikasi dan data} \\
+    \hline
+    12 apotek & \dots & \dots & \dots & \dots \\
+    \hline
+    Kondisi pengubah & \dots & \dots & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\textbf{Pertanyaan analisis.}
+
+\begin{enumerate}
+  \item Misalkan pembelian obat untuk 12 apotek dipusatkan. Apakah pembelian terpusat mengubah
+        model seluruh jaringan apotek, atau hanya satu lingkup?
+  \item Data apa yang diperlukan sebelum menyimpulkan integrasi rendah? Pada persentase pelanggan
+        pindah cabang berapa kesimpulan itu perlu diubah?
+  \item Apotek daring mitra masuk ke ekosistem Medikara. Bagian mana dari jawaban yang berubah?
+\end{enumerate}
+
+\subsection*{Latihan 3: Memperbaiki Prinsip}
+
+Latihan ini membuktikan bahwa prinsip yang baik membedakan alternatif keputusan. Kritik prinsip
+``Semua sistem harus memakai teknologi terbaru.'' Tulis ulang menjadi prinsip yang baik lengkap
+dengan alasan dan implikasi.
+
+\begin{enumerate}
+  \item Tulis dua akibat biaya dan risiko bila prinsip itu diterapkan harfiah pada lima SIMRS, satu
+        ERP, dan Medikara+.
+  \item Uji prinsip itu dengan lima ciri pada Tabel \ref{tab:ch03-kriteria-prinsip}.
+  \item Tulis nama, pernyataan, alasan, dan implikasi penggantinya.
+  \item Uji prinsip baru pada dua opsi, yaitu teknologi stabil dan teknologi baru, lalu salin
+        hasilnya ke Tabel \ref{tab:ch03-lat3-hasil}. Tabel \ref{tab:ch03-lat3-contoh} memperlihatkan
+        contoh terisi untuk slogan lain.
+\end{enumerate}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Contoh hasil Latihan 3 yang sudah terisi: memperbaiki slogan ``Keamanan adalah prioritas
+           utama''}
+  \label{tab:ch03-lat3-contoh}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.7cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.6cm}}
+    \hline
+    \textbf{Bagian} & \textbf{Hasil perbaikan} & \textbf{Alasan perbaikan} \\
+    \hline
+    Nama & Akses berdasarkan kebutuhan & Menyebut perilaku, bukan harapan \\
+    \hline
+    Pernyataan & Akses data pasien diberikan menurut tugas dan dibatasi waktu & Dapat dipakai menilai rancangan \\
+    \hline
+    Alasan & Insiden 2025 dan temuan audit; tujuan data hanya dibuka pihak yang berhak & Tertaut ke \textit{goal} \\
+    \hline
+    Implikasi & Peran ditinjau tiap tiga bulan; akun vendor berakhir bersama kontrak; akses darurat dicatat & Menyebut pekerjaan dan biaya \\
+    \hline
+    Uji dua opsi & Akun bersama untuk tim vendor: ditolak. Akun per orang dengan kedaluwarsa: lolos & Dua opsi dinilai berbeda \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\begin{table}[!htb]
+  \centering
+  \caption{Lembar isian Latihan 3: prinsip ``Semua sistem harus memakai teknologi terbaru''}
+  \label{tab:ch03-lat3-hasil}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{>{\raggedright\arraybackslash}p{1.7cm}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{3.6cm}}
+    \hline
+    \textbf{Bagian} & \textbf{Hasil perbaikan} & \textbf{Alasan perbaikan} \\
+    \hline
+    Nama & \dots & \dots \\
+    \hline
+    Pernyataan & \dots & \dots \\
+    \hline
+    Alasan & \dots & \dots \\
+    \hline
+    Implikasi & \dots & \dots \\
+    \hline
+    Uji dua opsi & \dots & \dots \\
+    \hline
+  \end{tabularx}
+\end{table}
+
+\textbf{Pertanyaan analisis.}
+
+\begin{enumerate}
+  \item Kapan teknologi baru layak dipilih menurut prinsip yang ditulis ulang? Berikan satu contoh
+        dari Medikara.
+  \item Siapa berwenang menyetujui pengecualian, dan kapan pengecualian itu ditinjau?
+  \item TOGAF mencontohkan prinsip perubahan berbasis kebutuhan \cite{togaf10}. Apa kesamaan dan
+        perbedaannya dengan prinsip yang ditulis ulang?
 \end{enumerate}

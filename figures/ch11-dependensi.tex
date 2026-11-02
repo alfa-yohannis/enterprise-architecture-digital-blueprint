@@ -1,0 +1,45 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  paket/.style={draw, rounded corners, align=center, text width=3.0cm,
+                minimum height=0.9cm, font=\scriptsize\bfseries},
+  tahap/.style={draw, rounded corners, align=center, text width=2.55cm,
+                minimum height=1.45cm, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  batas/.style={thick, gray!70!black}
+]
+  % Bagian atas: dua paket yang tampak saling menunggu.
+  \node[font=\scriptsize\bfseries, anchor=west] at (0,1.0) {Tampak melingkar};
+  \node[paket, fill=red!22] (p3) at (2.3,0)
+    {P3\\[-1pt]{\tiny\mdseries Identitas pasien tunggal}};
+  \node[paket, fill=red!22] (p5) at (9.7,0)
+    {P5\\[-1pt]{\tiny\mdseries Konsolidasi SIMRS}};
+  \draw[panah] ([yshift=2mm]p3.east) --
+    node[above, font=\tiny] {SIMRS terpadu butuh satu kunci pasien}
+    ([yshift=2mm]p5.west);
+  \draw[panah] ([yshift=-2mm]p5.west) --
+    node[below, font=\tiny] {pendaftaran terpusat butuh satu SIMRS}
+    ([yshift=-2mm]p3.east);
+
+  % Bagian bawah: urutan hasil sesudah batas paket ditata ulang.
+  \node[font=\scriptsize\bfseries, anchor=west] at (0,-1.15)
+    {Sesudah diurai menjadi hasil antara};
+  \node[tahap, fill=blue!8] (kontrak) at (1.3,-2.5)
+    {Kontrak identitas\\[1pt]{\tiny\mdseries definisi, aturan cocok, dan pemilik data}};
+  \node[tahap, fill=orange!12] (registri) at (4.4,-2.5)
+    {MPI pola registri\\[1pt]{\tiny\mdseries di atas lima SIMRS lewat lima adaptor}};
+  \node[tahap, fill=blue!8] (simrs) at (7.5,-2.5)
+    {SIMRS terpadu\\[1pt]{\tiny\mdseries Depok lebih dahulu, lalu empat rumah sakit lain}};
+  \node[tahap, fill=green!10] (terpusat) at (10.6,-2.5)
+    {MPI pola terpusat\\[1pt]{\tiny\mdseries pendaftaran langsung menulis ke MPI}};
+  \draw[panah] (kontrak) -- (registri);
+  \draw[panah] (registri) -- (simrs);
+  \draw[panah] (simrs) -- (terpusat);
+
+  % Garis lingkup paket.
+  \draw[batas] (0.05,-3.45) -- (5.65,-3.45);
+  \draw[batas] (6.25,-3.45) -- (11.85,-3.45);
+  \node[font=\tiny, align=center] at (2.85,-3.72)
+    {Lingkup P3: sebelum Maret 2028, bagian dari T1};
+  \node[font=\tiny, align=center] at (9.05,-3.72)
+    {Lingkup P5: April 2028 sampai September 2030};
+\end{tikzpicture}

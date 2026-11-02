@@ -1,0 +1,47 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  paket/.style={draw, rounded corners, align=center, text width=2.7cm,
+                minimum height=0.95cm, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Kolom kiri: paket tanpa prasyarat.
+  \node[paket, fill=blue!8] (p1) at (0,1.0)
+    {P1\\[-1pt]{\tiny\mdseries Kontrol akses terpusat, 9 bulan}};
+  \node[paket, fill=blue!8] (p2) at (0,-2.1)
+    {P2\\[-1pt]{\tiny\mdseries \textit{Hub} integrasi BPJS dan SATUSEHAT, 6 bulan}};
+
+  % Kolom tengah: paket yang ditunggu banyak paket lain.
+  \node[paket, fill=blue!8] (p4) at (4.3,2.1)
+    {P4\\[-1pt]{\tiny\mdseries \textit{Landing zone cloud}, 6 bulan}};
+  \node[paket, fill=orange!12] (p3) at (4.3,-0.6)
+    {P3\\[-1pt]{\tiny\mdseries Identitas pasien tunggal (MPI), 12 bulan}};
+
+  % Kolom kanan: hasil yang dirasakan pengguna.
+  \node[paket, fill=green!10] (p5) at (8.6,2.7)
+    {P5\\[-1pt]{\tiny\mdseries Konsolidasi SIMRS, 30 bulan}};
+  \node[paket, fill=green!10] (p6) at (8.6,1.0)
+    {P6\\[-1pt]{\tiny\mdseries Laporan manajemen terpadu, 12 bulan}};
+  \node[paket, fill=green!10] (p7) at (8.6,-0.7)
+    {P7\\[-1pt]{\tiny\mdseries Antrean dan janji temu lintas fasilitas, 9 bulan}};
+  \node[paket, fill=green!10] (p8) at (8.6,-2.4)
+    {P8\\[-1pt]{\tiny\mdseries Portal dan API mitra, 12 bulan}};
+
+  % Sebelas dependensi, sama dengan kolom Pendahulu pada tabel paket Bab 12.
+  \draw[panah] (p1.east) -- (p4.west);
+  \draw[panah] (p1.east) -- (p3.west);
+  \draw[panah] (p2.east) -- (p3.west);
+  \draw[panah] (p4.east) -- (p5.west);
+  \draw[panah] (p4.east) -- (p6.west);
+  \draw[panah] (p3.east) -- (p5.west);
+  \draw[panah] (p3.east) -- (p6.west);
+  \draw[panah] (p3.east) -- (p7.west);
+  \draw[panah] (p3.east) -- (p8.west);
+  \draw[panah] (p2.east) -- (p7.west);
+  \draw[panah] (p2.east) -- (p8.west);
+
+  % Keterangan.
+  \node[font=\tiny, text width=11.2cm, align=center] at (4.3,-3.35)
+    {Panah menuju paket yang membutuhkan hasil. Biru: fondasi. Jingga: paket
+     yang paling banyak ditunggu. Hijau: hasil yang dirasakan pengguna. Durasi
+     adalah perkiraan awal; tanggal dan kapasitas dihitung pada Bab 12.};
+\end{tikzpicture}

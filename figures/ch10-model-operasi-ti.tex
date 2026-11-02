@@ -1,0 +1,31 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  sel/.style={draw, minimum width=4.4cm, minimum height=2.15cm, align=center,
+              font=\scriptsize},
+  tanda/.style={draw, rounded corners, minimum height=0.5cm, align=center,
+                font=\tiny\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Empat sel model operasi TI menurut MIT CISR.
+  \node[sel, fill=gray!35] (lm) at (0,0)
+    {\textbf{Legacy Modernizer}\\33\% perusahaan\\{\tiny\mdseries 37\% pendapatan dari inovasi}};
+  \node[sel, fill=blue!8] (cs) at (0,2.15)
+    {\textbf{Creative Sprinter}\\16\% perusahaan\\{\tiny\mdseries 49\% pendapatan dari inovasi}};
+  \node[sel, fill=green!10] (ai) at (4.4,2.15)
+    {\textbf{Adaptive Innovator}\\33\% perusahaan\\{\tiny\mdseries 71\% pendapatan dari inovasi}};
+  \node[sel, fill=orange!12] (eb) at (4.4,0)
+    {\textbf{Efficient Builder}\\18\% perusahaan\\{\tiny\mdseries 54\% pendapatan dari inovasi}};
+
+  % Sumbu.
+  \draw[panah] (-2.2,-1.25) -- (6.8,-1.25);
+  \draw[panah] (-2.4,-1.07) -- (-2.4,3.4);
+  \node[font=\tiny, anchor=north, align=center] at (2.2,-1.35)
+    {kepemimpinan TI \textit{enterprise}, modularitas, dan pemakaian ulang (rendah ke tinggi)};
+  \node[font=\tiny, rotate=90, anchor=south] at (-2.5,1.07)
+    {kecepatan inovasi (rendah ke tinggi)};
+
+  % Posisi Medikara menurut tafsiran bab ini.
+  \node[tanda, fill=red!22] (kini) at (-0.9,-0.8) {Medikara kini};
+  \node[tanda, fill=green!10] (arah) at (3.4,-0.8) {arah target};
+  \draw[panah, red!65!black] (kini) -- (arah);
+\end{tikzpicture}

@@ -1,0 +1,5 @@
+# Daftar awal sistem fiktif Medikara. Salin lalu isi; hapus baris komentar saat impor spreadsheet.
+id,nama,fungsi,pemilik_bisnis,lingkup,sumber
+APP-01,SIMRS RS Jakarta,Layanan klinis dan administrasi,Direktur RS Jakarta,Rumah sakit,Kasus dasar
+APP-06,ERP,Keuangan terpusat,Direktur Keuangan,Korporat,Kasus dasar
+APP-07,Medikara+,Janji temu dan telekonsultasi,Direktur Pelayanan,Pasien,Kasus dasar

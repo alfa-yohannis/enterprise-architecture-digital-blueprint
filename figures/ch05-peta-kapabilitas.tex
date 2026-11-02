@@ -1,0 +1,40 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kap/.style={draw, fill=blue!8, text width=3.3cm, minimum height=0.5cm,
+              align=center, font=\tiny, inner sep=2pt},
+  tambal/.style={kap, fill=gray!35, dashed},
+  judul/.style={font=\scriptsize\bfseries, align=center, text width=3.5cm}
+]
+  \draw[rounded corners, fill=praditagreen!15] (0,0.75) rectangle (3.8,-4.45);
+  \draw[rounded corners, fill=praditagreen!15] (4.0,0.75) rectangle (7.8,-4.45);
+  \draw[rounded corners, fill=praditagreen!15] (8.0,0.75) rectangle (11.8,-4.45);
+  \node[judul] at (1.9,0.35) {CAP-S\\Kapabilitas Strategis};
+  \node[judul] at (5.9,0.35) {CAP-L\\Kapabilitas Layanan Pasien};
+  \node[judul] at (9.9,0.35) {CAP-P\\Kapabilitas Pendukung};
+
+  \node[kap] at (1.9,-0.35) {S01 Manajemen Strategi};
+  \node[kap] at (1.9,-0.97) {S02 Pengelolaan Kepatuhan};
+
+  \node[kap] at (5.9,-0.35) {L01 Pendaftaran Pasien};
+  \node[tambal] at (5.9,-0.97) {L02 Penerbitan Nomor Rekam Medis Lokal};
+  \node[kap] at (5.9,-1.59) {L03 Penjadwalan Layanan};
+  \node[kap] at (5.9,-2.21) {L04 Pengelolaan Rekam Medis};
+  \node[kap] at (5.9,-2.83) {L05 Pelayanan Klinis};
+  \node[kap] at (5.9,-3.45) {L06 Layanan Farmasi dan Laboratorium};
+  \node[kap] at (5.9,-4.07) {L07 Telekonsultasi};
+
+  \node[kap] at (9.9,-0.35) {P01 Klaim dan Penjaminan};
+  \node[kap] at (9.9,-0.97) {P02 Pengelolaan Akses Pengguna};
+  \node[kap] at (9.9,-1.59) {P03 Pelaporan Manajemen};
+  \node[kap] at (9.9,-2.21) {P04 Keuangan dan Akuntansi};
+  \node[kap] at (9.9,-2.83) {P05 Pengelolaan Tenaga Kerja};
+  \node[tambal] at (9.9,-3.45) {P06 Rekonsiliasi Data Manual Antarfasilitas};
+
+  \draw[fill=praditagreen!15] (0.6,-4.82) rectangle (0.9,-5.02);
+  \node[font=\tiny, anchor=west] at (0.95,-4.92) {tingkat 1 (kelompok)};
+  \draw[fill=blue!8] (4.0,-4.82) rectangle (4.3,-5.02);
+  \node[font=\tiny, anchor=west] at (4.35,-4.92) {tingkat 2};
+  \draw[fill=gray!35, dashed] (6.6,-4.82) rectangle (6.9,-5.02);
+  \node[font=\tiny, anchor=west] at (6.95,-4.92)
+    {kapabilitas tambalan: ada karena data terpecah};
+\end{tikzpicture}

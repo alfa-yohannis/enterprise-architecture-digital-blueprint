@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Latihan pemeriksa Bab 4: contoh sengaja rusak; jalankan python periksa-model.py medikara-cacat.xml. -->
+<model xmlns="http://www.opengroup.org/xsd/archimate/3.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" identifier="medikara-latihan-cacat">
+  <name>Medikara: contoh pertukaran dengan cacat disengaja</name>
+  <elements>
+    <element identifier="id-pasien" xsi:type="BusinessActor">
+      <name>Pasien</name>
+    </element>
+    <element identifier="id-petugas" xsi:type="BusinessRole">
+      <name>Petugas Pendaftaran</name>
+    </element>
+    <element identifier="id-layanan-janji" xsi:type="BusinessService">
+      <name>Layanan Janji Temu Rawat Jalan</name>
+      <properties>
+        <property propertyDefinitionRef="prop-2">
+          <value>Direktorat Pelayanan Medik</value>
+        </property>
+      </properties>
+    </element>
+    <element identifier="id-proses-janji" xsi:type="BusinessProcess">
+      <name>Membuat Janji Temu</name>
+    </element>
+    <element identifier="id-proses-pilih" xsi:type="BusinessProcess">
+      <name>Memilih Dokter dan Jadwal</name>
+    </element>
+    <element identifier="id-proses-konfirmasi" xsi:type="BusinessProcess">
+      <name>Mengonfirmasi Janji Temu</name>
+    </element>
+    <element identifier="id-proses-ingat" xsi:type="BusinessProcess">
+      <name>Mengirim Pengingat</name>
+    </element>
+    <element identifier="id-objek-janji" xsi:type="BusinessObject">
+      <name>Janji Temu</name>
+    </element>
+    <element identifier="id-medikara" xsi:type="ApplicationComponent">
+      <name>Medikara+</name>
+      <properties>
+        <property propertyDefinitionRef="prop-2">
+          <value>Divisi Layanan Digital</value>
+        </property>
+        <property propertyDefinitionRef="prop-3">
+          <value>Saat ini</value>
+        </property>
+        <property propertyDefinitionRef="prop-4">
+          <value>Wawancara kepala Divisi Layanan Digital</value>
+        </property>
+      </properties>
+    </element>
+    <element identifier="id-simrs-jakarta" xsi:type="ApplicationComponent">
+      <name>SIMRS RS Jakarta</name>
+      <properties>
+        <property propertyDefinitionRef="prop-2">
+          <value>Divisi Teknologi Informasi</value>
+        </property>
+        <property propertyDefinitionRef="prop-3">
+          <value>Saat ini</value>
+        </property>
+        <property propertyDefinitionRef="prop-4">
+          <value>Katalog aset TI RS Jakarta</value>
+        </property>
+      </properties>
+    </element>
+    <element identifier="id-layanan-pesan" xsi:type="ApplicationService">
+      <name>Layanan Pemesanan Jadwal</name>
+    </element>
+    <element identifier="id-layanan-jadwal" xsi:type="ApplicationService">
+      <name>Layanan Jadwal Dokter</name>
+    </element>
+    <element identifier="id-fungsi-jadwal" xsi:type="ApplicationFunction">
+      <name>Pengelolaan Jadwal Dokter</name>
+    </element>
+    <element identifier="id-data-jadwal" xsi:type="DataObject">
+      <name>Data Jadwal Dokter</name>
+    </element>
+    <element identifier="id-data-janji" xsi:type="DataObject">
+      <name>Data Janji Temu</name>
+    </element>
+    <element identifier="id-server-db" xsi:type="Node">
+      <name>Server Basis Data SIMRS</name>
+      <properties>
+        <property propertyDefinitionRef="prop-2">
+          <value>Divisi Teknologi Informasi</value>
+        </property>
+        <property propertyDefinitionRef="prop-1">
+          <value>Ruang server RS Jakarta</value>
+        </property>
+      </properties>
+    </element>
+    <element identifier="id-dbms" xsi:type="SystemSoftware">
+      <name>Sistem Manajemen Basis Data</name>
+    </element>
+    <element identifier="id-layanan-db" xsi:type="TechnologyService">
+      <name>Layanan Basis Data</name>
+    </element>
+    <element identifier="id-server-vendor" xsi:type="Node">
+      <name>Server Vendor Medikara+</name>
+      <properties>
+        <property propertyDefinitionRef="prop-2">
+          <value>Vendor Medikara+</value>
+        </property>
+      </properties>
+    </element>
+    <element identifier="id-direksi" xsi:type="Stakeholder">
+      <name>Direksi Medikara</name>
+    </element>
+    <element identifier="id-driver-antrean" xsi:type="Driver">
+      <name>Antrean Layanan yang Panjang</name>
+    </element>
+    <element identifier="id-asesmen-loket" xsi:type="Assessment">
+      <name>Sebagian Besar Janji Temu Masih Dibuat di Loket</name>
+    </element>
+    <element identifier="id-goal-akses" xsi:type="Goal">
+      <name>Akses Rawat Jalan Lebih Cepat</name>
+    </element>
+    <element identifier="id-outcome-tunggu" xsi:type="Outcome">
+      <name>Waktu Tunggu Pendaftaran Turun 30 Persen</name>
+    </element>
+    <element identifier="id-prinsip-sumber" xsi:type="Principle">
+      <name>Satu Sumber Kebenaran untuk Data Pasien</name>
+    </element>
+    <element identifier="id-req-jadwal" xsi:type="Requirement">
+      <name>Jadwal Dokter Dibaca Langsung dari SIMRS</name>
+    </element>
+    <element identifier="id-appbaru" xsi:type="ApplicationComponent">
+      <name>Application Component</name>
+    </element>
+    <element identifier="id-prosesbaru" xsi:type="BusinessProcess">
+      <name>Pendaftaran Pasien</name>
+    </element>
+  </elements>
+  <relationships>
+    <relationship identifier="id-r01" xsi:type="Serving" source="id-layanan-janji" target="id-pasien" />
+    <relationship identifier="id-r02" xsi:type="Realization" source="id-proses-janji" target="id-layanan-janji" />
+    <relationship identifier="id-r03" xsi:type="Assignment" source="id-petugas" target="id-proses-janji" />
+    <relationship identifier="id-r04" xsi:type="Composition" source="id-proses-janji" target="id-proses-pilih" />
+    <relationship identifier="id-r05" xsi:type="Composition" source="id-proses-janji" target="id-proses-konfirmasi" />
+    <relationship identifier="id-r06" xsi:type="Composition" source="id-proses-janji" target="id-proses-ingat" />
+    <relationship identifier="id-r07" xsi:type="Triggering" source="id-proses-pilih" target="id-proses-konfirmasi" />
+    <relationship identifier="id-r08" xsi:type="Triggering" source="id-proses-konfirmasi" target="id-proses-ingat" />
+    <relationship identifier="id-r09" xsi:type="Access" source="id-proses-janji" target="id-objek-janji" />
+    <relationship identifier="id-r10" xsi:type="Serving" source="id-layanan-pesan" target="id-proses-janji" />
+    <relationship identifier="id-r11" xsi:type="Realization" source="id-medikara" target="id-layanan-pesan" />
+    <relationship identifier="id-r12" xsi:type="Serving" source="id-layanan-jadwal" target="id-medikara" />
+    <relationship identifier="id-r13" xsi:type="Realization" source="id-fungsi-jadwal" target="id-layanan-jadwal" />
+    <relationship identifier="id-r14" xsi:type="Assignment" source="id-simrs-jakarta" target="id-fungsi-jadwal" />
+    <relationship identifier="id-r15" xsi:type="Access" source="id-fungsi-jadwal" target="id-data-jadwal" />
+    <relationship identifier="id-r16" xsi:type="Access" source="id-medikara" target="id-data-janji" />
+    <relationship identifier="id-r17" xsi:type="Realization" source="id-data-janji" target="id-objek-janji" />
+    <relationship identifier="id-r18" xsi:type="Flow" source="id-medikara" target="id-simrs-jakarta" />
+    <relationship identifier="id-r19" xsi:type="Serving" source="id-layanan-db" target="id-simrs-jakarta" />
+    <relationship identifier="id-r20" xsi:type="Realization" source="id-server-db" target="id-layanan-db" />
+    <relationship identifier="id-r21" xsi:type="Composition" source="id-server-db" target="id-dbms" />
+    <relationship identifier="id-r22" xsi:type="Serving" source="id-server-vendor" target="id-medikara" />
+    <relationship identifier="id-r23" xsi:type="Association" source="id-direksi" target="id-driver-antrean" />
+    <relationship identifier="id-r24" xsi:type="Association" source="id-driver-antrean" target="id-asesmen-loket" />
+    <relationship identifier="id-r25" xsi:type="Influence" source="id-asesmen-loket" target="id-goal-akses" />
+    <relationship identifier="id-r26" xsi:type="Realization" source="id-outcome-tunggu" target="id-goal-akses" />
+    <relationship identifier="id-r27" xsi:type="Realization" source="id-prinsip-sumber" target="id-goal-akses" />
+    <relationship identifier="id-r28" xsi:type="Realization" source="id-req-jadwal" target="id-outcome-tunggu" />
+    <relationship identifier="id-r29" xsi:type="Realization" source="id-req-jadwal" target="id-prinsip-sumber" />
+    <relationship identifier="id-r30" xsi:type="Realization" source="id-layanan-jadwal" target="id-req-jadwal" />
+    <relationship identifier="id-rbaru" xsi:type="Serving" source="id-prosesbaru" target="id-hilang" />
+  </relationships>
+  <propertyDefinitions>
+    <propertyDefinition identifier="prop-1" type="string">
+      <name>Lokasi</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="prop-2" type="string">
+      <name>Pemilik</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="prop-3" type="string">
+      <name>Status</name>
+    </propertyDefinition>
+    <propertyDefinition identifier="prop-4" type="string">
+      <name>Sumber</name>
+    </propertyDefinition>
+  </propertyDefinitions>
+  <views>
+    <diagrams>
+      <view identifier="view-latihan" xsi:type="Diagram">
+        <name>Elemen model awal</name>
+        <node identifier="node-0" elementRef="id-asesmen-loket" xsi:type="Element" x="0" y="0" w="130" h="60" />
+        <node identifier="node-1" elementRef="id-data-jadwal" xsi:type="Element" x="150" y="0" w="130" h="60" />
+        <node identifier="node-2" elementRef="id-data-janji" xsi:type="Element" x="300" y="0" w="130" h="60" />
+        <node identifier="node-3" elementRef="id-dbms" xsi:type="Element" x="450" y="0" w="130" h="60" />
+        <node identifier="node-4" elementRef="id-direksi" xsi:type="Element" x="600" y="0" w="130" h="60" />
+        <node identifier="node-5" elementRef="id-driver-antrean" xsi:type="Element" x="750" y="0" w="130" h="60" />
+        <node identifier="node-6" elementRef="id-fungsi-jadwal" xsi:type="Element" x="0" y="80" w="130" h="60" />
+        <node identifier="node-7" elementRef="id-goal-akses" xsi:type="Element" x="150" y="80" w="130" h="60" />
+        <node identifier="node-8" elementRef="id-layanan-db" xsi:type="Element" x="300" y="80" w="130" h="60" />
+        <node identifier="node-9" elementRef="id-layanan-jadwal" xsi:type="Element" x="450" y="80" w="130" h="60" />
+        <node identifier="node-10" elementRef="id-layanan-janji" xsi:type="Element" x="600" y="80" w="130" h="60" />
+        <node identifier="node-11" elementRef="id-layanan-pesan" xsi:type="Element" x="750" y="80" w="130" h="60" />
+        <node identifier="node-12" elementRef="id-medikara" xsi:type="Element" x="0" y="160" w="130" h="60" />
+        <node identifier="node-13" elementRef="id-objek-janji" xsi:type="Element" x="150" y="160" w="130" h="60" />
+        <node identifier="node-14" elementRef="id-outcome-tunggu" xsi:type="Element" x="300" y="160" w="130" h="60" />
+        <node identifier="node-15" elementRef="id-pasien" xsi:type="Element" x="450" y="160" w="130" h="60" />
+        <node identifier="node-16" elementRef="id-petugas" xsi:type="Element" x="600" y="160" w="130" h="60" />
+        <node identifier="node-17" elementRef="id-prinsip-sumber" xsi:type="Element" x="750" y="160" w="130" h="60" />
+        <node identifier="node-18" elementRef="id-proses-ingat" xsi:type="Element" x="0" y="240" w="130" h="60" />
+        <node identifier="node-19" elementRef="id-proses-janji" xsi:type="Element" x="150" y="240" w="130" h="60" />
+        <node identifier="node-20" elementRef="id-proses-konfirmasi" xsi:type="Element" x="300" y="240" w="130" h="60" />
+        <node identifier="node-21" elementRef="id-proses-pilih" xsi:type="Element" x="450" y="240" w="130" h="60" />
+        <node identifier="node-22" elementRef="id-req-jadwal" xsi:type="Element" x="600" y="240" w="130" h="60" />
+        <node identifier="node-23" elementRef="id-server-db" xsi:type="Element" x="750" y="240" w="130" h="60" />
+        <node identifier="node-24" elementRef="id-server-vendor" xsi:type="Element" x="0" y="320" w="130" h="60" />
+        <node identifier="node-25" elementRef="id-simrs-jakarta" xsi:type="Element" x="150" y="320" w="130" h="60" />
+      </view>
+    </diagrams>
+  </views>
+</model>

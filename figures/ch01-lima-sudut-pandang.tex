@@ -1,0 +1,44 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  sudut/.style={draw, rounded corners, minimum height=0.95cm, minimum width=3.0cm,
+                text width=2.8cm, align=left, font=\scriptsize\bfseries},
+  contoh/.style={draw, rounded corners, minimum height=0.95cm, minimum width=7.4cm,
+                 text width=7.2cm, align=left, font=\scriptsize},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Kolom kiri: lima sudut pandang beserta pertanyaan yang dijawabnya.
+  \node[sudut, fill=praditagreen!15] (st) at (1.5,0)
+    {Strategi\\{\tiny\mdseries ke mana organisasi menuju?}};
+  \node[sudut, fill=blue!8] (bs) at (1.5,-1.15)
+    {Bisnis\\{\tiny\mdseries layanan, proses, dan peran}};
+  \node[sudut, fill=blue!8] (dt) at (1.5,-2.3)
+    {Data\\{\tiny\mdseries informasi apa, milik siapa?}};
+  \node[sudut, fill=blue!8] (ap) at (1.5,-3.45)
+    {Aplikasi\\{\tiny\mdseries sistem apa yang membantu?}};
+  \node[sudut, fill=blue!8] (tk) at (1.5,-4.6)
+    {Teknologi\\{\tiny\mdseries di mana sistem berjalan?}};
+
+  % Kolom kanan: satu kunjungan rawat jalan dari tiap sudut pandang.
+  \node[contoh, fill=green!10] (cst) at (7.0,0)
+    {``Satu Pasien, Satu Rekam Medis''; antrean pendaftaran harus lebih pendek};
+  \node[contoh] (cbs) at (7.0,-1.15)
+    {Janji temu, pendaftaran, pemeriksaan dokter, resep, pembayaran atau klaim BPJS};
+  \node[contoh] (cdt) at (7.0,-2.3)
+    {Identitas pasien, kunjungan, rekam medis, resep, tagihan, klaim};
+  \node[contoh] (cap) at (7.0,-3.45)
+    {Medikara+, SIMRS rumah sakit, ERP keuangan, sambungan BPJS dan SATUSEHAT};
+  \node[contoh] (ctk) at (7.0,-4.6)
+    {Server \textit{on-premise} di ruang server tiap rumah sakit, jaringan antarlokasi};
+
+  \foreach \kiri/\kanan in {st/cst, bs/cbs, dt/cdt, ap/cap, tk/ctk} {
+    \draw[gray!60, thin] (\kiri.east) -- (\kanan.west);
+  }
+
+  % Arah rambatan perubahan.
+  \draw[panah, praditagreen] (-0.3,0.3) -- (-0.3,-4.9);
+  \node[font=\tiny, praditagreen, rotate=90, anchor=south] at (-0.35,-2.3)
+    {keputusan merambat turun};
+  \draw[panah, red!60!black] (11.0,-4.9) -- (11.0,0.3);
+  \node[font=\tiny, red!60!black, rotate=90, anchor=north] at (11.05,-2.3)
+    {batasan merambat naik};
+\end{tikzpicture}

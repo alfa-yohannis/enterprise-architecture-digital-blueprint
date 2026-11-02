@@ -1,0 +1,38 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.8cm,
+                minimum width=1.9cm, align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=blue!8] (simrs) at (0,1.5) {SIMRS};
+  \node[kotak, fill=blue!8] (klinik) at (0,0.5) {SIM Klinik};
+  \node[kotak, fill=blue!8] (erp) at (0,-0.5) {ERP keuangan};
+  \node[kotak, fill=blue!8] (app) at (0,-1.5) {Medikara+};
+
+  \node[kotak, fill=blue!8, minimum height=1.2cm] (mentah) at (2.45,0)
+    {Zona\\mentah\\{\tiny\mdseries salinan apa adanya}};
+  \node[kotak, fill=orange!12, minimum height=1.2cm] (mutu) at (4.9,0)
+    {Pemeriksaan\\kualitas\\{\tiny\mdseries aturan tertulis}};
+  \node[kotak, fill=blue!8, minimum height=1.2cm] (olah) at (7.35,0)
+    {Zona\\terolah\\{\tiny\mdseries satu definisi}};
+  \node[kotak, fill=praditagreen!15] (mpi) at (7.35,1.75)
+    {MPI\\{\tiny\mdseries ID induk pasien}};
+
+  \node[kotak, fill=green!10] (dash) at (9.8,0.6) {\textit{Dashboard}\\direksi};
+  \node[kotak, fill=green!10] (reg) at (9.8,-0.6) {Laporan\\eksternal};
+
+  \node[kotak, fill=red!22] (xls) at (4.9,-2.0)
+    {Spreadsheet\\manual};
+
+  \foreach \s in {simrs, klinik, erp, app}
+    \draw[panah] (\s.east) -- (mentah.west);
+  \draw[panah] (mentah) -- (mutu);
+  \draw[panah] (mutu) -- (olah);
+  \draw[panah] (mpi) -- (olah);
+  \draw[panah] (olah.east) -- (dash.west);
+  \draw[panah] (olah.east) -- (reg.west);
+  \draw[panah, dashed, gray] (xls.east) -| (reg.south);
+  \node[font=\tiny, gray, anchor=north] at (7.6,-2.05) {jalur lama, dihentikan bertahap};
+  \node[font=\tiny, gray, anchor=south, align=center] at (4.9,0.7)
+    {data yang gagal\\dikembalikan ke pemiliknya};
+\end{tikzpicture}

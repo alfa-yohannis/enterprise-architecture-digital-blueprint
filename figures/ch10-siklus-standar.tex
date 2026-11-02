@@ -1,0 +1,29 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=1.05cm, text width=1.7cm,
+                align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=blue!8] (usul) at (0,0) {Usulan\\{\tiny\mdseries diajukan proyek}};
+  \node[kotak, fill=blue!8] (baru) at (2.5,0) {Baru\\{\tiny\mdseries uji coba terbatas}};
+  \node[kotak, fill=green!10] (pakai) at (5.0,0) {Dipakai\\{\tiny\mdseries wajib untuk proyek baru}};
+  \node[kotak, fill=orange!12] (batas) at (7.5,0) {Dibatasi\\{\tiny\mdseries hanya dipelihara}};
+  \node[kotak, fill=red!22] (henti) at (10.0,0) {Dihentikan\\{\tiny\mdseries tanggal akhir pasti}};
+  \node[kotak, fill=gray!35] (tolak) at (2.5,-1.85) {Ditolak\\{\tiny\mdseries alasan dicatat}};
+
+  \draw[panah] (usul) -- (baru);
+  \draw[panah] (baru) -- (pakai);
+  \draw[panah] (pakai) -- (batas);
+  \draw[panah] (batas) -- (henti);
+  \draw[panah] (baru) -- (tolak);
+
+  \node[font=\tiny, gray] at (1.25,0.78) {disetujui dicoba};
+  \node[font=\tiny, gray] at (3.75,0.78) {lolos uji coba};
+  \node[font=\tiny, gray] at (6.25,0.78) {ada pengganti};
+  \node[font=\tiny, gray] at (8.75,0.78) {migrasi selesai};
+  \node[font=\tiny, gray, anchor=west] at (2.6,-0.95) {gagal uji coba};
+
+  \node[font=\tiny, align=center, text width=6.2cm, anchor=north west]
+    at (4.15,-1.3) {Setiap perpindahan status diputuskan forum arsitektur,
+    dicatat sebagai ADR, dan ditinjau ulang paling lambat 12 bulan sekali.};
+\end{tikzpicture}

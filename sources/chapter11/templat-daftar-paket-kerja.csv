@@ -1,0 +1,5 @@
+# Batas dan penerimaan paket kerja. Salin lalu isi satu baris per paket; pisahkan kode prasyarat dengan titik koma; hapus baris ini saat impor spreadsheet.
+id,nama,gap,masuk_lingkup,di_luar_lingkup,hasil,prasyarat,perkiraan_bulan,pemilik,bukti_penerimaan,risiko
+,,,,,,,,,,
+,,,,,,,,,,
+,,,,,,,,,,

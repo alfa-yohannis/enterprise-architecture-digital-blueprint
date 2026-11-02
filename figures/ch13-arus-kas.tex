@@ -1,0 +1,29 @@
+\begin{tikzpicture}[font=\scriptsize]
+  \begin{axis}[
+    width=10.5cm, height=5.6cm,
+    xmin=-0.35, xmax=4.45, ymin=-5.5, ymax=4.9,
+    xtick={0,1,2,3,4}, xticklabels={2027,2028,2029,2030,2031},
+    ytick={-5,-4,-3,-2,-1,0,1,2,3,4},
+    xlabel={Tahun}, ylabel={Arus kas kumulatif (Rp miliar)},
+    axis y line*=left, axis x line*=bottom,
+    legend style={font=\tiny, at={(0.02,0.98)}, anchor=north west,
+                  draw=none, fill=white},
+    legend cell align=left,
+  ]
+    \addplot[gray, thin, forget plot] coordinates {(-0.35,0) (4.45,0)};
+    \addplot[praditagreen, very thick, mark=*, mark size=1.6]
+      coordinates {(0,-3.7) (1,-3.1) (2,-0.7) (3,1.7) (4,4.1)};
+    \addlegendentry{Skenario dasar}
+    \addplot[red!65!black, very thick, dashed, mark=square*, mark size=1.4]
+      coordinates {(0,-3.7) (1,-4.8) (2,-4.1) (3,-1.7) (4,0.7)};
+    \addlegendentry{Manfaat tertunda satu tahun}
+    \draw[praditagreen, thick] (axis cs:2.29,-0.25) -- (axis cs:2.29,0.25);
+    \node[font=\tiny, praditagreen, anchor=south east] at (axis cs:2.25,0.2)
+      {balik modal 2,3 tahun};
+    \draw[red!65!black, thick] (axis cs:3.71,-0.25) -- (axis cs:3.71,0.25);
+    \node[font=\tiny, red!65!black, anchor=north west] at (axis cs:3.75,-0.2)
+      {3,7 tahun};
+    \node[font=\tiny, praditagreen, anchor=west] at (axis cs:4.05,4.1) {4,1};
+    \node[font=\tiny, red!65!black, anchor=west] at (axis cs:4.05,0.9) {0,7};
+  \end{axis}
+\end{tikzpicture}

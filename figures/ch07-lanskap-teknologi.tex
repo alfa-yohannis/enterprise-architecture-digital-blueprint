@@ -1,0 +1,41 @@
+\begin{tikzpicture}[font=\tiny,
+  kepala/.style={draw, fill=praditagreen!15, text width=2.36cm, minimum height=0.6cm,
+    align=flush center, font=\tiny\bfseries, inner sep=2pt},
+  isi/.style={draw, fill=blue!8, text width=2.36cm, minimum height=0.84cm,
+    align=flush center, inner sep=2pt},
+  rawan/.style={isi, fill=red!22},
+  baris/.style={font=\tiny\bfseries, text width=1.05cm, align=flush right, inner sep=1pt}]
+  \node[kepala] at (2.0,0) {Ruang server RS Jakarta};
+  \node[kepala] at (4.65,0) {Empat ruang server rumah sakit lain};
+  \node[kepala] at (7.3,0) {Klinik, laboratorium, dan apotek};
+  \node[kepala] at (9.95,0) {Lingkungan vendor};
+
+  \node[baris] at (0.0,-0.82) {Aplikasi};
+  \node[isi] at (2.0,-0.82) {SIMRS Jakarta, ERP keuangan, SIM Klinik};
+  \node[isi] at (4.65,-0.82) {SIMRS Bekasi, Depok, Bogor, Bandung};
+  \node[isi] at (7.3,-0.82) {Pemakai SIM Klinik, aplikasi laboratorium dan apotek};
+  \node[isi] at (9.95,-0.82) {Medikara+, catatan telekonsultasi};
+
+  \node[baris] at (0.0,-1.74) {Platform};
+  \node[isi] at (2.0,-1.74) {Server fisik, basis data komersial};
+  \node[isi] at (4.65,-1.74) {Server fisik, versi berbeda per lokasi};
+  \node[isi] at (7.3,-1.74) {Komputer pemakai, sedikit server lokal};
+  \node[isi] at (9.95,-1.74) {Dikelola vendor};
+
+  \node[baris] at (0.0,-2.66) {Jaringan};
+  \node[isi, text width=5.01cm] at (3.325,-2.66)
+    {Jaringan sewaan antar-rumah sakit};
+  \node[isi] at (7.3,-2.66) {Internet, sebagian klinik satu jalur};
+  \node[isi] at (9.95,-2.66) {Internet ke API bawaan dua SIMRS};
+
+  \node[baris] at (0.0,-3.58) {Temuan};
+  \node[rawan] at (2.0,-3.58) {Tanpa lokasi cadangan};
+  \node[rawan] at (4.65,-3.58) {Sistem operasi lama, dukungan berbeda};
+  \node[rawan] at (7.3,-3.58) {Dua klinik Bogor berhenti bila jalur putus};
+  \node[rawan] at (9.95,-3.58) {Akun bersama, data uji tidak disamarkan};
+
+  \node[draw, fill=green!10, text width=10.51cm, minimum height=0.56cm, align=flush center,
+    inner sep=2pt] at (5.975,-4.42)
+    {Katalog teknologi: 4 merek basis data, 3 keluarga sistem operasi server, 2 alat
+     cadangan, 6 alat pelaporan};
+\end{tikzpicture}

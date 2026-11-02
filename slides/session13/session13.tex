@@ -1,0 +1,625 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+% !TeX TXS-program:compile = txs:///xelatex | txs:///xelatex
+\documentclass[aspectratio=169, table, 12pt]{beamer}
+
+\input{../preamble}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% Font tema slide lebih lebar daripada font modul, sehingga kotak jaringan manfaat
+% bersentuhan. Lebar kotak dan jarak mendatarnya dilonggarkan khusus di slide ini.
+\makeatletter
+\newcommand{\longgarkandiagram}[2]{%
+  \tikzset{text width/.code={\def\tikz@text@width{#1}},
+           every picture/.append style={x=#2}}}
+\makeatother
+
+\title{\Huge Business Case dan\\ \vspace{10pt} Portofolio Inisiatif}
+\date{Pertemuan 13}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+  \frametitle{Isi Pertemuan}
+  \vspace{14pt}
+  \begin{columns}[t]
+    \column{0.5\textwidth}
+    {\small\tableofcontents[sections={1-4}]}
+
+    \column{0.5\textwidth}
+    {\small\tableofcontents[sections={5-7}]}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Proyek selesai tepat waktu,\\lalu apa hasilnya\\bagi organisasi?}}
+\end{frame}
+
+\section{Tujuan dan Konteks}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Tujuan dan Konteks}}
+\end{frame}
+
+\begin{frame}{{\Large Tujuan Pembelajaran}}
+  \vspace{10pt}
+  \begin{itemize}
+    \item Menyusun \textit{business case} untuk inisiatif prioritas dengan manfaat, biaya, risiko, dan
+          asumsi yang eksplisit.
+    \item Memetakan manfaat ke perubahan bisnis dan pemungkinnya dengan \textit{benefits dependency
+          network}.
+    \item Memprioritaskan portofolio inisiatif dengan kriteria berbobot dan menjustifikasi hasilnya.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Masalah: Proyek Selesai, Hasil Tidak Diketahui}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Laporan penutupan proyek Teknologi Informasi (TI) menyatakan tepat waktu dan sesuai anggaran.
+    \item Setahun kemudian seorang komisaris menanyakan hasilnya, dan tidak ada yang dapat menjawab.
+    \item Sejak awal tidak ada yang menetapkan hasil, penanggung jawab, dan cara mengukurnya.
+    \item Bab 12 menjawab apa yang dikerjakan lebih dahulu.
+    \item Bab ini menjawab dua hal: mengapa inisiatif layak didanai, dan mana yang didanai bila uang
+          tidak cukup.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Diagram Konsep Bab 13}}
+  \centering
+  \includegraphics[width=0.96\textwidth,height=0.77\textheight,keepaspectratio]{../../figures/ch13-diagram-konsep.png}
+  \label{fig:session13-ilustrasi-bab}
+\end{frame}
+
+\section{Manajemen Manfaat}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Manajemen Manfaat}}
+\end{frame}
+
+\begin{frame}{{\Large Teknologi Tidak Menghasilkan Manfaat}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Manajemen manfaat (\textit{benefits management}) mengatur investasi TI agar manfaat benar-benar
+          terwujud.
+    \item Manfaat muncul ketika orang bekerja dengan cara baru yang dimungkinkan teknologi.
+    \item Manfaat dinyatakan sebagai perubahan ukuran kinerja, bukan daftar kemampuan sistem.
+    \item Pemilik manfaat (\textit{benefit owner}) menerima manfaat itu dan berwenang mengubah cara kerja
+          unitnya.
+  \end{itemize}
+  \vspace{6pt}
+  Analogi: \textit{treadmill} tanpa perubahan kebiasaan berakhir menjadi gantungan baju, padahal
+  ``proyek pembelian''-nya selesai tepat waktu.
+\end{frame}
+
+\begin{frame}{{\Large Fitur, Manfaat, dan Perubahan Cara Kerja}}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{YYY}
+    \hline
+    \textbf{Fitur yang dibeli} & \textbf{Manfaat yang diharapkan} &
+      \textbf{Perubahan cara kerja yang dibutuhkan} \\
+    \hline
+    Pencarian pasien di MPI & Pendaftaran pasien lama turun dari 6 menjadi
+      3 menit & Petugas mencari pasien lebih dahulu sebelum membuat rekam
+      medis baru \\
+    \hline
+    Janji temu daring di Medikara+ & Antrean loket pagi berkurang & Dokter
+      membuka kuota jadwal di aplikasi, bukan hanya di loket \\
+    \hline
+    \textit{Dashboard} laporan terpadu & Rapat bulanan tanpa rekonsiliasi angka
+      & Unit berhenti menyusun \textit{spreadsheet} sendiri \\
+    \hline
+    Peninjauan hak akses otomatis & Temuan audit kontrol akses ditutup &
+      Atasan meninjau hak akses bawahannya tiap triwulan \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small MPI (\textit{Master Patient Index}) adalah indeks identitas pasien tunggal dari Bab 9.
+\end{frame}
+
+\begin{frame}{{\Large Siklus Manajemen Manfaat}}
+  \small Perubahan cara kerja direncanakan, dianggarkan, dan dipantau seperti perangkat lunaknya.
+  Tahap keempat menyambung ke tata kelola Bab 14.
+
+  \centering
+  \begin{figure}
+    \resizebox{0.94\textwidth}{!}{\input{../../figures/ch13-siklus-manfaat.tex}}
+    \caption{Siklus lima tahap menurut Ward dan Daniel. Tahap keempat membuktikan apakah investasinya
+             berhasil}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Manfaat yang Dapat Dicairkan}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Dapat dicairkan (\textit{cashable}): biaya benar-benar hilang atau pendapatan benar-benar
+          bertambah.
+    \item Misalkan MPI memangkas pendaftaran pasien lama dari 6 ke 3 menit pada 840.000 kunjungan, atau
+          42.000 jam kerja.
+    \item Angka itu tidak mengurangi gaji siapa pun, kecuali ada keputusan tambahan.
+    \item Rekonsiliasi manual berhenti: 640 jam per bulan, bernilai Rp400 juta per tahun hanya bila
+          biaya tenaga kontrak benar-benar hilang.
+    \item Yang dapat dicairkan masuk hitungan finansial. Sisanya tetap ditulis dengan ukurannya.
+  \end{itemize}
+\end{frame}
+
+\section{Benefits Dependency Network}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Benefits Dependency\\Network}}
+\end{frame}
+
+\begin{frame}{{\Large Lima Kolom, Dua Arah Baca}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Diagram sebab akibat dari tujuan investasi sampai teknologi yang memungkinkannya.
+    \item Dari kanan ke kiri: tujuan investasi, manfaat bisnis, perubahan bisnis, perubahan pemungkin,
+          dan teknologi pemungkin.
+    \item Penyusunan dimulai dari kanan, sehingga teknologi dipilih paling akhir.
+    \item Pemeriksaan berjalan dari kiri: apakah manfaat itu benar-benar muncul?
+    \item Peppard, Ward, dan Daniel meringkasnya sebagai \textit{ends}, \textit{ways}, dan \textit{means}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Dua Kolom yang Paling Sering Dilupakan}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Perubahan bisnis: cara kerja baru yang dijalankan terus-menerus sesudah proyek selesai.
+    \item Perubahan pemungkin: perubahan sekali jalan, seperti pelatihan, aturan baru, peran baru, atau
+          pembersihan data.
+    \item Rencana proyek TI umumnya hanya memuat kolom paling kiri.
+    \item Kolom perubahan tanpa anggaran dan penanggung jawab dianggap terjadi dengan sendirinya.
+  \end{itemize}
+  \vspace{6pt}
+  Analogi: saluran irigasi tanpa kesepakatan pembagian air tidak menaikkan panen.
+\end{frame}
+
+\begin{frame}{{\Large Jaringan Manfaat Identitas Pasien}}
+  \centering
+  {\longgarkandiagram{2.2cm}{1.12cm}%
+  \resizebox{!}{0.74\textheight}{\input{../../figures/ch13-bdn-mpi.tex}}}
+\end{frame}
+
+\begin{frame}{{\Large Menemukan Titik Rawan}}
+  \begin{block}{Kasus Medikara Health}
+    \small
+    \begin{itemize}
+      \item Tujuan: satu orang dikenali di seluruh 36 fasilitas, dan biaya akibat data ganda turun.
+      \item Dua tujuan menurunkan lima manfaat dengan pemilik, ukuran, nilai awal, dan target.
+      \item Titik rawan: dua dari lima manfaat bergantung pada petugas yang selalu mencari di MPI lebih
+            dahulu.
+      \item Bila tidak, kedua manfaat hilang walaupun MPI berfungsi sempurna.
+      \item Rencana: pelatihan di 36 fasilitas dan laporan mingguan ke Direktur Operasional.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{{\Large Pemilik, Ukuran, dan Target Manfaat}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{YL{2.5cm}YL{1.6cm}L{1.6cm}}
+    \hline
+    \textbf{Manfaat} & \textbf{Pemilik} & \textbf{Ukuran} & \textbf{Awal} & \textbf{Target Desember 2028} \\
+    \hline
+    Pendaftaran pasien lama lebih cepat & Direktur Operasional & Median waktu
+      pendaftaran pasien lama & 6 menit & 3 menit \\
+    \hline
+    Insiden salah identitas turun & Ketua Komite Mutu dan Keselamatan Pasien &
+      Insiden salah identitas yang dilaporkan per tahun & 48 & turun,
+      besarnya dipantau \\
+    \hline
+    Klaim tertunda berkurang & Direktur Keuangan & Biaya klaim tertunda dan
+      ditolak karena identitas tidak cocok & Rp1.500 juta per tahun &
+      Rp300 juta per tahun \\
+    \hline
+    Rekonsiliasi laporan manual berhenti & Kepala Divisi Perencanaan & Jam
+      kerja rekonsiliasi per bulan & 640 jam & 0 jam \\
+    \hline
+    Pemeriksaan lab ulang berkurang & Direktur Pelayanan & Pemeriksaan
+      lab ulang dalam 30 hari pada pasien yang sama & 18.000 per tahun &
+      6.000 per tahun \\
+    \hline
+  \end{tabularx}
+
+  \vspace{4pt}
+  \small Angka fiktif.
+\end{frame}
+
+\section{Biaya dan Ukuran Finansial}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Biaya dan\\Ukuran Finansial}}
+\end{frame}
+
+\begin{frame}{{\Large TCO Inisiatif Identitas Pasien}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{Yrrrrrr}
+    \hline
+    \textbf{Komponen (juta rupiah, angka fiktif)} & \textbf{2027} & \textbf{2028} & \textbf{2029} &
+      \textbf{2030} & \textbf{2031} & \textbf{Total} \\
+    \hline
+    Lisensi atau langganan MPI & 400 & 400 & 400 & 400 & 400 & 2.000 \\
+    \hline
+    Implementasi dan integrasi 5 SIMRS & 2.000 & 0 & 0 & 0 & 0 & 2.000 \\
+    \hline
+    Migrasi dan pembersihan data & 1.000 & 0 & 0 & 0 & 0 & 1.000 \\
+    \hline
+    Pelatihan dan perubahan cara kerja & 300 & 100 & 0 & 0 & 0 & 400 \\
+    \hline
+    Operasional: 3 \textit{steward} data dan infrastruktur & 0 & 600 & 600 & 600 & 600 & 2.400 \\
+    \hline
+    \textbf{Total biaya} & \textbf{3.700} & \textbf{1.100} & \textbf{1.000} &
+      \textbf{1.000} & \textbf{1.000} & \textbf{7.800} \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Harga di penawaran vendor hanya Rp2.400 juta, sekitar 31 persen dari \textit{Total Cost of
+  Ownership} (TCO). Analogi: harga brosur mobil belum termasuk bensin, servis, pajak, dan asuransi.
+\end{frame}
+
+\begin{frame}{{\Large Payback Period dan NPV}}
+  \small
+  \vspace{2pt}
+  \begin{itemize}
+    \item \textit{Payback period}: lama waktu sampai arus kas bersih kumulatif kembali ke nol.
+    \item \textit{Net Present Value} (NPV): jumlah arus kas bersih sesudah diubah ke nilai hari ini.
+  \end{itemize}
+  \[
+    \mathrm{NPV} = \sum_{t=0}^{n} \frac{\text{arus kas bersih tahun } t}{(1+r)^{t}}
+  \]
+  \begin{itemize}
+    \item \textit{Payback period} mudah dipahami, tetapi mengabaikan nilai waktu uang.
+    \item NPV lebih lengkap, tetapi bergantung pada tingkat diskonto dan panjang horizon.
+    \item Analogi: giliran pertama arisan lebih berharga daripada giliran terakhir.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Arus Kas dan NPV}}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{Xrrrrrr}
+    \hline
+    \textbf{Tahun} & \textbf{Biaya} & \textbf{Manfaat} & \textbf{Bersih} &
+      \textbf{Kumulatif} & \textbf{Faktor} & \textbf{Nilai kini} \\
+    \hline
+    2027 (tahun ke-0) & 3.700 & 0 & $-$3.700 & $-$3.700 & 1,000 & $-$3.700,0 \\
+    \hline
+    2028 & 1.100 & 1.700 & 600 & $-$3.100 & 0,909 & 545,5 \\
+    \hline
+    2029 & 1.000 & 3.400 & 2.400 & $-$700 & 0,826 & 1.983,5 \\
+    \hline
+    2030 & 1.000 & 3.400 & 2.400 & 1.700 & 0,751 & 1.803,2 \\
+    \hline
+    2031 & 1.000 & 3.400 & 2.400 & 4.100 & 0,683 & 1.639,2 \\
+    \hline
+    \textbf{Jumlah} & \textbf{7.800} & \textbf{11.900} & \textbf{4.100} & & & \textbf{NPV 2.271,3} \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Juta rupiah, tingkat diskonto 10 persen. P3 berjalan April 2027 sampai Maret 2028, sehingga
+  manfaat 2028 baru separuh. Manfaat penuh Rp3.400 juta: lab ulang Rp1.800 juta, klaim Rp1.200 juta,
+  rekonsiliasi Rp400 juta. \textit{Payback period} sekitar 2,3 tahun.
+\end{frame}
+
+\begin{frame}{{\Large Arus Kas Kumulatif}}
+  \centering
+  \begin{figure}
+    \resizebox{0.70\textwidth}{!}{\input{../../figures/ch13-arus-kas.tex}}
+    \caption{Arus kas kumulatif inisiatif identitas pasien tunggal. Penundaan manfaat satu tahun
+             menggeser balik modal dari 2,3 menjadi 3,7 tahun}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Pendalaman: Analisis Sensitivitas}}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{Xrr}
+    \hline
+    \textbf{Skenario} & \textbf{NPV (juta rupiah)} & \textbf{\textit{Payback}} \\
+    \hline
+    Dasar & 2.271,3 & 2,29 tahun \\
+    \hline
+    Biaya migrasi data naik 30 persen & 1.971,3 & 2,42 tahun \\
+    \hline
+    Manfaat tertunda satu tahun & $-$679,1 & 3,71 tahun \\
+    \hline
+    Keduanya sekaligus & $-$979,1 & 3,83 tahun \\
+    \hline
+    Implementasi dan migrasi naik 200 persen & $-$3.728,7 & tidak tercapai \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Kenaikan biaya migrasi hanya mengurangi NPV sebesar Rp300 juta. Penundaan manfaat menghapus
+  sekitar Rp2.950 juta. Jadwal adopsi di 36 fasilitas lebih menentukan daripada harga migrasi.
+\end{frame}
+
+\section{Manfaat yang Sulit Diukur}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Manfaat yang\\Sulit Diukur}}
+\end{frame}
+
+\begin{frame}{{\Large Empat Tingkat Keterukuran}}
+  \footnotesize
+  \begin{tabularx}{\textwidth}{L{1.8cm}YY}
+    \hline
+    \textbf{Tingkat} & \textbf{Artinya} & \textbf{Contoh Medikara} \\
+    \hline
+    Finansial & Nilainya dihitung dalam rupiah dengan rumus yang disepakati &
+      Pemeriksaan lab ulang yang dihindari, Rp1.800 juta per tahun \\
+    \hline
+    Kuantitatif & Besar perubahannya dapat diperkirakan dengan angka sebelum
+      proyek dimulai & Waktu pendaftaran pasien lama turun 3 menit, setara
+      42.000 jam kerja per tahun \\
+    \hline
+    Terukur & Ukurannya sudah ada, tetapi besar perubahannya belum dapat
+      diperkirakan dengan yakin & Insiden salah identitas yang dilaporkan,
+      saat ini 48 per tahun \\
+    \hline
+    Teramati & Hanya dapat dinilai lewat pendapat pihak yang disepakati &
+      Kepercayaan dokter pada riwayat pasien lintas fasilitas, dinilai lewat
+      survei dokter \\
+    \hline
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{{\Large Ukuran Pengganti dan Nilai Kendali}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Ukuran pengganti (\textit{proxy measure}): indikator yang bergerak searah dengan manfaat dan
+          datanya tersedia.
+    \item Mengukur berarti mengurangi ketidakpastian, bukan menghasilkan angka yang pasti.
+    \item Permenkes 11/2017 menempatkan identifikasi pasien yang benar sebagai sasaran keselamatan
+          pasien pertama. Manfaat MPI di sini tidak dirupiahkan.
+    \item UU 27/2022 Pasal 57 ayat (3): denda administratif paling tinggi 2 persen dari pendapatan
+          tahunan.
+    \item Nilai kendali adalah pengurangan nilai harapan kerugian: peluang per tahun dikalikan dampak.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Menutup Temuan Audit Kontrol Akses}}
+  \begin{block}{Kasus Medikara Health}
+    \small
+    \begin{itemize}
+      \item Misalkan 212 akun karyawan keluar masih aktif di SIMRS, dan pencabutan rata-rata 30 hari.
+      \item Manfaat finansial langsung kecil, sekitar Rp300 juta per tahun.
+      \item R-01 pada register IT40813: peluang 0,2 dan kerugian rata-rata Rp500 juta, Rp100 juta per tahun.
+      \item Sesudah kontrol berjalan, peluang 0,05: Rp25 juta. Pengurangannya Rp75 juta per tahun,
+            ditulis terpisah.
+      \item Target 2027: 0 akun aktif, pencabutan 1 hari, 100 persen akun ditinjau tiap triwulan.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Portofolio Inisiatif dan Prioritas}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Portofolio Inisiatif\\dan Prioritas}}
+\end{frame}
+
+\begin{frame}{{\Large Menilai Inisiatif Bersama}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Portofolio: seluruh inisiatif yang bersaing atas anggaran dan kapasitas yang sama.
+    \item Prioritas berbasis kapabilitas: \textit{heatmap} Bab 5 dan kapabilitas target Bab 8.
+    \item Teknik TOGAF: indeks nilai dan indeks risiko, dengan bobot ditetapkan sebelum daftar inisiatif
+          diketahui.
+    \item Skor berbobot adalah alat diskusi awal, bukan analisis multikriteria formal.
+    \item Portofolio dibagi tiga: fondasi, kepatuhan, dan pertumbuhan. Porsi pertumbuhan tidak boleh
+          nol.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Skor Portofolio Medikara}}
+  \scriptsize
+  \setlength{\tabcolsep}{4pt}
+  \begin{tabularx}{\textwidth}{lYcccccc r}
+    \hline
+    & & \textbf{Str.} & \textbf{Fin.} & \textbf{Kep.} & \textbf{Fon.} &
+      \textbf{Indeks} & \textbf{Indeks} & \\
+    \textbf{Kode} & \textbf{Inisiatif} & 35\% & 25\% & 25\% & 15\% &
+      \textbf{nilai} & \textbf{risiko} & \textbf{Biaya} \\
+    \hline
+    I1 & Identitas pasien tunggal (MPI) & 5 & 4 & 4 & 5 & 4,50 & 2,80 & 7,8 \\
+    \hline
+    I2 & Manajemen identitas dan akses terpusat & 3 & 1 & 5 & 4 & 3,15 & 2,20 & 4,2 \\
+    \hline
+    I3 & Konsolidasi lima SIMRS menjadi satu & 5 & 3 & 4 & 4 & 4,10 & 4,80 & 48,0 \\
+    \hline
+    I4 & Platform integrasi dan API & 4 & 3 & 3 & 5 & 3,65 & 2,70 & 9,5 \\
+    \hline
+    I5 & Data terpadu untuk laporan manajemen & 3 & 3 & 2 & 2 & 2,60 & 2,30 & 6,0 \\
+    \hline
+    I6 & Portal ekosistem mitra & 4 & 4 & 2 & 1 & 3,05 & 3,60 & 12,0 \\
+    \hline
+    I7 & Antrean dan janji temu terpadu & 4 & 3 & 1 & 1 & 2,55 & 1,80 & 3,5 \\
+    \hline
+    I8 & Ringkasan rekam medis berbasis AI & 3 & 2 & 1 & 1 & 1,95 & 3,90 & 5,0 \\
+    \hline
+    & \textbf{Total} & & & & & & & \textbf{96,0} \\
+    \hline
+  \end{tabularx}
+
+  \vspace{4pt}
+  \small Skor 1 sampai 5, biaya lima tahun dalam miliar rupiah, angka fiktif.
+\end{frame}
+
+\begin{frame}{{\Large Pemetaan Paket Kerja ke Inisiatif}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{lYlY}
+    \hline
+    \textbf{Paket} & \textbf{Nama paket} & \textbf{Kode} & \textbf{Inisiatif} \\
+    \hline
+    P1 & Kontrol akses terpusat & I2 & Manajemen identitas dan akses terpusat \\
+    \hline
+    P2 & \textit{Hub} integrasi BPJS dan SATUSEHAT & I4 & Platform integrasi dan API \\
+    \hline
+    P3 & Identitas pasien tunggal (MPI) & I1 & Identitas pasien tunggal (MPI) \\
+    \hline
+    P4 & \textit{Landing zone} \textit{cloud} & -- & Tidak dinilai sendiri, biaya dibagi ke I3 dan I5 \\
+    \hline
+    P5 & Konsolidasi SIMRS & I3 & Konsolidasi lima SIMRS menjadi satu \\
+    \hline
+    P6 & Laporan manajemen terpadu & I5 & Data terpadu untuk laporan manajemen \\
+    \hline
+    P7 & Antrean dan janji temu lintas fasilitas & I7 & Antrean dan janji temu terpadu \\
+    \hline
+    P8 & Portal dan API mitra & I6 & Portal ekosistem mitra \\
+    \hline
+    -- & Bukan paket kerja, usulan dari Bab 10 & I8 & Ringkasan rekam medis berbasis AI \\
+    \hline
+  \end{tabularx}
+
+  \vspace{4pt}
+  \small Biaya I3 Rp48,0 miliar lebih luas cakupannya daripada Rp29 miliar pada perbandingan opsi Bab 9:
+  menambahkan biaya SIMRS lama dan baru berdampingan, integrasi, dan perubahan cara kerja.
+\end{frame}
+
+\begin{frame}{{\Large Matriks Nilai dan Risiko}}
+  \centering
+  \begin{figure}
+    \resizebox{!}{0.62\textheight}{\input{../../figures/ch13-matriks-nilai-risiko.tex}}
+    \caption{Matriks nilai dan risiko portofolio Medikara, diadaptasi dari TOGAF}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Memutuskan Portofolio 2026 sampai 2030}}
+  \begin{block}{Kasus Medikara Health}
+    \small
+    \begin{itemize}
+      \item Misalkan pagu Rp60 miliar, kebutuhan Rp96 miliar. Mengikuti indeks nilai, I1 dan I3
+            menghabiskan 93 persen pagu.
+      \item I1, I2, dan I4 didanai penuh. I3 hanya tahap pertama, percontohan Depok Rp22 miliar,
+            dengan K3 pada Maret 2029 sebelum empat rumah sakit lain.
+      \item I7 ikut didanai, I6 tahap awal Rp6 miliar mulai 2029. I5 dan I8 ditunda.
+      \item Total Rp53 miliar, cadangan Rp7 miliar. Rp10 miliar IT40813 pengandaian lain.
+      \item Sisa Rp38 miliar untuk P5, P6, dan P8 diajukan pada K2, K3, dan K4.
+      \item Komposisi: 74 persen fondasi, 8 persen kepatuhan, 18 persen pertumbuhan.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Menulis Business Case dan Penutup}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Menulis Business Case\\dan Penutup}}
+\end{frame}
+
+\begin{frame}{{\Large Struktur Business Case}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{2.4cm}YY}
+    \hline
+    \textbf{Bagian} & \textbf{Pertanyaan yang dijawab} & \textbf{Sumber di cetak biru} \\
+    \hline
+    Ringkasan keputusan & Keputusan apa yang diminta, berapa biayanya, dan apa
+      hasilnya & Satu halaman, ditulis paling akhir \\
+    \hline
+    Alasan strategis & Mengapa sekarang, dan strategi mana yang didukung &
+      Visi arsitektur C1, \textit{heatmap} Bab 5, \textit{gap analysis} Bab 11 \\
+    \hline
+    Opsi dan nilai & Opsi apa saja yang dibandingkan, termasuk tetap seperti
+      sekarang, dan mana yang terbaik & ADR Bab 10, jaringan manfaat, NPV \\
+    \hline
+    Pengadaan & Bagaimana membeli atau membangun, dan bentuk kontraknya &
+      Keputusan membangun, membeli, atau berlangganan di Bab 9 \\
+    \hline
+    Keuangan & Berapa biayanya, kapan dikeluarkan, dan dari anggaran mana &
+      Tabel TCO, perkiraan biaya \textit{cloud} dari IT40713 \\
+    \hline
+    Pengelolaan & Siapa memimpin, kapan titik keputusan, dan bagaimana
+      manfaat dipantau & Peta jalan Bab 12, pemilik manfaat, tata kelola Bab 14 \\
+    \hline
+    Risiko dan asumsi & Apa yang dapat meleset, dan apa akibatnya pada
+      keputusan & Register risiko IT40813, analisis sensitivitas \\
+    \hline
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{{\Large Jujur tentang Ketidakpastian}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Flyvbjerg dan Budzier, 1.471 proyek TI: pembengkakan rata-rata 27 persen, dan satu dari enam
+          proyek rata-rata 200 persen.
+    \item Kalimat lemah: ``MPI akan meningkatkan efisiensi dan mutu layanan.''
+    \item Lebih kuat: ``MPI menurunkan pemeriksaan lab ulang dari 18.000 menjadi 6.000 per tahun mulai
+          2029, senilai Rp1.800 juta per tahun.''
+    \item Lebih kuat: ``NPV Rp2.271 juta pada tingkat diskonto 10 persen. Bila manfaat tertunda satu
+          tahun, NPV menjadi negatif Rp679 juta.''
+    \item Direksi menerima ringkasan satu halaman dengan angka dalam bentuk rentang.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Aktivitas: Business Case dan Portofolio}}
+  \small
+  \begin{itemize}
+    \item Pilih satu atau dua inisiatif pada arsitektur transisi pertama.
+    \item Susun jaringan manfaat dari kanan, periksa dari kiri, lalu isi daftar manfaat.
+    \item Hitung TCO, arus kas, NPV, dan \textit{payback period} beserta sumber tiap angka.
+    \item Nilai seluruh inisiatif: bobot ditetapkan sebelum skor, lalu gambar matriks.
+    \item Tulis \textit{business case}, dengan ringkasan satu halaman paling akhir.
+  \end{itemize}
+  \footnotesize Peran: analis bisnis, analis teknologi, pemodel, koordinator. Luaran: tonggak C4.
+  Data pribadi tidak boleh dipakai, hanya angka agregat.
+  Templat: \berkas{sources/chapter13/templat-business-case.md}.
+\end{frame}
+
+\begin{frame}{{\Large Ringkasan}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Manfaat datang dari cara kerja baru, diberi pemilik bisnis, dan ditinjau setelah sistem
+          dipakai.
+    \item Jaringan manfaat disusun dari kanan ke kiri dan diperiksa dari kiri ke kanan.
+    \item TCO Rp7.800 juta, NPV Rp2.271 juta, balik modal sekitar 2,3 tahun. Penundaan satu tahun membuat
+          NPV negatif.
+    \item Portofolio dinilai bersama, dengan bobot yang ditetapkan lebih dahulu.
+    \item Setiap angka punya sumber, setiap manfaat punya pemilik, dan setiap ketidakpastian ditulis
+          terbuka.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Latihan}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item \textbf{Latihan 1: Menulis Ulang Manfaat yang Kabur.} Tetapkan pemilik, ukuran, nilai awal,
+          target, dan tingkat keterukuran.
+    \item \textbf{Latihan 2: Memilih antara NPV dan Temuan Audit.} Hitung NPV keduanya, pengurangan nilai
+          harapan kerugian, lalu periksa dependensi.
+    \item \textbf{Latihan 3: Menelusuri Manfaat yang Tidak Tercapai.} Susun ulang jaringan manfaat, lalu
+          tandai mata rantai yang putus.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Bacaan dan Berkas Pendukung}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item \href{https://aisel.aisnet.org/misqe/vol6/iss1/3/}{Managing the Realization of Business Benefits from IT Investments}
+    \item \href{https://www.opengroup.org/togaf}{The TOGAF Standard, 10th Edition (2025 Update)}
+    \item \href{https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026}{The Green Book (2026)}
+    \item \berkas{sources/chapter13/README.md}
+  \end{itemize}
+\end{frame}
+
+\end{document}

@@ -1,0 +1,47 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kap/.style={draw, text width=3.3cm, minimum height=0.5cm, align=center,
+              font=\tiny, inner sep=2pt},
+  baru/.style={kap, fill=orange!12, very thick},
+  kuat/.style={kap, fill=blue!8},
+  tetap/.style={kap, fill=white},
+  henti/.style={kap, fill=gray!35, dashed},
+  judul/.style={font=\scriptsize\bfseries, align=center}
+]
+  \draw[rounded corners, fill=praditagreen!15] (0,0.65) rectangle (3.8,-5.5);
+  \draw[rounded corners, fill=praditagreen!15] (4.0,0.65) rectangle (7.8,-5.5);
+  \draw[rounded corners, fill=praditagreen!15] (8.0,0.65) rectangle (11.8,-5.5);
+  \node[judul] at (1.9,0.3) {Kapabilitas Strategis};
+  \node[judul] at (5.9,0.3) {Kapabilitas Layanan Pasien};
+  \node[judul] at (9.9,0.3) {Kapabilitas Pendukung};
+
+  \node[tetap] at (1.9,-0.35) {Manajemen Strategi};
+  \node[baru] at (1.9,-1.03) {Pengelolaan Kemitraan Ekosistem};
+  \node[baru] at (1.9,-1.71) {Wawasan Pasien dan Analitik};
+  \node[kuat] at (1.9,-2.39) {Pengelolaan Kepatuhan};
+
+  \node[baru] at (5.9,-0.35) {Pengelolaan Identitas Pasien Terpadu};
+  \node[kuat] at (5.9,-1.03) {Pendaftaran Pasien};
+  \node[kuat] at (5.9,-1.71) {Penjadwalan Layanan};
+  \node[kuat] at (5.9,-2.39) {Pengelolaan Rekam Medis};
+  \node[tetap] at (5.9,-3.07) {Pelayanan Klinis};
+  \node[kuat] at (5.9,-3.75) {Telekonsultasi};
+  \node[tetap] at (5.9,-4.43) {Layanan Farmasi dan Laboratorium};
+  \node[henti] at (5.9,-5.11) {Penerbitan Nomor Rekam Medis Lokal};
+
+  \node[kuat] at (9.9,-0.35) {Klaim dan Penjaminan};
+  \node[kuat] at (9.9,-1.03) {Pengelolaan Akses Pengguna};
+  \node[kuat] at (9.9,-1.71) {Pelaporan Manajemen};
+  \node[tetap] at (9.9,-2.39) {Keuangan dan Akuntansi};
+  \node[tetap] at (9.9,-3.07) {Pengelolaan Tenaga Kerja};
+  \node[henti] at (9.9,-3.75) {Rekonsiliasi Data Manual Antarfasilitas};
+
+  \draw[fill=orange!12, very thick] (0.6,-5.87) rectangle (0.9,-6.07);
+  \node[font=\tiny, anchor=west] at (0.95,-5.97) {baru (3)};
+  \draw[fill=blue!8] (3.0,-5.87) rectangle (3.3,-6.07);
+  \node[font=\tiny, anchor=west] at (3.35,-5.97) {diperkuat (8)};
+  \draw[fill=white] (5.6,-5.87) rectangle (5.9,-6.07);
+  \node[font=\tiny, anchor=west] at (5.95,-5.97) {dipertahankan (5)};
+  \draw[fill=gray!35, dashed] (8.4,-5.87) rectangle (8.7,-6.07);
+  \node[font=\tiny, anchor=west] at (8.75,-5.97) {dihentikan (2)};
+\end{tikzpicture}

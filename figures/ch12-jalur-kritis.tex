@@ -1,0 +1,42 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  paket/.style={draw, rounded corners, minimum height=0.95cm, text width=2.45cm,
+                align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  kritis/.style={-{Stealth[length=2mm]}, very thick, orange!80!black}
+]
+  \node[paket, fill=orange!12] (p1) at (0,1.2)
+    {P1 Kontrol akses\\{\tiny\mdseries 9 bulan, 0 sampai 9\\longgar 0}};
+  \node[paket, fill=blue!8] (p2) at (0,-1.6)
+    {P2 Hub integrasi\\{\tiny\mdseries 6 bulan, 0 sampai 6\\longgar 3}};
+  \node[paket, fill=orange!12] (p3) at (3.15,0)
+    {P3 Identitas pasien\\{\tiny\mdseries 12 bulan, 9 sampai 21\\longgar 0}};
+  \node[paket, fill=blue!8] (p4) at (3.15,2.0)
+    {P4 \textit{Landing zone}\\{\tiny\mdseries 6 bulan, 9 sampai 15\\longgar 6}};
+  \node[paket, fill=orange!12] (p5) at (6.3,2.4)
+    {P5 SIMRS terpadu\\{\tiny\mdseries 30 bulan, 21 sampai 51\\longgar 0}};
+  \node[paket, fill=blue!8] (p6) at (6.3,0.8)
+    {P6 Laporan terpadu\\{\tiny\mdseries 12 bulan, 21 sampai 33\\longgar 18}};
+  \node[paket, fill=blue!8] (p7) at (6.3,-0.8)
+    {P7 Antrean daring\\{\tiny\mdseries 9 bulan, 21 sampai 30\\longgar 21}};
+  \node[paket, fill=blue!8] (p8) at (6.3,-2.4)
+    {P8 Portal mitra\\{\tiny\mdseries 12 bulan, 30 sampai 42\\longgar 9}};
+  \node[paket, fill=green!10] (akhir) at (9.45,0)
+    {Selesai\\{\tiny\mdseries bulan 51, September 2030}};
+
+  \draw[kritis] (p1) -- (p3);
+  \draw[panah] (p1) -- (p4);
+  \draw[panah] (p2) -- (p3);
+  \draw[panah] (p2.east) -- (p7.west);
+  \draw[panah] (p2.east) -- (p8.west);
+  \draw[kritis] (p3) -- (p5);
+  \draw[panah] (p3) -- (p6);
+  \draw[panah] (p3) -- (p7);
+  \draw[panah] (p3) -- (p8);
+  \draw[panah] (p4) -- (p5);
+  \draw[panah] (p4) -- (p6);
+  \draw[kritis] (p5) -- (akhir);
+  \draw[panah] (p6) -- (akhir);
+  \draw[panah] (p7) -- (akhir);
+  \draw[panah] (p8) -- (akhir);
+\end{tikzpicture}

@@ -1,0 +1,24 @@
+\begin{tikzpicture}[font=\scriptsize,
+  sel/.style={draw, text width=4.4cm, minimum height=1.75cm, align=center},
+  panah/.style={-{Stealth[length=2mm]}, thick}]
+  \node[sel, fill=orange!12] at (0,1.9)
+    {\textbf{\textit{Migrate}}\\Nilai tinggi, teknis lemah\\
+     {\tiny\mdseries Kemampuan dipertahankan, implementasi diubah}\\
+     {\tiny\mdseries Contoh: lima SIMRS}};
+  \node[sel, fill=green!10] at (4.8,1.9)
+    {\textbf{\textit{Invest}}\\Nilai tinggi, teknis memadai\\
+     {\tiny\mdseries Kembangkan dengan ukuran manfaat}\\
+     {\tiny\mdseries Contoh: ERP keuangan, Medikara+}};
+  \node[sel, fill=red!22] at (0,0)
+    {\textbf{\textit{Eliminate}}\\Nilai rendah, teknis lemah\\
+     {\tiny\mdseries Penuhi syarat sebelum penghentian}\\
+     {\tiny\mdseries Contoh: antrean Bandung, 23 \textit{spreadsheet}}};
+  \node[sel, fill=blue!8] at (4.8,0)
+    {\textbf{\textit{Tolerate}}\\Nilai rendah, teknis memadai\\
+     {\tiny\mdseries Rawat dan tinjau secara berkala}\\
+     {\tiny\mdseries Contoh: SIM Klinik}};
+  \draw[panah] (-2.55,-1.05)--(7.35,-1.05)
+    node[midway, below, font=\tiny] {Kualitas teknis (tinggi bila 4 ke atas, skala 1 sampai 5)};
+  \draw[panah] (-2.55,-1.05)--(-2.55,2.95)
+    node[midway, above, rotate=90, font=\tiny] {Nilai bisnis (tinggi bila 4 ke atas)};
+\end{tikzpicture}

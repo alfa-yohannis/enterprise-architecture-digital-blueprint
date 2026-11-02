@@ -1,0 +1,17 @@
+# Templat dan contoh rantai motivasi Bab 3. Salin ke folder tim, ganti isinya, lalu periksa dengan periksa-keterlacakan.py. Hapus baris ini saat impor ke spreadsheet.
+id,jenis,pernyataan,induk,ukuran,baseline,target,batas_waktu,pemilik
+D1,driver,Antrean layanan rawat jalan di rumah sakit panjang,,,,,,
+D2,driver,Insiden kebocoran data pasien skala kecil lewat vendor pada 2025,,,,,,
+D3,driver,Temuan audit internal tentang kontrol akses yang lemah,,,,,,
+A1,assessment,Waktu tunggu rata-rata dari pendaftaran sampai diperiksa dokter 96 menit; jadwal dokter di Medikara+ disalin manual sekali sehari,D1,,,,,
+A2,assessment,17 akun vendor tetap aktif setelah kontrak berakhir; hak akses SIMRS tidak pernah ditinjau ulang,D2;D3,,,,,
+G1,goal,Pasien dilayani tepat waktu di fasilitas Medikara mana pun,A1,,,,,
+G2,goal,Data pasien hanya dapat dibuka oleh pihak yang berhak,A2,,,,,
+O1,outcome,Waktu tunggu rawat jalan di rumah sakit turun,G1,rata-rata menit dari pendaftaran sampai diperiksa dokter,96,60,2028-12,Direktur Pelayanan
+O2,outcome,Akun pihak ketiga tanpa kontrak berlaku hilang,G2,jumlah akun vendor aktif tanpa kontrak berlaku,17,0,2027-06,Kepala Keamanan Informasi
+O3,outcome,Hak akses SIMRS ditinjau berkala,G2,persentase akun SIMRS yang ditinjau dalam tiga bulan terakhir,0,100,2027-03,Kepala Keamanan Informasi
+PA1,prinsip,Satu sumber kebenaran untuk data pasien,G1,,,,,
+PA2,prinsip,Akses berdasarkan kebutuhan,G2,,,,,
+R1,requirement,Jadwal dokter di Medikara+ dibaca langsung dari SIMRS kelima rumah sakit dengan jeda paling lama 5 menit,O1;PA1,,,,,
+R2,requirement,Setiap akun vendor memakai autentikasi dua faktor dan kedaluwarsa otomatis pada tanggal akhir kontrak,O2;PA2,,,,,
+R3,requirement,Seluruh aplikasi dipindahkan ke cloud pada 2027,,,,,,

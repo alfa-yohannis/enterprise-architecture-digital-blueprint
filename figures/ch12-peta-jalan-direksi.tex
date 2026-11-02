@@ -1,0 +1,69 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  lajur/.style={anchor=west, text width=2.2cm, font=\tiny\bfseries},
+  isi/.style={font=\tiny, align=center},
+  kritis/.style={draw, fill=orange!12},
+  biasa/.style={draw, fill=blue!8},
+  keputusan/.style={diamond, draw, fill=praditagreen!15, inner sep=1.4pt},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Satu bulan = 0,168 cm. Bulan 0 = Juli 2026 pada x = 2,4.
+  \draw[gray!50] (2.4,-0.25) -- (11.472,-0.25);
+  \foreach \x in {2.4, 3.408, 5.424, 7.44, 9.456, 11.472}
+    \draw[gray!50] (\x,0.25) -- (\x,-0.25);
+  \node[font=\scriptsize\bfseries] at (2.904,0) {2026};
+  \node[font=\scriptsize\bfseries] at (4.416,0) {2027};
+  \node[font=\scriptsize\bfseries] at (6.432,0) {2028};
+  \node[font=\scriptsize\bfseries] at (8.448,0) {2029};
+  \node[font=\scriptsize\bfseries] at (10.464,0) {2030};
+
+  % Arsitektur transisi yang tercapai.
+  \foreach \x/\nama in {5.928/T1, 7.944/T2, 9.456/T3, 10.968/Target}{
+    \draw[gray!70, dashed] (\x,-0.7) -- (\x,-3.5);
+    \node[font=\tiny\bfseries, text=praditagreen, fill=white, inner sep=1pt]
+      at (\x,-0.5) {\nama};
+  }
+  \node[lajur] at (0,-0.5) {Transisi tercapai};
+
+  \node[lajur] at (0,-1.05) {Keamanan dan akses};
+  \draw[kritis] (2.4,-1.25) rectangle (3.912,-0.85);
+  \node[isi] at (3.156,-1.05) {Kontrol akses};
+
+  \node[lajur] at (0,-1.6) {Data pasien};
+  \draw[kritis] (3.912,-1.8) rectangle (5.928,-1.4);
+  \node[isi] at (4.92,-1.6) {Identitas pasien tunggal};
+  \draw[biasa] (5.928,-1.8) rectangle (7.944,-1.4);
+  \node[isi] at (6.936,-1.6) {Laporan terpadu};
+
+  \node[lajur] at (0,-2.15) {Rekam medis};
+  \draw[kritis] (5.928,-2.35) rectangle (10.968,-1.95);
+  \node[isi] at (8.448,-2.15) {SIMRS terpadu: Depok, lalu empat rumah sakit lain};
+
+  \node[lajur] at (0,-2.7) {Layanan pasien dan mitra};
+  \draw[biasa] (5.928,-2.9) rectangle (7.44,-2.5);
+  \node[isi] at (6.684,-2.7) {Antrean daring};
+  \draw[biasa] (7.44,-2.9) rectangle (9.456,-2.5);
+  \node[isi] at (8.448,-2.7) {Portal dan API mitra};
+
+  \node[lajur] at (0,-3.25) {Fondasi teknologi};
+  \draw[biasa] (2.4,-3.45) rectangle (3.408,-3.05);
+  \node[isi] at (2.904,-3.25) {Integrasi};
+  \draw[biasa] (3.912,-3.45) rectangle (4.92,-3.05);
+  \node[isi, anchor=west] at (4.98,-3.25) {\textit{landing zone} cloud};
+
+  \node[lajur] at (0,-3.85) {Keputusan direksi};
+  \foreach \x/\nama in {2.988/K1, 5.004/K2, 7.86/K3, 9.036/K4}{
+    \node[keputusan] at (\x,-3.85) {};
+    \node[font=\tiny, anchor=west] at (\x+0.1,-3.85) {\nama};
+  }
+
+  % Keterangan.
+  \draw[kritis] (0,-4.55) rectangle (0.35,-4.35);
+  \node[font=\tiny, anchor=west] at (0.4,-4.45) {jalur kritis, tidak boleh terlambat};
+  \draw[biasa] (3.6,-4.55) rectangle (3.95,-4.35);
+  \node[font=\tiny, anchor=west] at (4.0,-4.45) {masih punya kelonggaran};
+  \node[keputusan] at (6.75,-4.45) {};
+  \node[font=\tiny, anchor=west] at (6.9,-4.45) {titik keputusan};
+  \draw[gray!70, dashed] (8.75,-4.45) -- (9.15,-4.45);
+  \node[font=\tiny, anchor=west] at (9.2,-4.45) {transisi tercapai};
+\end{tikzpicture}

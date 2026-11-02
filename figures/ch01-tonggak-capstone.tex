@@ -1,0 +1,43 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  tonggak/.style={draw, rounded corners, minimum height=1.25cm, align=center,
+                  font=\scriptsize\bfseries},
+  luaran/.style={font=\tiny, align=center, anchor=south},
+  pertemuan/.style={draw, circle, minimum size=0.5cm, inner sep=0pt, font=\tiny\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Empat tonggak; satu pertemuan selebar 0,8 cm.
+  \node[tonggak, fill=praditagreen!15, minimum width=2.4cm] (c1) at (1.2,0)
+    {C1\\{\mdseries Konteks dan}\\{\mdseries Strategi}};
+  \node[tonggak, fill=blue!8, minimum width=3.2cm] (c2) at (4.0,0)
+    {C2\\{\mdseries Kondisi}\\{\mdseries Saat Ini}};
+  \node[tonggak, fill=blue!8, minimum width=3.2cm] (c3) at (7.2,0)
+    {C3\\{\mdseries Kondisi}\\{\mdseries Target}};
+  \node[tonggak, fill=green!10, minimum width=2.4cm] (c4) at (10.0,0)
+    {C4\\{\mdseries Peta Jalan dan}\\{\mdseries Tata Kelola}};
+
+  % Luaran utama mata kuliah ini untuk tiap tonggak.
+  \node[luaran, text width=2.3cm] at (1.2,0.7)
+    {piagam tim, profil, glosarium, visi arsitektur};
+  \node[luaran, text width=3.1cm] at (4.0,0.7)
+    {model ArchiMate, \textit{capability map}, katalog aplikasi};
+  \node[luaran, text width=3.1cm] at (7.2,0.7)
+    {arsitektur target, ADR, \textit{gap analysis}};
+  \node[luaran, text width=2.3cm] at (10.0,0.7)
+    {peta jalan, \textit{business case}, tata kelola};
+
+  % Empat belas pertemuan; Pertemuan 1 ditekankan.
+  \draw[gray!60, thick] (0.4,-1.15) -- (10.8,-1.15);
+  \node[pertemuan, fill=orange!12] at (0.4,-1.15) {1};
+  \foreach \nomor in {2,...,14} {
+    \node[pertemuan, fill=white] at ({0.8*\nomor-0.4},-1.15) {\nomor};
+  }
+  \node[font=\tiny, orange!50!black, anchor=north west] at (0.0,-1.45) {bab ini};
+
+  % Titik tinjauan.
+  \draw[panah, red!60!black] (5.6,-2.3) -- (5.6,-1.45);
+  \node[font=\tiny, red!60!black, anchor=north] at (5.6,-2.3) {tinjauan menjelang UTS};
+  \draw[panah, red!60!black] (10.8,-2.3) -- (10.8,-1.45);
+  \node[font=\tiny, red!60!black, anchor=north east] at (11.2,-2.3)
+    {presentasi menjelang UAS};
+\end{tikzpicture}

@@ -1,0 +1,17 @@
+# Templat katalog konsep informasi Bab 06. Isi 10 sampai 15 baris, satu baris per konsep. Baris Pasien hanya contoh dan boleh diganti. Kolom klasifikasi memakai Publik, Internal, Rahasia, atau Sangat Rahasia.
+konsep,definisi_bisnis,pemilik_bisnis,steward,pemakai_utama,jenis_data,aplikasi_pembuat,klasifikasi,kategori_uu_pdp,catatan_masalah
+Pasien,Orang yang terdaftar untuk menerima layanan kesehatan di fasilitas Medikara,Direktur tiap rumah sakit,Kepala pendaftaran tiap rumah sakit,"Dokter, perawat, kasir, petugas klaim",Data induk,"SIMRS, Medikara+",Rahasia,Data pribadi umum,Nomor rekam medis berbeda di tiap rumah sakit
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,
+,,,,,,,,,

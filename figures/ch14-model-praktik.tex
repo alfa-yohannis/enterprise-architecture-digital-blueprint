@@ -1,0 +1,47 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  induk/.style={draw, rounded corners, minimum height=0.8cm, text width=2.9cm,
+                align=center, font=\scriptsize\bfseries},
+  unit/.style={draw, rounded corners, minimum height=0.6cm, text width=0.85cm,
+               align=center, font=\tiny\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Model terpusat.
+  \node[font=\footnotesize\bfseries] at (0,1.0) {Terpusat};
+  \node[induk, fill=praditagreen!15] (pusat1) at (0,0)
+    {Tim EA pusat\\{\tiny\mdseries menyusun seluruh arsitektur}};
+  \node[unit, fill=blue!8] (a1) at (-1.05,-1.6) {RS};
+  \node[unit, fill=blue!8] (b1) at (0,-1.6) {Klinik};
+  \node[unit, fill=blue!8] (c1) at (1.05,-1.6) {Apotek};
+  \draw[panah] (pusat1) -- (a1);
+  \draw[panah] (pusat1) -- (b1);
+  \draw[panah] (pusat1) -- (c1);
+  \node[font=\tiny, align=center, anchor=north] at (0,-2.05)
+    {konsisten, tetapi lambat\\dan jauh dari unit};
+
+  % Model terfederasi.
+  \node[font=\footnotesize\bfseries] at (4.0,1.0) {Terfederasi};
+  \node[induk, fill=gray!35] (pusat2) at (4.0,0)
+    {Forum arsitek\\{\tiny\mdseries koordinasi tanpa mandat kuat}};
+  \node[unit, fill=orange!12] (a2) at (2.95,-1.6) {RS};
+  \node[unit, fill=orange!12] (b2) at (4.0,-1.6) {Klinik};
+  \node[unit, fill=orange!12] (c2) at (5.05,-1.6) {Apotek};
+  \draw[dashed, thick] (pusat2) -- (a2);
+  \draw[dashed, thick] (pusat2) -- (b2);
+  \draw[dashed, thick] (pusat2) -- (c2);
+  \node[font=\tiny, align=center, anchor=north] at (4.0,-2.05)
+    {dekat dengan unit, tetapi\\mudah menyimpang};
+
+  % Model hibrida.
+  \node[font=\footnotesize\bfseries] at (8.0,1.0) {Hibrida};
+  \node[induk, fill=praditagreen!15] (pusat3) at (8.0,0)
+    {Tim EA pusat\\{\tiny\mdseries prinsip, standar, repositori}};
+  \node[unit, fill=green!10] (a3) at (6.95,-1.6) {RS};
+  \node[unit, fill=green!10] (b3) at (8.0,-1.6) {Klinik};
+  \node[unit, fill=green!10] (c3) at (9.05,-1.6) {Apotek};
+  \draw[panah] (pusat3) -- (a3);
+  \draw[panah] (pusat3) -- (b3);
+  \draw[panah] (pusat3) -- (c3);
+  \node[font=\tiny, align=center, anchor=north] at (8.0,-2.05)
+    {standar dipegang pusat,\\keputusan harian di unit};
+\end{tikzpicture}

@@ -1,0 +1,28 @@
+\begin{tikzpicture}[font=\tiny,
+  kepala/.style={draw, fill=praditagreen!15, text width=1.52cm, minimum height=0.72cm,
+    align=flush center, font=\tiny\bfseries, inner sep=2pt},
+  isi/.style={draw, fill=blue!8, text width=1.52cm, minimum height=1.38cm,
+    align=flush center, inner sep=2pt},
+  tekan/.style={isi, fill=orange!12},
+  panah/.style={-{Stealth[length=2mm]}, thick}]
+  \foreach \posisi/\judul in {0/{Keluhan\\layanan}, 1/{Kapabilitas\\(Bab 5)},
+      2/{Konsep data\\(Bab 6)}, 3/{Aplikasi\\(Bab 7)}, 4/{Antarmuka\\(Bab 7)},
+      5/{Teknologi\\(Bab 7)}} {
+    \node[kepala] at (\posisi*2.0,0) {\judul};
+  }
+  \node[isi] (a) at (0,-1.15) {Janji temu daring tidak muncul di loket Bekasi};
+  \node[isi] (b) at (2.0,-1.15) {CAP-L03 Penjadwalan Layanan};
+  \node[isi] (c) at (4.0,-1.15) {Janji Temu: Medikara+ CRUD, SIMRS RU};
+  \node[isi] (d) at (6.0,-1.15) {Medikara+ dan SIMRS Bekasi};
+  \node[tekan] (e) at (8.0,-1.15) {INT-22: basis data dibaca langsung, satu akun};
+  \node[isi] (f) at (10.0,-1.15) {Server Bekasi, internet ke vendor};
+  \draw[panah] (a)--(b);
+  \draw[panah] (b)--(c);
+  \draw[panah] (c)--(d);
+  \draw[panah] (d)--(e);
+  \draw[panah] (e)--(f);
+  \node[draw, fill=green!10, text width=11.3cm, minimum height=0.62cm, align=flush center,
+    inner sep=2pt] at (5.0,-2.42)
+    {Temuan C2: akibat bagi pasien, bukti, pemilik yang mengonfirmasi, dan batas data.
+     Usulan solusi belum ditulis pada tahap ini.};
+\end{tikzpicture}

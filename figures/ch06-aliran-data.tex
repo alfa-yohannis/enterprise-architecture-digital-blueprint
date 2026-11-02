@@ -1,0 +1,40 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.9cm, minimum width=2.5cm,
+                align=center, font=\scriptsize\bfseries},
+  luar/.style={kotak, dashed, fill=blue!8},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  manual/.style={-{Stealth[length=2mm]}, thick, dashed, red!65!black},
+  label/.style={font=\tiny, fill=white, inner sep=1pt, align=center}
+]
+  \node[kotak, fill=blue!8] (mplus) at (0,1.8)
+    {Medikara+\\{\tiny\mdseries janji temu, telekonsultasi}};
+  \node[kotak, fill=praditagreen!15] (simrs) at (0,0)
+    {5 SIMRS\\{\tiny\mdseries RS, klinik, lab, apotek}};
+  \node[kotak, fill=blue!8] (erp) at (0,-1.8)
+    {ERP keuangan\\{\tiny\mdseries terpusat}};
+
+  \node[luar] (bpjs) at (4.6,2.0) {BPJS Kesehatan\\{\tiny\mdseries eksternal}};
+  \node[luar] (satu) at (4.6,0.7) {SATUSEHAT\\{\tiny\mdseries eksternal}};
+  \node[kotak, fill=red!22] (sheet) at (4.6,-1.0)
+    {Spreadsheet\\{\tiny\mdseries rekap bulanan}};
+  \node[kotak, fill=green!10] (laporan) at (8.9,-1.0)
+    {Laporan\\manajemen};
+
+  \draw[panah, {Stealth[length=2mm]}-{Stealth[length=2mm]}] (mplus) --
+    node[label] {janji temu, jadwal} (simrs);
+  \draw[panah] (simrs) -- node[label] {tagihan} (erp);
+  \draw[panah] ([yshift=0.2cm]simrs.east) -- ++(0.9,0) |-
+    node[label, pos=0.75] {klaim} (bpjs.west);
+  \draw[panah] ([yshift=0.2cm]simrs.east) -- ++(0.9,0) |-
+    node[label, pos=0.75] {kunjungan} (satu.west);
+  \draw[manual] ([yshift=-0.2cm]simrs.east) -- ++(0.6,0) |-
+    node[label, pos=0.75] {ekspor} (sheet.west);
+  \draw[manual] (erp.east) -- ++(0.6,0) |- (sheet.west);
+  \draw[manual] (sheet) -- node[label] {salin dan tempel} (laporan);
+
+  \node[font=\tiny, gray, anchor=west] at (6.6,-2.3)
+    {garis merah putus-putus:};
+  \node[font=\tiny, gray, anchor=west] at (6.6,-2.6)
+    {aliran manual yang tidak tercatat};
+\end{tikzpicture}

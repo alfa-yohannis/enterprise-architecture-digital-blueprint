@@ -1,0 +1,25 @@
+# Register gap sintetis Medikara: 23 gap menuju paket P1 sampai P8 pada Bab 12. Baca sebagai pembanding; hapus baris ini saat impor spreadsheet.
+id_gap,domain,kondisi_awal,kondisi_target,asal_gap,paket,bukti_penerimaan
+G-B01,bisnis,"Pendaftaran per fasilitas, verifikasi 25 menit","Pendaftaran lintas fasilitas, verifikasi 5 menit",baru,P3,Median waktu verifikasi diukur di Depok
+G-B02,bisnis,"Akses Pengguna tingkat 1, 212 akun aktif milik orang yang sudah keluar","Tingkat 3, tidak ada akun tanpa pemilik",diperkuat,P1,Uji persetujuan dan pencabutan
+G-B03,bisnis,Belum ada data steward lintas fasilitas dan SOP koreksi identitas,"Peran, SOP, dan pelatihan petugas tersedia",terlewat bila hanya melihat aplikasi,P3,Mandat dan simulasi kasus disetujui
+G-B04,bisnis,"Penjadwalan tingkat 2, janji daring 28 persen","Tingkat 3, janji daring 50 persen",diperkuat,P7,Porsi janji daring per bulan
+G-B05,bisnis,Kemitraan ditangani per kontrak,Pengelolaan Kemitraan Ekosistem tingkat 2,baru,P8,Proses persetujuan mitra berjalan
+G-B06,bisnis,Klaim BPJS dikembalikan 9 persen,Klaim dikembalikan 3 persen,diperkuat,P2,Laporan klaim bulanan
+G-B07,bisnis,Pengelolaan Kepatuhan tingkat 2,Tingkat 3,diperkuat,P1,Model tata kelola target IT40813 cocok
+G-B08,bisnis,"Telekonsultasi tingkat 2, komponen terkunci di vendor","Tingkat 3, pengingat kontrol 90 persen",diperkuat,P7,Porsi pengingat terkirim
+G-D01,data,"2,1 juta catatan identitas untuk sekitar 1,5 juta orang","Satu ID induk per orang, penerbitan nomor lokal dihentikan",baru,P3,Uji salah gabung dan penelusuran asal
+G-D02,data,"NIK terisi 77,4 persen",NIK terisi sesuai kewajiban rekam medis,diperkuat,P3,Laporan kelengkapan per sumber
+G-D03,data,Riwayat lintas fasilitas terbuka 10 persen,Terbuka 95 persen,diperkuat,P5,Pengukuran saat pemeriksaan
+G-D04,data,"23 spreadsheet, selisih 2.770 kunjungan pada Oktober 2025","Satu definisi angka dari platform data, rekonsiliasi manual berhenti",dihentikan sengaja,P6,Uji paralel dua periode
+G-D05,data,Data Medikara+ belum dianalisis,Wawasan Pasien dan Analitik tingkat 2,baru,P6,Laporan pertama dipakai Direktur Pelayanan
+G-A01,aplikasi,"Lima SIMRS, Rp5,7 miliar per tahun",Satu SIMRS terpadu,diganti,P5,Penerimaan per rumah sakit
+G-A02,aplikasi,SIM Klinik terpisah untuk 18 klinik,Modul rawat jalan SIMRS terpadu,digabung,P5,Penerimaan per gelombang klinik
+G-A03,aplikasi,"Antrean Bandung, janji temu ditulis dua aplikasi",Satu jadwal lewat Medikara+,dihentikan sengaja,P7,Data dua tahun dipindahkan
+G-A04,aplikasi,"Integrasi point-to-point, 26 antarmuka pada sembilan sistem",Lewat hub lalu platform integrasi,diganti,P2,Kontrak dan uji kegagalan
+G-A05,aplikasi,API mitra belum ada,Portal dan API mitra,baru,P8,Uji pembatasan akses
+G-A06,aplikasi,Surveilans Bogor dan Laporan Klaim Lama tidak punya padanan pada target,Laporan regulator dari platform data,terlewat,P6,Uji paralel dua periode pelaporan
+G-T01,teknologi,"Empat merek basis data, Rp2,4 miliar per tahun","Dua merek, Rp1,5 miliar per tahun",diganti,P5,Migrasi dua merek selesai
+G-T02,teknologi,Tim TI terbiasa server fisik,Tim mengelola biaya dan keamanan cloud,terlewat bila hanya melihat teknologi,P4,Staf lulus pelatihan
+G-T03,teknologi,"31 dari 46 aplikasi mengelola akun sendiri, akun bersama vendor","Akses terpusat, akun vendor bermasa berlaku",baru,P1,Uji akses dan bukti pencabutan
+G-T04,teknologi,Server lokal tiap rumah sakit,Landing zone cloud di region Indonesia,diganti,P4,Uji pemulihan

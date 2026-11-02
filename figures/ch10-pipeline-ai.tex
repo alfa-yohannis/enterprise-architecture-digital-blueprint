@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=1.1cm, text width=1.65cm,
+                align=center, font=\scriptsize\bfseries},
+  kendali/.style={circle, draw, fill=red!22, inner sep=1pt, font=\tiny\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[kotak, fill=blue!8] (sumber) at (0,0)
+    {Sumber data\\{\tiny\mdseries SIMRS, laboratorium, MPI}};
+  \node[kotak, fill=blue!8] (pipa) at (2.45,0)
+    {Pipeline data\\{\tiny\mdseries ekstraksi, format FHIR}};
+  \node[kotak, fill=orange!12] (model) at (4.9,0)
+    {Model ringkasan\\{\tiny\mdseries layanan model bahasa}};
+  \node[kotak, fill=blue!8] (ui) at (7.35,0)
+    {Antarmuka dokter\\{\tiny\mdseries draf di layar SIMRS}};
+  \node[kotak, fill=green!10] (rm) at (9.8,0)
+    {Rekam medis\\{\tiny\mdseries setelah disetujui dokter}};
+  \node[kotak, fill=praditagreen!15, text width=4.2cm] (pantau) at (6.1,-2.0)
+    {Pemantauan\\{\tiny\mdseries mutu ringkasan, keluhan dokter, catatan akses}};
+
+  \draw[panah] (sumber) -- (pipa);
+  \draw[panah] (pipa) -- (model);
+  \draw[panah] (model) -- (ui);
+  \draw[panah] (ui) -- (rm);
+  \draw[panah, dashed, gray] (model.south) -- (model.south |- pantau.north);
+  \draw[panah, dashed, gray] (ui.south) -- (ui.south |- pantau.north);
+  \draw[panah, dashed, gray] (pantau.west) -| (pipa.south);
+
+  % Titik kendali K1 sampai K5.
+  \node[kendali] at (1.225,0.32) {K1};
+  \node[kendali] at (3.675,0.32) {K2};
+  \node[kendali] at (4.9,0.8) {K3};
+  \node[kendali] at (8.575,0.32) {K4};
+  \node[kendali] at (8.45,-2.0) {K5};
+  \node[font=\tiny, gray, anchor=north] at (3.0,-2.1) {umpan balik perbaikan};
+\end{tikzpicture}

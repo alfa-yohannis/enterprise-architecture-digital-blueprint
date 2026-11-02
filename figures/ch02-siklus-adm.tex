@@ -1,0 +1,36 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  fase/.style={draw, rounded corners, minimum height=0.95cm, minimum width=2.45cm,
+               align=center, font=\scriptsize},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  dua/.style={{Stealth[length=1.5mm]}-{Stealth[length=1.5mm]}, gray}
+]
+  \node[fase, fill=orange!12] (pre) at (0,4.05)
+    {\textbf{Preliminary}\\{\tiny persiapan dan prinsip}};
+  \node[fase, fill=orange!12] (a) at (0,2.55) {\textbf{A}\\{\tiny visi arsitektur}};
+  \node[fase, fill=blue!8] (b) at (3.15,1.65) {\textbf{B}\\{\tiny arsitektur bisnis}};
+  \node[fase, fill=blue!8] (c) at (4.0,0) {\textbf{C}\\{\tiny arsitektur sistem}\\{\tiny informasi}};
+  \node[fase, fill=blue!8] (d) at (3.15,-1.65) {\textbf{D}\\{\tiny arsitektur teknologi}};
+  \node[fase, fill=green!10] (e) at (0,-2.55) {\textbf{E}\\{\tiny peluang dan solusi}};
+  \node[fase, fill=green!10] (f) at (-3.15,-1.65) {\textbf{F}\\{\tiny perencanaan migrasi}};
+  \node[fase, fill=blue!8] (g) at (-4.0,0) {\textbf{G}\\{\tiny tata kelola}\\{\tiny implementasi}};
+  \node[fase, fill=blue!8] (h) at (-3.15,1.65) {\textbf{H}\\{\tiny manajemen perubahan}};
+
+  \node[draw, rounded corners, fill=praditagreen!15, minimum width=2.6cm,
+        minimum height=1.0cm, align=center] (req) at (0,0)
+    {\textbf{Manajemen}\\\textbf{Kebutuhan}};
+
+  \draw[panah] (pre) -- (a);
+  \draw[panah] (a) to[bend left=15] (b);
+  \draw[panah] (b) to[bend left=15] (c);
+  \draw[panah] (c) to[bend left=15] (d);
+  \draw[panah] (d) to[bend left=15] (e);
+  \draw[panah] (e) to[bend left=15] (f);
+  \draw[panah] (f) to[bend left=15] (g);
+  \draw[panah] (g) to[bend left=15] (h);
+  \draw[panah] (h) to[bend left=15] (a);
+
+  \foreach \fasenya in {a, b, c, d, e, f, g, h} {
+    \draw[dua] (req) -- (\fasenya);
+  }
+\end{tikzpicture}

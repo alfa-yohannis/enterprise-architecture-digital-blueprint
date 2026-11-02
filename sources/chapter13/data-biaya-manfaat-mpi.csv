@@ -1,0 +1,10 @@
+# Data biaya dan manfaat inisiatif identitas pasien tunggal Medikara (fiktif) dalam juta rupiah. Ganti angkanya lalu jalankan: python analisis-business-case.py arus-kas data-biaya-manfaat-mpi.csv
+jenis,komponen,2027,2028,2029,2030,2031
+biaya,Lisensi atau langganan MPI,400,400,400,400,400
+biaya,Implementasi dan integrasi 5 SIMRS,2000,0,0,0,0
+biaya,Migrasi dan pembersihan data,1000,0,0,0,0
+biaya,Pelatihan dan perubahan cara kerja,300,100,0,0,0
+biaya,Operasional (3 steward data dan infrastruktur),0,600,600,600,600
+manfaat,Pemeriksaan laboratorium ulang yang dihindari,0,900,1800,1800,1800
+manfaat,Klaim tertunda dan ditolak karena identitas tidak cocok,0,600,1200,1200,1200
+manfaat,Rekonsiliasi laporan manual dihentikan,0,200,400,400,400

@@ -1,0 +1,34 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  simpul/.style={draw, rounded corners, minimum height=0.5cm,
+                 minimum width=1.5cm, align=center, font=\scriptsize\bfseries},
+  garis/.style={thick, gray}
+]
+  % Kiri: point-to-point, enam aplikasi saling terhubung langsung
+  \foreach \nama [count=\i] in {SIMRS, SIM Klinik, ERP, Medikara+, SATUSEHAT, BPJS} {
+    \node[simpul, fill=blue!8] (p\i) at ({90-60*(\i-1)}:1.8) {\nama};
+  }
+  \begin{scope}[on background layer]
+    \foreach \i in {1,...,6} {
+      \foreach \j in {1,...,6} {
+        \ifnum\i<\j
+          \draw[garis, red!45] (p\i) -- (p\j);
+        \fi
+      }
+    }
+  \end{scope}
+  \node[font=\scriptsize\bfseries, anchor=north] at (0,-2.35)
+    {\textit{Point-to-point}: 15 koneksi};
+
+  % Kanan: hub, tiap aplikasi cukup satu koneksi
+  \node[simpul, fill=orange!12, minimum width=1.7cm, minimum height=0.9cm]
+    (hub) at (6.9,0) {Platform\\integrasi};
+  \foreach \nama [count=\i] in {SIMRS, SIM Klinik, ERP, Medikara+, SATUSEHAT, BPJS} {
+    \node[simpul, fill=blue!8] (h\i) at ($(hub)+({90-60*(\i-1)}:1.8)$) {\nama};
+    \begin{scope}[on background layer]
+      \draw[garis, praditagreen] (hub) -- (h\i);
+    \end{scope}
+  }
+  \node[font=\scriptsize\bfseries, anchor=north] at (6.9,-2.35)
+    {\textit{Hub}: 6 koneksi};
+\end{tikzpicture}

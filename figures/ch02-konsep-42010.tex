@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  kotak/.style={draw, rounded corners, minimum height=0.95cm, minimum width=2.7cm,
+                align=center, font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick},
+  ket/.style={font=\tiny, fill=white, inner sep=1pt}
+]
+  \node[kotak, fill=praditagreen!15] (entitas) at (0,0)
+    {Entitas yang dikaji\\{\tiny\mdseries\textit{entity of interest}}};
+  \node[kotak, fill=blue!8] (arsitektur) at (4.4,0)
+    {Arsitektur\\{\tiny\mdseries ada walau tak ditulis}};
+  \node[kotak, fill=green!10] (deskripsi) at (8.8,0)
+    {Deskripsi arsitektur\\{\tiny\mdseries dokumen, model}};
+
+  \node[kotak, fill=blue!8] (pemangku) at (0,-2.4)
+    {Pemangku kepentingan\\{\tiny\mdseries\textit{stakeholder}}};
+  \node[kotak, fill=orange!12] (concern) at (4.4,-2.4)
+    {Concern\\{\tiny\mdseries kepentingan, pertanyaan}};
+  \node[kotak, fill=green!10] (view) at (8.8,-2.4)
+    {View\\{\tiny\mdseries gambar yang menjawab}};
+
+  \node[kotak, fill=blue!8] (viewpoint) at (6.6,-4.6)
+    {Viewpoint\\{\tiny\mdseries aturan membuat view}};
+
+  \draw[panah] (entitas) -- node[ket, above] {memiliki} (arsitektur);
+  \draw[panah] (arsitektur) -- node[ket, above] {diungkapkan dalam} (deskripsi);
+  \draw[panah] (pemangku) -- node[ket, right] {berkepentingan pada} (entitas);
+  \draw[panah] (pemangku) -- node[ket, above] {memiliki} (concern);
+  \draw[panah] (deskripsi) -- node[ket, right] {memuat} (view);
+  \draw[panah] (view) -- node[ket, above] {menjawab} (concern);
+  \draw[panah] (viewpoint.west) -| node[ket, pos=0.75, left] {membingkai} (concern.south);
+  \draw[panah] (viewpoint.east) -| node[ket, pos=0.75, right] {mengatur} (view.south);
+\end{tikzpicture}

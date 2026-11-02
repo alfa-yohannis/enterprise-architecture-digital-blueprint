@@ -1,0 +1,589 @@
+% !TeX program = xelatex
+% !TeX encoding = UTF-8
+% !TeX TXS-program:compile = txs:///xelatex | txs:///xelatex
+\documentclass[aspectratio=169, table, 12pt]{beamer}
+
+\input{../preamble}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
+
+% Font tema slide lebih lebar daripada font modul, sehingga kotak diagram jalur kritis
+% bertumpuk. Lebar kotak dan jarak tegaknya dilonggarkan khusus di slide ini.
+\makeatletter
+\newcommand{\longgarkandiagram}[2]{%
+  \tikzset{text width/.code={\def\tikz@text@width{#1}},
+           every picture/.append style={y=#2}}}
+\makeatother
+
+\title{\Huge Transisi, Peta Jalan,\\ \vspace{10pt} dan Perencanaan Migrasi}
+\date{Pertemuan 12}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\begin{frame}
+  \frametitle{Isi Pertemuan}
+  \vspace{14pt}
+  \begin{columns}[t]
+    \column{0.5\textwidth}
+    {\small\tableofcontents[sections={1-3}]}
+
+    \column{0.5\textwidth}
+    {\small\tableofcontents[sections={4-6}]}
+  \end{columns}
+\end{frame}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Bila program berhenti\\di tengah jalan, apa yang\\tersisa bagi organisasi?}}
+\end{frame}
+
+\section{Tujuan dan Konteks}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Tujuan dan Konteks}}
+\end{frame}
+
+\begin{frame}{{\Large Tujuan Pembelajaran}}
+  \vspace{10pt}
+  \begin{itemize}
+    \item Merancang dua sampai tiga arsitektur transisi yang masing-masing memberi nilai bisnis.
+    \item Menyusun peta jalan 2026 sampai 2030 berdasarkan dependensi, nilai, risiko, dan kapasitas
+          organisasi.
+    \item Menyusun rencana migrasi tingkat tinggi beserta asumsi dan titik keputusannya.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Masalah: Program Raksasa Menumpuk Risiko}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Godaan setelah Bab 11: identitas pasien, kontrol akses, konsolidasi Sistem Informasi
+          Manajemen Rumah Sakit (SIMRS), dan lainnya dikerjakan sekaligus.
+    \item Bila berhenti di tengah, organisasi sudah membayar mahal tanpa hasil yang dapat dipakai.
+    \item Flyvbjerg dan Budzier meneliti 1.471 proyek teknologi informasi (TI): pembengkakan biaya
+          rata-rata 27 persen.
+    \item Satu dari enam proyek membengkak rata-rata 200 persen, dengan keterlambatan hampir 70 persen.
+    \item Fase E dan fase F dalam ADM (\textit{Architecture Development Method}) memecahnya menjadi
+          langkah yang selesai dan bermanfaat.
+  \end{itemize}
+\end{frame}
+
+\section{Arsitektur Transisi}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Arsitektur Transisi}}
+\end{frame}
+
+\begin{frame}{{\Large Apa Itu Arsitektur Transisi}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Gambaran formal arsitektur pada satu titik waktu penting di antara kondisi saat ini dan
+          kondisi target.
+    \item Domainnya sama dengan target: bisnis, data, aplikasi, dan teknologi.
+    \item ArchiMate menyebutnya \textit{plateau}: keadaan yang relatif stabil selama kurun waktu
+          tertentu.
+    \item Setiap pijakan dijalankan sehari-hari, bukan sekadar tanggal di jadwal proyek.
+  \end{itemize}
+  \vspace{6pt}
+  Analogi: merenovasi rumah yang tetap dihuni. Bila uang habis setelah tahap kedua, kamar mandi baru
+  tetap berfungsi.
+\end{frame}
+
+\begin{frame}{{\Large Diagram Konsep Bab 12}}
+  \centering
+  \includegraphics[width=0.96\textwidth,height=0.77\textheight,keepaspectratio]{../../figures/ch12-diagram-konsep.png}
+  \label{fig:session12-ilustrasi-bab}
+\end{frame}
+
+\begin{frame}{{\Large Empat Syarat Transisi yang Bernilai}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{2.6cm}YY}
+    \hline
+    \textbf{Syarat} & \textbf{Pertanyaan uji} & \textbf{Contoh yang gagal} \\
+    \hline
+    Memberi manfaat yang terlihat & Siapa yang merasakan perubahannya, dan
+      dengan ukuran apa? & \textit{Cloud} sudah siap, tetapi belum ada
+      aplikasi yang pindah \\
+    \hline
+    Stabil bila langkah berikutnya ditunda & Bila langkah berikutnya mundur
+      dua tahun, apakah keadaan ini tetap berjalan dengan biaya wajar? & Data
+      pasien baru separuh dipindahkan, sehingga dua sumber data berjalan
+      bersamaan \\
+    \hline
+    Searah dengan target & Adakah bagian yang harus dibongkar lagi untuk
+      mencapai target? & SIMRS lama ditingkatkan besar-besaran, padahal akan
+      diganti dua tahun kemudian \\
+    \hline
+    Dapat dinyatakan tercapai & Adakah ukuran yang jelas untuk menyatakan
+      transisi ini tercapai? & Transisi bernama ``Digitalisasi Tahap 1''
+      tanpa daftar kemampuan dan ukuran \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Syarat kedua paling sering dilanggar.
+\end{frame}
+
+\begin{frame}{{\Large Uji Penundaan dan Jumlah Transisi}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Uji penundaan: andaikan langkah berikutnya ditunda dua tahun, lalu hitung apa yang tersisa.
+    \item Pekerjaan sementara dianggarkan secara sadar, misalnya antarmuka sistem lama dan baru.
+    \item Batas transisi jatuh sesudah paket yang tidak boleh berhenti di tengah.
+    \item Horizon empat sampai lima tahun cukup dua sampai tiga transisi, berjarak 9 sampai 24 bulan.
+    \item Misalkan stabilisasi tiga bulan. Lima transisi dalam 54 bulan menghabiskan hampir 28 persen
+          waktu, tiga transisi sekitar 17 persen.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Transisi yang Lolos dan yang Gagal}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item Misalkan kabupaten menyatukan 40 aplikasi perizinan ke satu portal dalam empat tahun.
+    \item Transisi pertama: satu akun warga dan satu nomor permohonan untuk 12 izin tersering. Bila
+          tahap berikutnya ditunda, satu pintu itu tetap ada.
+    \item Misalkan perusahaan distribusi dengan 25 gudang memindahkan basis data ke \textit{cloud} tanpa
+          mengubah aplikasi.
+    \item Sewa naik, misalnya Rp1,2 miliar per tahun, tetapi tidak ada proses gudang yang berubah.
+    \item Bila penggantian aplikasi ditunda dua tahun, Rp2,4 miliar terbayar tanpa manfaat.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Tiga Transisi Medikara}}
+  \centering
+  \begin{figure}
+    \resizebox{0.94\textwidth}{!}{\input{../../figures/ch12-transisi-medikara.tex}}
+    \caption{Tiga arsitektur transisi Medikara menuju target 2030. Kode P1 sampai P8 adalah paket
+             kerja}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Transisi Pertama: Identitas dan Akses}}
+  \begin{block}{Kasus Medikara Health}
+    \small
+    \begin{itemize}
+      \item Pemicu mendesak: insiden 2025 dan temuan audit belum tertutup. Kewajiban Undang-Undang
+            Pelindungan Data Pribadi (UU PDP) berlaku penuh sejak Oktober 2024.
+      \item Paket lain bergantung: konsolidasi SIMRS butuh satu identitas pasien.
+      \item Lolos uji penundaan: satu nomor pasien untuk 5 rumah sakit dan 18 klinik, akses 4.800
+            karyawan dari satu tempat, dan satu \textit{hub} integrasi.
+      \item Misalkan lima adaptor masing-masing Rp150 juta per tahun. Bila T2 tertunda dua tahun,
+            biayanya Rp1,5 miliar.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Mengurutkan Paket Kerja}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Mengurutkan Paket Kerja}}
+\end{frame}
+
+\begin{frame}{{\Large Empat Kriteria Pengurutan}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{1.6cm}YL{2.8cm}L{3.0cm}}
+    \hline
+    \textbf{Kriteria} & \textbf{Pertanyaan} & \textbf{Sifat} & \textbf{Sumber data} \\
+    \hline
+    Dependensi & Paket apa yang harus selesai sebelum paket ini dimulai? &
+      Syarat mutlak & Matriks dependensi Bab 11 \\
+    \hline
+    Nilai & Seberapa besar manfaat yang dirasakan pasien atau manajemen? &
+      Skor 1 sampai 5 & Rantai motivasi Bab 3, \textit{heatmap} Bab 5 \\
+    \hline
+    Risiko & Seberapa besar risiko organisasi yang turun bila paket selesai?
+      Seberapa sulit paket itu dikerjakan? & Skor 1 sampai 5, ditambah
+      catatan risiko pelaksanaan & Temuan audit, daftar risiko IT40813 \\
+    \hline
+    Kapasitas & Berapa paket besar yang sanggup dikerjakan dalam setahun? &
+      Batas per tahun & Jumlah staf TI, vendor, kesiapan unit bisnis \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Keempatnya tidak setara. Dependensi tidak dapat ditawar, skor memilih di antara paket yang
+  sama-sama siap, dan kapasitas membatasi jumlahnya.
+\end{frame}
+
+\begin{frame}{{\Large Kriteria Diterapkan Berurutan}}
+  \small Analogi: juru masak hajatan. Nasi ditanak sebelum tumpeng dibentuk (dependensi), hidangan yang
+  ditunggu tamu lebih dahulu (nilai), masakan yang mudah gagal dikerjakan pagi hari (risiko), dan
+  dapur hanya punya dua kompor besar (kapasitas).
+
+  \centering
+  \begin{figure}
+    \resizebox{0.94\textwidth}{!}{\input{../../figures/ch12-saringan-urutan.tex}}
+    \caption{Dependensi menyaring, skor memilih, kapasitas membatasi, dan siklus anggaran menetapkan
+             titik keputusan}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Delapan Paket Kerja Medikara}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{lYlrlrrr}
+    \hline
+    \textbf{Kode} & \textbf{Paket kerja} & \textbf{Ukuran} & \textbf{Bulan} &
+      \textbf{Pendahulu} & \textbf{Nilai} & \textbf{Risiko} & \textbf{Skor} \\
+    \hline
+    P1 & Kontrol akses terpusat & besar & 9 & tidak ada & 3 & 5 & 8 \\
+    \hline
+    P2 & \textit{Hub} integrasi BPJS dan SATUSEHAT & sedang & 6 & tidak ada & 3 & 3 & 6 \\
+    \hline
+    P3 & Identitas pasien tunggal (MPI) & besar & 12 & P1, P2 & 5 & 4 & 9 \\
+    \hline
+    P4 & \textit{Landing zone} \textit{cloud} & sedang & 6 & P1 & 1 & 2 & 3 \\
+    \hline
+    P5 & Konsolidasi SIMRS & besar & 30 & P3, P4 & 5 & 3 & 8 \\
+    \hline
+    P6 & Laporan manajemen terpadu & sedang & 12 & P3, P4 & 4 & 2 & 6 \\
+    \hline
+    P7 & Antrean dan janji temu lintas fasilitas & sedang & 9 & P2, P3 & 4 & 1 & 5 \\
+    \hline
+    P8 & Portal dan API mitra & besar & 12 & P2, P3 & 4 & 1 & 5 \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Skor prioritas adalah jumlah skor nilai dan skor pengurangan risiko.
+\end{frame}
+
+\begin{frame}{{\Large Skor, Fondasi, dan Hasil Cepat}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item P3 punya skor tertinggi, yaitu 9, tetapi menunggu P1 dan P2.
+    \item P4 punya skor terendah, yaitu 3, tetapi P5 dan P6 menunggunya. Skor tidak pernah boleh
+          mengalahkan dependensi.
+    \item Fondasi: nilainya kecil bila berdiri sendiri, tetapi menjadi syarat banyak paket. Contohnya
+          P2 dan P4.
+    \item Hasil cepat (\textit{quick win}): manfaatnya cepat terlihat dan dependensinya sedikit.
+          Contohnya P7.
+    \item Setiap transisi memuat paling sedikit satu hasil yang terlihat, dan hasil cepat harus searah
+          dengan target.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Kapasitas dan Siklus Anggaran}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Tim TI hanya sanggup dua proyek besar per tahun, dihitung pada setiap tahun yang dilaluinya.
+    \item Bila semua dimulai sedini mungkin, 2028 memuat tiga: P3, P5, dan P8. P8 bergeser ke Januari
+          2029.
+    \item Target tetap September 2030. Bila P5 yang digeser, target ikut mundur.
+    \item Misalkan tahun anggaran Januari sampai Desember. Pendanaan paket yang mulai April 2028 masuk
+          usulan Oktober 2027.
+    \item Karena itu P4 dijadwalkan selesai September 2027, sebulan sebelum keputusan pendanaan P5.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Pendalaman: Jalur Kritis}}
+  \centering
+  \begin{figure}
+    {\longgarkandiagram{2.45cm}{1.15cm}%
+    \resizebox{!}{0.56\textheight}{\input{../../figures/ch12-jalur-kritis.tex}}}
+  \end{figure}
+  \vspace{-6pt}
+  \small Jalur kritis berwarna jingga: P1, P3, dan P5 berjumlah 51 bulan, sehingga target tercapai
+  September 2030 dengan cadangan tiga bulan. Kelonggaran P8 turun dari 18 menjadi 9 bulan.
+\end{frame}
+
+\section{Peta Jalan untuk Pembaca Berbeda}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Peta Jalan untuk\\Pembaca Berbeda}}
+\end{frame}
+
+\begin{frame}{{\Large Tiga Versi Peta Jalan}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{1.5cm}YYL{2.5cm}}
+    \hline
+    \textbf{Versi} & \textbf{Pertanyaan pembaca} & \textbf{Isi utama} &
+      \textbf{Satuan waktu dan panjang} \\
+    \hline
+    Direksi & Apa manfaatnya, kapan tercapai, dan keputusan apa yang diminta? &
+      Transisi, manfaat terukur, jalur kritis, titik keputusan & Semester;
+      satu halaman \\
+    \hline
+    Unit bisnis & Kapan unit ini berubah, dan apa yang harus disiapkan? &
+      Jadwal per fasilitas, pelatihan, masa peralihan, dampak pada layanan &
+      Bulan; dua sampai empat halaman per unit \\
+    \hline
+    Tim TI & Siapa mengerjakan apa, dan apa bergantung pada apa? & Paket kerja,
+      dependensi, antarmuka sementara, lingkungan, sumber daya & Minggu atau
+      bulan; lembar kerja rinci \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Kotusev membedakan peta jalan yang menghadap bisnis dan yang menghadap tim teknis. Analogi:
+  rencana mudik. Penumpang menanyakan perkiraan tiba, sopir membutuhkan rute dan gerbang tol.
+\end{frame}
+
+\begin{frame}{{\Large Peta Jalan sebagai Dokumen Hidup}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Rincian berjenjang: 2026 dan 2027 per bulan, 2028 per triwulan, 2029 sampai 2030 per semester.
+    \item Rincian per bulan untuk tahun 2030 memberi kesan pasti yang palsu.
+    \item Tiga pemicu perubahan: tinjauan triwulanan, tinjauan tahunan bersama siklus anggaran, dan
+          kejadian besar.
+    \item Setiap perubahan dicatat dengan nomor versi, tanggal, dan alasannya.
+    \item Versi direksi tidak boleh berubah diam-diam. Pergeseran transisi dilaporkan sebagai keputusan
+          yang diminta.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Peta Jalan Versi Direksi}}
+  \centering
+  \begin{figure}
+    \resizebox{0.82\textwidth}{!}{\input{../../figures/ch12-peta-jalan-direksi.tex}}
+    \caption{Peta jalan Medikara 2026 sampai 2030 versi direksi, dengan tiga transisi, target, dan
+             empat titik keputusan}
+  \end{figure}
+\end{frame}
+
+\begin{frame}{{\Large Peta Jalan Satu Halaman}}
+  \begin{block}{Kasus Medikara Health}
+    \small
+    \begin{itemize}
+      \item Lima lajur berbahasa manfaat: keamanan dan akses, data pasien, rekam medis, layanan pasien
+            dan mitra, serta fondasi teknologi.
+      \item Paket di jalur kritis diberi warna berbeda.
+      \item Empat titik keputusan K1 sampai K4 ditaruh di baris paling bawah.
+      \item Dihilangkan: kode paket, sebelas dependensi, lima adaptor, rincian teknis, dan nama calon
+            vendor SIMRS.
+      \item Semua informasi itu tetap ada di versi tim TI.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\section{Perencanaan dan Pemodelan Migrasi}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Perencanaan dan\\Pemodelan Migrasi}}
+\end{frame}
+
+\begin{frame}{{\Large Empat Pola Peralihan}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{2.1cm}YYY}
+    \hline
+    \textbf{Pola} & \textbf{Cara kerja} & \textbf{Cocok bila} & \textbf{Risiko utama} \\
+    \hline
+    Sekaligus (\textit{big bang}) & Semua lokasi pindah pada satu tanggal &
+      Sistem kecil, atau sistem lama dan baru tidak dapat berjalan bersamaan &
+      Kegagalan berdampak ke semua lokasi sekaligus \\
+    \hline
+    Bertahap per lokasi & Satu lokasi percontohan, lalu lokasi lain bergelombang &
+      Tiap lokasi cukup mandiri & Dua sistem berjalan bersamaan, biaya ganda \\
+    \hline
+    Bertahap per fungsi & Modul demi modul, misalnya pendaftaran dulu, farmasi
+      kemudian & Sistem lama dapat dipecah & Banyak antarmuka sementara \\
+    \hline
+    Berjalan paralel & Sistem lama dan baru berjalan bersamaan, hasilnya
+      dibandingkan & Kesalahan berakibat fatal, misalnya tagihan atau data
+      klinis & Beban kerja ganda bagi staf \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Fase E menyusun versi pertama peta jalan, fase F memfinalkannya bersama
+  \textit{Implementation and Migration Plan}. Strategi 7R per aplikasi dibahas di IT40713.
+\end{frame}
+
+\begin{frame}{{\Large Asumsi, Titik Keputusan, Rencana Mundur}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Asumsi: pernyataan yang dianggap benar saat rencana disusun, tetapi belum terbukti.
+    \item Titik keputusan: tanggal yang ditetapkan sejak awal untuk memutuskan lanjut, ubah, atau
+          berhenti.
+    \item Rencana mundur: cara kembali ke keadaan stabil sebelumnya, lengkap dengan batas waktunya.
+    \item Asumsi diperiksa pada tanggal tertentu, sedangkan risiko dipantau terus-menerus.
+    \item Asumsi yang ternyata salah menjadi masalah yang harus segera ditangani.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Empat Titik Keputusan Medikara}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{lL{1.7cm}YY}
+    \hline
+    \textbf{Kode} & \textbf{Waktu} & \textbf{Keputusan} & \textbf{Kriteria lanjut} \\
+    \hline
+    K1 & Oktober 2026 & Mendanai P3 dan P4 dalam anggaran 2027 & P1 sesuai
+      jadwal; rancangan MPI disetujui pemilik data pasien \\
+    \hline
+    K2 & Oktober 2027 & Mendanai P5 dalam anggaran 2028 & Uji MPI di Depok:
+      salah gabung di bawah 0,1 persen; \textit{landing zone} selesai; vendor
+      SIMRS terpilih \\
+    \hline
+    K3 & Maret 2029 & Melanjutkan SIMRS terpadu ke empat rumah sakit lain &
+      Tiga bulan setelah dipakai di Depok: waktu pendaftaran tidak naik lebih
+      dari 10 persen, tidak ada data klinis hilang \\
+    \hline
+    K4 & Oktober 2029 & Mendanai gelombang terakhir, Jakarta dan Bandung &
+      Depok stabil; Bekasi dan Bogor lulus uji siap pakai untuk Desember 2029;
+      biaya ganda SIMRS sesuai rencana \\
+    \hline
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{{\Large Rencana Migrasi SIMRS}}
+  \begin{block}{Kasus Medikara Health}
+    \small
+    \begin{itemize}
+      \item Pola bertahap per lokasi. Misalkan Depok menjadi percontohan pada Desember 2028.
+      \item Bekasi dan Bogor menyusul Desember 2029, Jakarta dan Bandung September 2030.
+      \item Empat asumsi punya pemilik dan tanggal pemeriksaan, misalnya A1: dua proyek besar per
+            tahun, diperiksa setiap Oktober.
+      \item Rencana mundur Depok berbatas 30 hari, dengan kehilangan data paling banyak satu hari.
+      \item Sesudah 30 hari, masalah diselesaikan di sistem baru.
+    \end{itemize}
+  \end{block}
+\end{frame}
+
+\begin{frame}{{\Large Penyelarasan dengan Tiga Mata Kuliah}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{1.4cm}YY}
+    \hline
+    \textbf{Mata kuliah} & \textbf{Artefak yang diselaraskan} & \textbf{Yang harus cocok} \\
+    \hline
+    IT40613 & Peta jalan platform dan API dalam tiga gelombang rilis & API
+      mitra (P8) tidak dirilis sebelum MPI (P3) dan \textit{hub} integrasi (P2)
+      selesai. P8 pada 2029 dibaca sebagai masa rilis ke mitra \\
+    \hline
+    IT40713 & Peta jalan modernisasi tiga gelombang dan strategi 7R per
+      aplikasi & \textit{Landing zone} (P4) selesai sebelum SIMRS terpadu.
+      Gelombang 1 bersama P4, April sampai September 2027. Gelombang 2, sampai
+      September 2028, memuat sisi teknis P3 dan P7. Gelombang 3 memuat peralihan
+      P5, selesai September 2030 \\
+    \hline
+    IT40813 & Model tata kelola target dan peta jalan tata kelola terpadu &
+      P1 menutup temuan audit kontrol akses; penilaian risiko vendor selesai
+      sebelum K2 dan sebelum P8 \\
+    \hline
+  \end{tabularx}
+
+  \vspace{6pt}
+  \small Koordinator tim memastikan tanggal pada keempat rencana tidak saling bertentangan.
+\end{frame}
+
+\begin{frame}{{\Large Elemen Migrasi ArchiMate 3.2}}
+  \scriptsize
+  \begin{tabularx}{\textwidth}{L{2.5cm}YY}
+    \hline
+    \textbf{Elemen} & \textbf{Relasi yang lazim} & \textbf{Contoh Medikara} \\
+    \hline
+    \textit{Work package} & Me-\textit{realize} \textit{deliverable}; dipicu
+      \textit{work package} lain atau \textit{implementation event} & P3
+      Identitas pasien tunggal \\
+    \hline
+    \textit{Deliverable} & Me-\textit{realize} elemen inti, misalnya komponen
+      aplikasi & Indeks pasien tunggal yang dipakai lima rumah sakit \\
+    \hline
+    \textit{Implementation event} & Memicu \textit{work package} & K1 Anggaran
+      2027 disahkan \\
+    \hline
+    \textit{Plateau} & Menghimpun elemen inti yang ada pada keadaan itu; memicu
+      \textit{plateau} berikutnya & T1 Maret 2028 \\
+    \hline
+    \textit{Gap} & Berasosiasi dengan dua \textit{plateau} yang dibandingkan &
+      Data pasien ganda dan akses tak terkendali \\
+    \hline
+  \end{tabularx}
+\end{frame}
+
+\begin{frame}{{\Large Tiga Viewpoint dan Satu Elemen}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item \textit{Migration viewpoint}: \textit{plateau} dan \textit{gap}, untuk menjelaskan urutan
+          transisi kepada manajemen.
+    \item \textit{Implementation and migration viewpoint}: keterlacakan dari strategi sampai proyek.
+    \item \textit{Project viewpoint}: \textit{work package}, \textit{deliverable}, dan pihak yang
+          mengerjakannya.
+    \item Elemen tidak digambar ulang. ``SIMRS Depok'' pada \textit{plateau} sama dengan elemen pada
+          model \textit{baseline}.
+    \item Perubahan nama atau properti elemen langsung terlihat di semua \textit{view}.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Migration View di Sekitar T1}}
+  \centering
+  \begin{figure}
+    \resizebox{!}{0.60\textheight}{\input{../../figures/ch12-migration-view.tex}}
+    \caption{Potongan \textit{implementation and migration view} Medikara di sekitar T1}
+  \end{figure}
+\end{frame}
+
+\section{Aktivitas dan Penutup}
+
+\begin{frame}{\hfill}
+  \centering
+  \Huge{\textbf{Aktivitas dan Penutup}}
+\end{frame}
+
+\begin{frame}{{\Large Aktivitas: Peta Jalan 2026 sampai 2030}}
+  \small
+  \begin{itemize}
+    \item Tetapkan dua sampai tiga transisi, jalankan uji penundaan, catat biaya sementara.
+    \item Urutkan paket: dependensi, skor nilai dan risiko, kapasitas, lalu siklus anggaran.
+    \item Susun dua versi peta jalan: direksi dan tim pelaksana.
+    \item Tulis rencana migrasi: pola peralihan, asumsi, titik keputusan, dan rencana mundur.
+    \item Selaraskan tanggal dengan tiga mata kuliah lain, lalu modelkan di Archi.
+  \end{itemize}
+  \footnotesize Peran: analis bisnis, analis teknologi, pemodel, koordinator. Luaran: tonggak C4.
+  Penilaian: nilai transisi 25, pengurutan 25, dua versi 20, asumsi 20, konsistensi 10 persen.
+  Templat: \berkas{sources/chapter12/README.md}.
+\end{frame}
+
+\begin{frame}{{\Large Ringkasan}}
+  \small
+  \vspace{4pt}
+  \begin{itemize}
+    \item Arsitektur transisi memecah perjalanan menjadi dua sampai tiga keadaan antara yang stabil.
+    \item Dependensi adalah syarat mutlak, nilai dan risiko adalah skor, dan kapasitas adalah batas.
+    \item Satu perjalanan membutuhkan beberapa versi peta jalan, yang ditinjau triwulanan dan tahunan.
+    \item Rencana migrasi memuat pola peralihan, asumsi, titik keputusan, dan rencana mundur berbatas
+          waktu.
+    \item Di mana pun perjalanan berhenti, organisasi berdiri di tempat yang lebih baik daripada
+          sebelumnya.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Latihan}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item \textbf{Latihan 1: Menguji Nilai Tiap Transisi.} Tulis manfaat yang tersisa bila ditunda dua
+          tahun, hitung biaya sementara, lalu ubah batas contoh yang gagal.
+    \item \textbf{Latihan 2: Meringkas Peta Jalan untuk Direksi.} Tentukan informasi yang dipertahankan,
+          diringkas, atau dihilangkan, lalu uji pada pembaca non-teknis.
+    \item \textbf{Latihan 3: Batas Dua Proyek Besar per Tahun.} Hitung proyek besar tiap tahun, lalu coba
+          menggeser atau memecah paket.
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{{\Large Bacaan dan Berkas Pendukung}}
+  \small
+  \vspace{6pt}
+  \begin{itemize}
+    \item \href{https://arxiv.org/abs/1304.0265}{Why Your IT Project May Be Riskier Than You Think}
+    \item \href{https://www.opengroup.org/togaf}{The TOGAF Standard, 10th Edition (2025 Update)}
+    \item \href{https://pubs.opengroup.org/togaf-standard/adm/chap10.html}{The TOGAF Standard, 10th Edition: Architecture Development Method, Chapter 10 Phase F: Migration Planning}
+    \item \berkas{sources/chapter12/README.md}
+  \end{itemize}
+\end{frame}
+
+\end{document}

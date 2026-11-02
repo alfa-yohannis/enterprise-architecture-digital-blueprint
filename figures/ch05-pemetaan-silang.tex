@@ -1,0 +1,66 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  baris/.style={draw, fill=blue!8, text width=4.2cm, minimum height=0.40cm,
+                align=left, font=\tiny, inner sep=2pt, anchor=east},
+  kolom/.style={draw, fill=praditagreen!15, text width=1.2cm, minimum height=0.8cm,
+                align=center, font=\tiny\bfseries, inner sep=1pt},
+  ya/.style={circle, fill=black, inner sep=0pt, minimum size=5pt},
+  tidak/.style={circle, draw, thick, inner sep=0pt, minimum size=5pt},
+  jumlah/.style={font=\tiny\bfseries, align=center}
+]
+  % Kolom tahap value stream, jarak 1.3 cm.
+  \node[kolom] at (4.6,0) {1.\\Memesan};
+  \node[kolom] at (5.9,0) {2. Hadir,\\verifikasi};
+  \node[kolom] at (7.2,0) {3.\\Diperiksa};
+  \node[kolom] at (8.5,0) {4.\\Menerima\\obat};
+  \node[kolom] at (9.8,0) {5.\\Pembayaran};
+  \node[kolom] at (11.1,0) {6. Tindak\\lanjut};
+  \node[font=\tiny\bfseries, anchor=east] at (3.95,0) {Kapabilitas};
+
+  % Baris kapabilitas, jarak 0.45 cm.
+  \node[baris] at (3.95,-0.70) {L03 Penjadwalan Layanan};
+  \node[baris] at (3.95,-1.15) {L01 Pendaftaran Pasien};
+  \node[baris] at (3.95,-1.60) {L02 Penerbitan Nomor Rekam Medis Lokal};
+  \node[baris] at (3.95,-2.05) {L04 Pengelolaan Rekam Medis};
+  \node[baris] at (3.95,-2.50) {L05 Pelayanan Klinis};
+  \node[baris] at (3.95,-2.95) {L06 Farmasi dan Laboratorium};
+  \node[baris] at (3.95,-3.40) {L07 Telekonsultasi};
+  \node[baris] at (3.95,-3.85) {P01 Klaim dan Penjaminan};
+  \node[baris] at (3.95,-4.30) {P04 Keuangan dan Akuntansi};
+  \node[baris, fill=orange!12] at (3.95,-4.75) {P02 Pengelolaan Akses Pengguna};
+
+  % Garis bantu baris.
+  \foreach \y in {-0.70,-1.15,-1.60,-2.05,-2.50,-2.95,-3.40,-3.85,-4.30,-4.75}
+    \draw[gray!40] (4.0,\y) -- (11.7,\y);
+
+  % Dukungan langsung.
+  \node[ya] at (4.6,-0.70) {};  \node[ya] at (11.1,-0.70) {};
+  \node[ya] at (5.9,-1.15) {};
+  \node[ya] at (5.9,-1.60) {};  \node[ya] at (7.2,-1.60) {};
+  \node[ya] at (8.5,-1.60) {};
+  \node[ya] at (7.2,-2.05) {};  \node[ya] at (8.5,-2.05) {};
+  \node[ya] at (9.8,-2.05) {};  \node[ya] at (11.1,-2.05) {};
+  \node[ya] at (7.2,-2.50) {};  \node[ya] at (11.1,-2.50) {};
+  \node[ya] at (7.2,-2.95) {};  \node[ya] at (8.5,-2.95) {};
+  \node[ya] at (4.6,-3.40) {};  \node[ya] at (11.1,-3.40) {};
+  \node[ya] at (5.9,-3.85) {};  \node[ya] at (9.8,-3.85) {};
+  \node[ya] at (9.8,-4.30) {};
+
+  % Dukungan fondasi pada semua tahap.
+  \foreach \x in {4.6,5.9,7.2,8.5,9.8,11.1}
+    \node[tidak] at (\x,-4.75) {};
+
+  % Jumlah dukungan langsung per tahap.
+  \node[font=\tiny\bfseries, anchor=east] at (3.95,-5.25) {Jumlah dukungan langsung};
+  \node[jumlah] at (4.6,-5.25) {2};
+  \node[jumlah] at (5.9,-5.25) {3};
+  \node[jumlah] at (7.2,-5.25) {4};
+  \node[jumlah] at (8.5,-5.25) {3};
+  \node[jumlah] at (9.8,-5.25) {3};
+  \node[jumlah] at (11.1,-5.25) {4};
+
+  \node[ya] at (4.5,-5.75) {};
+  \node[font=\tiny, anchor=west] at (4.65,-5.75) {dukungan langsung};
+  \node[tidak] at (7.0,-5.75) {};
+  \node[font=\tiny, anchor=west] at (7.15,-5.75) {fondasi: dipakai di semua tahap};
+\end{tikzpicture}

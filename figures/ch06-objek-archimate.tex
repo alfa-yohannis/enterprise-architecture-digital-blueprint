@@ -1,0 +1,44 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  objek/.style={draw, minimum height=0.95cm, minimum width=2.3cm, text width=2.1cm,
+                align=center, font=\scriptsize},
+  lapisan/.style={font=\scriptsize\bfseries, anchor=east, align=right},
+  realisasi/.style={-{Triangle[open, length=2mm, width=2mm]}, thick, dashed}
+]
+  \node[lapisan] at (-1.4,2.3) {Bisnis};
+  \node[lapisan] at (-1.4,0.4) {Aplikasi};
+  \node[lapisan] at (-1.4,-1.5) {Teknologi};
+
+  \node[objek, fill=praditagreen!15, font=\scriptsize\bfseries, minimum width=3.0cm,
+        text width=2.8cm] (bisnis) at (3.9,2.3)
+    {Rekam Medis\\{\tiny\mdseries \textit{business object}}};
+
+  \node[objek, fill=blue!8] (jkt) at (0,0.4)
+    {Data rekam medis\\SIMRS Jakarta};
+  \node[objek, fill=blue!8] (bks) at (2.6,0.4)
+    {Data rekam medis\\SIMRS Bekasi};
+  \node[objek, fill=blue!8] (lain) at (5.2,0.4)
+    {Data rekam medis\\tiga SIMRS lain};
+  \node[objek, fill=orange!12] (vendor) at (7.8,0.4)
+    {Catatan\\telekonsultasi\\Medikara+};
+
+  \node[objek, fill=blue!8] (dbjkt) at (0,-1.5)
+    {Basis data\\{\tiny on-premise Jakarta}};
+  \node[objek, fill=blue!8] (dbbks) at (2.6,-1.5)
+    {Basis data\\{\tiny on-premise Bekasi}};
+  \node[objek, fill=blue!8] (dblain) at (5.2,-1.5)
+    {Tiga basis data\\{\tiny on-premise lain}};
+  \node[objek, fill=red!22] (dbvendor) at (7.8,-1.5)
+    {Basis data vendor\\{\tiny di luar Medikara}};
+
+  \foreach \objek in {jkt, bks, lain, vendor} {
+    \draw[realisasi] (\objek.north) -- (bisnis.south);
+  }
+  \draw[realisasi] (dbjkt) -- (jkt);
+  \draw[realisasi] (dbbks) -- (bks);
+  \draw[realisasi] (dblain) -- (lain);
+  \draw[realisasi] (dbvendor) -- (vendor);
+
+  \node[font=\tiny, gray, anchor=west] at (-2.4,-2.45)
+    {garis putus-putus berujung segitiga terbuka: relasi realisasi};
+\end{tikzpicture}

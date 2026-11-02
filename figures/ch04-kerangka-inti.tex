@@ -1,0 +1,59 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  sel/.style={draw, rounded corners, minimum height=1.05cm, minimum width=2.7cm,
+              text width=2.5cm, align=center, font=\scriptsize\bfseries},
+  label/.style={draw, rounded corners, fill=praditagreen!15, align=center,
+                font=\scriptsize\bfseries},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  % Judul kolom: tiga aspek inti, ditambah aspek motivasi di kanan.
+  \node[label, minimum width=2.7cm, minimum height=0.6cm] at (2.95,3.55) {Struktur pasif};
+  \node[label, minimum width=2.7cm, minimum height=0.6cm] at (5.75,3.55) {Perilaku};
+  \node[label, minimum width=2.7cm, minimum height=0.6cm] at (8.55,3.55) {Struktur aktif};
+
+  % Lapisan strategi di atas inti.
+  \node[sel, fill=blue!8, minimum width=8.3cm, text width=8.1cm, minimum height=0.75cm]
+    at (5.75,2.6)
+    {Strategi: kapabilitas, \textit{value stream}, sumber daya, \textit{course of action}};
+
+  % Judul baris: tiga lapisan inti.
+  \node[label, minimum width=1.5cm, minimum height=1.05cm] at (0.75,1.5) {Bisnis};
+  \node[label, minimum width=1.5cm, minimum height=1.05cm] at (0.75,0.3) {Aplikasi};
+  \node[label, minimum width=1.5cm, minimum height=1.05cm] at (0.75,-0.9) {Teknologi};
+
+  % Isi inti 3 x 3, dengan contoh dari layanan janji temu Medikara.
+  \node[sel, fill=orange!12] at (2.95,1.5)
+    {Objek bisnis\\{\tiny\mdseries Janji Temu}};
+  \node[sel, fill=orange!12] at (5.75,1.5)
+    {Proses, fungsi, layanan bisnis\\{\tiny\mdseries Membuat Janji Temu}};
+  \node[sel, fill=orange!12] at (8.55,1.5)
+    {Aktor, peran\\{\tiny\mdseries Pasien, Petugas Pendaftaran}};
+
+  \node[sel, fill=orange!12] at (2.95,0.3)
+    {Objek data\\{\tiny\mdseries Data Jadwal Dokter}};
+  \node[sel, fill=orange!12] at (5.75,0.3)
+    {Fungsi, layanan aplikasi\\{\tiny\mdseries Layanan Pemesanan Jadwal}};
+  \node[sel, fill=orange!12] at (8.55,0.3)
+    {Komponen, antarmuka\\{\tiny\mdseries Medikara+, SIMRS}};
+
+  \node[sel, fill=orange!12] at (2.95,-0.9)
+    {Artefak\\{\tiny\mdseries berkas basis data}};
+  \node[sel, fill=orange!12] at (5.75,-0.9)
+    {Layanan teknologi\\{\tiny\mdseries Layanan Basis Data}};
+  \node[sel, fill=orange!12] at (8.55,-0.9)
+    {\textit{Node}, perangkat\\{\tiny\mdseries Server Basis Data SIMRS}};
+
+  % Aspek motivasi di sisi kanan, merentang seluruh lapisan.
+  \node[sel, fill=blue!8, minimum width=1.8cm, text width=1.6cm, minimum height=4.35cm]
+    at (11.0,0.3)
+    {Motivasi\\[3pt]{\tiny\mdseries \textit{stakeholder}, \textit{driver}, \textit{goal},
+     \textit{outcome}, prinsip, \textit{requirement}}};
+
+  % Lapisan implementasi dan migrasi di bawah inti.
+  \node[sel, fill=blue!8, minimum width=8.3cm, text width=8.1cm, minimum height=0.75cm]
+    at (5.75,-2.0)
+    {Implementasi dan migrasi: \textit{work package}, \textit{deliverable}, \textit{plateau}, \textit{gap}};
+
+  \node[font=\tiny, gray, anchor=north] at (5.75,-2.45)
+    {kotak oranye: kerangka inti tiga lapisan kali tiga aspek};
+\end{tikzpicture}

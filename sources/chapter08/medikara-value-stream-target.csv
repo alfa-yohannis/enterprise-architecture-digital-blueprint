@@ -1,0 +1,5 @@
+# Contoh tahap nilai target; validasi sebelum implementasi. Salin lalu isi; hapus baris komentar saat impor spreadsheet.
+tahap,nilai,kapabilitas,perubahan,kriteria_penerimaan
+Akses layanan,Kepastian slot lintas fasilitas,Penjadwalan Layanan,Jadwal konsisten,Uji pesan perubahan dan kegagalan
+Kedatangan,Identitas dikenali,Identitas Pasien Terpadu,Padanan nomor lokal,Uji salah cocok dan koreksi
+Tindak lanjut,Instruksi dan hasil tersedia sesuai kewenangan,Pengelolaan Rekam Medis,Pertukaran data relevan,Uji hak akses dan penelusuran

@@ -1,0 +1,33 @@
+\begin{tikzpicture}[
+  font=\scriptsize,
+  elemen/.style={draw, rounded corners, minimum height=1.55cm, text width=2.3cm,
+                 align=center, inner sep=3pt},
+  panah/.style={-{Stealth[length=2mm]}, thick}
+]
+  \node[elemen, fill=red!22] (driver) at (0,0)
+    {\textbf{Driver}\\[2pt]{\tiny\mdseries Antrean rawat jalan di rumah sakit panjang}};
+  \node[elemen, fill=blue!8] (assessment) at (3.05,0)
+    {\textbf{Assessment}\\[2pt]{\tiny\mdseries Tunggu rata-rata 96 menit; jadwal dokter disalin manual sekali sehari}};
+  \node[elemen, fill=praditagreen!15] (goal) at (6.1,0)
+    {\textbf{Goal}\\[2pt]{\tiny\mdseries Pasien dilayani tepat waktu di fasilitas mana pun}};
+  \node[elemen, fill=orange!12] (outcome) at (9.15,0)
+    {\textbf{Outcome}\\[2pt]{\tiny\mdseries 96 menjadi 60 menit pada Desember 2028, pemilik Direktur Pelayanan}};
+  \node[elemen, fill=blue!8] (prinsip) at (6.1,-2.35)
+    {\textbf{Prinsip}\\[2pt]{\tiny\mdseries Satu sumber kebenaran: data pasien dicatat sekali di sumbernya}};
+  \node[elemen, fill=green!10] (requirement) at (9.15,-2.35)
+    {\textbf{Requirement}\\[2pt]{\tiny\mdseries Jadwal di Medikara+ dibaca langsung dari SIMRS, jeda paling lama 5 menit}};
+
+  \draw[panah] (driver) -- (assessment);
+  \draw[panah] (assessment) -- (goal);
+  \draw[panah] (goal) -- (outcome);
+  \draw[panah] (goal) -- (prinsip);
+  \draw[panah] (outcome) -- (requirement);
+  \draw[panah] (prinsip) -- (requirement);
+
+  \draw[panah, gray] (3.6,-1.85) -- (0.0,-1.85);
+  \draw[panah, gray] (0.0,-2.85) -- (3.6,-2.85);
+  \node[font=\tiny, gray, align=center] at (1.8,-1.6) {dibaca ke kiri dan ke atas: \textit{mengapa}?};
+  \node[font=\tiny, gray, align=center] at (1.8,-3.1) {dibaca ke kanan dan ke bawah: \textit{bagaimana}?};
+  \node[font=\tiny, gray, align=center, text width=3.4cm] at (1.8,-2.35)
+    {setiap elemen menunjuk induknya, sehingga rantai dapat ditelusuri dua arah};
+\end{tikzpicture}
